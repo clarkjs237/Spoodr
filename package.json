@@ -13,6 +13,7 @@
     "@babel/core": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
     "@babel/preset-react": "^7.17.12",
+    "@testing-library/react": "^13.2.0",
     "babel-loader": "^8.2.5",
     "dotenv": "^16.0.1",
     "eslint": "^8.15.0",
