@@ -10,7 +10,10 @@
 #.yarn/cache
 .pnp.*
 
+/node_modules
+
 public/*
 !public/index.html
 
 .env*
+
