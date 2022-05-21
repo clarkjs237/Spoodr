@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const dotEnv = require('dotenv-webpack');
 const path = require("path");
 
 module.exports = {
@@ -23,4 +24,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [new dotEnv()]
 };
