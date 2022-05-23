@@ -51,7 +51,7 @@ function App() {
       <Title>Hello World Title</Title>
       <Overview product={product} productStyle={productStyle} />
       <Questions product={product} />
-      <Related product={product}/>
+      <Related product={product} />
       <Reviews product={product} />
     </Wrapper>
   );
