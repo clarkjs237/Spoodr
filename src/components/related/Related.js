@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RelatedList from './RelatedList/RelatedList';
+import RelatedListItem from './RelatedList/RelatedListItem';
 
 function Related({ product }) {
   const [relatedIDs, setRelatedIDs] = useState([]);
@@ -22,6 +23,23 @@ function Related({ product }) {
     updateRelatedIDs(product.id);
   }, []);
 
-  return <RelatedList ids={relatedIDs} />;
+  // Pass down the array of related id to RelatedList
+  // return <RelatedList ids={relatedIDs} />;
+
+  // Testing out the Carousel here
+  return (
+    <div className='Related'>
+      Related Items:
+      <RelatedList>
+        {/* <RelatedListItem>Item 1</RelatedListItem>
+        <RelatedListItem>Item 2</RelatedListItem>
+        <RelatedListItem>Item 3</RelatedListItem> */}
+        {relatedIDs.map((id) => {
+          // return <RelatedListItem>{id}</RelatedListItem>
+          return <RelatedListItem key={id} id={id} />
+        })}
+      </RelatedList>
+    </div>
+  )
 }
 export default Related;

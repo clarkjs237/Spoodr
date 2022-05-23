@@ -3,7 +3,9 @@
 // Ratings and Reviews so we can do that star thing
 import React, { useState, useEffect } from 'react';
 
-function RelatedListItem({ id }) {
+
+// UNCOMMENT THE LINES BELOW 8-63 FOR THIS TO WORK AGAIN
+function RelatedListItem({ id, children, width }) {
   // so this is where we will be making GET requests to get the product information
   // namely, I want category, product name, price, rating, and pictures
   // How do I decide which one will be shown?
@@ -49,14 +51,35 @@ function RelatedListItem({ id }) {
     updateProduct(id);
   }, []);
 
+
+
   return (
-    <div>
-      ID:
-      {id}
-      Product:
-      {product.style_id}
+    <div className="carousel-item" style={{ width: width}}>
+      Product #: {id}<br></br>
+      Style #: {product.style_id}<br></br>
+      Name: {product.name}
     </div>
-  );
+  )
+  // return (
+  //   <div className="carousel-item">
+  //     {/* ID:
+  //     {id}
+  //     Product:
+  //     {product.style_id} */}
+  //     {product.name}
+  //   </div>
+  // );
 }
+
+// So right now, children is in reference to whatever text is inside
+// of RelatedListItems text block back in Related
+
+// function RelatedListItem({ children, width }) {
+//   return (
+//     <div className="carousel-item" style={{ width: width}}>
+//       {children}
+//     </div>
+//   )
+// }
 
 export default RelatedListItem;
