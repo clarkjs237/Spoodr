@@ -47,6 +47,10 @@ function RelatedListItem({ id, children, width }) {
       });
   }
 
+  function firstImage() {
+    console.log(product.photos);
+  }
+
   useEffect(() => {
     updateProduct(id);
   }, []);
@@ -57,7 +61,9 @@ function RelatedListItem({ id, children, width }) {
     <div className="carousel-item" style={{ width: width}}>
       Product #: {id}<br></br>
       Style #: {product.style_id}<br></br>
-      Name: {product.name}
+      Name: {product.name}<br></br>
+      {/* Photos: {product.photos[0]} */}
+      {/* <img src={product.photos[0].thumbnail_url}></img> */}
     </div>
   )
   // return (
