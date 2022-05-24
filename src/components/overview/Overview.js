@@ -1,25 +1,38 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import ProductInfo from './overviewComponents/ProductInfo';
+import SocialMedia from'./overviewComponents/SocialMedia';
 
-export default function Overview({ product, productStyle, totalReviews, averageRating, averageRoundRating }) {
+const ProductOverview = styled.div`
+  color: #0B2027;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+`;
+
+const ProductSlogan = styled.h4`
+`;
+
+export default function Overview({ product, productStyle, totalReviews, averageRating, averageStarRating }) {
   const [productStyleId, setProductStyleId] = useState(0);
   if(product.id && productStyle.product_id) {
+    const url = productStyle.results[productStyleId].photos[productStyleId].url;
     return (
-      <div>
+      <ProductOverview>
         <ProductInfo
           totalReviews={totalReviews}
           averageRating={averageRating}
-          averageRoundRating={averageRoundRating}
+          averageStarRating={averageStarRating}
           productCategory={product.category.toUpperCase()}
           productTitle={product.name}
           productOrginalPrice={productStyle.results[productStyleId].original_price}
           productSalePrice={productStyle.results[productStyleId].sale_price}
         />
         <div>
-          <h4>{product.slogan}</h4>
+          <ProductSlogan>
+            {product.slogan}<SocialMedia url={url} slogan={product.slogan}/>
+          </ProductSlogan>
           <p>{product.description}</p>
         </div>
-      </div>
+      </ProductOverview>
     )
   }
 }

@@ -1,24 +1,59 @@
-export default function StarRating({ totalReviews, averageRatings, averageRoundRating }) {
-  const function makeStarArray(averageRoundRating) {
+import styled from 'styled-components';
+
+const ReviewLink = styled.span`
+  color: #32292F;
+  text-decoration: underline;
+  &:hover {
+    background-color: #90D7FF;
+    cursor: pointer;
+`;
+
+const Star = styled.span`
+background: ${props => {
+  if(props.full) {
+    return "#0B2027";
+  } else if(props.half) {
+    return "-webkit-linear-gradient(0deg, #0B2027 50%, #D3AB9E 50%)";
+  } else if (props.quarter) {
+    return "-webkit-linear-gradient(0deg, #0B2027 40%, #D3AB9E 40%)";
+  } else if (props.threequarter) {
+    return "-webkit-linear-gradient(0deg, #0B2027 60%, #D3AB9E 60%)";
+  } else {
+    return "#D3AB9E";
+  }}};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
+export default function StarRating({ totalReviews, averageRating, averageStarRating }) {
+
+  function makeStarArray(averageStarRating) {
     return [...Array(5)].map((star) => {
-      if(averageRoundRating > 1) {
-        averageRoundRatings--;
-        return <span className="star">&#9733;</span>;//1
-      } else if(averageRoundRating === 0) {
-        return <span className="star">&#9734;</span>;//0
+      if(averageStarRating >= 1) {
+        averageStarRating--;
+        return <Star full>&#9733;</Star>;//1
+      } else if(averageStarRating === 0) {
+        return <Star empty>&#9733;</Star>;//0
       } else {
         let returnRating = averageRating;
-        averageRating = 0;
-        ;
+        averageStarRating = 0;
+        if(returnRating === .25) {
+          return <Star quarter>&#9733;</Star>
+        } else if(returnRating === .5) {
+          return <Star half>&#9733;</Star>
+        } else {
+          return <Star threequarter>&#9733;</Star>
+        }
       }
     })
   }
+
   return (
     <div>
-      <h1>{makeStarArray(averageRoundRating)}</h1>
-      <span>
-      </span>
-      <span>{`Read all ${totalReviews} reviews`}</span>
+      <span>{makeStarArray(averageStarRating)}</span>
+      <ReviewLink onClick={() => window.location.replace('/#reviews')}> {`Read all ${totalReviews} reviews`}</ReviewLink>
     </div>
   )
 }
+
+//window.location.replace('/#reviews')
