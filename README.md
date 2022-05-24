@@ -23,4 +23,3 @@ RUN yarn build
 In a browser
   
 OPEN the localhost server that yarn started
-
