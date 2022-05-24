@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import ProductInfo from './overviewComponents/ProductInfo';
-import SocialMedia from'./overviewComponents/SocialMedia';
+import ProductInfo from './OverviewComponents/ProductInfo';
+import SocialMedia from'./OverviewComponents/SocialMedia';
 
+//todo remove when passed down from app
 const ProductOverview = styled.div`
   color: #0B2027;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

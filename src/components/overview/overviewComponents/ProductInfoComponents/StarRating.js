@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const ReviewLink = styled.span`
-  color: #32292F;
+font-size: .75em;
+color: #32292F;
   text-decoration: underline;
   &:hover {
     background-color: #90D7FF;
