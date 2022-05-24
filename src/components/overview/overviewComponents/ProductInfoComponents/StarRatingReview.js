@@ -15,11 +15,9 @@ export default function StarRatingReview({ totalReviews, averageRating, averageS
     <div>
       <StarRating averageStarRating={averageStarRating} />
       <ReviewLink onClick={() => window.location.replace('/#reviews')}>
-        {' '}
         {`Read all ${totalReviews} reviews`}
       </ReviewLink>
     </div>
   );
 }
 
-// window.location.replace('/#reviews')

@@ -5,6 +5,7 @@ import SocialMedia from './OverviewComponents/SocialMedia';
 
 const ProductOverview = styled.div`
   color: #0B2027;
+  background-color: #EAC9C1;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 `;
 
@@ -14,7 +15,7 @@ const ProductSlogan = styled.h4`
 
 export default function Overview({ product, productStyle, totalReviews, averageRating, averageStarRating }) {
   const [productStyleId, setProductStyleId] = useState(0);
-  if(product.id && productStyle.product_id) {
+  if(product.category && productStyle.product_id) {
     const url = productStyle.results[productStyleId].photos[productStyleId].url;
     return (
       <ProductOverview>

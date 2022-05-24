@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ProductPrice from './ProductInfoComponents/ProductPrice';
-import StarRating from './ProductInfoComponents/StarRating';
+import StarRatingReview from './ProductInfoComponents/StarRatingReview';
 
 const ProductTitle = styled.h2`
   margin: 0;
@@ -16,7 +16,7 @@ export default function ProductInfo({
 }) {
   return (
     <div>
-      <StarRating
+      <StarRatingReview
         totalReviews={totalReviews}
         averageRating={averageRating}
         averageStarRating={averageStarRating}
