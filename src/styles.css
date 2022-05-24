@@ -14,7 +14,7 @@
   height: 10rem;
   background-color: green;
   color: white;
-  margin: 8px;
+  /* margin: 8px; */
   /* border: 2px red solid; */
   text-align: center;
 }
@@ -26,4 +26,18 @@
 
 .indicators > button {
   margin: 5px;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  font-size: 2rem;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  font-size: 2rem;
 }

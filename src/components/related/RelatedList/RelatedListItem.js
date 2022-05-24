@@ -27,7 +27,9 @@ function RelatedListItem({ id, width }) {
   const [product, setProduct] = useState({});
 
   // Making a function to update the related IDs. This will be an array of ids
+  // This is where I actually get the Image id
   function updateProduct(productID) {
+    console.log('made request');
     fetch(`${URL}/products/${productID}/styles`, {
       headers: {
         Authorization: process.env.GITTOKEN,
