@@ -62,7 +62,7 @@ function Reviews(props) {
       <div>Hello World!</div>
       <div>Here live the reviews!</div>
       <Ratings props={props} />
-      <ReviewList props={props}/>
+      <ReviewList product_id={props.product.id} postReview={postReview}/>
       <button type="submit">More Reviews</button>
       <button type="submit">Add Review</button>
     </>

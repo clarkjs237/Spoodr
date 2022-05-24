@@ -3,7 +3,7 @@ import ReviewListItem from './ReviewListItem';
 
 function ReviewList(props) {
   return (
-    <ReviewListItem props={props} />
+    <ReviewListItem product_id={props.product_id} postReview={props.postReview}/>
   );
 }
 
