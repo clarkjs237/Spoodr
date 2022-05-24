@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import ProductPrice from './ProductInfoComponents/ProductPrice';
 import StarRating from './ProductInfoComponents/StarRating';
-import styled from 'styled-components';
 
 const ProductTitle = styled.h2`
   margin: 0;
@@ -11,7 +11,9 @@ const ProductCategory = styled.div`
   font-size: 1em;
 `;
 
-export default function ProductInfo({ productCategory, productTitle, productOrginalPrice, productSalePrice, totalReviews, averageRating, averageStarRating }) {
+export default function ProductInfo({
+  productCategory, productTitle, productOrginalPrice, productSalePrice, totalReviews, averageRating, averageStarRating,
+}) {
   return (
     <div>
       <StarRating
@@ -26,5 +28,5 @@ export default function ProductInfo({ productCategory, productTitle, productOrgi
         productSalePrice={productSalePrice}
       />
     </div>
-  )
+  );
 }
