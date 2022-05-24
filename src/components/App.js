@@ -74,31 +74,30 @@ function App() {
     getReviewsMeta(product);
   }, []);
 
-  if (typeof product === 'Number') {
-    return <div>empty div</div>;
-  } else if(typeof product === 'object') {
+  if (typeof product === 'object') {
     return (
       <Wrapper>
         <Title>Hello World Title</Title>
         <Overview
-        product={product}
-        productStyle={productStyle}
-        totalReviews={totalReviews}
-        averageRating={averageRating}
-        averageStarRating={averageStarRating}
+          product={product}
+          productStyle={productStyle}
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageStarRating={averageStarRating}
         />
         <Questions product={product} />
         <Related product={product} />
         <Reviews
-        product={product}
-        totalReviews={totalReviews}
-        averageRating={averageRating}
-        averageStarRating={averageStarRating}
-        reviewsMeta={reviewsMeta}
+          product={product}
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageStarRating={averageStarRating}
+          reviewsMeta={reviewsMeta}
         />
       </Wrapper>
     );
   }
+  return <div />;
 }
 
 export default App;

@@ -1,21 +1,9 @@
 // This will be a functional stateless component that just maps the ids that are passed into
 // it from Related.js
 import React, { useState } from 'react';
-import RelatedListItem from './RelatedListItem';
-
-// function RelatedList({ ids }) {
-//   return (
-//     <div>
-//       {ids.map((id) => {
-//         return <RelatedListItem key={id} id={id} />
-//       })}
-//     </div>
-//   );
-// }
 
 // Experimenting with the carousel
 function RelatedList({ children }) {
-
   const [activeIndex, setActiveIndex] = useState(0);
 
   function updateIndex(newIndex) {
@@ -27,7 +15,6 @@ function RelatedList({ children }) {
 
     setActiveIndex(newIndex);
   }
-
 
   return (
     <div className="carousel">

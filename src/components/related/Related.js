@@ -15,7 +15,6 @@ function Related({ product }) {
     })
       .then((response) => response.json())
       .then((result) => {
-        // console.log(result);
         setRelatedIDs(result);
       });
   }
@@ -29,23 +28,18 @@ function Related({ product }) {
 
   // Testing out the Carousel here
   if (product.id === undefined) {
-    return <div>Empty div</div>
-  } else {
-    return (
-      <div className='Related'>
-        Related Items:
-        <RelatedList>
-          {/* <RelatedListItem>Item 1</RelatedListItem>
-          <RelatedListItem>Item 2</RelatedListItem>
-          <RelatedListItem>Item 3</RelatedListItem> */}
-          {relatedIDs.map((id) => {
-            // return <RelatedListItem>{id}</RelatedListItem>
-            return <RelatedListItem key={id} id={id} />
-          })}
-        </RelatedList>
-      </div>
-    );
+    return <div>Empty div</div>;
   }
-
+  return (
+    <div className="Related">
+      Related Items:
+      <RelatedList>
+        {relatedIDs.map((id) => {
+          // return <RelatedListItem>{id}</RelatedListItem>
+          return <RelatedListItem key={id} id={id} />
+        })}
+      </RelatedList>
+    </div>
+  );
 }
 export default Related;
