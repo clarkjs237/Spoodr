@@ -5,6 +5,22 @@ const StyleImage = styled.img`
   border-radius: 50%;
 `;
 
+const StyleImageWrapper = styled.span`
+  position: relative;
+`;
+
+const SelectedStyle = styled.label`
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  font-size: .5rem
+  border-radius: 50%;
+  border-width: .1rem
+`;
+
 export default function StyleSelectorImage({
   styleId,
   setStyleId,
@@ -18,11 +34,14 @@ export default function StyleSelectorImage({
 
   if(styleId === thumbnailId) {
     return (
-      <StyleImage src={thumbnail}
+      <StyleImageWrapper>
+        <StyleImage value={thumbnailId} src={thumbnail} />
+        <SelectedStyle>&#10003;</SelectedStyle>
+      </StyleImageWrapper>
     )
   } else {
     return (
-
+      <StyleImage value={thumbnailId} src={thumbnail} onClick={onClickHandler} />
     )
   }
 
