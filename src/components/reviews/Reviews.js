@@ -1,4 +1,6 @@
 import React from 'react';
+import Ratings from './Ratings';
+import ReviewList from './ReviewList';
 
 function Reviews(props) {
   function getReviews(id) {
@@ -59,10 +61,12 @@ function Reviews(props) {
     <>
       <div>Hello World!</div>
       <div>Here live the reviews!</div>
-      <div>{getReviews(props.product)}</div>
-      <div>{getReviewMeta(props.product)}</div>
+      <Ratings props={props} />
+      <ReviewList props={props}/>
+      <button type="submit">More Reviews</button>
+      <button type="submit">Add Review</button>
     </>
-  )
+  );
 }
 
 export default Reviews;
