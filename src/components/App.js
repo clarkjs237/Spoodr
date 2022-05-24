@@ -5,8 +5,10 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import Reviews from './reviews/Reviews';
 
-const PRODUCT_ID = 65631;
-const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+export const PRODUCT_ID = 65631;
+export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+// In the file you need these variables in, do:
+// import { PRODUCT_ID, URL } from '../App';
 
 // const Title = styled.h1`
 // font-size: 1.5em;
@@ -19,7 +21,7 @@ const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 // `;
 
 function App() {
-  const [product, setProduct] = useState({'id': PRODUCT_ID});
+  const [product, setProduct] = useState({ id: PRODUCT_ID });
   const [productStyle, setProductStyle] = useState({});
   const [reviewsMeta, setReviewsMeta] = useState({});
   const [totalReviews, setTotalReviews] = useState(0);
