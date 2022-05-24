@@ -5,6 +5,7 @@ import RelatedListItem from './RelatedList/RelatedListItem';
 function Related({ product }) {
   const [relatedIDs, setRelatedIDs] = useState([]);
   // console.log('PRODUCT ' + product);
+  // console.log(product);
   // Making a function to update the related IDs. This will be an array of ids
   function updateRelatedIDs(id) {
     fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/${id}/related`, {
