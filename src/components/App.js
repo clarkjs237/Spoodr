@@ -6,7 +6,9 @@ import Related from './related/Related';
 import Reviews from './reviews/Reviews';
 
 export const PRODUCT_ID = 65631;
-const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+// In the file you need these variables in, do:
+// import { PRODUCT_ID, URL } from '../App';
 
 // const Title = styled.h1`
 // font-size: 1.5em;

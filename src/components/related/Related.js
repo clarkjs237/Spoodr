@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import RelatedList from './RelatedList/RelatedList';
 import RelatedListItem from './RelatedList/RelatedListItem';
-import { PRODUCT_ID } from '../App';
+import { URL } from '../App';
 
 function Related({ product }) {
   const [relatedIDs, setRelatedIDs] = useState([]);
-  // console.log('PRODUCT ' + product);
-  // console.log(product);
+
   // Making a function to update the related IDs. This will be an array of ids
-  console.log(PRODUCT_ID);
   function updateRelatedIDs(id) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/${id}/related`, {
+    fetch(`${URL}/products/${id}/related`, {
       headers: {
         Authorization: process.env.GITTOKEN,
       },
