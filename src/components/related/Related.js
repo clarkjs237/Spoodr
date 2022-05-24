@@ -68,17 +68,9 @@ function Related({ product }) {
     return <div>Empty</div>;
   }
   return (
-    // <div className="Related">
-    //   Related Items:
-    //   <RelatedList>
-    //     {relatedIDs.map((id) => (
-    //       <RelatedListItem key={id} id={id} />
-    //     ))}
-    //   </RelatedList>
-    // </div>
     <div className="Related">
       Related Items:
-      {/* <RelatedList related_ids={relatedIDs} /> */}
+      <RelatedList related_ids={relatedIDs} />
     </div>
   );
 }

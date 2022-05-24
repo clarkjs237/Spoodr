@@ -19,15 +19,7 @@
   text-align: center;
 }
 
-.indicators {
-  display: flex;
-  justify-content: center;
-}
-
-.indicators > button {
-  margin: 5px;
-}
-
+/* These are for the chevrons in RelatedList */
 .right-arrow {
   position: absolute;
   top: 50%;

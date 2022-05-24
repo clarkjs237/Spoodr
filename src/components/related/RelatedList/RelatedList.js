@@ -7,15 +7,32 @@ import RelatedListItem from './RelatedListItem';
 
 // Experimenting with the carousel
 function RelatedList({ related_ids }) {
-  // related_ids is an array of ids [65632, 65633, 65638, 65637]
+  // related_ids is an OBJECT with the product_id as the key
+  // and the default style for that product as the value
   const [activeIndex, setActiveIndex] = useState(0);
-  const length = related_ids.length;
+  const length = Object.keys(related_ids).length;
 
   const StyledSlider = styled.div`
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 20rem;
+    border: 1px red solid;
+    white-space: nowrap;
+    transition: transform 0.3s;
+  `;
+
+  const Tester = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  width: 15rem;
+  background-color: green;
+  color: white;
+  border: 1px red solid;
+  margin: 5px;
   `;
 
   const nextCard = () => {
@@ -34,72 +51,39 @@ function RelatedList({ related_ids }) {
 
   return (
     <StyledSlider
-      style={{transform: `transform: translateX(-${activeIndex * 50}%)`}}
+      style={{ transform: `transform: translateX(-${activeIndex * 50}%)` }}
       className="carousel"
     >
-    {activeIndex}
-    <div className="inner">
-      <FaChevronLeft
+      <div className="inner">
+        <FaChevronLeft
           className="left-arrow"
           onClick={prevCard}
-      />
-      <FaChevronRight
-        className="right-arrow"
-        onClick={nextCard}
-      />
-      {related_ids.map((id, index) => (
-        <div key={index}>
-          {index === activeIndex && (
-            <RelatedListItem id={id} width={'10%' } />
-          )}
-        </div>
-      ))}
-    </div>
+        />
+        <FaChevronRight
+          className="right-arrow"
+          onClick={nextCard}
+        />
+        {/* {Object.values(related_ids).map((style, index) => (
+          <div key={index}>
+            <Tester></Tester>
+          </div>
+        ))} */}
+        <Tester>
+          1
+        </Tester>
+        <Tester>
+          2
+        </Tester>
+        <Tester>
+          3
+        </Tester>
+        <Tester>
+          4
+        </Tester>
+      </div>
 
     </StyledSlider>
   )
-
-
-  // function updateIndex(newIndex) {
-  //   if (newIndex < 0) {
-  //     newIndex = 0;
-  //   } else if (newIndex >= React.Children.count(children)) {
-  //     newIndex = React.Children.count(children) - 1;
-  //   }
-
-  //   setActiveIndex(newIndex);
-  // }
-
-  // return (
-  //   <div className="carousel">
-  //     <div className="inner" style={{ transform: `translateX(-${activeIndex * 50}%)` }}>
-  //       {React.Children.map(children, (child) => (
-  //         React.cloneElement(child, { width: '10%' })
-  //       ))}
-  //     </div>
-  //     <div className="indicators">
-  //       <button
-  //         onClick={() => {
-  //           updateIndex(activeIndex - 1);
-  //         }}
-  //       >
-  //         Prev
-  //       </button>
-  //       <button
-  //         onClick={() => {
-  //           updateIndex(activeIndex + 1);
-  //         }}
-  //       >
-  //         Next
-  //       </button>
-  //     </div>
-  //   </div>
-  // )
-
-
-
-
-
 }
 
 export default RelatedList;
