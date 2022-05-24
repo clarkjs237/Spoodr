@@ -72,7 +72,11 @@ function Reviews(props) {
       <div>Hello World!</div>
       <div>Here live the reviews!</div>
       <Ratings props={props} />
-      <ReviewList reviews={reviews} postReview={postReview}/>
+      <ReviewList
+        reviews={reviews}
+        markReviewAsHelpful={markReviewAsHelpful}
+        reportReview={reportReview}
+      />
       <button type="submit">More Reviews</button>
       <button type="submit">Add Review</button>
     </>

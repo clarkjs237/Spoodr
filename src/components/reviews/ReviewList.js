@@ -2,12 +2,17 @@ import React from 'react';
 import ReviewListItem from './ReviewListItem';
 
 function ReviewList(props) {
-  console.log(props)
   return (
     <div>
       {/* <Sort /> */}
+      <br />
       {props.reviews.map((review, index) => (
-        <ReviewListItem review={review} postReview={props.postReview} index={index} />
+        <ReviewListItem
+          review={review}
+          markReviewAsHelpful={props.markReviewAsHelpful}
+          reportReview={props.reportReview}
+          key={index}
+        />
       ))}
     </div>
   );
