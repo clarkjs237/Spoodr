@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const Star = styled.span`
@@ -18,18 +19,19 @@ const Star = styled.span`
 `;
 
 export default function StarRating({ averageStarRating }) {
+  let returnRating = averageStarRating;
   return [...Array(5)].map(() => {
-    if (averageStarRating >= 1) {
-      averageStarRating--;
+    if (returnRating >= 1) {
+      returnRating--;
       return <Star full>&#9733;</Star>;// 1
-    } if (averageStarRating === 0) {
+    } if (returnRating === 0) {
       return <Star empty>&#9733;</Star>;// 0
     }
-    const returnRating = averageStarRating;
-    averageStarRating = 0;
-    if (returnRating === 0.25) {
+    const partialReturnRating = returnRating;
+    returnRating = 0;
+    if (partialReturnRating === 0.25) {
       return <Star quarter>&#9733;</Star>;
-    } if (returnRating === 0.5) {
+    } if (partialReturnRating === 0.5) {
       return <Star half>&#9733;</Star>;
     }
     return <Star threequarter>&#9733;</Star>;

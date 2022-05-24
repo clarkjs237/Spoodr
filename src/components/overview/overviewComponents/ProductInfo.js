@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ProductPrice from './ProductInfoComponents/ProductPrice';
 import StarRatingReview from './ProductInfoComponents/StarRatingReview';
@@ -12,7 +14,13 @@ const ProductCategory = styled.div`
 `;
 
 export default function ProductInfo({
-  productCategory, productTitle, productOrginalPrice, productSalePrice, totalReviews, averageRating, averageStarRating,
+  productCategory,
+  productTitle,
+  productOrginalPrice,
+  productSalePrice,
+  totalReviews,
+  averageRating,
+  averageStarRating,
 }) {
   return (
     <div>
@@ -30,3 +38,7 @@ export default function ProductInfo({
     </div>
   );
 }
+
+ProductInfo.propTypes = {
+
+};

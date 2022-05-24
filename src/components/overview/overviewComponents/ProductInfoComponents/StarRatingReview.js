@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import StarRating from './StarRating';
 
@@ -20,4 +21,3 @@ export default function StarRatingReview({ totalReviews, averageRating, averageS
     </div>
   );
 }
-

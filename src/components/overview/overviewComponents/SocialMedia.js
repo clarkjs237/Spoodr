@@ -1,6 +1,13 @@
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import {
-  FacebookShareButton, FacebookIcon, PinterestShareButton, PinterestIcon, TwitterShareButton, TwitterIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  TwitterShareButton,
+  TwitterIcon,
 } from 'react-share';
 
 const SocialMediaSpan = styled.span`
@@ -28,3 +35,7 @@ export default function SocialMedia({ url, slogan }) {
     </>
   );
 }
+
+SocialMedia.propTypes = {
+
+};
