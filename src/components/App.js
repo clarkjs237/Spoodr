@@ -21,6 +21,7 @@ function App() {
   const [reviewsMeta, setReviewsMeta] = useState({});
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
+  const [averageStarRating, setAverageStarRating] = useState(0);
 
   function updateProductByID(id) {
     fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/${id}`, {
@@ -44,7 +45,8 @@ function App() {
     const ratings = Object.keys(result.ratings).map((value) => Number(value));
     const aveRate = ratings.reduce((a, b) => a + Number(result.ratings[b]) * b, 0) / totalRatings;
     const roundedAveRate = (Math.floor(aveRate * 4) / 4).toFixed(2);
-    setAverageRating(roundedAveRate);
+    setAverageRating(aveRate.toFixed(1));
+    setAverageStarRating(roundedAveRate);
   }
 
   function getTotalRatings(result) {
@@ -80,6 +82,7 @@ function App() {
         productStyle={productStyle}
         totalReviews={totalReviews}
         averageRating={averageRating}
+        averageStarRating={averageStarRating}
       />
       <Questions product={product} />
       <Related product={product} />
@@ -87,6 +90,7 @@ function App() {
         product={product}
         totalReviews={totalReviews}
         averageRating={averageRating}
+        averageStarRating={averageStarRating}
         reviewsMeta={reviewsMeta}
       />
     </Wrapper>
