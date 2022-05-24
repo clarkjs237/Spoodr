@@ -5,7 +5,6 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import Reviews from './reviews/Reviews';
 
-
 function App() {
   const Title = styled.h1`
     font-size: 1.5em;
