@@ -5,20 +5,21 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import Reviews from './reviews/Reviews';
 
-// const PRODUCT_ID = 65631;
+export const PRODUCT_ID = 65631;
+const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+
+// const Title = styled.h1`
+// font-size: 1.5em;
+// text-align: center;
+// color: palevioletred;
+// `;
+// const Wrapper = styled.section`
+// padding: 4em;
+// background: papayawhip;
+// `;
 
 function App() {
-  const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: palevioletred;
-  `;
-  const Wrapper = styled.section`
-    padding: 4em;
-    background: papayawhip;
-  `;
-
-  const [product, setProduct] = useState(65631);
+  const [product, setProduct] = useState({'id': PRODUCT_ID});
   const [productStyle, setProductStyle] = useState({});
   const [reviewsMeta, setReviewsMeta] = useState({});
   const [totalReviews, setTotalReviews] = useState(0);
@@ -26,7 +27,7 @@ function App() {
   const [averageStarRating, setAverageStarRating] = useState(0);
 
   function updateProductByID(id) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/${id}`, {
+    fetch(`${URL}/products/${id}`, {
       headers: {
         Authorization: process.env.GITTOKEN,
       },
@@ -34,7 +35,7 @@ function App() {
       .then((response) => response.json())
       .then((result) => setProduct(result));
 
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/${id}/styles`, {
+    fetch(`${URL}/products/${id}/styles`, {
       headers: {
         Authorization: process.env.GITTOKEN,
       },
@@ -59,7 +60,7 @@ function App() {
   }
 
   function getReviewsMeta(id) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/meta?product_id=${id}`, {
+    fetch(`${URL}/reviews/meta?product_id=${id}`, {
       headers: {
         Authorization: process.env.GITTOKEN,
       },
@@ -72,36 +73,32 @@ function App() {
   }
 
   useEffect(() => {
-    updateProductByID(product);
-    getReviewsMeta(product);
+    updateProductByID(product.id);
+    getReviewsMeta(product.id);
   }, []);
 
-  // If statement to handle the initial rendering issue converting product from a Number
-  // to an object
-  if (typeof product === 'object') {
-    return (
-      <Wrapper>
-        <Title>Hello World Title</Title>
-        <Overview
-          product={product}
-          productStyle={productStyle}
-          totalReviews={totalReviews}
-          averageRating={averageRating}
-          averageStarRating={averageStarRating}
-        />
-        <Questions product={product} />
-        <Related product={product} />
-        <Reviews
-          product={product}
-          totalReviews={totalReviews}
-          averageRating={averageRating}
-          averageStarRating={averageStarRating}
-          reviewsMeta={reviewsMeta}
-        />
-      </Wrapper>
-    );
-  }
-  return <div />;
+  return (
+    <>
+      <Overview
+        product={product}
+        productStyle={productStyle}
+        totalReviews={totalReviews}
+        averageRating={averageRating}
+        averageStarRating={averageStarRating}
+      />
+      <Questions product={product} />
+      <Related
+        product={product}
+      />
+      <Reviews
+        product={product}
+        totalReviews={totalReviews}
+        averageRating={averageRating}
+        averageStarRating={averageStarRating}
+        reviewsMeta={reviewsMeta}
+      />
+    </>
+  );
 }
 
 export default App;
