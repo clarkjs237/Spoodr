@@ -23,13 +23,6 @@ function Related({ product }) {
     updateRelatedIDs(product.id);
   }, []);
 
-  // Pass down the array of related id to RelatedList
-  // return <RelatedList ids={relatedIDs} />;
-
-  // Testing out the Carousel here
-  if (product.id === undefined) {
-    return <div>Empty div</div>;
-  }
   return (
     <div className="Related">
       Related Items:

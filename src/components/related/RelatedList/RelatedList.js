@@ -20,7 +20,7 @@ function RelatedList({ children }) {
     <div className="carousel">
       <div className="inner" style={{ transform: `translateX(-${activeIndex * 50}%)` }}>
         {React.Children.map(children, (child) => {
-          return React.cloneElement(child, { width: "50%"});
+          return React.cloneElement(child, { width: "10%"});
         })}
       </div>
       <div className="indicators">

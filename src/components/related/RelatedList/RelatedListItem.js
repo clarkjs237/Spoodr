@@ -2,8 +2,16 @@
 // Styles
 // Ratings and Reviews so we can do that star thing
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { URL } from '../../App';
 
-// UNCOMMENT THE LINES BELOW 8-63 FOR THIS TO WORK AGAIN
+// const Title = styled.h1`
+// font-size: 1.5em;
+// text-align: center;
+// color: palevioletred;
+// `;
+
+
 function RelatedListItem({ id, width }) {
   // so this is where we will be making GET requests to get the product information
   // namely, I want category, product name, price, rating, and pictures
@@ -20,7 +28,7 @@ function RelatedListItem({ id, width }) {
 
   // Making a function to update the related IDs. This will be an array of ids
   function updateProduct(productID) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/${productID}/styles`, {
+    fetch(`${URL}/products/${productID}/styles`, {
       headers: {
         Authorization: process.env.GITTOKEN,
       },
@@ -47,34 +55,45 @@ function RelatedListItem({ id, width }) {
     updateProduct(id);
   }, []);
 
+
+  const Wrapper = styled.section`
+    padding: 4em;
+    background: papayawhip;
+    display: inline-flex;
+    border: 1px solid red;
+    width: ${width}
+    `;
+
   if (product.photos) {
+    // return (
+    //   <Wrapper>
+    //     <div className="carousel-item" style={{ width }}>
+    //       Product #: {id}<br />
+    //       Style #: {product.style_id}<br />
+    //       Name: {product.name}<br />
+    //       <img
+    //         alt='Img'
+    //         src={product.photos['0'].thumbnail_url}
+    //         style={{ width }}
+    //       />
+    //     </div>
+    //   </Wrapper>
+    // );
     return (
-      <div className="carousel-item" style={{ width }}>
+      <Wrapper>
         Product #: {id}<br />
         Style #: {product.style_id}<br />
         Name: {product.name}<br />
-        {/* Photos: {product.photos['0'].thumbnail_url}<br></br> */}
         <img
           alt='Img'
           src={product.photos['0'].thumbnail_url}
           style={{ width }}
         />
-      </div>
+      </Wrapper>
     );
   }
 
   return <div />;
 }
-
-// So right now, children is in reference to whatever text is inside
-// of RelatedListItems text block back in Related
-
-// function RelatedListItem({ children, width }) {
-//   return (
-//     <div className="carousel-item" style={{ width: width}}>
-//       {children}
-//     </div>
-//   )
-// }
 
 export default RelatedListItem;
