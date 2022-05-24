@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Ratings from './Ratings';
 import ReviewList from './ReviewList';
 import { PRODUCT_ID, URL } from '../App';
 
 function Reviews(props) {
-  function getReviews(id, page, count, sort) {
-    const ID = id || PRODUCT_ID;
-    const PAGE = page || 1;
-    const COUNT = count || 2;
-    const SORT = sort || 'relevant';
-    fetch(`${URL}/reviews?product_id=${ID}&page=${PAGE}&count=${COUNT}&sort=${SORT}`, {
+  const [reviews, setReviews] = useState([]);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(2);
+  const [sort, setSort] = useState("relevant");
+
+  function getReviews(id) {
+    fetch(`${URL}/reviews?product_id=${id}&page=${page}&count=${count}&sort=${sort}`, {
       headers: {
         Authorization: process.env.GITTOKEN,
       },
     })
       .then((response) => response.json())
-      .then((result) => console.log(`review:: ${result}`));
+      .then((result) => setReviews(result.results));
   }
 
   function postReview(data) {
@@ -62,12 +63,16 @@ function Reviews(props) {
       .then((result) => console.log(`reported review:: ${result}`));
   }
 
+  useEffect(() => {
+    getReviews(PRODUCT_ID);
+  }, []);
+
   return (
     <>
       <div>Hello World!</div>
       <div>Here live the reviews!</div>
       <Ratings props={props} />
-      <ReviewList product_id={props.product.id} postReview={postReview}/>
+      <ReviewList reviews={reviews} postReview={postReview}/>
       <button type="submit">More Reviews</button>
       <button type="submit">Add Review</button>
     </>

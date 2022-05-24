@@ -2,8 +2,14 @@ import React from 'react';
 import ReviewListItem from './ReviewListItem';
 
 function ReviewList(props) {
+  console.log(props)
   return (
-    <ReviewListItem product_id={props.product_id} postReview={props.postReview}/>
+    <div>
+      {/* <Sort /> */}
+      {props.reviews.map((review, index) => (
+        <ReviewListItem review={review} postReview={props.postReview} index={index} />
+      ))}
+    </div>
   );
 }
 
