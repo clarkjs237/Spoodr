@@ -19,7 +19,7 @@
     "babel-plugin-styled-components": "^2.0.7",
     "dotenv": "^16.0.1",
     "dotenv-webpack": "^7.1.0",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
@@ -34,8 +34,10 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-share": "^4.4.0",
     "styled-components": "^5.3.5"
   },
   "resolutions": {
