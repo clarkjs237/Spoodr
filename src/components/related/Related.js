@@ -4,20 +4,7 @@ import RelatedList from './RelatedList/RelatedList';
 import { URL } from '../App';
 
 function Related({ product }) {
-  const [relatedIDs, setRelatedIDs] = useState([]);
-  const [defaultStyles, setDefaultStyles] = useState([]);
-  const [productIdAndStyle, setproductIdAndStyle] = useState({});
-
-  function createObject() {
-    // will use relatedIds and defaultStyles to create an object
-    // that I will then pass down as props
-    let res = {};
-    for (var i = 0; i < relatedIDs.length; i++) {
-      res[relatedIDs[i]] = defaultStyles[i];
-    }
-    console.log(res);
-  }
-
+  const [relatedIDs, setRelatedIDs] = useState({});
 
   // Will be used to find the default style based on a given productID
   function updateDefaultCard(productID) {
@@ -31,17 +18,25 @@ function Related({ product }) {
         // Result is an individual request from this styles api
         // So an object containing all the styles
         let bool = false;
+        let defaultStyle;
         result.results.forEach((style) => {
           if (!bool && style['default?']) {
             // this is default style
-            setDefaultStyles((oldArray) => [...oldArray, style]);
+            defaultStyle = { [result.product_id]: style };
             bool = true;
           }
         });
         if (!bool) {
-          setDefaultStyles((oldArray) => [...oldArray, result.results[0]]);
+          defaultStyle = { [result.product_id]: result.results[0] };
         }
-      })
+
+        // Create an object with the key = product_id and the value
+        // equal to the default style object
+        setRelatedIDs((oldObject) => ({
+          ...oldObject,
+          ...defaultStyle,
+        }));
+      });
   }
 
   // Making a function to update the related IDs. This will be an array of ids
@@ -53,16 +48,10 @@ function Related({ product }) {
     })
       .then((response) => response.json())
       .then((results) => {
-        // Result here is that array of related ids
-        setRelatedIDs(results);
-        // I could run the helper function here with results
-        // console.log(results)
         results.forEach((product_id) => {
-          // update the default style for each id
           updateDefaultCard(product_id);
         });
-      })
-      .then(() => createObject());
+      });
   }
 
 
@@ -70,9 +59,6 @@ function Related({ product }) {
   useEffect(() => {
     // I want to get the related IDs firstly
     updateRelatedIDs(product.id);
-    // createObject();
-    // Then I want to get the default products for each one
-    // and store that
   }, []);
 
   // This is where we will make use of RelatedList
