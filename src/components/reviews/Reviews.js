@@ -11,16 +11,6 @@ function Reviews(props) {
       .then((result) => console.log(`review:: ${result}`));
   }
 
-  function getReviewMeta(id) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/meta?product_id=${id}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => console.log(`review/meta:: ${result}`));
-  }
-
   function postReview(data) {
     fetch('https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews', {
       method: 'POST',
