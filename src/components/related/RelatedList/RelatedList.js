@@ -24,27 +24,31 @@ function RelatedList({ related_ids }) {
   `;
 
   const Tester = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 10rem;
-  width: 15rem;
-  background-color: green;
-  color: white;
-  border: 1px red solid;
-  margin: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+    width: 400%;
+    background-color: green;
+    color: white;
+    border: 1px red solid;
+    margin: 5px;
   `;
 
   const nextCard = () => {
     // if the activeIndex is the last in the array, stay at end
     // else, increase by 1 (move right)
+    console.log('right')
     setActiveIndex(activeIndex === length - 1 ? activeIndex : activeIndex + 1);
+    console.log(activeIndex)
   };
 
   const prevCard = () => {
     // if the index is 0, stay at 0
     // else, decrease the index by 1
+    console.log('left')
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
+    console.log(activeIndex)
   };
 
 
