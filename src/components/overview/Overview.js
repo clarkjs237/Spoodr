@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import ProductInfo from './overviewComponents/ProductInfo';
 
-export default function Overview({ product, productStyle }) {
+export default function Overview({ product, productStyle, totalReviews, averageRating, averageRoundRating }) {
   const [productStyleId, setProductStyleId] = useState(0);
   if(product.id && productStyle.product_id) {
     return (
       <div>
         <ProductInfo
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageRoundRating={averageRoundRating}
           productCategory={product.category.toUpperCase()}
           productTitle={product.name}
           productOrginalPrice={productStyle.results[productStyleId].original_price}
