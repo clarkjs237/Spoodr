@@ -1,10 +1,15 @@
 import React from 'react';
 import Ratings from './Ratings';
 import ReviewList from './ReviewList';
+import { PRODUCT_ID, URL } from '../App';
 
 function Reviews(props) {
-  function getReviews(id) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews?product_id=${id}`, {
+  function getReviews(id, page, count, sort) {
+    const ID = id || PRODUCT_ID;
+    const PAGE = page || 1;
+    const COUNT = count || 2;
+    const SORT = sort || 'relevant';
+    fetch(`${URL}/reviews?product_id=${ID}&page=${PAGE}&count=${COUNT}&sort=${SORT}`, {
       headers: {
         Authorization: process.env.GITTOKEN,
       },
