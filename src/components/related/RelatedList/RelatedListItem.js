@@ -47,9 +47,9 @@ function RelatedListItem({ id, children, width }) {
       });
   }
 
-  function firstImage() {
-    console.log(product.photos);
-  }
+  // function firstImage() {
+  //   console.log(product.photos);
+  // }
 
   useEffect(() => {
     updateProduct(id);

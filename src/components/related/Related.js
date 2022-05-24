@@ -27,19 +27,24 @@ function Related({ product }) {
   // return <RelatedList ids={relatedIDs} />;
 
   // Testing out the Carousel here
-  return (
-    <div className='Related'>
-      Related Items:
-      <RelatedList>
-        {/* <RelatedListItem>Item 1</RelatedListItem>
-        <RelatedListItem>Item 2</RelatedListItem>
-        <RelatedListItem>Item 3</RelatedListItem> */}
-        {relatedIDs.map((id) => {
-          // return <RelatedListItem>{id}</RelatedListItem>
-          return <RelatedListItem key={id} id={id} />
-        })}
-      </RelatedList>
-    </div>
-  )
+  if (product.id === undefined) {
+    return <div>Empty div</div>
+  } else {
+    return (
+      <div className='Related'>
+        Related Items:
+        <RelatedList>
+          {/* <RelatedListItem>Item 1</RelatedListItem>
+          <RelatedListItem>Item 2</RelatedListItem>
+          <RelatedListItem>Item 3</RelatedListItem> */}
+          {relatedIDs.map((id) => {
+            // return <RelatedListItem>{id}</RelatedListItem>
+            return <RelatedListItem key={id} id={id} />
+          })}
+        </RelatedList>
+      </div>
+    );
+  }
+
 }
 export default Related;
