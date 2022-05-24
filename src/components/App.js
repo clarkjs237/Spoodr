@@ -5,6 +5,8 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import Reviews from './reviews/Reviews';
 
+// const PRODUCT_ID = 65631;
+
 function App() {
   const Title = styled.h1`
     font-size: 1.5em;
@@ -74,6 +76,8 @@ function App() {
     getReviewsMeta(product);
   }, []);
 
+  // If statement to handle the initial rendering issue converting product from a Number
+  // to an object
   if (typeof product === 'object') {
     return (
       <Wrapper>
