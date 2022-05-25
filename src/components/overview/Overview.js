@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import ProductInfo from './OverviewComponents/ProductInfo';
-import SocialMedia from './OverviewComponents/SocialMedia';
+import ProductInfo from './overviewComponents/ProductInfo';
+import SocialMedia from './overviewComponents/SocialMedia';
 
 const ProductOverview = styled.div`
   color: #0B2027;
