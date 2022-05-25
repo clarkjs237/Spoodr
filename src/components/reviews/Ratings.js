@@ -26,7 +26,24 @@ function Ratings(props) {
         )
       } */}
       <div>
+        5 stars
+        <meter value={40} min={0} max={100}></meter>
+      </div>
+      <div>
+        4 stars
+        <meter value={30} min={0} max={100}></meter>
+      </div>
+      <div>
+        3 stars
         <meter value={10} min={0} max={100}></meter>
+      </div>
+      <div>
+        2 stars
+        <meter value={15} min={0} max={100}></meter>
+      </div>
+      <div>
+        1 stars
+        <meter value={5} min={0} max={100}></meter>
       </div>
     </>
   )
