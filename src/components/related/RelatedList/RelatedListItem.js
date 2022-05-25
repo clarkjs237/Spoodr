@@ -1,80 +1,84 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { URL } from '../../App';
+
+const CarouselItem = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 14rem;
+  min-width: 12rem;
+  max-width: 14rem;
+  max-height: 12rem;
+  background-color: green;
+  color: white;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border: 2px red solid;
+`;
+
+const InsideCarousel = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Photo = styled.img`
+  height: 8rem;
+`;
+function RelatedListItem({ style, id, info, handleRelatedItemClick }) {
+  const [price, setPrice] = useState({});
 
 
+  function priceCalculator(style) {
+    // will set the price to be the sale price or regular price
+    const prices = {
+      sale_price: style.sale_price,
+      original_price: style.original_price,
+    };
+    setPrice(prices);
+  }
 
-function RelatedListItem({ id, width }) {
-  const [product, setProduct] = useState({});
+  function handleClick(e) {
+    // this will be the function that will use the
+    // handleRelatedItemClick
 
-  // Making a function to update the related IDs. This will be an array of ids
-  function updateProduct(productID) {
-    fetch(`${URL}/products/${productID}/styles`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        let bool = false;
-        result.results.forEach((style) => {
-          if (!bool && style['default?']) {
-            // this is default style
-            setProduct(style);
-            bool = true;
-          }
-        });
-        // If bool wasn't flipped, we know theres no default
-        // so we need to set default to be the first in the list
-        if (!bool) {
-          setProduct(result.results[0]);
-        }
-      });
+    e.preventDefault();
+    handleRelatedItemClick(id);
   }
 
   useEffect(() => {
-    updateProduct(id);
-  }, []);
+    priceCalculator(style);
+  }, [style]); // Needed to add [style] to correctly update the price
 
-
-  const Wrapper = styled.section`
-    padding: 4em;
-    background: papayawhip;
-    display: inline-flex;
-    border: 1px solid red;
-    width: ${width}
-    `;
-
-  if (product.photos) {
-    // return (
-    //   <Wrapper>
-    //     <div className="carousel-item" style={{ width }}>
-    //       Product #: {id}<br />
-    //       Style #: {product.style_id}<br />
-    //       Name: {product.name}<br />
-    //       <img
-    //         alt='Img'
-    //         src={product.photos['0'].thumbnail_url}
-    //         style={{ width }}
-    //       />
-    //     </div>
-    //   </Wrapper>
-    // );
+  // conditional render here in the event that info isnt
+  // assigned correctly yet
+  if (style && info && id && price.original_price) {
+    if (price.sale_price) {
+      return (
+        <CarouselItem>
+          <InsideCarousel>
+            <Photo src={style.photos['0'].thumbnail_url}/>
+            {info.product_category}<br/>
+            {info.product_name}<br/>
+            ${price.sale_price}<s>${price.original_price}</s><br/>
+          </InsideCarousel>
+        </CarouselItem>
+      );
+    }
     return (
-      <Wrapper>
-        Product #: {id}<br />
-        Style #: {product.style_id}<br />
-        Name: {product.name}<br />
-        <img
-          alt='Img'
-          src={product.photos['0'].thumbnail_url}
-          style={{ width }}
-        />
-      </Wrapper>
+      <CarouselItem
+        onClick={(e) => handleClick(e)}
+      >
+        <InsideCarousel>
+          <Photo src={style.photos['0'].thumbnail_url}/>
+          {info.product_category}<br/>
+          {info.product_name}<br/>
+          ${price.original_price}<br/>
+        </InsideCarousel>
+      </CarouselItem>
     );
   }
+  return <div>emtpy</div>
 
-  return <div />;
 }
 
 export default RelatedListItem;

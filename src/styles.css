@@ -1,29 +1,25 @@
-.carousel {
-  overflow: hidden
-}
-
-.inner {
-  white-space: nowrap;
-  transition: transform 0.3s;
-}
-
-.carousel-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 10rem;
-  background-color: green;
-  color: white;
-  margin: 8px;
-  /* border: 2px red solid; */
-  text-align: center;
-}
-
-.indicators {
+/* These are for the chevrons in RelatedList */
+/* .right-arrow {
   display: flex;
   justify-content: center;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  font-size: 2rem;
 }
 
-.indicators > button {
-  margin: 5px;
-}
+.left-arrow {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  font-size: 2rem;
+} */
+
+/* .cont {
+  display: flex;
+  flex-direction: row;
+  border: 2px purple solid;
+} */
+
