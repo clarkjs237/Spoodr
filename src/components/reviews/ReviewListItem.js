@@ -1,8 +1,11 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import StarRating from '../overview/overviewComponents/ProductInfoComponents/StarRating';
+import { URL } from "../App";
 
 function ReviewListItem(props) {
+  const [helpfulness, setHelpfulness] = useState(props.review.helpfulness);
+
   function parseDate(dateString) {
     const DATE = dateString.split('-');
     const YEAR = DATE[0];
@@ -52,10 +55,47 @@ function ReviewListItem(props) {
     return `${MONTH}, ${DAY}, ${YEAR}`;
   }
 
+  function markReviewAsHelpful(reviewId) {
+    fetch(
+      `${URL}/reviews/${reviewId}/helpful`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.GITTOKEN,
+        },
+      }
+    )
+      // .then((response) => response.json())
+      .then(() => setHelpfulness(helpfulness + 1));
+  }
+
+  function reportReview(reviewId) {
+    fetch(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/report`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.GITTOKEN,
+        },
+      }
+    )
+      // .then((response) => response.json())
+      .then(() => console.log(`reported review:: ${reviewId}`));
+  }
+
+  function handleHelfulnessClick() {
+    markReviewAsHelpful(props.review.review_id);
+  }
+
+  function handleReportClick() {
+    reportReview(props.review.review_id);
+  }
+
   return (
     <div>
       <div>
-        {StarRating(props.review.rating)}
+        {/* {StarRating(props.review.rating)} */}
+        <StarRating averageStarRating={props.review.rating}/>
       </div>
       <div id="date">
         {props.review.reviewer_name} {parseDate(props.review.date)}
@@ -68,15 +108,13 @@ function ReviewListItem(props) {
       { props.review.response &&
         <div id="response">Response from seller: {props.review.response}</div>
       }
-      <div id="helpfulness">
+      <span id="helpfulness">
         Helpful?
-        <button id="text-only-button">yes</button>
-        <button id="text-only-button">no</button>
-        {props.review.helpfulness}
-      </div>
-      <div id="report">
-        <button id="text-only-button">report</button>
-      </div>
+        <button type="submit" onClick={handleHelfulnessClick}>yes</button>
+        {helpfulness}
+      </span>
+      <button type="submit" onClick={handleReportClick}>report</button>
+      <br />
       ---------------------
       <br />
       <br />
