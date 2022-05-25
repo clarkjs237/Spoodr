@@ -1,52 +1,62 @@
 // This will be a functional stateless component that just maps the ids that are passed into
 // it from Related.js
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import RelatedListItem from './RelatedListItem';
 import '/Users/sullyclark/Desktop/HackReactor/fec/src/styles.css';
 
 // Experimenting with the carousel
-// function RelatedList({ related_ids }) {
-function RelatedList({ children, style, id }) {
+// -----------------------------------------
+// CSS STYLING FROM CAROUSEL ITEM
+
+const Inner = styled.div`
+  width: 200rem;
+  // height: 13rem;
+  white-space: nowrap;
+  border: 2px green solid;
+  transition: transform 0.3s ease-out;
+  padding: 0.5rem;
+  // margin-left: 0.5rem;
+
+  ${(props) =>
+  css`
+      transform: translateX(-${props.activeIndex * 25}%);
+  `};
+`;
+
+const Carousel = styled.div`
+  overflow: hidden;
+  border: 2px blue solid;
+  max-width: 45rem;
+  min-width: 30rem;
+`;
+
+// I want to retry my Chevron Tags real quick using styled components
+// const LeftChevron = styled.span`
+//   content: \02C3;
+// `;
+
+
+function RelatedList({ related_ids }) {
+// function RelatedList({ children, style, id }) {
   // related_ids is an OBJECT with the product_id as the key
   // and the default style for that product as the value
   const [activeIndex, setActiveIndex] = useState(0);
-  // const length = Object.keys(related_ids).length;
-  // const length = 3;
-  const length = children.length - 1;
-  console.log('CHILDREN')
-  console.log(children)
-
-  // const StyledSlider = styled.div`
-  //   position: relative;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   height: 20rem;
-  //   border: 1px red solid;
-  //   white-space: nowrap;
-  //   transition: transform 0.3s;
-  // `;
-
-  // const Tester = styled.div`
-  //   display: inline-flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   height: 10rem;
-  //   width: 400%;
-  //   background-color: green;
-  //   color: white;
-  //   border: 1px red solid;
-  //   margin: 5px;
-  // `;
+  // Length here is determined by the number of children RelatedList has
+  // which is determined by the map functionality
+  // const length = children.length - 1;
+  const length = Object.keys(related_ids).length;
+  // const length = children.length >= 2 ? children.length - 2 : 0;
+  // console.log('CHILDREN')
+  // console.log(children)
 
   const nextCard = () => {
     // if the activeIndex is the last in the array, stay at end
     // else, increase by 1 (move right)
     console.log('right');
     setActiveIndex(activeIndex === length - 1 ? activeIndex : activeIndex + 1);
-    console.log(activeIndex);
+    // console.log(activeIndex);
   };
 
   const prevCard = () => {
@@ -54,24 +64,55 @@ function RelatedList({ children, style, id }) {
     // else, decrease the index by 1
     console.log('left');
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
-    console.log(activeIndex);
   };
 
-  // -----------------------------------------
-  // CSS STYLING FROM CAROUSEL ITEM
-
-
   return (
-    <div className="carousel">
+
+    <Carousel>
       <FaChevronLeft className="left-arrrow" onClick={prevCard} />
       <FaChevronRight className="right-arrrow" onClick={nextCard} />
-      <div className="inner" style={{transform: `translateX(-${activeIndex * 50}%)` }}>
-        {React.Children.map(children, (child, index) => (
-          React.cloneElement(child, { width: '50%' })
+      <Inner activeIndex={activeIndex}>
+        {Object.values(related_ids).map((style, index) => (
+          <RelatedListItem key={index} style={style} id={Object.keys(related_ids)[index]} />
         ))}
-      </div>
-    </div>
+      </Inner>
+    </Carousel>
+
+
+
+
+
+
+
+    // This works - for now
+    // <div className="carousel">
+      // <FaChevronLeft className="left-arrrow" onClick={prevCard} />
+      // <FaChevronRight className="right-arrrow" onClick={nextCard} />
+    //   {/* <LeftChevron /> */}
+    //   <div className="inner" style={{transform: `translateX(-${activeIndex * 25}%)` }}>
+    //   {/* <div className="inner" style={{transform: `translateX(-${activeIndex * 5}rem)` }}> */}
+    //     {React.Children.map(children, (child, index) => (
+    //       React.cloneElement(child, { width: '25%' })
+    //       // React.cloneElement(child, { width: '10rem' })
+    //     ))}
+    //   </div>
+    // </div>
+
   );
 }
 
 export default RelatedList;
+
+
+// This is experimental. I'm really struggling with the Related
+// <div className="carousel">
+//   <FaChevronLeft className="left-arrrow" onClick={prevCard} />
+//   <FaChevronRight className="right-arrrow" onClick={nextCard} />
+//   {/* <LeftChevron /> */}
+//   <Inner style={{transform: `translateX(-${activeIndex * 25}%)`}}>
+//     {React.Children.map(children, (child, index) => (
+//       React.cloneElement(child, { width: '25%' })
+//       // React.cloneElement(child, { width: '10rem' })
+//     ))}
+//   </Inner>
+// </div>

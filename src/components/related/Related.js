@@ -56,7 +56,7 @@ function Related({ product }) {
 
   useEffect(() => {
     // I want to get the related IDs firstly
-    console.log('EXECUTING API CALLS');
+    console.log('EXECUTING API CALLS'); // This is only executing once, good
     updateRelatedIDs(product.id);
   }, []);
 
@@ -67,13 +67,17 @@ function Related({ product }) {
     return <div>Empty</div>;
   }
   return (
+    // <div>
+    //   Related Items:
+    //   <RelatedList>
+    //     {Object.values(relatedIDs).map((style, index) => (
+    //       <RelatedListItem key={index} style={style} id={Object.keys(relatedIDs)[index]} />
+    //     ))}
+    //   </RelatedList>
+    // </div>
     <div>
       Related Items:
-      <RelatedList>
-        {Object.values(relatedIDs).map((style, index) => (
-          <RelatedListItem key={index} style={style} id={Object.keys(relatedIDs)[index]} />
-        ))}
-      </RelatedList>
+      <RelatedList related_ids={relatedIDs}/>
     </div>
   );
 }
