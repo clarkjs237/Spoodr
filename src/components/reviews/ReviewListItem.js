@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import StarRating from '../overview/overviewComponents/ProductInfoComponents/StarRating';
 
 function ReviewListItem(props) {
-
   function parseDate(dateString) {
-    const DATE = props.review.date.split('-')
+    const DATE = dateString.split('-');
     const YEAR = DATE[0];
     let MONTH = DATE[1];
     switch (MONTH) {
@@ -48,21 +48,24 @@ function ReviewListItem(props) {
     }
     let DAY = DATE[2];
     DAY = DAY.split('T');
-    DAY = DAY[0]
+    DAY = DAY[0];
     return `${MONTH}, ${DAY}, ${YEAR}`;
   }
 
   return (
     <div>
       <br />
-      {/* <Stars /> */}
+      <div>
+        {StarRating(props.review.rating)}
+      </div>
       <div id="date">
-        {parseDate(props.review.date)}
+        {props.review.reviewer_name} {parseDate(props.review.date)}
       </div>
       <div id="summary">Summary: {props.review.summary}</div>
       <div id="body">Body: {props.review.body}</div>
-      <div id="recommend">Recommend: {props.review.recommend}</div>
-      <div id="reviewer">Reviewer: {props.review.reviewer_name}</div>
+      { props.review.recommend === true &&
+        <div> ✔ I recommend this product. </div>
+      }
       {/* <div id="response">Response: {props.review.response}</div> */}
       <div id="helpfulness">
         Helpful?
