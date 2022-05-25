@@ -52,10 +52,13 @@ function ReviewListItem(props) {
     return `${MONTH}, ${DAY}, ${YEAR}`;
   }
 
+  console.log(props.review.rating)
+
   return (
     <div>
       <div>
-        {StarRating(props.review.rating)}
+        {/* {StarRating(props.review.rating)} */}
+        <StarRating averageStarRating={props.review.rating}/>
       </div>
       <div id="date">
         {props.review.reviewer_name} {parseDate(props.review.date)}
