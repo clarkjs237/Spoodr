@@ -89,7 +89,9 @@ function App() {
         averageStarRating={averageStarRating}
       />
       <Questions product={product} />
-      <Related product={product} />
+      <Related
+        product={product}
+      />
       <Reviews
         product={product}
         totalReviews={totalReviews}
