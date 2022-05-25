@@ -24,7 +24,7 @@ const InsideCarousel = styled.div`
 const Photo = styled.img`
   height: 8rem;
 `;
-function RelatedListItem({ style, id, info }) {
+function RelatedListItem({ style, id, info, handleRelatedItemClick }) {
   const [price, setPrice] = useState({});
 
 
@@ -35,6 +35,14 @@ function RelatedListItem({ style, id, info }) {
       original_price: style.original_price,
     };
     setPrice(prices);
+  }
+
+  function handleClick(e) {
+    // this will be the function that will use the
+    // handleRelatedItemClick
+
+    e.preventDefault();
+    handleRelatedItemClick(id);
   }
 
   useEffect(() => {
@@ -57,7 +65,9 @@ function RelatedListItem({ style, id, info }) {
       );
     }
     return (
-      <CarouselItem>
+      <CarouselItem
+        onClick={(e) => handleClick(e)}
+      >
         <InsideCarousel>
           <Photo src={style.photos['0'].thumbnail_url}/>
           {info.product_category}<br/>

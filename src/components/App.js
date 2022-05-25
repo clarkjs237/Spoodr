@@ -74,6 +74,12 @@ function App() {
       });
   }
 
+  // Sully's event handler function
+  function handleRelatedItemClick(id) {
+    // This will change the state of product by using setProduct
+    console.log('Related Product ID : ' + id);
+    // setProduct({ id: id });
+  }
   useEffect(() => {
     updateProductByID(product.id);
     getReviewsMeta(product.id);
@@ -91,6 +97,7 @@ function App() {
       <Questions product={product} />
       <Related
         product={product}
+        handleRelatedItemClick={handleRelatedItemClick}
       />
       <Reviews
         product={product}

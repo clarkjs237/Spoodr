@@ -3,7 +3,7 @@ import RelatedList from './RelatedList/RelatedList';
 import RelatedListItem from './RelatedList/RelatedListItem';
 import { URL } from '../App';
 
-function Related({ product }) {
+function Related({ product, handleRelatedItemClick }) {
   const [relatedIDs, setRelatedIDs] = useState({});
   const [nameAndCat, setNameAndCat] = useState({});
 
@@ -41,11 +41,6 @@ function Related({ product }) {
           ...oldObject,
           ...defaultStyle,
         }));
-
-        // setNameAndCat((oldObject) => ({
-        //   ...oldObject,
-        //   ...tester,
-        // }));
       });
   }
 
@@ -101,8 +96,10 @@ function Related({ product }) {
   useEffect(() => {
     // I want to get the related IDs firstly
     // console.log('EXECUTING API CALLS'); // This is only executing once, good
+    // setRelatedIDs({});
+    // setNameAndCat({});
     updateRelatedIDs(product.id);
-  }, []);
+  }, [product]);
 
   // This is where we will make use of RelatedList
   // Carousel = RelatedList
@@ -113,7 +110,11 @@ function Related({ product }) {
   return (
     <div>
       Related Items:
-      <RelatedList styles={relatedIDs} infos={nameAndCat} />
+      <RelatedList
+        styles={relatedIDs}
+        infos={nameAndCat}
+        handleRelatedItemClick={handleRelatedItemClick}
+      />
     </div>
   );
 }

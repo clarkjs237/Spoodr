@@ -56,8 +56,7 @@ const Related = styled.div`
   flex-direction: row;
 `;
 
-
-function RelatedList({ styles, infos }) {
+function RelatedList({ styles, infos, handleRelatedItemClick }) {
 // function RelatedList({ children, style, id }) {
   // related_ids is an OBJECT with the product_id as the key
   // and the default style for that product as the value
@@ -85,6 +84,8 @@ function RelatedList({ styles, infos }) {
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
   };
 
+
+
   if (!styles || !infos) {
     return <div>Empty</div>;
   }
@@ -102,6 +103,7 @@ function RelatedList({ styles, infos }) {
               style={style}
               info={Object.values(infos)[index]}
               id={Object.keys(styles)[index]}
+              handleRelatedItemClick={handleRelatedItemClick}
             />
           ))}
         </Inner>
@@ -115,17 +117,3 @@ function RelatedList({ styles, infos }) {
 }
 
 export default RelatedList;
-
-
-// This is experimental. I'm really struggling with the Related
-// <div className="carousel">
-//   <FaChevronLeft className="left-arrrow" onClick={prevCard} />
-//   <FaChevronRight className="right-arrrow" onClick={nextCard} />
-//   {/* <LeftChevron /> */}
-//   <Inner style={{transform: `translateX(-${activeIndex * 25}%)`}}>
-//     {React.Children.map(children, (child, index) => (
-//       React.cloneElement(child, { width: '25%' })
-//       // React.cloneElement(child, { width: '10rem' })
-//     ))}
-//   </Inner>
-// </div>
