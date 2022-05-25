@@ -69,8 +69,26 @@ function ReviewListItem(props) {
       .then(() => setHelpfulness(helpfulness + 1));
   }
 
+  function reportReview(reviewId) {
+    fetch(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/report`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.GITTOKEN,
+        },
+      }
+    )
+      // .then((response) => response.json())
+      .then(() => console.log(`reported review:: ${reviewId}`));
+  }
+
   function handleHelfulnessClick() {
     markReviewAsHelpful(props.review.review_id);
+  }
+
+  function handleReportClick() {
+    reportReview(props.review.review_id);
   }
 
   return (
@@ -95,9 +113,7 @@ function ReviewListItem(props) {
         <button id="text-only-button" onClick={handleHelfulnessClick}>yes</button>
         {helpfulness}
       </div>
-      <div id="report">
-        <button id="text-only-button">report</button>
-      </div>
+      <button id="text-only-button" onClick={handleReportClick}>report</button>
       ---------------------
       <br />
       <br />
