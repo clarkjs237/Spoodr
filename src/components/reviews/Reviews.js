@@ -75,21 +75,25 @@ function Reviews(props) {
       .then((result) => console.log(`reported review:: ${result}`));
   }
 
+  function getMoreReviews() {
+    setCount(count + 2);
+    getReviews(PRODUCT_ID);
+  }
+
   useEffect(() => {
     getReviews(PRODUCT_ID);
   }, []);
 
   return (
     <>
-      <div>Hello World!</div>
-      <div>Here live the reviews!</div>
+      <h3>Ratings & Reviews</h3>
       <Ratings props={props} />
       <ReviewList
         reviews={reviews}
         markReviewAsHelpful={markReviewAsHelpful}
         reportReview={reportReview}
       />
-      <button type="submit">More Reviews</button>
+      <button type="submit" onClick={getMoreReviews}>More Reviews</button>
       <button type="submit">Add Review</button>
     </>
   );

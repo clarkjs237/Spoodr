@@ -54,7 +54,6 @@ function ReviewListItem(props) {
 
   return (
     <div>
-      <br />
       <div>
         {StarRating(props.review.rating)}
       </div>
@@ -66,16 +65,20 @@ function ReviewListItem(props) {
       { props.review.recommend === true &&
         <div> ✔ I recommend this product. </div>
       }
-      {/* <div id="response">Response: {props.review.response}</div> */}
+      { props.review.response &&
+        <div id="response">Response from seller: {props.review.response}</div>
+      }
       <div id="helpfulness">
         Helpful?
         <button id="text-only-button">yes</button>
+        <button id="text-only-button">no</button>
         {props.review.helpfulness}
       </div>
       <div id="report">
         <button id="text-only-button">report</button>
       </div>
       ---------------------
+      <br />
       <br />
     </div>
   );
