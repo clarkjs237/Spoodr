@@ -1,18 +1,63 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 
 function ReviewListItem(props) {
-  const MONTH = props.review.date.getMonth()
-  const DAY = props.review.date.getMonth()
-  const YEAR = props.review.date.getMonth()
+
+  function parseDate(dateString) {
+    const DATE = props.review.date.split('-')
+    const YEAR = DATE[0];
+    let MONTH = DATE[1];
+    switch (MONTH) {
+      case '01':
+        MONTH = 'January';
+        break;
+      case '02':
+        MONTH = 'February';
+        break;
+      case '03':
+        MONTH = 'March';
+        break;
+      case '04':
+        MONTH = 'April';
+        break;
+      case '05':
+        MONTH = 'May';
+        break;
+      case '06':
+        MONTH = 'June';
+        break;
+      case '07':
+        MONTH = 'July';
+        break;
+      case '08':
+        MONTH = 'August';
+        break;
+      case '09':
+        MONTH = 'September';
+        break;
+      case '10':
+        MONTH = 'October';
+        break;
+      case '11':
+        MONTH = 'November';
+        break;
+      case '12':
+        MONTH = 'December';
+        break;
+      default:
+    }
+    let DAY = DATE[2];
+    DAY = DAY.split('T');
+    DAY = DAY[0]
+    return `${MONTH}, ${DAY}, ${YEAR}`;
+  }
 
   return (
     <div>
       <br />
       {/* <Stars /> */}
       <div id="date">
-        {MONTH},
-        {DAY},
-        {YEAR}
+        {parseDate(props.review.date)}
       </div>
       <div id="summary">Summary: {props.review.summary}</div>
       <div id="body">Body: {props.review.body}</div>

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Ratings from './Ratings';
-import ReviewList from './ReviewList';
-import { PRODUCT_ID, URL } from '../App';
+/* eslint-disable react/jsx-filename-extension */
+import React, { useState, useEffect } from "react";
+import Ratings from "./Ratings";
+import ReviewList from "./ReviewList";
+import { PRODUCT_ID, URL } from "../App";
 
 function Reviews(props) {
   const [reviews, setReviews] = useState([]);
@@ -10,17 +11,20 @@ function Reviews(props) {
   const [sort, setSort] = useState("relevant");
 
   function getReviews(id) {
-    fetch(`${URL}/reviews?product_id=${id}&page=${page}&count=${count}&sort=${sort}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    fetch(
+      `${URL}/reviews?product_id=${id}&page=${page}&count=${count}&sort=${sort}`,
+      {
+        headers: {
+          Authorization: process.env.GITTOKEN,
+        },
+      }
+    )
       .then((response) => response.json())
       .then((result) => setReviews(result.results));
   }
 
   function postReview(data) {
-    fetch('https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews', {
+    fetch("https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews", {
       method: 'POST',
       headers: {
         Authorization: process.env.GITTOKEN,
@@ -42,23 +46,31 @@ function Reviews(props) {
   }
 
   function markReviewAsHelpful(reviewId) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/helpful`, {
-      method: 'PUT',
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    fetch(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/helpful`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.GITTOKEN,
+        },
+      }
+    )
       .then((response) => response.json())
-      .then((result) => console.log(`incremented helpful count of ${reviewId} to ${result}`));
+      .then((result) =>
+        console.log(`incremented helpful count of ${reviewId} to ${result}`)
+      );
   }
 
   function reportReview(reviewId) {
-    fetch(`https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/report`, {
-      method: 'PUT',
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    fetch(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/report`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.GITTOKEN,
+        },
+      }
+    )
       .then((response) => response.json())
       .then((result) => console.log(`reported review:: ${result}`));
   }
