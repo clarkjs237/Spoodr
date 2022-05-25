@@ -1,5 +1,6 @@
 .carousel {
-  overflow: hidden
+  overflow: hidden;
+  border: 2px blue solid;
 }
 
 .inner {
@@ -11,16 +12,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 10rem;
+  height: 12rem;
   background-color: green;
   color: white;
   /* margin: 8px; */
-  /* border: 2px red solid; */
-  text-align: center;
+  border: 2px red solid;
+  /* text-align: center; */
 }
 
 /* These are for the chevrons in RelatedList */
 .right-arrow {
+  display: flex;
+  justify-content: center;
   position: absolute;
   top: 50%;
   right: 20px;
@@ -28,6 +31,8 @@
 }
 
 .left-arrow {
+  display: flex;
+  justify-content: center;
   position: absolute;
   top: 50%;
   left: 20px;

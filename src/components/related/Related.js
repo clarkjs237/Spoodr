@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RelatedList from './RelatedList/RelatedList';
-// import RelatedListItem from './RelatedList/RelatedListItem';
+import RelatedListItem from './RelatedList/RelatedListItem';
 import { URL } from '../App';
 
 function Related({ product }) {
@@ -54,10 +54,9 @@ function Related({ product }) {
       });
   }
 
-
-
   useEffect(() => {
     // I want to get the related IDs firstly
+    console.log('EXECUTING API CALLS');
     updateRelatedIDs(product.id);
   }, []);
 
@@ -68,9 +67,13 @@ function Related({ product }) {
     return <div>Empty</div>;
   }
   return (
-    <div className="Related">
+    <div>
       Related Items:
-      <RelatedList related_ids={relatedIDs} />
+      <RelatedList>
+        {Object.values(relatedIDs).map((style, index) => (
+          <RelatedListItem key={index} style={style} id={Object.keys(relatedIDs)[index]} />
+        ))}
+      </RelatedList>
     </div>
   );
 }
