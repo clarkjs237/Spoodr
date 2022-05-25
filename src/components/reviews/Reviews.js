@@ -45,21 +45,7 @@ function Reviews(props) {
       .then((result) => console.log(`created review:: ${result}`));
   }
 
-  function markReviewAsHelpful(reviewId) {
-    fetch(
-      `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/helpful`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: process.env.GITTOKEN,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((result) =>
-        console.log(`incremented helpful count of ${reviewId} to ${result}`)
-      );
-  }
+
 
   function reportReview(reviewId) {
     fetch(
@@ -90,7 +76,6 @@ function Reviews(props) {
       <Ratings props={props} />
       <ReviewList
         reviews={reviews}
-        markReviewAsHelpful={markReviewAsHelpful}
         reportReview={reportReview}
       />
       <button type="submit" onClick={getMoreReviews}>More Reviews</button>

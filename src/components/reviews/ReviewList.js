@@ -10,7 +10,6 @@ function ReviewList(props) {
       {props.reviews.map((review, index) => (
         <ReviewListItem
           review={review}
-          markReviewAsHelpful={props.markReviewAsHelpful}
           reportReview={props.reportReview}
           key={index}
         />
