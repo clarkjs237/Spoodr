@@ -108,12 +108,13 @@ function ReviewListItem(props) {
       { props.review.response &&
         <div id="response">Response from seller: {props.review.response}</div>
       }
-      <div id="helpfulness">
+      <span id="helpfulness">
         Helpful?
-        <button id="text-only-button" onClick={handleHelfulnessClick}>yes</button>
+        <button type="submit" onClick={handleHelfulnessClick}>yes</button>
         {helpfulness}
-      </div>
-      <button id="text-only-button" onClick={handleReportClick}>report</button>
+      </span>
+      <button type="submit" onClick={handleReportClick}>report</button>
+      <br />
       ---------------------
       <br />
       <br />
