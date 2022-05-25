@@ -14,19 +14,16 @@ const DisplayImage = styled.img`
   width: 100%;
 `;
 
-const StyledDisplayImageNav = styled(DisplayImageNav)`
-
-`;
-
 const DisplayWrapper = styled.div`
   height: 25rem;
   border: solid;
   border-width: .1rem;
   border-color: #32292F;
   background-color: #D3AB9E;
-  width: 50%;
+  width: 37.5rem;
   position: relative;
 `;
+
 const ThumbnailImageWrapper = styled.div`
   position: absolute;
   top: 1rem;
@@ -55,7 +52,7 @@ export default function ImageGalleryDefault({
           />
         ))}
       </ThumbnailImageWrapper>
-      <StyledDisplayImageNav
+      <DisplayImageNav
         curDisplayIndex={curDisplayIndex}
         setCurDisplayIndex={setCurDisplayIndex}
         maxDisplayIndex={curDisplayPhotos.length - 1}

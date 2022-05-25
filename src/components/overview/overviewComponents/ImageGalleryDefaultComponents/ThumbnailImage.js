@@ -9,6 +9,9 @@ const Thumbnail = styled.img`
   width: 2rem;
   margin: .01rem;
   cursor: pointer;
+  &:hover {
+    border-color: #90D7FF;
+  }
 `;
 
 export default function ThumbnailImage({

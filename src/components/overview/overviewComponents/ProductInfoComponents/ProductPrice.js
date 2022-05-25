@@ -7,10 +7,11 @@ const PriceContainer = styled.p`
 `;
 
 const Price = styled.span`
-  color: ${(props) => (props.sale ? 'red' : 'inherit')};
+  color: ${(props) => (props.sale ? '#90D7FF' : 'inherit')};
   text-decoration: ${(props) => (props.orgsale ? 'line-through' : 'inherit')};
   font-weight: ${(props) => (props.sale ? 'bold' : 'inherit')};
   margin-right: .75em;
+  -webkit-text-stroke: ${(props) => (props.sale ? '.5px #32292F' : 'inherit')};
 `;
 
 export default function ProductPrice({ productOrginalPrice, productSalePrice }) {

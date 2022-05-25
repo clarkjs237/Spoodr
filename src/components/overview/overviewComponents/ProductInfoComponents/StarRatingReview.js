@@ -9,6 +9,7 @@ color: #32292F;
   &:hover {
     background-color: #90D7FF;
     cursor: pointer;
+  }
 `;
 
 export default function StarRatingReview({ totalReviews, averageRating, averageStarRating }) {
