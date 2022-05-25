@@ -16,6 +16,11 @@ const CarouselItem = styled.div`
   border: 2px red solid;
 `;
 
+const InsideCarousel = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Photo = styled.img`
   height: 8rem;
 `;
@@ -42,23 +47,23 @@ function RelatedListItem({ style, id, info }) {
     if (price.sale_price) {
       return (
         <CarouselItem>
-          <div className="inside-carousel">
+          <InsideCarousel>
             <Photo src={style.photos['0'].thumbnail_url}/>
             {info.product_category}<br/>
             {info.product_name}<br/>
             ${price.sale_price}<s>${price.original_price}</s><br/>
-          </div>
+          </InsideCarousel>
         </CarouselItem>
       );
     }
     return (
       <CarouselItem>
-        <div className="inside-carousel">
+        <InsideCarousel>
           <Photo src={style.photos['0'].thumbnail_url}/>
           {info.product_category}<br/>
           {info.product_name}<br/>
           ${price.original_price}<br/>
-        </div>
+        </InsideCarousel>
       </CarouselItem>
     );
   }

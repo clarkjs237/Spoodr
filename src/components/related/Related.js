@@ -111,14 +111,6 @@ function Related({ product }) {
     return <div>Empty</div>;
   }
   return (
-    // <div>
-    //   Related Items:
-    //   <RelatedList>
-    //     {Object.values(relatedIDs).map((style, index) => (
-    //       <RelatedListItem key={index} style={style} id={Object.keys(relatedIDs)[index]} />
-    //     ))}
-    //   </RelatedList>
-    // </div>
     <div>
       Related Items:
       <RelatedList styles={relatedIDs} infos={nameAndCat} />

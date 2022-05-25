@@ -26,7 +26,7 @@ const Inner = styled.div`
 `;
 
 const Carousel = styled.div`
-  // display: inline-flex;
+  // display: flex;
   overflow: hidden;
   border: 2px blue solid;
   // max-width: 45rem;
@@ -35,9 +35,26 @@ const Carousel = styled.div`
 `;
 
 // I want to retry my Chevron Tags real quick using styled components
-// const LeftChevron = styled.span`
-//   content: \02C3;
-// `;
+const RightChevron = styled.span`
+  display: flex;
+  font-size: 2rem;
+  // padding: 2rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LeftChevron = styled.span`
+  display: flex;
+  font-size: 2rem;
+  // margin-left: 1rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Related = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 
 function RelatedList({ styles, infos }) {
@@ -73,20 +90,27 @@ function RelatedList({ styles, infos }) {
   }
   return (
 
-    <Carousel>
-      <FaChevronLeft className="left-arrrow" onClick={prevCard} />
-      <FaChevronRight className="right-arrrow" onClick={nextCard} />
-      <Inner activeIndex={activeIndex}>
-        {Object.values(styles).map((style, index) => (
-          <RelatedListItem
-            key={index}
-            style={style}
-            info={Object.values(infos)[index]}
-            id={Object.keys(styles)[index]}
-          />
-        ))}
-      </Inner>
-    </Carousel>
+    <Related>
+      <LeftChevron
+        onClick={prevCard}
+      >&#9664;</LeftChevron>
+      <Carousel>
+        <Inner activeIndex={activeIndex}>
+          {Object.values(styles).map((style, index) => (
+            <RelatedListItem
+              key={index}
+              style={style}
+              info={Object.values(infos)[index]}
+              id={Object.keys(styles)[index]}
+            />
+          ))}
+        </Inner>
+      </Carousel>
+      <RightChevron
+        onClick={nextCard}
+      >&#9654;</RightChevron>
+    </Related>
+
   );
 }
 
