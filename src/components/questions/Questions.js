@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { PRODUCT_ID, URL } from "../App";
-import Search from "./Search";
-import Answers from "./Answers";
+import React, { useState, useEffect } from 'react';
+import { PRODUCT_ID, URL } from '../App';
+import Search from './Search';
+import Answers from './Answers';
 
 function Questions() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [questions, setQuestions] = useState([]);
   const [activeQuestions, setActiveQuestions] = useState([]);
   const [isCollapsedQuestions, setIsQuestionsCollapsed] = useState(true);
-  const [isCollapsedAnswers, setIsCollapsedAnswers] = useState(true);
-  const [answerText, setAnswerText] = useState('See more answers');
-
-  useEffect(() => {
-    getQuestions();
-  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -21,15 +15,6 @@ function Questions() {
 
   const handleQuestionsClick = () => {
     setIsQuestionsCollapsed(!isCollapsedQuestions);
-  };
-
-  const handleAnswersClick = () => {
-    if (isCollapsedAnswers) {
-      setAnswerText('Collapse answers');
-    } else {
-      setAnswerText('See more answers');
-    }
-    setIsCollapsedAnswers(!isCollapsedAnswers);
   };
 
   async function getQuestions() {
@@ -40,7 +25,7 @@ function Questions() {
           headers: {
             Authorization: process.env.GITTOKEN,
           },
-        }
+        },
       );
       const data = await response.json();
       setQuestions(data.results);
@@ -50,9 +35,11 @@ function Questions() {
     }
   }
 
-  const searchedQuestions = questions.filter((question) =>
-    question.question_body.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
+  const searchedQuestions = questions.filter((question) => question.question_body.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <>
@@ -60,45 +47,31 @@ function Questions() {
       <section>
         {searchTerm.length > 2
           ? searchedQuestions.map((question) => {
-              let answers = [];
-              if (isCollapsedAnswers) {
-                answers = Object.values(question.answers).slice(0, 2);
-              } else {
-                answers = Object.values(question.answers);
-              }
-              return (
-                <div key={question.question_id}>
-                  <p>Q: {question.question_body}</p>
-                  <Answers
-                    answers={answers}
-                    isCollapsedAnswers={isCollapsedAnswers}
-                    onAnswerClick={handleAnswersClick}
-                    answerText={answerText}
-                  />
-                </div>
-              );
-            })
+            const answers = Object.values(question.answers);
+            return (
+              <div key={question.question_id}>
+                <p>
+                  Q:
+                  {question.question_body}
+                </p>
+                <Answers answers={answers} />
+              </div>
+            );
+          })
           : activeQuestions.map((question) => {
-              let answers = [];
-              if (isCollapsedAnswers) {
-                answers = Object.values(question.answers).slice(0, 2);
-              } else {
-                answers = Object.values(question.answers);
-              }
-              return (
-                <div key={question.question_id}>
-                  <p>Q: {question.question_body}</p>
-                  <Answers
-                    answers={answers}
-                    isCollapsedAnswers={isCollapsedAnswers}
-                    onAnswerClick={handleAnswersClick}
-                    answerText={answerText}
-                  />
-                </div>
-              );
-            })}
-        <button onClick={handleQuestionsClick}>More answered questions</button>
-        <button>Add a question +</button>
+            const answers = Object.values(question.answers);
+            return (
+              <div key={question.question_id}>
+                <p>
+                  Q:
+                  {question.question_body}
+                </p>
+                <Answers allAnswers={answers} />
+              </div>
+            );
+          })}
+        <button type="button" onClick={handleQuestionsClick}>More answered questions</button>
+        <button type="button">Add a question +</button>
       </section>
     </>
   );

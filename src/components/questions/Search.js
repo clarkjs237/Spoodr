@@ -1,6 +1,8 @@
-import React from "react";
+import React from 'react';
 
-function Search({ id, value, type = "text", onInputChange }) {
+function Search({
+  id, value, type = 'text', onInputChange,
+}) {
   return (
     <section>
       <label htmlFor={id}>Questions & answers</label>
