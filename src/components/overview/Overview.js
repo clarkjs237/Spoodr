@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ProductInfo from './overviewComponents/ProductInfo';
 import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
+import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
 
 const ProductOverview = styled.div`
   color: #0B2027;
@@ -24,17 +25,37 @@ export default function Overview({
   averageRating,
   averageStarRating,
 }) {
-  const [curStyleId, setCurStyleId] = useState(0);
   if (product.category && productStyle.product_id) {
+    const [curStyleId, setCurStyleId] = useState(0);
+    const [expandedView, setExpandedView] = useState(false);
+    const [curDisplayIndex, setCurDisplayIndex] = useState(0);
+
     const socialUrl = productStyle.results[curStyleId].photos[curStyleId].url;
     const productOrginalPrice = productStyle.results[curStyleId].original_price;
     const productSalePrice = productStyle.results[curStyleId].sale_price;
     const curStyleName = productStyle.results[curStyleId].name;
     let i = -1;
-    const styleThumbnails = productStyle.results.map((element) => {
+    const styleThumbnails = productStyle.results.map((style) => {
       i++;
-      return { id: i, thumbnail: element.photos[0].thumbnail_url };
+      return { id: i, thumbnail: style.photos[0].thumbnail_url };
     });
+    i = -1;
+    const curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo) => {
+      i++;
+      photo.id = i;
+      return photo;
+    });
+
+    if (expandedView) {
+      return (
+        <ImageGalleryExpanded
+          curDisplayPhotos={curDisplayPhotos}
+          curDisplayIndex={curDisplayIndex}
+          setCurDisplayIndex={setCurDisplayIndex}
+        />
+      );
+    }
+
     return (
       <ProductOverview>
         <ProductInfo
@@ -51,6 +72,11 @@ export default function Overview({
           setCurStyleId={setCurStyleId}
           curStyleName={curStyleName}
           styleThumbnails={styleThumbnails}
+        />
+        <ImageGalleryDefault
+          curDisplayPhotos={curDisplayPhotos}
+          curDisplayIndex={curDisplayIndex}
+          setCurDisplayIndex={setCurDisplayIndex}
         />
         <SocialMedia url={socialUrl} slogan={product.slogan} />
         <ProductSlogan>{product.slogan}</ProductSlogan>

@@ -1,24 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const ImageNav = styled.span`
+`;
+
 export default function DisplayImageNav({
   curDisplayIndex,
   setCurDisplayIndex,
-  maxDisplayIndex
- }) {
-
+  maxDisplayIndex,
+}) {
   function onClickHandler(e) {
-    if(e.target.name) {
-      setCurDisplayIndex(curDisplayIndex + 1)
+    if (e.target.name) {
+      setCurDisplayIndex(curDisplayIndex + 1);
     } else {
-      setCurDisplayIndex(curDisplayIndex - 1)
+      setCurDisplayIndex(curDisplayIndex - 1);
     }
   }
 
-  if(curDisplayIndex === 0) {
-
-  } else if (curDisplayIndex)
-  return(
-
-  )
+  if (curDisplayIndex === 0) {
+    return (
+      <ImageNav />
+    );
+  }
+  if (curDisplayIndex === maxDisplayIndex) {
+    return (
+      <ImageNav />
+    );
+  }
+  return (
+    <ImageNav />
+  );
 }

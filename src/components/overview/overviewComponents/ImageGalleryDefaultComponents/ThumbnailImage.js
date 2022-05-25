@@ -3,25 +3,28 @@ import styled from 'styled-components';
 
 const Thumbnail = styled.img`
   border: solid;
-  border-width: .5rem;
-  bordercolor: ${props => props.selected ? '#90D7FF' : '#32292F'}
+  border-width: .1rem;
+  border-color: ${(props) => (props.selected ? '#90D7FF' : '#32292F')};
+  height: 2.5rem;
+  width: 2rem;
+  margin: .01rem;
+  cursor: pointer;
 `;
 
 export default function ThumbnailImage({
   id,
   thumbnail,
   curDisplayIndex,
-  setCurDisplayIndex
+  setCurDisplayIndex,
 }) {
-
   function onClickHandler(e) {
-    setCurDisplayIndex(e.target.name)
+    setCurDisplayIndex(parseInt(e.target.name));
   }
 
-  if(id === curDisplayIndex) {
-    return <Thumbnail selected src={thumbnail}/>
+  if (id === curDisplayIndex) {
+    return <div><Thumbnail selected src={thumbnail} name={id} onClick={onClickHandler} /></div>;
   }
-  return(
-    <Thumbnail src={thumbnail}/>
-  )
+  return (
+    <div><Thumbnail src={thumbnail} name={id} onClick={onClickHandler} /></div>
+  );
 }
