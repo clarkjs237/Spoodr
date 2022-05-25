@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import ProductInfo from './OverviewComponents/ProductInfo';
-import SocialMedia from './OverviewComponents/SocialMedia';
+import ProductInfo from './overviewComponents/ProductInfo';
+import SocialMedia from './overviewComponents/SocialMedia';
+import StyleSelector from './overviewComponents/StyleSelector';
 
 const ProductOverview = styled.div`
   color: #0B2027;
@@ -23,11 +24,17 @@ export default function Overview({
   averageRating,
   averageStarRating,
 }) {
-  const [productStyleId, setProductStyleId] = useState(2);
+  const [curStyleId, setCurStyleId] = useState(0);
   if (product.category && productStyle.product_id) {
-    const socialUrl = productStyle.results[productStyleId].photos[productStyleId];
-    const productOrginalPrice = productStyle.results[productStyleId].original_price;
-    const productSalePrice = productStyle.results[productStyleId].sale_price;
+    const socialUrl = productStyle.results[curStyleId].photos[curStyleId].url;
+    const productOrginalPrice = productStyle.results[curStyleId].original_price;
+    const productSalePrice = productStyle.results[curStyleId].sale_price;
+    const curStyleName = productStyle.results[curStyleId].name;
+    let i = -1;
+    const styleThumbnails = productStyle.results.map((element) => {
+      i++;
+      return { id: i, thumbnail: element.photos[0].thumbnail_url };
+    });
     return (
       <ProductOverview>
         <ProductInfo
@@ -39,8 +46,14 @@ export default function Overview({
           productOrginalPrice={productOrginalPrice}
           productSalePrice={productSalePrice}
         />
-        <ProductSlogan>{product.slogan}</ProductSlogan>
+        <StyleSelector
+          curStyleId={curStyleId}
+          setCurStyleId={setCurStyleId}
+          curStyleName={curStyleName}
+          styleThumbnails={styleThumbnails}
+        />
         <SocialMedia url={socialUrl} slogan={product.slogan} />
+        <ProductSlogan>{product.slogan}</ProductSlogan>
         <ProductDescription>{product.description}</ProductDescription>
       </ProductOverview>
     );
