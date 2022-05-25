@@ -38,7 +38,7 @@ const Carousel = styled.div`
 // `;
 
 
-function RelatedList({ related_ids }) {
+function RelatedList({ styles, infos }) {
 // function RelatedList({ children, style, id }) {
   // related_ids is an OBJECT with the product_id as the key
   // and the default style for that product as the value
@@ -46,7 +46,7 @@ function RelatedList({ related_ids }) {
   // Length here is determined by the number of children RelatedList has
   // which is determined by the map functionality
   // const length = children.length - 1;
-  const length = Object.keys(related_ids).length;
+  const length = Object.keys(styles).length;
   // const length = children.length >= 2 ? children.length - 2 : 0;
   // console.log('CHILDREN')
   // console.log(children)
@@ -66,38 +66,25 @@ function RelatedList({ related_ids }) {
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
   };
 
+  if (!styles || !infos) {
+    return <div>Empty</div>;
+  }
   return (
 
     <Carousel>
       <FaChevronLeft className="left-arrrow" onClick={prevCard} />
       <FaChevronRight className="right-arrrow" onClick={nextCard} />
       <Inner activeIndex={activeIndex}>
-        {Object.values(related_ids).map((style, index) => (
-          <RelatedListItem key={index} style={style} id={Object.keys(related_ids)[index]} />
+        {Object.values(styles).map((style, index) => (
+          <RelatedListItem
+            key={index}
+            style={style}
+            info={Object.values(infos)[index]}
+            id={Object.keys(styles)[index]}
+          />
         ))}
       </Inner>
     </Carousel>
-
-
-
-
-
-
-
-    // This works - for now
-    // <div className="carousel">
-      // <FaChevronLeft className="left-arrrow" onClick={prevCard} />
-      // <FaChevronRight className="right-arrrow" onClick={nextCard} />
-    //   {/* <LeftChevron /> */}
-    //   <div className="inner" style={{transform: `translateX(-${activeIndex * 25}%)` }}>
-    //   {/* <div className="inner" style={{transform: `translateX(-${activeIndex * 5}rem)` }}> */}
-    //     {React.Children.map(children, (child, index) => (
-    //       React.cloneElement(child, { width: '25%' })
-    //       // React.cloneElement(child, { width: '10rem' })
-    //     ))}
-    //   </div>
-    // </div>
-
   );
 }
 

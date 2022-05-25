@@ -19,19 +19,47 @@ const CarouselItem = styled.div`
 const Photo = styled.img`
   height: 8rem;
 `;
-function RelatedListItem({ style, id }) {
-  const [product, setProduct] = useState({});
+function RelatedListItem({ style, id, info }) {
+  const [price, setPrice] = useState({});
+
+
+  function priceCalculator(style) {
+    // will set the price to be the sale price or regular price
+    const prices = {
+      sale_price: style.sale_price,
+      original_price: style.original_price,
+    };
+    setPrice(prices);
+  }
 
   useEffect(() => {
-    setProduct(style);
+    priceCalculator(style);
   }, []);
 
-  return (
-    <CarouselItem>
-      {id}
-      <Photo src={style.photos['0'].thumbnail_url}/>
-    </CarouselItem>
-  );
+  // conditional render here in the event that info isnt
+  // assigned correctly yet
+  if (style && info && id && price.original_price) {
+    if (price.sale_price) {
+      return (
+        <CarouselItem>
+          {info.product_category}<br/>
+          {info.product_name}<br/>
+          {price.sale_price}<br/>
+          {/* <Photo src={style.photos['0'].thumbnail_url}/> */}
+        </CarouselItem>
+      );
+    }
+    return (
+      <CarouselItem>
+        {info.product_category}<br/>
+        {info.product_name}<br/>
+        {price.original_price}<br/>
+        {/* <Photo src={style.photos['0'].thumbnail_url}/> */}
+      </CarouselItem>
+    );
+  }
+  return <div>emtpy</div>
+
 }
 
 export default RelatedListItem;
