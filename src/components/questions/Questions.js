@@ -1,6 +1,6 @@
 // import React from 'react';
 
 function Questions() {
-  return <div>Hello World Questions!</div>
+  return <div>Hello World Questions!</div>;
 }
 export default Questions;
