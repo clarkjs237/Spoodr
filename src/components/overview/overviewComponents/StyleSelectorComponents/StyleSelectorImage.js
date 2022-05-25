@@ -11,6 +11,9 @@ const StyleImage = styled.img`
   height: 3.5rem;
   padding: 0;
   margin: .01rem;
+  &:hover {
+    border-color: #90D7FF;
+  }
 `;
 
 const Check = styled.label`
