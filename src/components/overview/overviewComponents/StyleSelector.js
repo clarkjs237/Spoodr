@@ -1,40 +1,40 @@
 import React from 'react';
-import StyleSelectorImage from './StyleSelectorComponents/StyleSelectorImage';
 import styled from 'styled-components';
+import StyleSelectorImage from './StyleSelectorComponents/StyleSelectorImage';
 
-const StyleTitle = styled.p`
+const StyleName = styled.p`
 `;
 
 const Style = styled.span`
   font-weight: bold;
 `;
 
-const ThumbnailDisplay = styled.p`
+const ThumbnailDisplay = styled.div`
+  position: relative;
 `;
 
 export default function StyleSelector({
   curStyleId,
-  setStyleId,
-  styleTitle,
-  styleThumbnails//[{id: 0, thumbnail: someurl},...]
+  setCurStyleId,
+  curStyleName,
+  styleThumbnails,
 }) {
-
-  let setsOfFour = Math.ceil(styleThumbnails.length / 4);
-  let styleThumbnailsByFour = [...Array(setsOfFour)].map((und, i) =>
-    styleThumbnails.slice((i * setsOfFour, (i + 1) * setsOfFour)));
+  const setsOfFour = Math.ceil(styleThumbnails.length / 4);
+  const styleThumbnailsByFour = [...Array(setsOfFour)].map((und, i) => styleThumbnails.slice(i * 4, (i + 1) * 4));
 
   return (
     <>
-      <StyleTitle><Style>{'STYLE >'}</Style>{styleTitle}</StyleTitle>
+      <StyleName>
+        <Style>{'STYLE > '}</Style>
+        {curStyleName}
+      </StyleName>
       <ThumbnailDisplay>
-        {styleThumbnailsByFour.map((fourStyleThumbnails) => {
-          return <ThumbnailDisplay>
-            {fourStyleThumbnails.map(({ id, thumbnail }) => {
-              return <StyleSelectorImage curStyleId={curStyleId} setStyleId={setStyleId} thumbnailId={id} thumbnail={thumbnail} />
-            })}
+        {styleThumbnailsByFour.map((fourStyleThumbnails) => (
+          <ThumbnailDisplay>
+            {fourStyleThumbnails.map(({ id, thumbnail }) => <StyleSelectorImage curStyleId={curStyleId} setCurStyleId={setCurStyleId} thumbnailId={id} thumbnail={thumbnail} />)}
           </ThumbnailDisplay>
-        })}
+        ))}
       </ThumbnailDisplay>
     </>
-  )
+  );
 }
