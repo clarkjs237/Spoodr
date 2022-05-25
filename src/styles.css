@@ -49,3 +49,8 @@
   left: 20px;
   font-size: 2rem;
 }
+
+.inside-carousel {
+  display: flex;
+  flex-direction: column;
+}

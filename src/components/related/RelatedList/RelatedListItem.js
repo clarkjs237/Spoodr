@@ -5,9 +5,9 @@ const CarouselItem = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 12rem;
+  min-height: 14rem;
   min-width: 12rem;
-  max-width: 12rem;
+  max-width: 14rem;
   max-height: 12rem;
   background-color: green;
   color: white;
@@ -34,7 +34,7 @@ function RelatedListItem({ style, id, info }) {
 
   useEffect(() => {
     priceCalculator(style);
-  }, []);
+  }, [style]); // Needed to add [style] to correctly update the price
 
   // conditional render here in the event that info isnt
   // assigned correctly yet
@@ -42,19 +42,23 @@ function RelatedListItem({ style, id, info }) {
     if (price.sale_price) {
       return (
         <CarouselItem>
-          {info.product_category}<br/>
-          {info.product_name}<br/>
-          {price.sale_price}<br/>
-          {/* <Photo src={style.photos['0'].thumbnail_url}/> */}
+          <div className="inside-carousel">
+            <Photo src={style.photos['0'].thumbnail_url}/>
+            {info.product_category}<br/>
+            {info.product_name}<br/>
+            ${price.sale_price}<s>${price.original_price}</s><br/>
+          </div>
         </CarouselItem>
       );
     }
     return (
       <CarouselItem>
-        {info.product_category}<br/>
-        {info.product_name}<br/>
-        {price.original_price}<br/>
-        {/* <Photo src={style.photos['0'].thumbnail_url}/> */}
+        <div className="inside-carousel">
+          <Photo src={style.photos['0'].thumbnail_url}/>
+          {info.product_category}<br/>
+          {info.product_name}<br/>
+          ${price.original_price}<br/>
+        </div>
       </CarouselItem>
     );
   }
