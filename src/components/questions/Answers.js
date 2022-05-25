@@ -1,10 +1,10 @@
 import React from "react";
 
-function Answers({ answers }) {
+function Answers({ answers, isCollapsedAnswers, onAnswerClick, answerText }) {
   return (
-    <>
+    <section>
       {answers.map((answer) => (
-        <div>
+        <div key={answer.id}>
           <p>A: {answer.body}</p>
           <footer>
             <span>by {answer.answerer_name}</span>
@@ -13,7 +13,8 @@ function Answers({ answers }) {
           </footer>
         </div>
       ))}
-    </>
+      <p onClick={onAnswerClick}>{answerText}</p>
+    </section>
   );
 }
 

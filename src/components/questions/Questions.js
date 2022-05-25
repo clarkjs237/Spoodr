@@ -6,6 +6,10 @@ import Answers from "./Answers";
 function Questions() {
   const [searchTerm, setSearchTerm] = useState("");
   const [questions, setQuestions] = useState([]);
+  const [activeQuestions, setActiveQuestions] = useState([]);
+  const [isCollapsedQuestions, setIsQuestionsCollapsed] = useState(true);
+  const [isCollapsedAnswers, setIsCollapsedAnswers] = useState(true);
+  const [answerText, setAnswerText] = useState('See more answers');
 
   useEffect(() => {
     getQuestions();
@@ -13,6 +17,19 @@ function Questions() {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleQuestionsClick = () => {
+    setIsQuestionsCollapsed(!isCollapsedQuestions);
+  };
+
+  const handleAnswersClick = () => {
+    if (isCollapsedAnswers) {
+      setAnswerText('Collapse answers');
+    } else {
+      setAnswerText('See more answers');
+    }
+    setIsCollapsedAnswers(!isCollapsedAnswers);
   };
 
   async function getQuestions() {
@@ -27,6 +44,7 @@ function Questions() {
       );
       const data = await response.json();
       setQuestions(data.results);
+      setActiveQuestions(data.results.slice(0, 4));
     } catch (error) {
       console.error(`Could not get questions: ${error}`);
     }
@@ -40,27 +58,47 @@ function Questions() {
     <>
       <Search id="search" value={searchTerm} onInputChange={handleSearch} />
       <section>
-        {searchTerm.length > 2 ? (
-          searchedQuestions.map((question) => {
-            const answers = Object.values(question.answers);
-            return (
-              <div key={question.question_id}>
-                <p>Q: {question.question_body}</p>
-                <Answers answers={answers} />
-              </div>
-            );
-          })
-        ) : (
-          questions.map((question) => {
-            const answers = Object.values(question.answers);
-            return (
-              <div key={question.question_id}>
-                <p>Q: {question.question_body}</p>
-                <Answers answers={answers} />
-              </div>
-            );
-          })
-        )}
+        {searchTerm.length > 2
+          ? searchedQuestions.map((question) => {
+              let answers = [];
+              if (isCollapsedAnswers) {
+                answers = Object.values(question.answers).slice(0, 2);
+              } else {
+                answers = Object.values(question.answers);
+              }
+              return (
+                <div key={question.question_id}>
+                  <p>Q: {question.question_body}</p>
+                  <Answers
+                    answers={answers}
+                    isCollapsedAnswers={isCollapsedAnswers}
+                    onAnswerClick={handleAnswersClick}
+                    answerText={answerText}
+                  />
+                </div>
+              );
+            })
+          : activeQuestions.map((question) => {
+              let answers = [];
+              if (isCollapsedAnswers) {
+                answers = Object.values(question.answers).slice(0, 2);
+              } else {
+                answers = Object.values(question.answers);
+              }
+              return (
+                <div key={question.question_id}>
+                  <p>Q: {question.question_body}</p>
+                  <Answers
+                    answers={answers}
+                    isCollapsedAnswers={isCollapsedAnswers}
+                    onAnswerClick={handleAnswersClick}
+                    answerText={answerText}
+                  />
+                </div>
+              );
+            })}
+        <button onClick={handleQuestionsClick}>More answered questions</button>
+        <button>Add a question +</button>
       </section>
     </>
   );
