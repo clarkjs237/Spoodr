@@ -5,24 +5,27 @@ const CarouselItem = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 14rem;
-  min-width: 12rem;
-  max-width: 14rem;
-  max-height: 12rem;
+  min-height: 18rem;
+  min-width: 13rem;
+  max-width: 13rem;
+  max-height: 18rem;
   background-color: green;
   color: white;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  border: 2px red solid;
+  margin: 0.5rem;
 `;
 
 const InsideCarousel = styled.div`
   display: flex;
   flex-direction: column;
+
+  // position: relative;
 `;
 
 const Photo = styled.img`
   height: 8rem;
+
+  // height: 100%;
+  // position: absolute;
 `;
 function RelatedListItem({ style, id, info, handleRelatedItemClick }) {
   const [price, setPrice] = useState({});
