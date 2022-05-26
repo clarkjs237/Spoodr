@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { format } from 'date-fns';
 
 function Answers({ allAnswers }) {
   const [answers, setAnswers] = useState(allAnswers.slice(0, 2));
@@ -30,15 +31,20 @@ function Answers({ allAnswers }) {
               {answer.answerer_name}
             </span>
             <span>
+              by
+              {format(new Date(answer.date), 'MMMM d, yyyy')}
+            </span>
+            <span>
               Helpful? Yes(
-              {answer.helpfulness}
+              <span>{answer.helpfulness}</span>
               )
             </span>
             <span>Report</span>
           </footer>
         </div>
       ))}
-      <p onClick={handleAnswerClick}>{answerText}</p>
+      {(allAnswers.length > 2)
+        && <p onClick={handleAnswerClick}>{answerText}</p>}
     </>
   );
 }
