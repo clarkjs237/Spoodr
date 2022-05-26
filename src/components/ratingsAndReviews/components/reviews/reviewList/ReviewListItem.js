@@ -94,7 +94,6 @@ function ReviewListItem(props) {
   return (
     <div>
       <div>
-        {/* {StarRating(props.review.rating)} */}
         <StarRating averageStarRating={props.review.rating}/>
       </div>
       <div id="date">

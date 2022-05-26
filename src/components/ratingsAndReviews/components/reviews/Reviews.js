@@ -52,7 +52,9 @@ function Reviews(props) {
         handleSortChange={handleSortChange}
       />
       <ReviewsList reviews={reviews} />
-      <button type="submit" onClick={handleMoreReviews}>More Reviews</button>
+      { reviews.length === count && reviews.length > 0 &&
+        <button type="submit" onClick={handleMoreReviews}>More Reviews</button>
+      }
       {/* <AddReviewForm /> */}
     </div>
   );
