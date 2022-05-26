@@ -4,36 +4,34 @@ import StarRating from '../overview/overviewComponents/ProductInfoComponents/Sta
 import { PRODUCT_ID } from '../App';
 
 function Ratings(props) {
-  const [reviewsMeta, setReviewsMeta] = useState(props.reviewsMeta);
+  // const [reviewsMeta, setReviewsMeta] = useState(props.reviewsMeta);
   const [percentRecommended, setPercentRecommended] = useState(0);
+  const [five, setFive] = useState(0);
+  const [four, setFour] = useState(0);
+  const [three, setThree] = useState(0);
+  const [two, setTwo] = useState(0);
+  const [one, setOne] = useState(0);
 
   function calculatePercentRecommended() {
-    const TRUE = Number(reviewsMeta.recommended.true)
-    const FALSE = Number(reviewsMeta.recommended.false)
+    const TRUE = Number(props.reviewsMeta.recommended.true)
+    const FALSE = Number(props.reviewsMeta.recommended.false)
     const TOTAL = TRUE + FALSE;
-    setPercentRecommended(Math.round((TRUE / TOTAL) * 100));
+    setPercentRecommended(Math.floor((TRUE / TOTAL) * 100));
   }
 
-  function calculateStarPercent(ratings) {
+  function calculateStarPercent() {
     const TOTAL_RATINGS = props.totalReviews;
-    return (Math.round((ratings / TOTAL_RATINGS) * 100));
-  }
-
-  function getReviewsMeta(id) {
-    fetch(`${URL}/reviews/meta?product_id=${id}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        setReviewsMeta(result);
-      });
+    setFive(Math.floor((props.reviewsMeta.ratings[5] / TOTAL_RATINGS) * 100));
+    setFour(Math.floor((props.reviewsMeta.ratings[4] / TOTAL_RATINGS) * 100));
+    setThree(Math.floor((props.reviewsMeta.ratings[3] / TOTAL_RATINGS) * 100));
+    setTwo(Math.floor((props.reviewsMeta.ratings[2] / TOTAL_RATINGS) * 100));
+    setOne(Math.floor((props.reviewsMeta.ratings[1] / TOTAL_RATINGS) * 100));
   }
 
   useEffect(() => {
-    // calculatePercentRecommended();
-  }, [reviewsMeta.recommended]);
+    calculatePercentRecommended();
+    calculateStarPercent();
+  }, [props.reviewsMeta.recommended.true, props.reviewsMeta.ratings]);
 
   return (
     <div>
@@ -43,28 +41,28 @@ function Ratings(props) {
       </div>
       <div>
         {percentRecommended}
-        % of reviewers reccoment this product
+        % of reviewers recommend this product
       </div>
-      {/* <div>
+      <div>
         5 stars
-        <meter value={calculateStarPercent(reviewsMeta.ratings["5"])} min={0} max={100}></meter>
+        <meter value={five} min={0} max={100}></meter>
       </div>
       <div>
         4 stars
-        <meter value={calculateStarPercent(reviewsMeta.ratings["4"])} min={0} max={100}></meter>
+        <meter value={four} min={0} max={100}></meter>
       </div>
       <div>
         3 stars
-        <meter value={calculateStarPercent(reviewsMeta.ratings["3"])} min={0} max={100}></meter>
+        <meter value={three} min={0} max={100}></meter>
       </div>
       <div>
         2 stars
-        <meter value={calculateStarPercent(reviewsMeta.ratings["2"])} min={0} max={100}></meter>
+        <meter value={two} min={0} max={100}></meter>
       </div>
       <div>
         1 stars
-        <meter value={calculateStarPercent(reviewsMeta.ratings["1"])} min={0} max={100}></meter>
-      </div> */}
+        <meter value={one} min={0} max={100}></meter>
+      </div>
     </div>
   );
 }
