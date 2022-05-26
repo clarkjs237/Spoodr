@@ -19,7 +19,6 @@ export default function DisplayImageNav({
   maxDisplayIndex,
 }) {
   function onClickHandler(e) {
-    // debugger;
     if (e.target.id === 'back') {
       setCurDisplayIndex(curDisplayIndex - 1);
     } else {

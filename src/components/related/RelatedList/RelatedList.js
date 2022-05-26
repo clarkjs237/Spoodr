@@ -2,9 +2,8 @@
 // it from Related.js
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-// import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import RelatedListItem from './RelatedListItem';
-// import '/Users/sullyclark/Desktop/HackReactor/fec/src/styles.css';
+
 
 // Experimenting with the carousel
 // -----------------------------------------
