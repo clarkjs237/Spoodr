@@ -28,7 +28,7 @@ const Photo = styled.img`
   // height: 100%;
   // position: absolute;
 `;
-function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addIcon }) {
+function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addIcon, product }) {
   function handleRelatedClick(e) {
     // this will be the function that will use the
     // handleRelatedItemClick
@@ -40,6 +40,22 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addI
     // This will be when the user clicks add to outfit
     e.preventDefault();
     console.log('Added to Outfit!');
+    // I just need to pass product down into RelatedListItem and this should work
+    // Add it to local storage
+    // Do this in an array
+    if (localStorage.outfit === undefined) {
+      // There is nothing in the outfit
+      // Add item to array and stringify it
+      localStorage.setItem('outfit', JSON.stringify([product]));
+    } else {
+      // convert localStorage.outfit to a array, which will be a JSON.parse
+      // #################################################################
+      // Need to check and make sure this isn't already in the list.
+      // #################################################################
+      let currOutfitList = JSON.parse(localStorage.outfit);
+      let newOutfitList = JSON.stringify(curr.push(product));
+      localStorage.setItem('outfit', newOutfitList);
+    }
   }
   // conditional render here in the event that info isnt
   // assigned correctly yet
@@ -56,7 +72,7 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addI
         Add Current Product to My Outfit
       </CarouselItem>)
   }
-  if (style && info && review && id) {
+  if (style && info && review && id && !addIcon) {
     return (
       <CarouselItem
         onClick={(e) => handleRelatedClick(e)}

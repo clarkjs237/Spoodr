@@ -7,11 +7,11 @@ import OutfitListItem from './OutfitListItem';
 import RelatedList, { Container, Carousel, Inner, Blur, Chevron } from '../RelatedList/RelatedList';
 import RelatedListItem from '../RelatedList/RelatedListItem';
 
-function OutfitList() {
+function OutfitList({ product }) {
   return (
     <Container>
       <Carousel>
-        <RelatedListItem addIcon={true}/>
+        <RelatedListItem addIcon={true} product={product} />
       </Carousel>
     </Container>
   )

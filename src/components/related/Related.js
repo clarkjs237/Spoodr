@@ -14,7 +14,7 @@ const RelatedAndOutfitContainer = styled.div`
   margin-top: 2rem;
 `
 
-function Related({ product, handleRelatedItemClick, globalStyleId }) {
+function Related({ product, handleRelatedItemClick }) {
   const [relatedIDs, setRelatedIDs] = useState({});
   const [nameAndCat, setNameAndCat] = useState({});
   const [reviews, setReviews] = useState({});
@@ -134,7 +134,7 @@ function Related({ product, handleRelatedItemClick, globalStyleId }) {
     let res = confirm('Are you sure you want to delete My Outfit?');
     if (res) {
       console.log('outfit deleted');
-      // localStorage.clear();
+      localStorage.removeItem('outfit');
       // localStorage.setItem('Tester', `{"this": "is a test"}` )
       // localStorage.setItem('Guac', `{"oy": 30}`)
     }
@@ -155,7 +155,9 @@ function Related({ product, handleRelatedItemClick, globalStyleId }) {
         handleRelatedItemClick={handleRelatedItemClick}
       />
       <Titles>My Outfit:</Titles>
-      <OutfitList />
+      <OutfitList
+        product={product}
+      />
       <button
         onClick={resetOutfit}
       >Clear My Outfit</button>
