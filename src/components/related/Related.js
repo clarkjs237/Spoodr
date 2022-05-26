@@ -9,7 +9,12 @@ const Titles = styled.h1`
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 `;
 
-function Related({ product, handleRelatedItemClick }) {
+const RelatedAndOutfitContainer = styled.div`
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+`
+
+function Related({ product, handleRelatedItemClick, globalStyleId }) {
   const [relatedIDs, setRelatedIDs] = useState({});
   const [nameAndCat, setNameAndCat] = useState({});
   const [reviews, setReviews] = useState({});
@@ -19,6 +24,7 @@ function Related({ product, handleRelatedItemClick }) {
     fetch(`${URL}/products/${productID}/styles`, {
       headers: {
         Authorization: process.env.GITTOKEN,
+        'User-Agent': 'user',
       },
     })
       .then((response) => response.json())
@@ -51,6 +57,7 @@ function Related({ product, handleRelatedItemClick }) {
     fetch(`${URL}/products/${productID}`, {
       headers: {
         Authorization: process.env.GITTOKEN,
+        'User-Agent': 'user',
       },
     })
       .then((response) => response.json())
@@ -77,6 +84,7 @@ function Related({ product, handleRelatedItemClick }) {
     fetch(`${URL}/reviews/meta?product_id=${productID}`, {
       headers: {
         Authorization: process.env.GITTOKEN,
+        'User-Agent': 'user',
       },
     })
       .then((response) => response.json())
@@ -100,6 +108,7 @@ function Related({ product, handleRelatedItemClick }) {
     fetch(`${URL}/products/${id}/related`, {
       headers: {
         Authorization: process.env.GITTOKEN,
+        'User-Agent': 'user',
       },
     })
       .then((response) => response.json())
@@ -120,6 +129,16 @@ function Related({ product, handleRelatedItemClick }) {
     updateRelatedIDs(product.id);
   }, [product]);
 
+  function resetOutfit() {
+    // This is when we want to clear localstorage
+    let res = confirm('Are you sure you want to delete My Outfit?');
+    if (res) {
+      console.log('outfit deleted');
+      // localStorage.clear();
+      // localStorage.setItem('Tester', `{"this": "is a test"}` )
+      // localStorage.setItem('Guac', `{"oy": 30}`)
+    }
+  }
   // This is where we will make use of RelatedList
   // Carousel = RelatedList
   // CarouselItems = RelatedListItem
@@ -127,7 +146,7 @@ function Related({ product, handleRelatedItemClick }) {
     return <div>Empty</div>;
   }
   return (
-    <div>
+    <RelatedAndOutfitContainer>
       <Titles>Related Items:</Titles>
       <RelatedList
         styles={relatedIDs}
@@ -135,9 +154,20 @@ function Related({ product, handleRelatedItemClick }) {
         reviews={reviews}
         handleRelatedItemClick={handleRelatedItemClick}
       />
-      <Titles>Your Outfit:</Titles>
+      <Titles>My Outfit:</Titles>
       <OutfitList />
-    </div>
+      <button
+        onClick={resetOutfit}
+      >Clear My Outfit</button>
+    </RelatedAndOutfitContainer>
   );
 }
 export default Related;
+
+// This from Overview.js
+// // Sully work
+// // Need to lift state up of the current style id
+// useEffect(() => {
+//   // Want to setGlobalStyle when curStyleId is changed
+//   setGlobalStyleId(curStyleId);
+// }, [curStyleId]);

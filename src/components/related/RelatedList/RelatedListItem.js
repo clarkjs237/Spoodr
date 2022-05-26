@@ -47,7 +47,10 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addI
   if (addIcon) {
     return (
       <CarouselItem
-        style={{ "textAlign": "center" }}
+        style={
+          { "textAlign": "center",
+            "transform": "translateX(-0.5rem)",
+          }}
         onClick={handleAddToOutfit}
       >
         Add Current Product to My Outfit
