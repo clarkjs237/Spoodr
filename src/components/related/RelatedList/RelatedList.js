@@ -25,6 +25,7 @@ export const Carousel = styled.div`
   min-height: 19rem;
   max-height: 19rem;
 
+
   // Attempting to overlay button
   position: relative;
 `;
@@ -79,6 +80,7 @@ export const Chevron = styled.span`
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 2rem;
 `;
 
 function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {

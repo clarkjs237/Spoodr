@@ -4,14 +4,16 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import OutfitListItem from './OutfitListItem';
-import { Container, Carousel, Inner, Blur, Chevron } from '../RelatedList/RelatedList';
+import RelatedList, { Container, Carousel, Inner, Blur, Chevron } from '../RelatedList/RelatedList';
+import RelatedListItem from '../RelatedList/RelatedListItem';
 
 function OutfitList() {
   return (
-    <div>
-      Outfit List
-      <Carousel></Carousel>
-    </div>
+    <Container>
+      <Carousel>
+        <RelatedListItem addIcon={true}/>
+      </Carousel>
+    </Container>
   )
 }
 

@@ -95,7 +95,7 @@ function Related({ product, handleRelatedItemClick }) {
       });
   }
 
-  // Making a function to update the related IDs. This will be an array of ids
+  // This houses all of the API calls necessary for each Related Product ID
   function updateRelatedIDs(id) {
     fetch(`${URL}/products/${id}/related`, {
       headers: {
@@ -117,10 +117,6 @@ function Related({ product, handleRelatedItemClick }) {
   }
 
   useEffect(() => {
-    // I want to get the related IDs firstly
-    // console.log('EXECUTING API CALLS'); // This is only executing once, good
-    // setRelatedIDs({});
-    // setNameAndCat({});
     updateRelatedIDs(product.id);
   }, [product]);
 

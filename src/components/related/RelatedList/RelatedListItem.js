@@ -14,6 +14,7 @@ const CarouselItem = styled.div`
   background-color: green;
   color: white;
   margin: 0.5rem;
+  cursor: pointer;
 `;
 
 const InsideCarousel = styled.div`
@@ -27,37 +28,35 @@ const Photo = styled.img`
   // height: 100%;
   // position: absolute;
 `;
-function RelatedListItem({ style, id, info, review, handleRelatedItemClick }) {
-  // const [price, setPrice] = useState({});
-
-
-  // function priceCalculator(style) {
-  //   // will set the price to be the sale price or regular price
-  //   const prices = {
-  //     sale_price: style.sale_price,
-  //     original_price: style.original_price,
-  //   };
-  //   setPrice(prices);
-  // }
-
-  function handleClick(e) {
+function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addIcon }) {
+  function handleRelatedClick(e) {
     // this will be the function that will use the
     // handleRelatedItemClick
-
     e.preventDefault();
     handleRelatedItemClick(id);
   }
 
-  // useEffect(() => {
-  //   priceCalculator(style);
-  // }, [style]); // Needed to add [style] to correctly update the price
-
+  function handleAddToOutfit(e) {
+    // This will be when the user clicks add to outfit
+    e.preventDefault();
+    console.log('Added to Outfit!');
+  }
   // conditional render here in the event that info isnt
   // assigned correctly yet
+  // addIcon is a boolean to determine if this is part of Outfit or Not
+  if (addIcon) {
+    return (
+      <CarouselItem
+        style={{ "textAlign": "center" }}
+        onClick={handleAddToOutfit}
+      >
+        Add Current Product to My Outfit
+      </CarouselItem>)
+  }
   if (style && info && review && id) {
     return (
       <CarouselItem
-        onClick={(e) => handleClick(e)}
+        onClick={(e) => handleRelatedClick(e)}
       >
         <InsideCarousel>
           <Photo src={style.photos['0'].thumbnail_url}/>
@@ -72,7 +71,6 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick }) {
     );
   }
   return <div>emtpy</div>;
-
 }
 
 export default RelatedListItem;
