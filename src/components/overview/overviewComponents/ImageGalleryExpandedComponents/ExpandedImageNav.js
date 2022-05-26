@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 const StyledDisplayImageNav = styled.div`
   position: absolute;
-  top: 12rem;
-  left: ${(props) => (props.next ? '35rem' : '3.5rem')};
+  top: 50%;
+  left: ${(props) => (props.next ? '80%' : '20%')};
   font-size: 1.5rem;
-  color: #32292F;
+  color:#D3AB9E;
   &:hover {
     color: #90D7FF;
     cursor: pointer;
   }
 `;
 
-export default function DisplayImageNav({
+export default function ExpandedImageNav({
   curDisplayIndex,
   setCurDisplayIndex,
   maxDisplayIndex,
