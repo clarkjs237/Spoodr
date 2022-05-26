@@ -18,6 +18,8 @@ function App() {
   const [averageRating, setAverageRating] = useState(0);
   const [averageStarRating, setAverageStarRating] = useState(0);
 
+  const [curStyleId, setCurStyleId] = useState(0);
+
   function updateProductByID(id) {
     fetch(`${URL}/products/${id}`, {
       headers: {
@@ -83,10 +85,13 @@ function App() {
         totalReviews={totalReviews}
         averageRating={averageRating}
         averageStarRating={averageStarRating}
+        curStyleId={curStyleId}
+        setCurStyleId={setCurStyleId}
       />
       <Related
         product={product}
         handleRelatedItemClick={handleRelatedItemClick}
+        curStyleId={curStyleId}
       />
       <Questions product={product} />
       <Reviews

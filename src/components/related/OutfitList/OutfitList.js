@@ -11,7 +11,10 @@ function OutfitList({ product }) {
   return (
     <Container>
       <Carousel>
-        <RelatedListItem addIcon={true} product={product} />
+        <Inner>
+          <RelatedListItem addIcon={true} product={product} />
+          {/* This is where my mapping over the My Outfit array will go */}
+        </Inner>
       </Carousel>
     </Container>
   )
