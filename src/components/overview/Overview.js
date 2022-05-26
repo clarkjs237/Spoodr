@@ -24,9 +24,11 @@ export default function Overview({
   totalReviews,
   averageRating,
   averageStarRating,
+  curStyleId,
+  setCurStyleId
 }) {
   if (product.category && productStyle.product_id) {
-    const [curStyleId, setCurStyleId] = useState(0);
+    // const [curStyleId, setCurStyleId] = useState(0);
     const [expandedView, setExpandedView] = useState(false);
     const [curDisplayIndex, setCurDisplayIndex] = useState(0);
 
@@ -45,6 +47,7 @@ export default function Overview({
       photo.id = i;
       return photo;
     });
+
 
     if (expandedView) {
       return (
