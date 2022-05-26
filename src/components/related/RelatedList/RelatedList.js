@@ -20,7 +20,6 @@ const Inner = styled.div`
 
 const Carousel = styled.div`
   overflow: hidden;
-  border: 2px blue solid;
   max-width: 48.5rem;
   min-width: 48.5rem;
   min-height: 19rem;
@@ -41,6 +40,7 @@ const Blur = styled.div`
       return css`
         left: 0rem;
         backdrop-filter: blur(0.1rem);
+        width: 4.5rem;
       `;
     }
     if (!props.left) {

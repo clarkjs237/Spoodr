@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import StarRating from '../../overview/overviewComponents/ProductInfoComponents/StarRating';
+import ProductPrice from '../../overview/overviewComponents/ProductInfoComponents/ProductPrice';
 
 const CarouselItem = styled.div`
   display: inline-flex;
@@ -17,8 +19,6 @@ const CarouselItem = styled.div`
 const InsideCarousel = styled.div`
   display: flex;
   flex-direction: column;
-
-  // position: relative;
 `;
 
 const Photo = styled.img`
@@ -28,17 +28,17 @@ const Photo = styled.img`
   // position: absolute;
 `;
 function RelatedListItem({ style, id, info, review, handleRelatedItemClick }) {
-  const [price, setPrice] = useState({});
+  // const [price, setPrice] = useState({});
 
 
-  function priceCalculator(style) {
-    // will set the price to be the sale price or regular price
-    const prices = {
-      sale_price: style.sale_price,
-      original_price: style.original_price,
-    };
-    setPrice(prices);
-  }
+  // function priceCalculator(style) {
+  //   // will set the price to be the sale price or regular price
+  //   const prices = {
+  //     sale_price: style.sale_price,
+  //     original_price: style.original_price,
+  //   };
+  //   setPrice(prices);
+  // }
 
   function handleClick(e) {
     // this will be the function that will use the
@@ -48,26 +48,13 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick }) {
     handleRelatedItemClick(id);
   }
 
-  useEffect(() => {
-    priceCalculator(style);
-  }, [style]); // Needed to add [style] to correctly update the price
+  // useEffect(() => {
+  //   priceCalculator(style);
+  // }, [style]); // Needed to add [style] to correctly update the price
 
   // conditional render here in the event that info isnt
   // assigned correctly yet
-  if (style && info && review && id && price.original_price) {
-    if (price.sale_price) {
-      return (
-        <CarouselItem>
-          <InsideCarousel>
-            <Photo src={style.photos['0'].thumbnail_url}/>
-            {info.product_category}<br/>
-            {info.product_name}<br/>
-            {review}<br />
-            ${price.sale_price}<s>${price.original_price}</s><br/>
-          </InsideCarousel>
-        </CarouselItem>
-      );
-    }
+  if (style && info && review && id) {
     return (
       <CarouselItem
         onClick={(e) => handleClick(e)}
@@ -76,13 +63,15 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick }) {
           <Photo src={style.photos['0'].thumbnail_url}/>
           {info.product_category}<br/>
           {info.product_name}<br/>
-          {review}<br />
-          ${price.original_price}<br/>
+          <div>
+            <StarRating averageStarRating={review}/>
+          </div>
+          <ProductPrice productOrginalPrice={style.original_price} productSalePrice={style.sale_price}/>
         </InsideCarousel>
       </CarouselItem>
     );
   }
-  return <div>emtpy</div>
+  return <div>emtpy</div>;
 
 }
 
