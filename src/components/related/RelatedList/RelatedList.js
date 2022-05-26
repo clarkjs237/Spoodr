@@ -81,7 +81,7 @@ const Related = styled.div`
   flex-direction: row;
 `;
 
-function RelatedList({ styles, infos, handleRelatedItemClick }) {
+function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
 // function RelatedList({ children, style, id }) {
   // related_ids is an OBJECT with the product_id as the key
   // and the default style for that product as the value
@@ -106,7 +106,7 @@ function RelatedList({ styles, infos, handleRelatedItemClick }) {
 
 
 
-  if (!styles || !infos) {
+  if (!styles || !infos || !reviews) {
     return <div>Empty</div>;
   }
   return (
@@ -119,6 +119,7 @@ function RelatedList({ styles, infos, handleRelatedItemClick }) {
               key={index}
               style={style}
               info={Object.values(infos)[index]}
+              review={Object.values(reviews)[index]}
               id={Object.keys(styles)[index]}
               handleRelatedItemClick={handleRelatedItemClick}
             />

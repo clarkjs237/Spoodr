@@ -27,7 +27,7 @@ const Photo = styled.img`
   // height: 100%;
   // position: absolute;
 `;
-function RelatedListItem({ style, id, info, handleRelatedItemClick }) {
+function RelatedListItem({ style, id, info, review, handleRelatedItemClick }) {
   const [price, setPrice] = useState({});
 
 
@@ -54,7 +54,7 @@ function RelatedListItem({ style, id, info, handleRelatedItemClick }) {
 
   // conditional render here in the event that info isnt
   // assigned correctly yet
-  if (style && info && id && price.original_price) {
+  if (style && info && review && id && price.original_price) {
     if (price.sale_price) {
       return (
         <CarouselItem>
@@ -62,6 +62,7 @@ function RelatedListItem({ style, id, info, handleRelatedItemClick }) {
             <Photo src={style.photos['0'].thumbnail_url}/>
             {info.product_category}<br/>
             {info.product_name}<br/>
+            {review}<br />
             ${price.sale_price}<s>${price.original_price}</s><br/>
           </InsideCarousel>
         </CarouselItem>
@@ -75,6 +76,7 @@ function RelatedListItem({ style, id, info, handleRelatedItemClick }) {
           <Photo src={style.photos['0'].thumbnail_url}/>
           {info.product_category}<br/>
           {info.product_name}<br/>
+          {review}<br />
           ${price.original_price}<br/>
         </InsideCarousel>
       </CarouselItem>
