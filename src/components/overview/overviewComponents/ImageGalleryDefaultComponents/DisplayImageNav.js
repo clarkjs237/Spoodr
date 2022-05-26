@@ -18,6 +18,7 @@ export default function DisplayImageNav({
   setCurDisplayIndex,
   maxDisplayIndex,
 }) {
+  //additionally functionality left in place for a quick refactor to looping but has no effect due to render
   function onClickHandler(e) {
     if (e.target.id === 'back') {
       if(curDisplayIndex === 0) {

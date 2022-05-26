@@ -4,6 +4,7 @@ import ProductInfo from './overviewComponents/ProductInfo';
 import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
 import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
+import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
 
 const ProductOverview = styled.div`
   color: #0B2027;
@@ -51,6 +52,7 @@ export default function Overview({
           curDisplayPhotos={curDisplayPhotos}
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
+          setExpandedView={setExpandedView}
         />
       );
     }
@@ -76,6 +78,7 @@ export default function Overview({
           curDisplayPhotos={curDisplayPhotos}
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
+          setExpandedView={setExpandedView}
         />
         <SocialMedia url={socialUrl} slogan={product.slogan} />
         <ProductSlogan>{product.slogan}</ProductSlogan>
