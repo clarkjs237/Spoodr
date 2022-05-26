@@ -5,8 +5,7 @@ import Answers from './Answers';
 
 function Questions() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [questions, setQuestions] = useState([]);
-  const [activeQuestions, setActiveQuestions] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
   const [isCollapsedQuestions, setIsQuestionsCollapsed] = useState(true);
 
   const handleSearch = (event) => {
@@ -28,8 +27,7 @@ function Questions() {
         },
       );
       const data = await response.json();
-      setQuestions(data.results);
-      setActiveQuestions(data.results.slice(0, 4));
+      setAllQuestions(data.results);
     } catch (error) {
       console.error(`Could not get questions: ${error}`);
     }
@@ -39,38 +37,43 @@ function Questions() {
     getQuestions();
   }, []);
 
-  const searchedQuestions = questions.filter((question) => question.question_body.toLowerCase().includes(searchTerm.toLowerCase()));
+  let questions = [];
+  if (searchTerm.length > 2) {
+    questions = allQuestions.filter(
+      (question) => question.question_body.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  } else {
+    questions = allQuestions;
+  }
+
+  if (isCollapsedQuestions) {
+    questions = questions.slice(0, 4);
+  }
+
+  // sort questions by order of helpfulness
 
   return (
     <>
       <Search id="search" value={searchTerm} onInputChange={handleSearch} />
       <section>
-        {searchTerm.length > 2
-          ? searchedQuestions.map((question) => {
-            const answers = Object.values(question.answers);
-            return (
-              <div key={question.question_id}>
-                <p>
-                  Q:
-                  {question.question_body}
-                </p>
-                <Answers answers={answers} />
-              </div>
-            );
-          })
-          : activeQuestions.map((question) => {
-            const answers = Object.values(question.answers);
-            return (
-              <div key={question.question_id}>
-                <p>
-                  Q:
-                  {question.question_body}
-                </p>
-                <Answers allAnswers={answers} />
-              </div>
-            );
-          })}
-        <button type="button" onClick={handleQuestionsClick}>More answered questions</button>
+        {questions.map((question) => {
+          const answers = Object.values(question.answers);
+          return (
+            <div key={question.question_id}>
+              <p>
+                Q:
+                {question.question_body}
+              </p>
+              <Answers allAnswers={answers} />
+            </div>
+          );
+        })}
+        {(questions.length > 4)
+        && (
+        <button type="button" onClick={handleQuestionsClick}>
+          More answered questions
+        </button>
+        )}
         <button type="button">Add a question +</button>
       </section>
     </>
