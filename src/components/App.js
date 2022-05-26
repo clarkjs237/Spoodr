@@ -23,7 +23,10 @@ export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 function App() {
   const [product, setProduct] = useState({ id: PRODUCT_ID });
   const [productStyle, setProductStyle] = useState({});
-  const [reviewsMeta, setReviewsMeta] = useState({});
+  const [reviewsMeta, setReviewsMeta] = useState({
+    recommended: { true: '0', false: '0' },
+    ratings: { 5: '0', 4: '0', 3: '0', 2: '0', 1: '0'},
+  });
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const [averageStarRating, setAverageStarRating] = useState(0);
