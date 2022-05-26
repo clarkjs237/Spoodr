@@ -13,8 +13,7 @@ const Inner = styled.div`
   white-space: nowrap;
   transition: transform 0.3s ease-out;
 
-  ${(props) =>
-  css`
+  ${(props) => css`
       transform: translateX(-${props.activeIndex * 14 + 0.5}rem);
   `};
 `;
@@ -31,12 +30,37 @@ const Carousel = styled.div`
   position: relative;
 `;
 
+const Blur = styled.div`
+  position: absolute;
+  width: 4rem;
+  height: 18rem;
+  top: 0.5rem;
+
+  ${(props) => {
+    if (props.left && props.activeIndex > 0) {
+      return css`
+        left: 0rem;
+        backdrop-filter: blur(0.1rem);
+      `;
+    }
+    if (!props.left) {
+      return css`
+        left: 44.5rem;
+        backdrop-filter: blur(0.1rem);
+    `;
+    }
+    return css`
+      visibility: hidden;
+    `;
+  }};
+`;
+
 // I want to retry my Chevron Tags real quick using styled components
 const Chevron = styled.span`
-  font-size: 2rem;
+  font-size: 4rem;
   position: absolute;
-  top: 9.5rem;
-  left: ${(props) => (props.left ? '0.5rem' : '45rem')};
+  top: 7rem;
+  left: ${(props) => (props.left ? '0.5rem' : '46.5rem')};
   visibility ${(props) => {
     if (props.left && props.activeIndex === 0) {
       return 'hidden';
@@ -48,8 +72,8 @@ const Chevron = styled.span`
   }};
   &:hover {
     color: #90D7FF;
-    curser: pointer;
   }
+  cursor: pointer;
 `;
 
 const Related = styled.div`
@@ -100,18 +124,28 @@ function RelatedList({ styles, infos, handleRelatedItemClick }) {
             />
           ))}
         </Inner>
+        <Blur
+          left={true}
+          activeIndex={activeIndex}
+          length={length}
+        />
+        <Blur
+          left={false}
+          activeIndex={activeIndex}
+          length={length}
+        />
         <Chevron
           left={true}
           activeIndex={activeIndex}
           length={length}
           onClick={prevCard}
-        >&#9664;</Chevron>
+        >&#10216;</Chevron>
         <Chevron
           left={false}
           activeIndex={activeIndex}
           length={length}
           onClick={nextCard}
-        >&#9654;</Chevron>
+        >&#10217;</Chevron>
       </Carousel>
     </Related>
 
