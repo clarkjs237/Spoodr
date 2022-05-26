@@ -1,12 +1,11 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
-import Ratings from './Ratings';
-import ReviewList from './ReviewList';
-import AddReviewForm from './AddReviewForm';
+import Ratings from './components/ratings/Ratings';
+import ReviewList from './components/reviews/ReviewList';
+import AddReviewForm from './components/reviews/AddReviewForm';
 import { PRODUCT_ID, URL } from '../App';
 
-function Reviews(props) {
-  console.log(props.reviewsMeta)
+function RatingsAndReviews(props) {
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(2);
@@ -52,4 +51,4 @@ function Reviews(props) {
   );
 }
 
-export default Reviews;
+export default RatingsAndReviews;

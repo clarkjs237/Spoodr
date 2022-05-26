@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
-import StarRating from '../overview/overviewComponents/ProductInfoComponents/StarRating';
-import { URL } from "../App";
+import StarRating from '../../../overview/overviewComponents/ProductInfoComponents/StarRating';
+import { URL } from "../../../App";
 
 function ReviewListItem(props) {
   const [helpfulness, setHelpfulness] = useState(props.review.helpfulness);

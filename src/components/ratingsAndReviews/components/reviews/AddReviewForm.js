@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
-import { PRODUCT_ID, URL } from "../App";
+import { PRODUCT_ID, URL } from "../../../App";
 import styled from 'styled-components';
 
 function AddReviewForm(props) {
