@@ -9,7 +9,7 @@ import RelatedListItem from './RelatedListItem';
 // -----------------------------------------
 // CSS STYLING FROM CAROUSEL ITEM
 
-const Inner = styled.div`
+export const Inner = styled.div`
   white-space: nowrap;
   transition: transform 0.3s ease-out;
 
@@ -18,7 +18,7 @@ const Inner = styled.div`
   `};
 `;
 
-const Carousel = styled.div`
+export const Carousel = styled.div`
   overflow: hidden;
   max-width: 48.5rem;
   min-width: 48.5rem;
@@ -29,7 +29,7 @@ const Carousel = styled.div`
   position: relative;
 `;
 
-const Blur = styled.div`
+export const Blur = styled.div`
   position: absolute;
   width: 4rem;
   height: 18rem;
@@ -56,7 +56,7 @@ const Blur = styled.div`
 `;
 
 // I want to retry my Chevron Tags real quick using styled components
-const Chevron = styled.span`
+export const Chevron = styled.span`
   font-size: 4rem;
   position: absolute;
   top: 7rem;
@@ -76,7 +76,7 @@ const Chevron = styled.span`
   cursor: pointer;
 `;
 
-const Related = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: row;
 `;
@@ -111,7 +111,7 @@ function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
   }
   return (
 
-    <Related>
+    <Container>
       <Carousel>
         <Inner activeIndex={activeIndex}>
           {Object.values(styles).map((style, index) => (
@@ -148,7 +148,7 @@ function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
           onClick={nextCard}
         >&#10217;</Chevron>
       </Carousel>
-    </Related>
+    </Container>
 
   );
 }

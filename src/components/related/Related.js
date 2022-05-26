@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RelatedList from './RelatedList/RelatedList';
+import OutfitList from './OutfitList/OutfitList';
 import { URL } from '../App';
 import styled from 'styled-components';
 
@@ -139,6 +140,7 @@ function Related({ product, handleRelatedItemClick }) {
         handleRelatedItemClick={handleRelatedItemClick}
       />
       <Titles>Your Outfit:</Titles>
+      <OutfitList />
     </div>
   );
 }
