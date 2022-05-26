@@ -5,20 +5,10 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 
-export const PRODUCT_ID = 65631;
+export const PRODUCT_ID = 65637;
 export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 // In the file you need these variables in, do:
 // import { PRODUCT_ID, URL } from '../App';
-
-// const Title = styled.h1`
-// font-size: 1.5em;
-// text-align: center;
-// color: palevioletred;
-// `;
-// const Wrapper = styled.section`
-// padding: 4em;
-// background: papayawhip;
-// `;
 
 function App() {
   const [product, setProduct] = useState({ id: PRODUCT_ID });
@@ -30,6 +20,8 @@ function App() {
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const [averageStarRating, setAverageStarRating] = useState(0);
+
+  const [curStyleId, setCurStyleId] = useState(0);
 
   function updateProductByID(id) {
     fetch(`${URL}/products/${id}`, {
@@ -96,12 +88,15 @@ function App() {
         totalReviews={totalReviews}
         averageRating={averageRating}
         averageStarRating={averageStarRating}
+        curStyleId={curStyleId}
+        setCurStyleId={setCurStyleId}
       />
-      <Questions product={product} />
       <Related
         product={product}
         handleRelatedItemClick={handleRelatedItemClick}
+        curStyleId={curStyleId}
       />
+      <Questions product={product} />
       <RatingsAndReviews
         product={product}
         totalReviews={totalReviews}
