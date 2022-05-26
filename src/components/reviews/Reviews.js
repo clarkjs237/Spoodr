@@ -6,7 +6,6 @@ import AddReviewForm from './AddReviewForm';
 import { PRODUCT_ID, URL } from '../App';
 
 function Reviews(props) {
-  console.log(props.reviewsMeta)
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(2);
