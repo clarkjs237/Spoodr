@@ -2,11 +2,9 @@
 import React from 'react';
 import ReviewListItem from './ReviewListItem';
 
-function ReviewList(props) {
+function ReviewsList(props) {
   return (
     <div>
-      {/* <Sort /> */}
-      <br />
       {props.reviews.map((review, index) => (
         <ReviewListItem
           review={review}
@@ -17,4 +15,4 @@ function ReviewList(props) {
   );
 }
 
-export default ReviewList;
+export default ReviewsList;

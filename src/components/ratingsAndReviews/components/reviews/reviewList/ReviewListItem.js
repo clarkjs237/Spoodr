@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
-import StarRating from '../../../overview/overviewComponents/ProductInfoComponents/StarRating';
-import { URL } from "../../../App";
+import StarRating from '../../../../overview/overviewComponents/ProductInfoComponents/StarRating';
+import { URL } from "../../../../App";
 
 function ReviewListItem(props) {
   const [helpfulness, setHelpfulness] = useState(props.review.helpfulness);
@@ -94,7 +94,6 @@ function ReviewListItem(props) {
   return (
     <div>
       <div>
-        {/* {StarRating(props.review.rating)} */}
         <StarRating averageStarRating={props.review.rating}/>
       </div>
       <div id="date">
