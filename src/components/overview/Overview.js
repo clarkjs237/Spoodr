@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import ProductInfo from './overviewComponents/ProductInfo';
 import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
@@ -86,6 +85,3 @@ export default function Overview({
   }
 }
 
-Overview.propTypes = {
-
-};

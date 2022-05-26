@@ -34,6 +34,20 @@ export default function DisplayImageNav({
     }
   }
 
+  if(curDisplayIndex === 0) {
+    return (
+      <>
+        <ImageNav next onClick={onClickHandler}>&#8594;</ImageNav>
+      </>
+    );
+  }
+  if(curDisplayIndex === maxDisplayIndex) {
+    return (
+      <>
+        <ImageNav id="back" onClick={onClickHandler}>&#8592;</ImageNav>
+      </>
+    );
+  }
   return (
     <>
       <ImageNav id="back" onClick={onClickHandler}>&#8592;</ImageNav>

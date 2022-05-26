@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Thumbnail = styled.img`
   border: solid;
+  object-fit: cover;
   border-width: .1rem;
   border-color: ${(props) => (props.selected ? '#90D7FF' : '#32292F')};
   height: 2.5rem;
