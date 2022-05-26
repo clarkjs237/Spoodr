@@ -16,12 +16,12 @@ function Answers({ questionId }) {
         },
       },
     );
-    const data = await response.json();
-    setAllAnswers(data.results);
+    const { results } = await response.json();
+    setAllAnswers(results);
     if (isCollapsedAnswers) {
-      setAnswers(data.results.slice(0, 2));
+      setAnswers(results.slice(0, 2));
     } else {
-      setAnswers(data.results);
+      setAnswers(results);
     }
   }
 
@@ -49,7 +49,17 @@ function Answers({ questionId }) {
     getAnswers();
   };
 
-  const handleReportClick = async () => {
+  const handleReportClick = async (answerId) => {
+    await fetch(
+      `${process.env.URL}/qa/answers/${answerId}/report`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.GITTOKEN,
+        },
+      },
+    );
+    getAnswers();
   };
 
   useEffect(() => {
@@ -81,7 +91,7 @@ function Answers({ questionId }) {
               {answer.helpfulness}
               )
             </span>
-            <span onClick={handleReportClick}>Report</span>
+            <span onClick={() => handleReportClick(answer.answer_id)}>Report</span>
           </footer>
         </div>
       ))}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Dialog } from '@headlessui/react';
 import Search from './Search';
 import Answers from './Answers';
 
@@ -6,6 +7,7 @@ function Questions() {
   const [searchTerm, setSearchTerm] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
   const [isCollapsedQuestions, setIsQuestionsCollapsed] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
 
   async function getQuestions() {
     const response = await fetch(
@@ -16,8 +18,8 @@ function Questions() {
         },
       },
     );
-    const data = await response.json();
-    setAllQuestions(data.results);
+    const { results } = await response.json();
+    setAllQuestions(results);
   }
 
   const handleSearch = (event) => {
@@ -75,7 +77,6 @@ function Questions() {
               {question.question_helpfulness}
               )
             </span>
-            |
             <span>Add Answer</span>
             <Answers questionId={question.question_id} />
           </div>
@@ -87,6 +88,20 @@ function Questions() {
         </button>
         )}
         <button type="button">Add a question +</button>
+        <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+          <Dialog.Panel>
+            <Dialog.Title>Deactivate account</Dialog.Title>
+            <Dialog.Description>
+              This will permanently deactivate your account
+            </Dialog.Description>
+            <p>
+              Are you sure you want to deactivate your account? All of your data
+              will be permanently removed. This action cannot be undone.
+            </p>
+            <button type="button" onClick={() => setIsOpen(false)}>Deactivate</button>
+            <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
+          </Dialog.Panel>
+        </Dialog>
       </section>
     </>
   );
