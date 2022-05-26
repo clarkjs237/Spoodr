@@ -5,7 +5,7 @@ const StyledDisplayImageNav = styled.div`
   position: absolute;
   top: 12rem;
   left: ${(props) => (props.next ? '35rem' : '3.5rem')};
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   color: #32292F;
   &:hover {
     color: #90D7FF;
@@ -18,7 +18,7 @@ export default function DisplayImageNav({
   setCurDisplayIndex,
   maxDisplayIndex,
 }) {
-  //additionally functionality left in place for a quick refactor to looping but has no effect due to render
+  //additionally functionality left in place for a quick refactor to looping scroll but has no effect due to render
   function onClickHandler(e) {
     if (e.target.id === 'back') {
       if(curDisplayIndex === 0) {
@@ -38,21 +38,21 @@ export default function DisplayImageNav({
   if(curDisplayIndex === 0) {
     return (
       <div>
-        <StyledDisplayImageNav next onClick={onClickHandler}>&#8594;</StyledDisplayImageNav>
+        <StyledDisplayImageNav next onClick={onClickHandler}>&#8250;</StyledDisplayImageNav>
       </div>
     );
   }
   if(curDisplayIndex === maxDisplayIndex) {
     return (
       <div>
-        <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8592;</StyledDisplayImageNav>
+        <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8249;</StyledDisplayImageNav>
       </div>
     );
   }
   return (
     <div>
-      <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8592;</StyledDisplayImageNav>
-      <StyledDisplayImageNav next onClick={onClickHandler}>&#8594;</StyledDisplayImageNav>
+      <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8249;</StyledDisplayImageNav>
+      <StyledDisplayImageNav next onClick={onClickHandler}>&#8250;</StyledDisplayImageNav>
     </div>
   );
 }

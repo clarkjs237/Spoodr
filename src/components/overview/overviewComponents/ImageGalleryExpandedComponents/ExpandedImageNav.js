@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const StyledDisplayImageNav = styled.div`
   position: absolute;
-  top: 50%;
-  left: ${(props) => (props.next ? '80%' : '20%')};
-  font-size: 1.5rem;
+  top: 43%;
+  left: ${(props) => (props.next ? '85%' : '15%')};
+  font-size: 3.5rem;
   color:#D3AB9E;
   &:hover {
     color: #90D7FF;
@@ -38,21 +38,21 @@ export default function ExpandedImageNav({
   if(curDisplayIndex === 0) {
     return (
       <div>
-        <StyledDisplayImageNav next onClick={onClickHandler}>&#8594;</StyledDisplayImageNav>
+        <StyledDisplayImageNav next onClick={onClickHandler}>&#8250;</StyledDisplayImageNav>
       </div>
     );
   }
   if(curDisplayIndex === maxDisplayIndex) {
     return (
       <div>
-        <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8592;</StyledDisplayImageNav>
+        <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8249;</StyledDisplayImageNav>
       </div>
     );
   }
   return (
     <div>
-      <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8592;</StyledDisplayImageNav>
-      <StyledDisplayImageNav next onClick={onClickHandler}>&#8594;</StyledDisplayImageNav>
+      <StyledDisplayImageNav id="back" onClick={onClickHandler}>&#8249;</StyledDisplayImageNav>
+      <StyledDisplayImageNav next onClick={onClickHandler}>&#8250;</StyledDisplayImageNav>
     </div>
   );
 }
