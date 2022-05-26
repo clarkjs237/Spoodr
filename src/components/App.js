@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Overview from './overview/Overview';
 import Questions from './questions/Questions';
 import Related from './related/Related';
-import Reviews from './reviews/Reviews';
+import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 
 export const PRODUCT_ID = 65631;
 export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
@@ -102,7 +102,7 @@ function App() {
         product={product}
         handleRelatedItemClick={handleRelatedItemClick}
       />
-      <Reviews
+      <RatingsAndReviews
         product={product}
         totalReviews={totalReviews}
         averageRating={averageRating}

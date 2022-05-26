@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
-import StarRating from '../overview/overviewComponents/ProductInfoComponents/StarRating';
-import { PRODUCT_ID } from '../App';
+import StarRating from '../../../overview/overviewComponents/ProductInfoComponents/StarRating';
+import { PRODUCT_ID } from '../../../App';
 
 function Ratings(props) {
   // const [reviewsMeta, setReviewsMeta] = useState(props.reviewsMeta);
