@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import ThumbnailImage from './ImageGalleryDefaultComponents/ThumbnailImage';
+import ThumbnailImageNav from './ImageGalleryDefaultComponents/ThumbnailImageNav';
 import DisplayImageNav from './ImageGalleryDefaultComponents/DisplayImageNav';
 
 const DisplayImage = styled.img`
-  object-fit: contain;
+  object-fit: cover;
+  cursor: zoom-in;
   width: 60%;
   height: 100%;
-  display: block;
+  object-position: 40% 20%;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  &:hover: {
+    cursor: zoom-in;
+  }
 `;
 
 const DisplayWrapper = styled.div`
@@ -26,7 +29,7 @@ const DisplayWrapper = styled.div`
 
 const ThumbnailImageWrapper = styled.div`
   position: absolute;
-  top: 1rem;
+  top: .25rem;
   left: .5rem;
 `;
 
@@ -34,23 +37,28 @@ export default function ImageGalleryDefault({
   curDisplayPhotos,
   curDisplayIndex,
   setCurDisplayIndex,
-}) { // [{id: 0, url: url, thumbnail_url: url}...]
+  setExpandedView,
+}) {
   if (!curDisplayPhotos[curDisplayIndex]) {
     setCurDisplayIndex(curDisplayPhotos.length - 1);
   }
 
+  function onClickHandler(e) {
+    setExpandedView(true);
+  }
+
   return (
     <DisplayWrapper>
-      <DisplayImage src={curDisplayPhotos[curDisplayIndex].url} />
+      <DisplayImage
+        src={curDisplayPhotos[curDisplayIndex].url}
+        onClick={onClickHandler}
+      />
       <ThumbnailImageWrapper>
-        {curDisplayPhotos.map(({ id, thumbnail_url }) => (
-          <ThumbnailImage
-            id={id}
-            thumbnail={thumbnail_url}
-            curDisplayIndex={curDisplayIndex}
-            setCurDisplayIndex={setCurDisplayIndex}
-          />
-        ))}
+        <ThumbnailImageNav
+          curDisplayPhotos={curDisplayPhotos}
+          curDisplayIndex={curDisplayIndex}
+          setCurDisplayIndex={setCurDisplayIndex}
+        />
       </ThumbnailImageWrapper>
       <DisplayImageNav
         curDisplayIndex={curDisplayIndex}

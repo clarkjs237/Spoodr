@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -11,7 +10,7 @@ import {
 } from 'react-share';
 
 const SocialMediaSpan = styled.span`
-  margin-left: .5rem;
+  margin-left: .25rem;
 `;
 
 export default function SocialMedia({ url, slogan }) {
@@ -19,23 +18,19 @@ export default function SocialMedia({ url, slogan }) {
     <div>
       <SocialMediaSpan>
         <FacebookShareButton url={url} quote={slogan}>
-          <FacebookIcon size={24} round />
+          <FacebookIcon size="1.75rem" round />
         </FacebookShareButton>
       </SocialMediaSpan>
       <SocialMediaSpan>
         <PinterestShareButton media={url} url={url} description={slogan}>
-          <PinterestIcon size={24} round />
+          <PinterestIcon size="1.75rem" round />
         </PinterestShareButton>
       </SocialMediaSpan>
       <SocialMediaSpan>
         <TwitterShareButton url={url} title={slogan}>
-          <TwitterIcon size={24} round />
+          <TwitterIcon size="1.75rem" round />
         </TwitterShareButton>
       </SocialMediaSpan>
     </div>
   );
 }
-
-SocialMedia.propTypes = {
-
-};
