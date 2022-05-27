@@ -18,20 +18,19 @@ export default function SocialMedia({ url, slogan }) {
     <div>
       <SocialMediaSpan>
         <FacebookShareButton url={url} quote={slogan}>
-          <FacebookIcon size={'1.75rem'} round={true} />
+          <FacebookIcon size="1.75rem" round />
         </FacebookShareButton>
       </SocialMediaSpan>
       <SocialMediaSpan>
         <PinterestShareButton media={url} url={url} description={slogan}>
-          <PinterestIcon size={'1.75rem'} round={true} />
+          <PinterestIcon size="1.75rem" round />
         </PinterestShareButton>
       </SocialMediaSpan>
       <SocialMediaSpan>
         <TwitterShareButton url={url} title={slogan}>
-          <TwitterIcon size={'1.75rem'} round={true} />
+          <TwitterIcon size="1.75rem" round />
         </TwitterShareButton>
       </SocialMediaSpan>
     </div>
   );
 }
-

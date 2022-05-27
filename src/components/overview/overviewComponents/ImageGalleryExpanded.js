@@ -12,15 +12,15 @@ const ImageGalleryExpandedWrapper = styled.div`
 
 const ExpandedImage = styled.img`
   display: block;
-  width: ${props => props.zoom ? '250%' : '100%'};
-  height: ${props => props.zoom ? 'auto' : '90vh'};
+  width: ${(props) => (props.zoom ? '250%' : '100%')};
+  height: ${(props) => (props.zoom ? 'auto' : '90vh')};
   border: solid;
   border-width: .1rem;
   margin-left: auto;
   margin-right: auto;
   object-fit: cover;
   &:hover {
-    cursor: ${props => props.zoom ? 'zoom-out' : 'crosshair'};
+    cursor: ${(props) => (props.zoom ? 'zoom-out' : 'crosshair')};
   }
 `;
 
@@ -45,32 +45,31 @@ export default function ImageGalleryExpanded({
   curDisplayPhotos,
   curDisplayIndex,
   setCurDisplayIndex,
-  setExpandedView
+  setExpandedView,
 }) {
   const [zoomedView, setZoomedView] = useState(false);
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
 
-  function onClickHandler (e) {
-    if(e.target.id === 'ExpandedImage') {
-      if(zoomedView){
-        setZoomedView(false)
+  function onClickHandler(e) {
+    if (e.target.id === 'ExpandedImage') {
+      if (zoomedView) {
+        setZoomedView(false);
       } else {
-        setMousePosition(e)
-        setZoomedView(true)
+        setMousePosition(e);
+        setZoomedView(true);
       }
     }
-    if(e.target.id === 'LeaveExpanded') {
-      setExpandedView(false)
+    if (e.target.id === 'LeaveExpanded') {
+      setExpandedView(false);
     }
   }
-
 
   function handleEscKeyPress(e) {
     if (e.key === 'Escape') {
       setExpandedView(false);
     }
-  };
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscKeyPress);
@@ -82,7 +81,7 @@ export default function ImageGalleryExpanded({
   function setMousePosition(e) {
     const {
       top: offsetTop,
-      left: offsetLeft
+      left: offsetLeft,
     } = e.target.getBoundingClientRect();
 
     const x = ((e.pageX - offsetLeft) / e.target.width) * 100;
@@ -94,27 +93,26 @@ export default function ImageGalleryExpanded({
 
   function handleMouseMove(e) {
     setMousePosition(e);
-
   }
 
   if (zoomedView) {
     return (
       <ImageGalleryExpandedWrapper>
         <ExpandedImage
-          id='ExpandedImage'
+          id="ExpandedImage"
           zoom={zoomedView}
           src={curDisplayPhotos[curDisplayIndex].url}
           onClick={onClickHandler}
           onMouseMove={handleMouseMove}
         />
       </ImageGalleryExpandedWrapper>
-    )
+    );
   }
 
-  return(
+  return (
     <ImageGalleryExpandedWrapper>
       <ExpandedImage
-        id='ExpandedImage'
+        id="ExpandedImage"
         zoom={zoomedView}
         src={curDisplayPhotos[curDisplayIndex].url}
         onClick={onClickHandler}
@@ -127,17 +125,17 @@ export default function ImageGalleryExpanded({
       />
       <ExpandedThumbnailImages>
         {curDisplayPhotos.map(({ id, thumbnail_url }) => (
-            <ThumbnailImage
-              id={id}
-              thumbnail={thumbnail_url}
-              curDisplayIndex={curDisplayIndex}
-              setCurDisplayIndex={setCurDisplayIndex}
-            />
+          <ThumbnailImage
+            id={id}
+            thumbnail={thumbnail_url}
+            curDisplayIndex={curDisplayIndex}
+            setCurDisplayIndex={setCurDisplayIndex}
+          />
         ))}
       </ExpandedThumbnailImages>
-      <LeaveExpandedView id='LeaveExpanded' onClick={onClickHandler}>
+      <LeaveExpandedView id="LeaveExpanded" onClick={onClickHandler}>
         &#9447;
       </LeaveExpandedView>
     </ImageGalleryExpandedWrapper>
-  )
+  );
 }

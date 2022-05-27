@@ -1,8 +1,7 @@
-
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { act } from 'react-dom/test-utils';
 import Overview from './Overview';
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { act } from "react-dom/test-utils";
 
 let container = null;
 beforeEach(() => {
@@ -17,12 +16,11 @@ afterEach(() => {
   container = null;
 });
 
-it("renders with a Title", ()=> {
+it('renders with a Title', () => {
+  const slogan = container
 
-  const slogan = container.
-
-  act(() => {
-    render(<Overview />, container);
-  });
-  expect(container.textContent).toBe("");
-})
+    .act(() => {
+      render(<Overview />, container);
+    });
+  expect(container.textContent).toBe('');
+});

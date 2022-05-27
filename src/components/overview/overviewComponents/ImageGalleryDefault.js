@@ -37,7 +37,7 @@ export default function ImageGalleryDefault({
   curDisplayPhotos,
   curDisplayIndex,
   setCurDisplayIndex,
-  setExpandedView
+  setExpandedView,
 }) {
   if (!curDisplayPhotos[curDisplayIndex]) {
     setCurDisplayIndex(curDisplayPhotos.length - 1);
