@@ -1,6 +1,6 @@
 // This will be a functional stateless component that just maps the ids that are passed into
 // it from Related.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import RelatedListItem from './RelatedListItem';
 
@@ -32,22 +32,21 @@ export const Carousel = styled.div`
 
 export const Blur = styled.div`
   position: absolute;
-  width: 4rem;
-  height: 18rem;
-  top: 0.5rem;
+  width: 4.5rem;
+  height: 18.5rem;
+  top: 0.20rem;
 
   ${(props) => {
     if (props.left && props.activeIndex > 0) {
       return css`
         left: 0rem;
-        backdrop-filter: blur(0.1rem);
-        width: 4.5rem;
+        background-image: linear-gradient(-90deg, transparent, white 80%);
       `;
     }
     if (!props.left) {
       return css`
         left: 44.5rem;
-        backdrop-filter: blur(0.1rem);
+        background-image: linear-gradient(90deg, transparent, white 80%);
     `;
     }
     return css`
@@ -83,6 +82,18 @@ export const Container = styled.div`
   margin-bottom: 2rem;
 `;
 
+// export function nextCard(activeIndex, setActiveIndex, length) {
+//   // if the activeIndex is the last in the array, stay at end
+//   // else, increase by 1 (move right)
+//   setActiveIndex(activeIndex === length ? activeIndex : activeIndex + 1);
+// }
+
+// export function prevCard(activeIndex, setActiveIndex) {
+//   // if the index is 0, stay at 0
+//   // else, decrease the index by 1
+//   setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
+// }
+
 function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
 // function RelatedList({ children, style, id }) {
   // related_ids is an OBJECT with the product_id as the key
@@ -106,7 +117,10 @@ function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
   };
 
-
+  function comparisonModal(e) {
+    e.stopPropagation();
+    console.log('Comparison Clicked!');
+  }
 
   if (!styles || !infos || !reviews) {
     return <div>Empty</div>;
@@ -119,11 +133,12 @@ function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
           {Object.values(styles).map((style, index) => (
             <RelatedListItem
               key={index}
-              style={style}
+              defStyle={style}
               info={Object.values(infos)[index]}
               review={Object.values(reviews)[index]}
               id={Object.keys(styles)[index]}
               handleRelatedItemClick={handleRelatedItemClick}
+              actionButton={(e) => comparisonModal(e)}
             />
           ))}
         </Inner>

@@ -1,8 +1,8 @@
-/* eslint-disable react/jsx-filename-extension */
-import React, { useState, useEffect } from 'react';
-import RatingSummary from './RatingSummary';
-import Recommendations from './Recommendations';
-import StarBreakdown from './StarBreakdown';
+import React from 'react';
+import RatingSummary from './components/RatingSummary';
+import Recommendations from './components/Recommendations';
+import StarBreakdown from './components/StarBreakdown';
+import Characteristics from './components/Characteristics';
 
 function RatingBreakdown(props) {
   return (
@@ -17,7 +17,11 @@ function RatingBreakdown(props) {
       />
       <StarBreakdown
         totalReviews={props.totalReviews}
-        reviewsMeta={props.reviewsMeta}/>
+        reviewsMeta={props.reviewsMeta}
+      />
+      <Characteristics
+        reviewsMeta={props.reviewsMeta}
+      />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import StarRating from '../../overview/overviewComponents/ProductInfoComponents/StarRating';
 import ProductPrice from '../../overview/overviewComponents/ProductInfoComponents/ProductPrice';
+import ActionButton from '../ActionButton/ActionButton';
 
 const CarouselItem = styled.div`
   display: inline-flex;
@@ -11,10 +12,11 @@ const CarouselItem = styled.div`
   min-width: 13rem;
   max-width: 13rem;
   max-height: 18rem;
-  background-color: green;
-  color: white;
+  background-color: #EAC9C1;
   margin: 0.5rem;
   cursor: pointer;
+  border: 1.5px solid #32292F;
+  transform: ${(props) => props.outfit ? 'translateY(-9.25rem)' : 'translateY(0rem)'}
 `;
 
 const InsideCarousel = styled.div`
@@ -28,7 +30,19 @@ const Photo = styled.img`
   // height: 100%;
   // position: absolute;
 `;
-function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addIcon, product }) {
+function RelatedListItem({
+  ind,
+  defStyle,
+  id,
+  info,
+  review,
+  handleRelatedItemClick,
+  actionButton,
+  handleAddToOutfit,
+  resetOutfit,
+  outfit,
+  product
+}) {
   function handleRelatedClick(e) {
     // this will be the function that will use the
     // handleRelatedItemClick
@@ -36,55 +50,42 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addI
     handleRelatedItemClick(id);
   }
 
-  function handleAddToOutfit(e) {
-    // This will be when the user clicks add to outfit
-    e.preventDefault();
-    console.log('Added to Outfit!');
-    // I just need to pass product down into RelatedListItem and this should work
-    // Add it to local storage
-    // Do this in an array
-    if (localStorage.outfit === undefined) {
-      // There is nothing in the outfit
-      // Add item to array and stringify it
-      localStorage.setItem('outfit', JSON.stringify([product]));
-    } else {
-      // convert localStorage.outfit to a array, which will be a JSON.parse
-      // #################################################################
-      // Need to check and make sure this isn't already in the list.
-      // #################################################################
-      let currOutfitList = JSON.parse(localStorage.outfit);
-      let newOutfitList = JSON.stringify(curr.push(product));
-      localStorage.setItem('outfit', newOutfitList);
-    }
+  // function testerTest(e) {
+  //   console.log(e.target.name);
+  //   actionButton(e, e.target.name);
+  // }
+
+  function testerBoy(e) {
+    console.log('In tester boy');
+    console.log(e.target.name);
   }
-  // conditional render here in the event that info isnt
-  // assigned correctly yet
-  // addIcon is a boolean to determine if this is part of Outfit or Not
-  if (addIcon) {
+
+  if (defStyle && info && review && id) {
     return (
       <CarouselItem
-        style={
-          { "textAlign": "center",
-            "transform": "translateX(-0.5rem)",
-          }}
-        onClick={handleAddToOutfit}
-      >
-        Add Current Product to My Outfit
-      </CarouselItem>)
-  }
-  if (style && info && review && id && !addIcon) {
-    return (
-      <CarouselItem
-        onClick={(e) => handleRelatedClick(e)}
+        // onClick={(e) => handleRelatedItemClick(e)}
+        onClick={handleRelatedClick}
+        outfit={outfit}
+        id={id}
       >
         <InsideCarousel>
-          <Photo src={style.photos['0'].thumbnail_url}/>
+          <Photo src={defStyle.photos['0'].thumbnail_url}
+            onClick={(e) => testerBoy(e)}
+            name={'HELLO'}
+          />
           {info.product_category}<br/>
           {info.product_name}<br/>
           <div>
             <StarRating averageStarRating={review}/>
           </div>
-          <ProductPrice productOrginalPrice={style.original_price} productSalePrice={style.sale_price}/>
+          <ProductPrice productOrginalPrice={defStyle.original_price} productSalePrice={defStyle.sale_price}/>
+          <ActionButton
+            outfit={outfit}
+            name={'SADFFSDASADF'}
+            onClick={testerBoy}
+            // onClick={actionButton}
+            // onClick={(e) => testerTest(e)}
+          />
         </InsideCarousel>
       </CarouselItem>
     );
