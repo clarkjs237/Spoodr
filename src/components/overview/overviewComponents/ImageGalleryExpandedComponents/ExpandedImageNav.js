@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const StyledDisplayImageNav = styled.div`
   position: absolute;
   top: 43%;
-  left: ${(props) => (props.next ? '85%' : '15%')};
+  left: ${(props) => (props.next ? '95%' : '5%')};
   font-size: 3.5rem;
-  color:#D3AB9E;
+  color: #32292F;
   &:hover {
     color: #90D7FF;
     cursor: pointer;

@@ -11,33 +11,18 @@ const ImageGalleryExpandedWrapper = styled.div`
 `;
 
 const ExpandedImage = styled.img`
-  transform: ${props => props.zoom ? 'scale(2.5)' : 'scale(1)'};
   display: block;
-  height: ${props => props.zoom ? '100vh' : '90vh'};
-  width: auto;
+  width: ${props => props.zoom ? '250%' : '100%'};
+  height: ${props => props.zoom ? 'auto' : '90vh'};
   border: solid;
   border-width: .1rem;
   margin-left: auto;
   margin-right: auto;
   object-fit: cover;
   &:hover {
-    cursor: crosshair;
+    cursor: ${props => props.zoom ? 'zoom-out' : 'crosshair'};
   }
 `;
-
-// const ZoomedImage = styled.img`
-// background-color: #EAC9C1;
-// display: block;
-// height: 225vh;
-// width: auto;
-// border: solid;
-// border-width: .1rem;
-// margin-left: auto;
-// margin-right: auto;
-// object-fit: cover;
-// &:hover {
-//   cursor: crosshair;
-// `;
 
 const ExpandedThumbnailImages = styled.div`
   width: fit-content;
@@ -48,9 +33,9 @@ const ExpandedThumbnailImages = styled.div`
 const LeaveExpandedView = styled.div`
   position: absolute;
   top: 0;
-  left: 96%;
+  left: 97%;
   font-size: 1.75rem;
-  color: #D3AB9E;
+  color: #32292F;
   &:hover {
     cursor: pointer;
     color: #90D7FF;
@@ -68,12 +53,18 @@ export default function ImageGalleryExpanded({
 
   function onClickHandler (e) {
     if(e.target.id === 'ExpandedImage') {
-      zoomedView ? setZoomedView(false) : setZoomedView(true);
+      if(zoomedView){
+        setZoomedView(false)
+      } else {
+        setMousePosition(e)
+        setZoomedView(true)
+      }
     }
     if(e.target.id === 'LeaveExpanded') {
       setExpandedView(false)
     }
   }
+
 
   function handleEscKeyPress(e) {
     if (e.key === 'Escape') {
@@ -88,18 +79,23 @@ export default function ImageGalleryExpanded({
     };
   });
 
-  // function move(e) {
-  //   const {
-  //     top: offsetTop,
-  //     left: offsetLeft
-  //   } = e.target.getBoundingClientRect();
+  function setMousePosition(e) {
+    const {
+      top: offsetTop,
+      left: offsetLeft
+    } = e.target.getBoundingClientRect();
 
-  //   const x = ((e.pageX - offsetLeft) / e.target.width) * 100;
-  //   const y = ((e.pageY - offsetTop) / e.target.height) * 100;
+    const x = ((e.pageX - offsetLeft) / e.target.width) * 100;
+    const y = ((e.pageY - offsetTop) / e.target.height) * 100;
 
-  //   setMouseX(x);
-  //   setMouseY(y);
-  // }
+    setMouseX(x);
+    setMouseY(y);
+  }
+
+  function handleMouseMove(e) {
+    setMousePosition(e);
+
+  }
 
   if (zoomedView) {
     return (
@@ -109,6 +105,7 @@ export default function ImageGalleryExpanded({
           zoom={zoomedView}
           src={curDisplayPhotos[curDisplayIndex].url}
           onClick={onClickHandler}
+          onMouseMove={handleMouseMove}
         />
       </ImageGalleryExpandedWrapper>
     )
@@ -121,6 +118,7 @@ export default function ImageGalleryExpanded({
         zoom={zoomedView}
         src={curDisplayPhotos[curDisplayIndex].url}
         onClick={onClickHandler}
+        onMouseMove={handleMouseMove}
       />
       <ExpandedImageNav
         curDisplayIndex={curDisplayIndex}
