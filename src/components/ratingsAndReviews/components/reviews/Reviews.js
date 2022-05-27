@@ -51,9 +51,11 @@ function Reviews(props) {
         sort={sort}
         handleSortChange={handleSortChange}
       />
-      <ReviewsList
-        reviews={reviews}
-      />
+      <div className="review-list">
+        <ReviewsList
+          reviews={reviews}
+        />
+      </div>
       { reviews.length === count && reviews.length > 0 &&
         <button type="submit" onClick={handleMoreReviews}>More Reviews</button>
       }

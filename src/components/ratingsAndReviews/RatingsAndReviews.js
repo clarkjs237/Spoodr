@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Ratings from './components/ratings/Ratings';
 import Reviews from './components/reviews/Reviews';
+import './ratings-and-reviews-styles.css';
 
 function RatingsAndReviews(props) {
   return (

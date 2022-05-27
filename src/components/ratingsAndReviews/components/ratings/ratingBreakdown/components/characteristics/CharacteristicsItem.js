@@ -7,11 +7,9 @@ function CharacteristicsItem(props) {
         {props.characteristic}
       </div>
       <meter value={props.value} min={0} max={5} />
-      <div>
-        Too Small
-      </div>
-      <div>
-        Too Big
+      <div className='characteristic-limits'>
+        <div>Too Small</div>
+        <div>Too Big</div>
       </div>
     </div>
   );

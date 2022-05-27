@@ -21,25 +21,25 @@ function StarBreakdown(props) {
   }, [props.reviewsMeta.ratings]);
 
   return (
-    <div>
+    <div className='star-breakdown'>
       <div>
-        <button>5 stars</button>
+        <button className='underline-button' >5 stars</button>
         <meter value={five} min={0} max={100}></meter>
       </div>
       <div>
-      <button>4 stars</button>
+        <button className='underline-button'>4 stars</button>
         <meter value={four} min={0} max={100}></meter>
       </div>
       <div>
-      <button>3 stars</button>
+        <button className='underline-button'>3 stars</button>
         <meter value={three} min={0} max={100}></meter>
       </div>
       <div>
-      <button>2 stars</button>
+        <button className='underline-button'>2 stars</button>
         <meter value={two} min={0} max={100}></meter>
       </div>
       <div>
-      <button>1 stars</button>
+        <button className='underline-button'>1 stars</button>
         <meter value={one} min={0} max={100}></meter>
       </div>
     </div>
