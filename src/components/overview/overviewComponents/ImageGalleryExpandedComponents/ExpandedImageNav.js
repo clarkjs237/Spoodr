@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const StyledDisplayImageNav = styled.div`
   position: absolute;
-  top: 12rem;
-  left: ${(props) => (props.next ? '35rem' : '3.5rem')};
-  font-size: 2.25rem;
+  top: 43%;
+  left: ${(props) => (props.next ? '95%' : '5%')};
+  font-size: 3.5rem;
   color: #32292F;
   &:hover {
     color: #90D7FF;
@@ -13,12 +13,12 @@ const StyledDisplayImageNav = styled.div`
   }
 `;
 
-export default function DisplayImageNav({
+export default function ExpandedImageNav({
   curDisplayIndex,
   setCurDisplayIndex,
   maxDisplayIndex,
 }) {
-  // additionally functionality left in place for a quick refactor to looping scroll but has no effect due to render
+  // additionally functionality left in place for a quick refactor to looping but has no effect due to render
   function onClickHandler(e) {
     if (e.target.id === 'back') {
       if (curDisplayIndex === 0) {

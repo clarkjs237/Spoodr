@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import ProductInfo from './overviewComponents/ProductInfo';
 import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
 import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
+import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
 
 const ProductOverview = styled.div`
   color: #0B2027;
@@ -25,14 +25,14 @@ export default function Overview({
   averageRating,
   averageStarRating,
   curStyleId,
-  setCurStyleId
+  setCurStyleId,
 }) {
   if (product.category && productStyle.product_id) {
     // const [curStyleId, setCurStyleId] = useState(0);
     const [expandedView, setExpandedView] = useState(false);
     const [curDisplayIndex, setCurDisplayIndex] = useState(0);
 
-    const socialUrl = productStyle.results[curStyleId].photos[curStyleId].url;
+    const socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
     const productOrginalPrice = productStyle.results[curStyleId].original_price;
     const productSalePrice = productStyle.results[curStyleId].sale_price;
     const curStyleName = productStyle.results[curStyleId].name;
@@ -48,13 +48,13 @@ export default function Overview({
       return photo;
     });
 
-
     if (expandedView) {
       return (
         <ImageGalleryExpanded
           curDisplayPhotos={curDisplayPhotos}
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
+          setExpandedView={setExpandedView}
         />
       );
     }
@@ -80,6 +80,7 @@ export default function Overview({
           curDisplayPhotos={curDisplayPhotos}
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
+          setExpandedView={setExpandedView}
         />
         <SocialMedia url={socialUrl} slogan={product.slogan} />
         <ProductSlogan>{product.slogan}</ProductSlogan>
@@ -88,7 +89,3 @@ export default function Overview({
     );
   }
 }
-
-Overview.propTypes = {
-
-};
