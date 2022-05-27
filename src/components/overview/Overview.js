@@ -32,7 +32,7 @@ export default function Overview({
     const [expandedView, setExpandedView] = useState(false);
     const [curDisplayIndex, setCurDisplayIndex] = useState(0);
 
-    const socialUrl = productStyle.results[curStyleId].photos[curStyleId].url;
+    const socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
     const productOrginalPrice = productStyle.results[curStyleId].original_price;
     const productSalePrice = productStyle.results[curStyleId].sale_price;
     const curStyleName = productStyle.results[curStyleId].name;
