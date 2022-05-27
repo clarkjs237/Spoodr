@@ -5,8 +5,9 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 
-export const PRODUCT_ID = 40351; //
-export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';// hr-rfp not rfp
+export const PRODUCT_ID = 40351;
+export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
+
 // In the file you need these variables in, do:
 // import { PRODUCT_ID, URL } from '../App';
 
@@ -74,6 +75,8 @@ function App() {
   function handleRelatedItemClick(id) {
     // This will change the state of product by using setProduct
     console.log('Related Product ID : ' + id);
+    // e.preventDefault();
+    // console.log(e.target.id)
     // setProduct({ id: id });
   }
   useEffect(() => {
@@ -95,7 +98,9 @@ function App() {
       <Related
         product={product}
         handleRelatedItemClick={handleRelatedItemClick}
+        productStyle={productStyle}
         curStyleId={curStyleId}
+        averageStarRating={averageStarRating}
       />
       <Questions product={product} />
       <RatingsAndReviews
