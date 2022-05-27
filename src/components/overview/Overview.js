@@ -5,6 +5,7 @@ import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
 import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
 import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
+import AddToCart from './overviewComponents/AddToCart';
 
 const ProductOverview = styled.div`
   color: #0B2027;
@@ -27,26 +28,52 @@ export default function Overview({
   curStyleId,
   setCurStyleId,
 }) {
-  if (product.category && productStyle.product_id) {
-    // const [curStyleId, setCurStyleId] = useState(0);
-    const [expandedView, setExpandedView] = useState(false);
-    const [curDisplayIndex, setCurDisplayIndex] = useState(0);
 
-    const socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
-    const productOrginalPrice = productStyle.results[curStyleId].original_price;
-    const productSalePrice = productStyle.results[curStyleId].sale_price;
-    const curStyleName = productStyle.results[curStyleId].name;
-    let i = -1;
-    const styleThumbnails = productStyle.results.map((style) => {
-      i++;
-      return { id: i, thumbnail: style.photos[0].thumbnail_url };
-    });
-    i = -1;
-    const curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo) => {
-      i++;
-      photo.id = i;
-      return photo;
-    });
+  const [expandedView, setExpandedView] = useState(false);
+  const [curDisplayIndex, setCurDisplayIndex] = useState(0);
+  let curDisplayPhotos;
+  let productOrginalPrice;
+  let productSalePrice;
+  let curStyleName;
+  let styleThumbnails;
+  let curStyleQuantAndSizes;
+  let socialUrl;
+
+  if (product.category && productStyle.product_id) {
+    if(productStyle.results.length) {
+      productOrginalPrice = productStyle.results[curStyleId].original_price;
+      productSalePrice = productStyle.results[curStyleId].sale_price;
+      curStyleName = productStyle.results[curStyleId].name;
+      const curSkus = productStyle.results[curStyleId].skus;
+      curStyleQuantAndSizes = Object.keys(curSkus)
+        .map((key) => curSkus[key])
+        .filter(({ quantity }) => quantity > 0);
+      if(!curStyleQuantAndSizes.length) {
+        curStyleQuantAndSizes = [{size: 'Sold Out', quantity: 0}];
+      }
+    } else {
+      productOrginalPrice = product.default_price;
+      productSalePrice = null;
+      curStyleName = '';
+      curStyleQuantAndSizes = [{size: 'Sold Out', quantity: 0}];
+    }
+
+    if(productStyle.results[curStyleId]) {
+      socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
+      styleThumbnails = productStyle.results.map((style, i) => {
+        return { id: i, thumbnail: style.photos[0].thumbnail_url };
+      });
+      curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo, i) => {
+        photo.id = i;
+        return photo;
+      });
+    } else {
+      const missingImg = "https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format";
+      socialUrl = missingImg;
+      styleThumbnails = [{id: 0, url: missingImg, thumbnail_url: missingImg}];
+      curDisplayPhotos = [{id: 0, url: missingImg, thumbnail_url: missingImg}];
+    }
+
 
     if (expandedView) {
       return (
@@ -61,6 +88,12 @@ export default function Overview({
 
     return (
       <ProductOverview>
+        <ImageGalleryDefault
+          curDisplayPhotos={curDisplayPhotos}
+          curDisplayIndex={curDisplayIndex}
+          setCurDisplayIndex={setCurDisplayIndex}
+          setExpandedView={setExpandedView}
+        />
         <ProductInfo
           totalReviews={totalReviews}
           averageRating={averageRating}
@@ -76,11 +109,8 @@ export default function Overview({
           curStyleName={curStyleName}
           styleThumbnails={styleThumbnails}
         />
-        <ImageGalleryDefault
-          curDisplayPhotos={curDisplayPhotos}
-          curDisplayIndex={curDisplayIndex}
-          setCurDisplayIndex={setCurDisplayIndex}
-          setExpandedView={setExpandedView}
+        <AddToCart
+          curStyleQuantAndSizes={curStyleQuantAndSizes}
         />
         <SocialMedia url={socialUrl} slogan={product.slogan} />
         <ProductSlogan>{product.slogan}</ProductSlogan>

@@ -9,6 +9,7 @@ const ImageGalleryExpandedWrapper = styled.div`
   width: 100%;
   background-color: #EAC9C1;
   position: relative;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 `;
 
 const ExpandedImage = styled.img`
@@ -33,12 +34,14 @@ const ExpandedThumbnailImages = styled.div`
 const LeaveExpandedView = styled.div`
   position: absolute;
   top: 0;
-  left: 97%;
+  left: 94.5vw;
   font-size: 1.75rem;
   color: #32292F;
   &:hover {
     cursor: pointer;
     color: #90D7FF;
+  }
+
 `;
 
 export default function ImageGalleryExpanded({
