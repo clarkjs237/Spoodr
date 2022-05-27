@@ -29,7 +29,7 @@ const DisplayWrapper = styled.div`
 
 const ThumbnailImageWrapper = styled.div`
   position: absolute;
-  top: 1rem;
+  top: .25rem;
   left: .5rem;
 `;
 

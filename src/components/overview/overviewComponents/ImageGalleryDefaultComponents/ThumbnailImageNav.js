@@ -2,6 +2,21 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ThumbnailImage from './ThumbnailImage';
 
+const NavArrow = styled.div`
+  transform: ${props => props.id === "top" ? 'rotate(90deg)' : 'rotate(270deg)'};
+  font-size: 1.75rem;
+  color: #32292F;
+  opacity: ${props => props.clear ? '0' : '1'};
+  height: auto;
+  width: .1rem;
+  margin-left: ${props => props.id === "top" ? '1.4rem' : '1.1rem'};
+  border-width: 0;
+  &:hover {
+    color: #90D7FF;
+    cursor: pointer;
+  }
+`;
+
 export default function ThumbnailImageNav({
   curDisplayPhotos,
   curDisplayIndex,
@@ -10,7 +25,8 @@ export default function ThumbnailImageNav({
   const maxThumbnailIndex = 6;
   const curDisplayMaxIndex = curDisplayPhotos.length - 1;
   const [thumbnailIndex, setThumbnailIndex] = useState(curDisplayIndex);
-  let navArrows = { top: false, bottom: false };
+  let navArrowTop;
+  let navArrowBottom;
   let curDisplayPhotosSeven = curDisplayPhotos;
 
   useEffect(() => {
@@ -19,27 +35,39 @@ export default function ThumbnailImageNav({
 
   function onClickHandler(e) {
     if (e.target.id === 'top') {
-      setThumbnailIndex(thumbnailIndex - 1);
+      if(thumbnailIndex > curDisplayMaxIndex - 4) {
+        setThumbnailIndex(curDisplayMaxIndex - 4);
+      } else {
+        setThumbnailIndex(thumbnailIndex - 1);
+      }
     } else {
-      setThumbnailIndex(thumbnailIndex + 1);
+      if(thumbnailIndex < 4) {
+        setThumbnailIndex(4);
+      } else {
+        setThumbnailIndex(thumbnailIndex + 1);
+      }
     }
   }
 
   if (curDisplayMaxIndex > maxThumbnailIndex) {
     if (thumbnailIndex <= 3) {
       curDisplayPhotosSeven = curDisplayPhotos.slice(0, 7);
-      navArrows = { top: false, bottom: true };
+      navArrowTop = <NavArrow id='top' clear={true}>&#8249;</NavArrow>;
+      navArrowBottom = <NavArrow id='bottom' onClick={onClickHandler}>&#8249;</NavArrow>;
     } else if (thumbnailIndex >= (curDisplayMaxIndex- 3)) {
       curDisplayPhotosSeven = curDisplayPhotos.slice(curDisplayMaxIndex - 6, curDisplayMaxIndex + 1);
-      navArrows = { top: true, bottom: false };
+      navArrowBottom = <NavArrow id='bottom' clear={true}>&#8249;</NavArrow>;
+      navArrowTop = <NavArrow id='top' onClick={onClickHandler}>&#8249;</NavArrow>;
     } else {
       curDisplayPhotosSeven = curDisplayPhotos.slice(thumbnailIndex - 3, thumbnailIndex + 4);
-      navArrows = { top: true, bottom: true };
+      navArrowBottom = <NavArrow id='bottom' onClick={onClickHandler}>&#8249;</NavArrow>;
+      navArrowTop = <NavArrow id='top' onClick={onClickHandler}>&#8249;</NavArrow>;
     }
   }
 
   return (
     <div>
+      {navArrowTop}
       {curDisplayPhotosSeven.map(({ id, thumbnail_url }) => (
         <div>
           <ThumbnailImage
@@ -50,6 +78,7 @@ export default function ThumbnailImageNav({
           />
         </div>
       ))}
+      {navArrowBottom}
     </div>
   );
 }

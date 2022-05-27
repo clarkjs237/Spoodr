@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ThumbnailImage from './ImageGalleryDefaultComponents/ThumbnailImage';
 import ExpandedImageNav from './ImageGalleryExpandedComponents/ExpandedImageNav';
+import ExpandedThumbnailImageNav from './ImageGalleryExpandedComponents/ExpandedThumbnailImageNav';
 
 const ImageGalleryExpandedWrapper = styled.div`
-  heigth: 100%;
+  height: ${(props) => (props.zoom ? '100%' : '99vh')};
   width: 100%;
   background-color: #EAC9C1;
   position: relative;
@@ -25,9 +26,8 @@ const ExpandedImage = styled.img`
 `;
 
 const ExpandedThumbnailImages = styled.div`
-  width: fit-content;
-  margin: auto;
-
+  display: flex;
+  justify-content: center;
 `;
 
 const LeaveExpandedView = styled.div`
@@ -97,7 +97,7 @@ export default function ImageGalleryExpanded({
 
   if (zoomedView) {
     return (
-      <ImageGalleryExpandedWrapper>
+      <ImageGalleryExpandedWrapper zoom={zoomedView}>
         <ExpandedImage
           id="ExpandedImage"
           zoom={zoomedView}
@@ -124,14 +124,11 @@ export default function ImageGalleryExpanded({
         maxDisplayIndex={curDisplayPhotos.length - 1}
       />
       <ExpandedThumbnailImages>
-        {curDisplayPhotos.map(({ id, thumbnail_url }) => (
-          <ThumbnailImage
-            id={id}
-            thumbnail={thumbnail_url}
+        <ExpandedThumbnailImageNav
+            curDisplayPhotos={curDisplayPhotos}
             curDisplayIndex={curDisplayIndex}
             setCurDisplayIndex={setCurDisplayIndex}
           />
-        ))}
       </ExpandedThumbnailImages>
       <LeaveExpandedView id="LeaveExpanded" onClick={onClickHandler}>
         &#9447;
