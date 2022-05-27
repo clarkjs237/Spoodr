@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StarRating from '../../../../overview/overviewComponents/ProductInfoComponents/StarRating';
-
+import StarRating from '../../../../../overview/overviewComponents/ProductInfoComponents/StarRating';
 
 function RatingSummary(props) {
   return (

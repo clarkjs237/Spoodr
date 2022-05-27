@@ -9,16 +9,16 @@ function StarBreakdown(props) {
 
   function calculateStarPercent() {
     const TOTAL_RATINGS = props.totalReviews;
-    setFive(Math.floor((props.reviewsMeta.ratings[5] / TOTAL_RATINGS) * 100));
-    setFour(Math.floor((props.reviewsMeta.ratings[4] / TOTAL_RATINGS) * 100));
-    setThree(Math.floor((props.reviewsMeta.ratings[3] / TOTAL_RATINGS) * 100));
-    setTwo(Math.floor((props.reviewsMeta.ratings[2] / TOTAL_RATINGS) * 100));
-    setOne(Math.floor((props.reviewsMeta.ratings[1] / TOTAL_RATINGS) * 100));
+    setFive((props.reviewsMeta.ratings[5] / TOTAL_RATINGS) * 100);
+    setFour((props.reviewsMeta.ratings[4] / TOTAL_RATINGS) * 100);
+    setThree((props.reviewsMeta.ratings[3] / TOTAL_RATINGS) * 100);
+    setTwo((props.reviewsMeta.ratings[2] / TOTAL_RATINGS) * 100);
+    setOne((props.reviewsMeta.ratings[1] / TOTAL_RATINGS) * 100);
   }
 
   useEffect(() => {
     calculateStarPercent();
-  }, [props.reviewsMeta.recommended.true, props.reviewsMeta.ratings]);
+  }, [props.reviewsMeta.ratings]);
 
   return (
     <div>
