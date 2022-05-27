@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyleImage = styled.img`
+  object-fit: cover;
   border-radius: 50%;
   border: solid;
   border-width: .1rem;
