@@ -23,3 +23,8 @@
   border: 2px purple solid;
 } */
 
+.review-photo {
+  max-height: 50px;
+  max-width: 100%;
+}
+

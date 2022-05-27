@@ -10,14 +10,14 @@ function Reviews(props) {
   const [count, setCount] = useState(2);
   const [sort, setSort] = useState('relevant');
 
-  function getReviews(id) {
+  function getReviews() {
     fetch(
-      `${URL}/reviews?product_id=${id}&page=${page}&count=${count}&sort=${sort}`,
+      `${URL}/reviews?product_id=${PRODUCT_ID}&page=${page}&count=${count}&sort=${sort}`,
       {
         headers: {
           Authorization: process.env.GITTOKEN,
         },
-      }
+      },
     )
       .then((response) => response.json())
       .then((result) => setReviews(result.results));
@@ -25,7 +25,7 @@ function Reviews(props) {
 
   function handleMoreReviews() {
     setCount(count + 2);
-    getReviews(PRODUCT_ID);
+    getReviews();
   }
 
   function handleSortChange(option) { //"newest", "helpful", or "relevant"
@@ -41,7 +41,7 @@ function Reviews(props) {
   }
 
   useEffect(() => {
-    getReviews(PRODUCT_ID);
+    getReviews();
   }, [count, sort]);
 
   return (
@@ -51,7 +51,9 @@ function Reviews(props) {
         sort={sort}
         handleSortChange={handleSortChange}
       />
-      <ReviewsList reviews={reviews} />
+      <ReviewsList
+        reviews={reviews}
+      />
       { reviews.length === count && reviews.length > 0 &&
         <button type="submit" onClick={handleMoreReviews}>More Reviews</button>
       }
