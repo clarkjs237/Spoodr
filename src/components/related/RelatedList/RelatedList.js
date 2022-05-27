@@ -32,9 +32,9 @@ export const Carousel = styled.div`
 
 export const Blur = styled.div`
   position: absolute;
-  width: 4rem;
-  height: 18rem;
-  top: 0.5rem;
+  // width: 4rem;
+  height: 18.5rem;
+  top: 0.25rem;
 
   ${(props) => {
     if (props.left && props.activeIndex > 0) {
@@ -48,6 +48,7 @@ export const Blur = styled.div`
       return css`
         left: 44.5rem;
         backdrop-filter: blur(0.1rem);
+        width: 5rem;
     `;
     }
     return css`

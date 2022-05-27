@@ -11,10 +11,11 @@ const CarouselItem = styled.div`
   min-width: 13rem;
   max-width: 13rem;
   max-height: 18rem;
-  background-color: green;
-  color: white;
+  background-color: #EAC9C1;
+  // color: white;
   margin: 0.5rem;
   cursor: pointer;
+  border: 1.5px solid #32292F;
 `;
 
 const InsideCarousel = styled.div`
@@ -53,7 +54,7 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addI
       // Need to check and make sure this isn't already in the list.
       // #################################################################
       let currOutfitList = JSON.parse(localStorage.outfit);
-      let newOutfitList = JSON.stringify(curr.push(product));
+      let newOutfitList = JSON.stringify(currOutfitList.push(product));
       localStorage.setItem('outfit', newOutfitList);
     }
   }
@@ -66,6 +67,7 @@ function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addI
         style={
           { "textAlign": "center",
             "transform": "translateX(-0.5rem)",
+            "whiteSpace": "normal"
           }}
         onClick={handleAddToOutfit}
       >
