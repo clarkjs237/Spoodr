@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import ThumbnailImage from './ImageGalleryDefaultComponents/ThumbnailImage';
+import ThumbnailImageNav from './ImageGalleryDefaultComponents/ThumbnailImageNav';
 import DisplayImageNav from './ImageGalleryDefaultComponents/DisplayImageNav';
 
 const DisplayImage = styled.img`
@@ -55,16 +54,11 @@ export default function ImageGalleryDefault({
         onClick={onClickHandler}
       />
       <ThumbnailImageWrapper>
-        {curDisplayPhotos.map(({ id, thumbnail_url }) => (
-          <div>
-            <ThumbnailImage
-              id={id}
-              thumbnail={thumbnail_url}
-              curDisplayIndex={curDisplayIndex}
-              setCurDisplayIndex={setCurDisplayIndex}
-            />
-          </div>
-        ))}
+        <ThumbnailImageNav
+          curDisplayPhotos={curDisplayPhotos}
+          curDisplayIndex={curDisplayIndex}
+          setCurDisplayIndex={setCurDisplayIndex}
+        />
       </ThumbnailImageWrapper>
       <DisplayImageNav
         curDisplayIndex={curDisplayIndex}
