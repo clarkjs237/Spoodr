@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import OutfitListItem from './OutfitListItem';
 import RelatedList, { Container, Carousel, Inner, Blur, Chevron } from '../RelatedList/RelatedList';
 import RelatedListItem from '../RelatedList/RelatedListItem';
+import ActionButton from '../ActionButton/ActionButton';
 
 const AddOutfitCard = styled.div`
   display: inline-flex;
@@ -138,8 +139,10 @@ function OutfitList({
 
   function handleOutfitItemClick(e) {
     // this is when an outfit item is clicked
-    console.log('Outfit Item Clicked');
-    console.log(e.target.id);
+    e.preventDefault();
+    console.log('BOTTOM CLICKED');
+    // console.log(e.target);
+    // console.log(e.currentTarget);
   }
 
   function resetOutfit() {
@@ -152,57 +155,70 @@ function OutfitList({
     }
   }
 
+  function removeFromOutfit(e, name) {
+    // The key to this is stopPropagation. It kills any events from that singular
+    // event handler, which is exactly what I want
+    e.stopPropagation();
+    console.log('TOP CLICKED');
+    // console.log(e.target.index);
+    // console.log(e.currentTarget);
+    console.log(name);
+  }
+
   useEffect(() => {
     generateInitialOutfitList();
   }, []);
 
-  return (
-    <Container>
-      <Carousel>
-        <Inner activeIndex={activeIndex}>
-          <AddOutfitCard>
-            {/* Add Current Outfit to My Outfit<br /> */}
-            <AddOutfitButton onClick={handleAddToOutfit}>&#43;</AddOutfitButton>
-            <AddButtonText>Add to My Outfit</AddButtonText>
-            {/* <button onClick={resetOutfit}>Delete Outfit</button> */}
-          </AddOutfitCard>
-          {outfit.map((item, index) => (
-            <RelatedListItem
-              outfit={true}
-              key={index}
-              defStyle={item.style}
-              info={item.info}
-              review={item.review}
-              id={item.id}
-              handleItemClick={handleOutfitItemClick}
-            />
-          ))}
-        </Inner>
-        <Blur
-          left={true}
-          activeIndex={activeIndex}
-          length={length}
-        />
-        <Blur
-          left={false}
-          activeIndex={activeIndex}
-          length={length}
-        />
-        <Chevron
-          left={true}
-          activeIndex={activeIndex}
-          length={length}
-          onClick={prevCard}
-        >&#10216;</Chevron>
-        <Chevron
-          left={false}
-          activeIndex={activeIndex}
-          length={length}
-          onClick={nextCard}
-        >&#10217;</Chevron>
-      </Carousel>
-    </Container>
-  );
+  if (product && productStyle && averageStarRating) {
+    return (
+      <Container>
+        <Carousel>
+          <Inner activeIndex={activeIndex}>
+            <AddOutfitCard>
+              <AddOutfitButton onClick={handleAddToOutfit}>&#43;</AddOutfitButton>
+              <AddButtonText>Add to My Outfit</AddButtonText>
+            </AddOutfitCard>
+            {outfit.map((item, index) => (
+              <RelatedListItem
+                outfit={true}
+                key={index}
+                ind={index}
+                defStyle={item.style}
+                info={item.info}
+                review={item.review}
+                id={item.id}
+                handleRelatedItemClick={(e) => handleOutfitItemClick(e)}
+                actionButton={(e) => removeFromOutfit(e)}
+              />
+            ))}
+          </Inner>
+          <Blur
+            left={true}
+            activeIndex={activeIndex}
+            length={length}
+          />
+          <Blur
+            left={false}
+            activeIndex={activeIndex}
+            length={length}
+          />
+          <Chevron
+            left={true}
+            activeIndex={activeIndex}
+            length={length}
+            onClick={prevCard}
+          >&#10216;</Chevron>
+          <Chevron
+            left={false}
+            activeIndex={activeIndex}
+            length={length}
+            onClick={nextCard}
+          >&#10217;</Chevron>
+        </Carousel>
+      </Container>
+    );
+  }
+  return <div>Empty</div>;
 }
 
 export default OutfitList;

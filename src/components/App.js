@@ -73,6 +73,8 @@ function App() {
   function handleRelatedItemClick(id) {
     // This will change the state of product by using setProduct
     console.log('Related Product ID : ' + id);
+    // e.preventDefault();
+    // console.log(e.target.id)
     // setProduct({ id: id });
   }
   useEffect(() => {

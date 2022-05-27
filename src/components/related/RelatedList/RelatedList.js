@@ -117,6 +117,11 @@ function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
   };
 
+  function comparisonModal(e) {
+    e.stopPropagation();
+    console.log('Comparison Clicked!');
+  }
+
   if (!styles || !infos || !reviews) {
     return <div>Empty</div>;
   }
@@ -133,6 +138,7 @@ function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
               review={Object.values(reviews)[index]}
               id={Object.keys(styles)[index]}
               handleRelatedItemClick={handleRelatedItemClick}
+              actionButton={(e) => comparisonModal(e)}
             />
           ))}
         </Inner>

@@ -135,16 +135,6 @@ function Related({
     updateRelatedIDs(product.id);
   }, [product]);
 
-  // function resetOutfit() {
-  //   // This is when we want to clear localstorage
-  //   let res = confirm('Are you sure you want to delete My Outfit?');
-  //   if (res) {
-  //     console.log('outfit deleted');
-  //     localStorage.removeItem('outfit');
-  //     // localStorage.setItem('Tester', `{"this": "is a test"}` )
-  //     // localStorage.setItem('Guac', `{"oy": 30}`)
-  //   }
-  // }
   // This is where we will make use of RelatedList
   // Carousel = RelatedList
   // CarouselItems = RelatedListItem
