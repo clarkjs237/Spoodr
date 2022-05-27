@@ -11,28 +11,28 @@ import {
 } from 'react-share';
 
 const SocialMediaSpan = styled.span`
-  margin-left: .5em;
+  margin-left: .5rem;
 `;
 
 export default function SocialMedia({ url, slogan }) {
   return (
-    <>
+    <div>
       <SocialMediaSpan>
         <FacebookShareButton url={url} quote={slogan}>
-          <FacebookIcon size={20} round />
+          <FacebookIcon size={24} round />
         </FacebookShareButton>
       </SocialMediaSpan>
       <SocialMediaSpan>
         <PinterestShareButton media={url} url={url} description={slogan}>
-          <PinterestIcon size={20} round />
+          <PinterestIcon size={24} round />
         </PinterestShareButton>
       </SocialMediaSpan>
       <SocialMediaSpan>
         <TwitterShareButton url={url} title={slogan}>
-          <TwitterIcon size={20} round />
+          <TwitterIcon size={24} round />
         </TwitterShareButton>
       </SocialMediaSpan>
-    </>
+    </div>
   );
 }
 
