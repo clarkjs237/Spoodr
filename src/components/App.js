@@ -16,6 +16,7 @@ function App() {
   const [reviewsMeta, setReviewsMeta] = useState({
     recommended: { true: '0', false: '0' },
     ratings: { 5: '0', 4: '0', 3: '0', 2: '0', 1: '0'},
+    characteristics: {},
   });
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
@@ -73,6 +74,8 @@ function App() {
   function handleRelatedItemClick(id) {
     // This will change the state of product by using setProduct
     console.log('Related Product ID : ' + id);
+    // e.preventDefault();
+    // console.log(e.target.id)
     // setProduct({ id: id });
   }
   useEffect(() => {
@@ -94,7 +97,9 @@ function App() {
       <Related
         product={product}
         handleRelatedItemClick={handleRelatedItemClick}
+        productStyle={productStyle}
         curStyleId={curStyleId}
+        averageStarRating={averageStarRating}
       />
       <Questions product={product} />
       <RatingsAndReviews

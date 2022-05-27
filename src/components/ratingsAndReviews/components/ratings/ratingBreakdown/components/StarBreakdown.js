@@ -9,37 +9,37 @@ function StarBreakdown(props) {
 
   function calculateStarPercent() {
     const TOTAL_RATINGS = props.totalReviews;
-    setFive(Math.floor((props.reviewsMeta.ratings[5] / TOTAL_RATINGS) * 100));
-    setFour(Math.floor((props.reviewsMeta.ratings[4] / TOTAL_RATINGS) * 100));
-    setThree(Math.floor((props.reviewsMeta.ratings[3] / TOTAL_RATINGS) * 100));
-    setTwo(Math.floor((props.reviewsMeta.ratings[2] / TOTAL_RATINGS) * 100));
-    setOne(Math.floor((props.reviewsMeta.ratings[1] / TOTAL_RATINGS) * 100));
+    setFive((props.reviewsMeta.ratings[5] / TOTAL_RATINGS) * 100);
+    setFour((props.reviewsMeta.ratings[4] / TOTAL_RATINGS) * 100);
+    setThree((props.reviewsMeta.ratings[3] / TOTAL_RATINGS) * 100);
+    setTwo((props.reviewsMeta.ratings[2] / TOTAL_RATINGS) * 100);
+    setOne((props.reviewsMeta.ratings[1] / TOTAL_RATINGS) * 100);
   }
 
   useEffect(() => {
     calculateStarPercent();
-  }, [props.reviewsMeta.recommended.true, props.reviewsMeta.ratings]);
+  }, [props.reviewsMeta.ratings]);
 
   return (
-    <div>
+    <div className='star-breakdown'>
       <div>
-        <button>5 stars</button>
+        <button className='underline-button' >5 stars</button>
         <meter value={five} min={0} max={100}></meter>
       </div>
       <div>
-      <button>4 stars</button>
+        <button className='underline-button'>4 stars</button>
         <meter value={four} min={0} max={100}></meter>
       </div>
       <div>
-      <button>3 stars</button>
+        <button className='underline-button'>3 stars</button>
         <meter value={three} min={0} max={100}></meter>
       </div>
       <div>
-      <button>2 stars</button>
+        <button className='underline-button'>2 stars</button>
         <meter value={two} min={0} max={100}></meter>
       </div>
       <div>
-      <button>1 stars</button>
+        <button className='underline-button'>1 stars</button>
         <meter value={one} min={0} max={100}></meter>
       </div>
     </div>

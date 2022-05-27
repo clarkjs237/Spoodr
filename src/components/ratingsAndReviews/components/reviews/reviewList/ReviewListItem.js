@@ -1,59 +1,12 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import StarRating from '../../../../overview/overviewComponents/ProductInfoComponents/StarRating';
+import ReviewPhoto from './ReviewPhoto';
 import { URL } from "../../../../App";
+import { format } from 'date-fns';
 
 function ReviewListItem(props) {
   const [helpfulness, setHelpfulness] = useState(props.review.helpfulness);
-
-  function parseDate(dateString) {
-    const DATE = dateString.split('-');
-    const YEAR = DATE[0];
-    let MONTH = DATE[1];
-    switch (MONTH) {
-      case '01':
-        MONTH = 'January';
-        break;
-      case '02':
-        MONTH = 'February';
-        break;
-      case '03':
-        MONTH = 'March';
-        break;
-      case '04':
-        MONTH = 'April';
-        break;
-      case '05':
-        MONTH = 'May';
-        break;
-      case '06':
-        MONTH = 'June';
-        break;
-      case '07':
-        MONTH = 'July';
-        break;
-      case '08':
-        MONTH = 'August';
-        break;
-      case '09':
-        MONTH = 'September';
-        break;
-      case '10':
-        MONTH = 'October';
-        break;
-      case '11':
-        MONTH = 'November';
-        break;
-      case '12':
-        MONTH = 'December';
-        break;
-      default:
-    }
-    let DAY = DATE[2];
-    DAY = DAY.split('T');
-    DAY = DAY[0];
-    return `${MONTH}, ${DAY}, ${YEAR}`;
-  }
 
   function markReviewAsHelpful(reviewId) {
     fetch(
@@ -71,7 +24,7 @@ function ReviewListItem(props) {
 
   function reportReview(reviewId) {
     fetch(
-      `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/${reviewId}/report`,
+      `${URL}/reviews/${reviewId}/report`,
       {
         method: 'PUT',
         headers: {
@@ -97,10 +50,28 @@ function ReviewListItem(props) {
         <StarRating averageStarRating={props.review.rating}/>
       </div>
       <div id="date">
-        {props.review.reviewer_name} {parseDate(props.review.date)}
+        {props.review.reviewer_name} {format(new Date(props.review.date), 'MMMM d, yyyy')}
       </div>
-      <div id="summary">Summary: {props.review.summary}</div>
-      <div id="body">Body: {props.review.body}</div>
+      <div id="summary">
+        Summary
+        <br />
+        {props.review.summary}
+      </div>
+      <div id="body">
+        Body
+        <bt />
+        {props.review.body}
+        <div>
+          Photos
+          <br />
+          {props.review.photos.map((photo, index) => (
+            <ReviewPhoto
+              url={photo.url}
+              key={index}
+            />
+          ))}
+        </div>
+      </div>
       { props.review.recommend === true &&
         <div> ✔ I recommend this product. </div>
       }
@@ -120,5 +91,7 @@ function ReviewListItem(props) {
     </div>
   );
 }
+
+
 
 export default ReviewListItem;
