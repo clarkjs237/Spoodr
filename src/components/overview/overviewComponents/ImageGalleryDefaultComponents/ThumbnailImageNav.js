@@ -8,8 +8,9 @@ export default function ThumbnailImageNav({
   setCurDisplayIndex,
 }) {
   const maxThumbnailIndex = 6;
+  const curDisplayMaxIndex = curDisplayPhotos.length - 1;
   const [thumbnailIndex, setThumbnailIndex] = useState(curDisplayIndex);
-  const navArrows = { top: false, bottom: false };
+  let navArrows = { top: false, bottom: false };
   let curDisplayPhotosSeven = curDisplayPhotos;
 
   useEffect(() => {
@@ -24,12 +25,12 @@ export default function ThumbnailImageNav({
     }
   }
 
-  if (curDisplayPhotos.length > maxThumbnailIndex + 1) {
+  if (curDisplayMaxIndex > maxThumbnailIndex) {
     if (thumbnailIndex <= 3) {
       curDisplayPhotosSeven = curDisplayPhotos.slice(0, 7);
       navArrows = { top: false, bottom: true };
-    } else if (thumbnailIndex >= (maxThumbnailIndex - 3)) {
-      curDisplayPhotosSeven = curDisplayPhotos.slice(maxThumbnailIndex - 7, maxThumbnailIndex + 1);
+    } else if (thumbnailIndex >= (curDisplayMaxIndex- 3)) {
+      curDisplayPhotosSeven = curDisplayPhotos.slice(curDisplayMaxIndex - 6, curDisplayMaxIndex + 1);
       navArrows = { top: true, bottom: false };
     } else {
       curDisplayPhotosSeven = curDisplayPhotos.slice(thumbnailIndex - 3, thumbnailIndex + 4);
