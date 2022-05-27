@@ -5,8 +5,8 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 
-export const PRODUCT_ID = 65637;
-export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+export const PRODUCT_ID = 40351; //
+export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';// hr-rfp not rfp
 // In the file you need these variables in, do:
 // import { PRODUCT_ID, URL } from '../App';
 
@@ -16,6 +16,7 @@ function App() {
   const [reviewsMeta, setReviewsMeta] = useState({
     recommended: { true: '0', false: '0' },
     ratings: { 5: '0', 4: '0', 3: '0', 2: '0', 1: '0'},
+    characteristics: {},
   });
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
