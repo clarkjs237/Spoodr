@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Factors(props) {
+function Characteristics(props) {
   const [size, setSize] = useState(0);
   const [width, setWidth] = useState(0);
   const [comfort, setComfort] = useState(0);
@@ -11,7 +11,7 @@ function Factors(props) {
 
   // console.log(props.reviewsMeta)
 
-  function setFactors() {
+  function setCharacteristics() {
     setSize(props.reviewsMeta?.characteristics.Size?.value);
     setWidth(props.reviewsMeta?.characteristics.Width?.value);
     setComfort(props.reviewsMeta?.characteristics.Comfort?.value);
@@ -21,7 +21,7 @@ function Factors(props) {
   }
 
   useEffect(() => {
-    setFactors();
+    setCharacteristics();
   }, [props.reviewsMeta.characteristics]);
 
   return (
@@ -66,4 +66,4 @@ function Factors(props) {
   );
 }
 
-export default Factors;
+export default Characteristics;

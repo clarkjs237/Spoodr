@@ -2,7 +2,7 @@ import React from 'react';
 import RatingSummary from './components/RatingSummary';
 import Recommendations from './components/Recommendations';
 import StarBreakdown from './components/StarBreakdown';
-import Factors from './components/Factors';
+import Characteristics from './components/Characteristics';
 
 function RatingBreakdown(props) {
   return (
@@ -19,7 +19,7 @@ function RatingBreakdown(props) {
         totalReviews={props.totalReviews}
         reviewsMeta={props.reviewsMeta}
       />
-      <Factors
+      <Characteristics
         reviewsMeta={props.reviewsMeta}
       />
     </div>
