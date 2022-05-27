@@ -83,7 +83,7 @@ function App() {
 
   return (
     <>
-      {/* <Overview
+      <Overview
         product={product}
         productStyle={productStyle}
         totalReviews={totalReviews}
@@ -97,7 +97,7 @@ function App() {
         handleRelatedItemClick={handleRelatedItemClick}
         curStyleId={curStyleId}
       />
-      <Questions product={product} /> */}
+      <Questions product={product} />
       <RatingsAndReviews
         product={product}
         totalReviews={totalReviews}
