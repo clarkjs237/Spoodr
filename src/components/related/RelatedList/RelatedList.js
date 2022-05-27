@@ -130,7 +130,7 @@ function RelatedList({ styles, infos, reviews, handleRelatedItemClick }) {
           {Object.values(styles).map((style, index) => (
             <RelatedListItem
               key={index}
-              style={style}
+              defStyle={style}
               info={Object.values(infos)[index]}
               review={Object.values(reviews)[index]}
               id={Object.keys(styles)[index]}

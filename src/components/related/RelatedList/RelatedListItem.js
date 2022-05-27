@@ -12,10 +12,10 @@ const CarouselItem = styled.div`
   max-width: 13rem;
   max-height: 18rem;
   background-color: #EAC9C1;
-  // color: white;
   margin: 0.5rem;
   cursor: pointer;
   border: 1.5px solid #32292F;
+  transform: ${(props) => props.outfit ? 'translateY(-9.25rem)' : 'translateY(0rem)'}
 `;
 
 const InsideCarousel = styled.div`
@@ -30,7 +30,7 @@ const Photo = styled.img`
   // position: absolute;
 `;
 function RelatedListItem({
-  style,
+  defStyle,
   id,
   info,
   review,
@@ -46,38 +46,21 @@ function RelatedListItem({
     e.preventDefault();
     handleRelatedItemClick(id);
   }
-  // conditional render here in the event that info isnt
-  // assigned correctly yet
-  // addIcon is a boolean to determine if this is part of Outfit or Not
-  // if (addIcon) {
-  //   return (
-  //     <CarouselItem
-  //       style={
-  //         { "textAlign": "center",
-  //           "transform": "translateX(-0.5rem)",
-  //         }}
-  //       onClick={handleAddToOutfit}
-  //     >
-  //       Add Current Product to My Outfit
-  //       <button
-  //         onClick={resetOutfit}
-  //       >Clear My Outfit</button>
-  //     </CarouselItem>)
-  // }
-  if (style && info && review && id) {
+
+  if (defStyle && info && review && id) {
     return (
       <CarouselItem
         onClick={(e) => handleRelatedClick(e)}
         outfit={outfit}
       >
         <InsideCarousel>
-          <Photo src={style.photos['0'].thumbnail_url}/>
+          <Photo src={defStyle.photos['0'].thumbnail_url}/>
           {info.product_category}<br/>
           {info.product_name}<br/>
           <div>
             <StarRating averageStarRating={review}/>
           </div>
-          <ProductPrice productOrginalPrice={style.original_price} productSalePrice={style.sale_price}/>
+          <ProductPrice productOrginalPrice={defStyle.original_price} productSalePrice={defStyle.sale_price}/>
         </InsideCarousel>
       </CarouselItem>
     );

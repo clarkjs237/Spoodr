@@ -7,7 +7,7 @@ import OutfitListItem from './OutfitListItem';
 import RelatedList, { Container, Carousel, Inner, Blur, Chevron } from '../RelatedList/RelatedList';
 import RelatedListItem from '../RelatedList/RelatedListItem';
 
-const AddOutfitButton = styled.div`
+const AddOutfitCard = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -19,6 +19,23 @@ const AddOutfitButton = styled.div`
   margin: 0.5rem;
   cursor: pointer;
   border: 1.5px solid #32292F;
+  transform: translateY(-0.3rem);
+  position: relative;
+`;
+
+const AddOutfitButton = styled.span`
+  font-size: 6rem;
+  position: absolute;
+  top: 4rem;
+  left: 4.65rem;
+`;
+
+const AddButtonText = styled.span`
+  font-size: 1.3rem;
+  font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  position: absolute;
+  top: 11rem;
+  left: 1.8rem;
 `;
 
 function OutfitList({
@@ -142,29 +159,21 @@ function OutfitList({
     <Container>
       <Carousel>
         <Inner activeIndex={activeIndex}>
-          {/* <RelatedListItem
-            addIcon={true}
-            product={product}
-            handleAddToOutfit={handleAddToOutfit}
-            resetOutfit={resetOutfit}
-          /> */}
-          <AddOutfitButton
-            onClick={handleAddToOutfit}
-            style={{"transform": "translateY(-0.25rem)"}}
-          >
-            Add Current Outfit to My Outfit<br />
-            <button onClick={resetOutfit}>Delete Outfit</button>
-          </AddOutfitButton>
+          <AddOutfitCard>
+            {/* Add Current Outfit to My Outfit<br /> */}
+            <AddOutfitButton onClick={handleAddToOutfit}>&#43;</AddOutfitButton>
+            <AddButtonText>Add to My Outfit</AddButtonText>
+            {/* <button onClick={resetOutfit}>Delete Outfit</button> */}
+          </AddOutfitCard>
           {outfit.map((item, index) => (
             <RelatedListItem
               outfit={true}
               key={index}
-              style={item.style}
+              defStyle={item.style}
               info={item.info}
               review={item.review}
               id={item.id}
               handleItemClick={handleOutfitItemClick}
-              // style={{"position": "absolute"}}
             />
           ))}
         </Inner>
