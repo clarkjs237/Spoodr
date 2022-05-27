@@ -14,7 +14,13 @@ const RelatedAndOutfitContainer = styled.div`
   margin-top: 2rem;
 `
 
-function Related({ product, handleRelatedItemClick }) {
+function Related({
+  product,
+  handleRelatedItemClick,
+  productStyle,
+  curStyleId,
+  averageStarRating
+}) {
   const [relatedIDs, setRelatedIDs] = useState({});
   const [nameAndCat, setNameAndCat] = useState({});
   const [reviews, setReviews] = useState({});
@@ -129,20 +135,20 @@ function Related({ product, handleRelatedItemClick }) {
     updateRelatedIDs(product.id);
   }, [product]);
 
-  function resetOutfit() {
-    // This is when we want to clear localstorage
-    let res = confirm('Are you sure you want to delete My Outfit?');
-    if (res) {
-      console.log('outfit deleted');
-      localStorage.removeItem('outfit');
-      // localStorage.setItem('Tester', `{"this": "is a test"}` )
-      // localStorage.setItem('Guac', `{"oy": 30}`)
-    }
-  }
+  // function resetOutfit() {
+  //   // This is when we want to clear localstorage
+  //   let res = confirm('Are you sure you want to delete My Outfit?');
+  //   if (res) {
+  //     console.log('outfit deleted');
+  //     localStorage.removeItem('outfit');
+  //     // localStorage.setItem('Tester', `{"this": "is a test"}` )
+  //     // localStorage.setItem('Guac', `{"oy": 30}`)
+  //   }
+  // }
   // This is where we will make use of RelatedList
   // Carousel = RelatedList
   // CarouselItems = RelatedListItem
-  if (Object.keys(relatedIDs).length === 0 || Object.keys(nameAndCat).length === 0) {
+  if (Object.keys(relatedIDs).length === 0 || Object.keys(nameAndCat).length === 0 || Object.keys(reviews).length === 0) {
     return <div>Empty</div>;
   }
   return (
@@ -157,19 +163,11 @@ function Related({ product, handleRelatedItemClick }) {
       <Titles>My Outfit:</Titles>
       <OutfitList
         product={product}
+        productStyle={productStyle}
+        curStyleId={curStyleId}
+        averageStarRating={averageStarRating}
       />
-      <button
-        onClick={resetOutfit}
-      >Clear My Outfit</button>
     </RelatedAndOutfitContainer>
   );
 }
 export default Related;
-
-// This from Overview.js
-// // Sully work
-// // Need to lift state up of the current style id
-// useEffect(() => {
-//   // Want to setGlobalStyle when curStyleId is changed
-//   setGlobalStyleId(curStyleId);
-// }, [curStyleId]);

@@ -94,7 +94,9 @@ function App() {
       <Related
         product={product}
         handleRelatedItemClick={handleRelatedItemClick}
+        productStyle={productStyle}
         curStyleId={curStyleId}
+        averageStarRating={averageStarRating}
       />
       <Questions product={product} />
       <RatingsAndReviews

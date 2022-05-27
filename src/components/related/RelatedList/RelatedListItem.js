@@ -29,55 +29,46 @@ const Photo = styled.img`
   // height: 100%;
   // position: absolute;
 `;
-function RelatedListItem({ style, id, info, review, handleRelatedItemClick, addIcon, product }) {
+function RelatedListItem({
+  style,
+  id,
+  info,
+  review,
+  handleRelatedItemClick,
+  handleAddToOutfit,
+  resetOutfit,
+  outfit,
+  product
+}) {
   function handleRelatedClick(e) {
     // this will be the function that will use the
     // handleRelatedItemClick
     e.preventDefault();
     handleRelatedItemClick(id);
   }
-
-  function handleAddToOutfit(e) {
-    // This will be when the user clicks add to outfit
-    e.preventDefault();
-    console.log('Added to Outfit!');
-    // I just need to pass product down into RelatedListItem and this should work
-    // Add it to local storage
-    // Do this in an array
-    if (localStorage.outfit === undefined) {
-      // There is nothing in the outfit
-      // Add item to array and stringify it
-      localStorage.setItem('outfit', JSON.stringify([product]));
-    } else {
-      // convert localStorage.outfit to a array, which will be a JSON.parse
-      // #################################################################
-      // Need to check and make sure this isn't already in the list.
-      // #################################################################
-      let currOutfitList = JSON.parse(localStorage.outfit);
-      let newOutfitList = JSON.stringify(currOutfitList.push(product));
-      localStorage.setItem('outfit', newOutfitList);
-    }
-  }
   // conditional render here in the event that info isnt
   // assigned correctly yet
   // addIcon is a boolean to determine if this is part of Outfit or Not
-  if (addIcon) {
-    return (
-      <CarouselItem
-        style={
-          { "textAlign": "center",
-            "transform": "translateX(-0.5rem)",
-            "whiteSpace": "normal"
-          }}
-        onClick={handleAddToOutfit}
-      >
-        Add Current Product to My Outfit
-      </CarouselItem>)
-  }
-  if (style && info && review && id && !addIcon) {
+  // if (addIcon) {
+  //   return (
+  //     <CarouselItem
+  //       style={
+  //         { "textAlign": "center",
+  //           "transform": "translateX(-0.5rem)",
+  //         }}
+  //       onClick={handleAddToOutfit}
+  //     >
+  //       Add Current Product to My Outfit
+  //       <button
+  //         onClick={resetOutfit}
+  //       >Clear My Outfit</button>
+  //     </CarouselItem>)
+  // }
+  if (style && info && review && id) {
     return (
       <CarouselItem
         onClick={(e) => handleRelatedClick(e)}
+        outfit={outfit}
       >
         <InsideCarousel>
           <Photo src={style.photos['0'].thumbnail_url}/>
