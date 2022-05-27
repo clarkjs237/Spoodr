@@ -21,6 +21,7 @@ const AddOutfitCard = styled.div`
   border: 1.5px solid #32292F;
   transform: translateY(-0.3rem);
   position: relative;
+  background-image: linear-gradient(to bottom, white, transparent)
 `;
 
 const AddOutfitButton = styled.span`

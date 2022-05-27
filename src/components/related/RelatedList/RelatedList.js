@@ -32,23 +32,21 @@ export const Carousel = styled.div`
 
 export const Blur = styled.div`
   position: absolute;
-  // width: 4rem;
+  width: 4.5rem;
   height: 18.5rem;
-  top: 0.25rem;
+  top: 0.20rem;
 
   ${(props) => {
     if (props.left && props.activeIndex > 0) {
       return css`
         left: 0rem;
-        backdrop-filter: blur(0.1rem);
-        width: 4.5rem;
+        background-image: linear-gradient(-90deg, transparent, white 80%);
       `;
     }
     if (!props.left) {
       return css`
         left: 44.5rem;
-        backdrop-filter: blur(0.1rem);
-        width: 5rem;
+        background-image: linear-gradient(90deg, transparent, white 80%);
     `;
     }
     return css`
