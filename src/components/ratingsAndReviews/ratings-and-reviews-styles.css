@@ -1,0 +1,41 @@
+/*---- R&R styles ----*/
+.ratings-and-reviews, .rating-summary {
+  display: flex;
+}
+
+.average-rating {
+  font-size: 3rem;
+}
+
+.star-breakdown {
+  width: 100%
+}
+
+meter::-webkit-meter-bar {
+  background: #eee;
+  border-radius: 0px;
+  width: 200px;
+}
+
+.characteristic-limits{
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-photo {
+  max-height: 50px;
+  max-width: 100%;
+}
+
+.review-list {
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.underline-button {
+  border-style: none;
+  background: none;
+  text-decoration: underline;
+}
+
