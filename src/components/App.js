@@ -70,7 +70,7 @@ function App() {
   }
 
   // Sully's event handler function
-  function handleRelatedItemClick(id) {
+  function handleItemClick(id) {
     // This will change the state of product by using setProduct
     console.log('Related Product ID : ' + id);
     // e.preventDefault();
@@ -95,7 +95,7 @@ function App() {
       />
       <Related
         product={product}
-        handleRelatedItemClick={handleRelatedItemClick}
+        handleRelatedItemClick={handleItemClick}
         productStyle={productStyle}
         curStyleId={curStyleId}
         averageStarRating={averageStarRating}

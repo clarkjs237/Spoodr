@@ -144,11 +144,9 @@ export default function CarouselComponent({
   relInfos,
   relReviews,
   // Below is for OutfitList
-  curProduct,
-  curProductStyle,
-  curStyleId,
-  curAverageStarRating,
   outfitList, // this will be just one array, so I don't think I need any of the things above
+  handleAddToOutfit, // this is the function for adding to the OutfitList
+  removeItemFromOutfit, // this will remove a specific item from My Outfit
   // Keep track of the activeIndex, needs to be stored in state
   relatedActiveIndex,
   setRelatedActiveIndex,
@@ -185,7 +183,7 @@ export default function CarouselComponent({
                 info={Object.values(relInfos)[index]}
                 review={Object.values(relReviews)[index]}
                 outfit={false}
-                key={index}
+                index={index}
               />
             ))}
           </Inner>
@@ -234,12 +232,11 @@ export default function CarouselComponent({
       setOutfitActiveIndex(outfitActiveIndex === 0 ? 0 : outfitActiveIndex - 1);
     };
 
-
     return (
       <Container>
         <CarouselWindow>
           <Inner activeIndex={outfitActiveIndex}>
-            <AddOutfitCard>
+            <AddOutfitCard onClick={handleAddToOutfit}>
               <AddOutfitButton />
               <AddButtonText>Add to My Outfit</AddButtonText>
             </AddOutfitCard>
@@ -250,7 +247,9 @@ export default function CarouselComponent({
                 info={item.info}
                 review={item.review}
                 outfit={true}
-                key={index}
+                index={index}
+                // add individual card functionality here
+                removeItemFromOutfit={removeItemFromOutfit}
               />
             ))}
           </Inner>

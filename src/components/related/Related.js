@@ -11,11 +11,11 @@ const Titles = styled.h1`
 const RelatedAndOutfitContainer = styled.div`
   margin-bottom: 2rem;
   margin-top: 2rem;
-`
+`;
 
 function Related({
   product,
-  handleRelatedItemClick,
+  handleItemClick,
   productStyle,
   curStyleId,
   averageStarRating
@@ -148,6 +148,64 @@ function Related({
     }
   }
 
+  // Add currently viewed product/style to outfit
+  function handleAddToOutfit() {
+    // This will be when the user clicks add to outfit
+    // Update the state of outfitList and add to localStorage.outfit
+    if (!localStorage.outfit) {
+      let res = {
+        id: productStyle.product_id,
+        info: {category_name: product.category, product_name: product.name},
+        review: Number(averageStarRating),
+        style: productStyle.results[curStyleId]
+      };
+      localStorage.setItem('outfit', JSON.stringify([res]));
+      setOutfitList((oldArray) => [...oldArray, res]);
+    } else {
+      // const currOutfitList = JSON.parse(localStorage.outfit);
+      const currOutfitList = [...outfitList]; // faster than looking in localStorage?
+      // This is where I want to see if the item is already in the outfit list
+      // currOutfitList is an array of objects
+      let bool = true;
+      for (let i = 0; i < currOutfitList.length; i++) {
+        const outfit = currOutfitList[i];
+        // If the product ids are the same AND the style ids are the same,
+        // this is the same product and cannot be added to outfit list
+        if (outfit.id === productStyle.product_id
+          && outfit.style.style_id === productStyle.results[curStyleId].style_id) {
+          // this is the same product and I will not add it to the outfit list
+          console.log('Same product and style cannot be added to outfit');
+          bool = false;
+          break;
+        }
+      }
+      // If the product/style wasn't found in the list, add it to the outfit list
+      if (bool) {
+        // If the product isn't already in the outfit list, add it to it
+        let res = {
+          id: productStyle.product_id,
+          info: {category_name: product.category, product_name: product.name},
+          review: Number(averageStarRating),
+          style: productStyle.results[curStyleId]
+        };
+        currOutfitList.push(res);
+        let newOutfitList = JSON.stringify(currOutfitList);
+        localStorage.setItem('outfit', newOutfitList);
+        setOutfitList((oldArray) => [...oldArray, res]);
+      }
+    }
+  }
+
+  // Remove specific entry from outfit
+  function removeItemFromOutfit(index) {
+    // we are going to be returned the id in the array (hopefully),
+    // and use that to splice it from outfitList and will update localStorage
+    let temp = [...outfitList];
+    temp.splice(index, 1);
+    setOutfitList(temp);
+    let newOutfitList = JSON.stringify(temp);
+    localStorage.setItem('outfit', newOutfitList);
+  }
   useEffect(() => {
     updateRelatedIDs(product.id);
     generateInitialOutfitList();
@@ -178,6 +236,8 @@ function Related({
         outfitList={outfitList}
         outfitActiveIndex={outfitActiveIndex}
         setOutfitActiveIndex={setOutfitActiveIndex}
+        handleAddToOutfit={handleAddToOutfit}
+        removeItemFromOutfit={removeItemFromOutfit}
       />
     </RelatedAndOutfitContainer>
   );

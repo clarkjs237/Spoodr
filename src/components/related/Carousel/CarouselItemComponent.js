@@ -16,7 +16,7 @@ const CarouselItem = styled.div`
   cursor: pointer;
   border: 1.5px solid #32292F;
 
-  // Might not need this line below
+  // For whatever reason, I need this line for the outfit list formatting
   transform: ${(props) => (props.outfit ? 'translateY(-9.25rem)' : 'translateY(0rem)')}
 `;
 
@@ -61,7 +61,16 @@ export default function CarouselItemComponent({
   info,     // general product info (object with at least category_name and product_name)
   review,   // an average rating (number) - exclude review from this bc it could be zero
   outfit,   // boolean, true if this belongs to the outfit list, false if it's related item
+  index,      // specific index in the list, in string I believe
+  removeItemFromOutfit, // this is for Outfit only. Will return specific index
 }) {
+
+  function actionButtonClick(e) {
+    e.stopPropagation(); // need this in order to not activate things below
+    removeItemFromOutfit(index);
+  }
+
+
   if (defStyle && info && review && id && (review !== undefined)) {
     return (
       <CarouselItem outfit={outfit}>
@@ -76,7 +85,7 @@ export default function CarouselItemComponent({
             productOrginalPrice={defStyle.original_price}
             productSalePrice={defStyle.sale_price}
           />
-          <ActionButton outfit={outfit} />
+          <ActionButton outfit={outfit} onClick={actionButtonClick}/>
         </InsideCarousel>
       </CarouselItem>
     );
