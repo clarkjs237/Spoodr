@@ -88,8 +88,8 @@ export default function CarouselItemComponent({
       <CarouselItem outfit={outfit} onClick={individualCardClicked}>
         <InsideCarousel>
           <Photo src={defStyle.photos['0'].thumbnail_url}/>
-          {info.product_category}<br/>
-          {info.product_name}<br/>
+          {info.category}<br />
+          {info.name}<br />
           <div>
             <StarRating averageStarRating={review} />
           </div>

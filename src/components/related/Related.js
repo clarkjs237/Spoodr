@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CarouselComponent from './Carousel/CarouselComponent';
+import Modal from './Modal/Modal';
 import { URL } from '../App';
 import styled from 'styled-components';
 
@@ -11,6 +12,9 @@ const Titles = styled.h1`
 const RelatedAndOutfitContainer = styled.div`
   margin-bottom: 2rem;
   margin-top: 2rem;
+
+  // Added this line, not sure if I'll need to keep it or not
+  position: relative;
 `;
 
 function Related({
@@ -30,6 +34,11 @@ function Related({
   const [outfitList, setOutfitList] = useState([]);
   const [relatedActiveIndex, setRelatedActiveIndex] = useState(0);
   const [outfitActiveIndex, setOutfitActiveIndex] = useState(0);
+
+  // For the popup modal view
+  const [modalCardIndex, setModalCardIndex] = useState(0); // to manage the index selected
+  const [isOpen, setIsOpen] = useState(false); // this is to manage if it is open or not
+  const ref = useRef();
 
   // Will be used to find the default style based on a given productID
   function updateDefaultStyle(productID) {
@@ -75,11 +84,9 @@ function Related({
       .then((response) => response.json())
       .then((result) => {
         // Getting the product name and the category
-        let newId = {
-          [result.id]: {
-            product_name: result.name,
-            product_category: result.category,
-          },
+        // UPDATE: Just get the whole product_info object
+        const newId = {
+          [result.id]: result,
         };
         // Saving it to object with the product id as the key
         setNameAndCat((oldObject) => ({
@@ -156,7 +163,7 @@ function Related({
     if (!localStorage.outfit) {
       let res = {
         id: productStyle.product_id,
-        info: {category_name: product.category, product_name: product.name},
+        info: {category: product.category, name: product.name},
         review: Number(averageStarRating),
         style: productStyle.results[curStyleId]
       };
@@ -185,7 +192,7 @@ function Related({
         // If the product isn't already in the outfit list, add it to it
         let res = {
           id: productStyle.product_id,
-          info: {category_name: product.category, product_name: product.name},
+          info: {category: product.category, name: product.name},
           review: Number(averageStarRating),
           style: productStyle.results[curStyleId]
         };
@@ -213,14 +220,25 @@ function Related({
   function comparisonModal(index) {
     // This will be triggered when the star action button is clicked for
     // the individual related list item.
-    console.log('Im in comparisonModal ' + index);
+    if (!isOpen) {
+      console.log(`Compare Related Item at index: ${index} to Overview Product`);
+      setModalCardIndex(index);
+      // Set the value so it is now open
+      // This works!
+      setIsOpen(true);
+    } else {
+      console.log(`Compare Another Related Item at index: ${index} to Overview Product`);
+      // There is already a modal open and another one has been clicked on, meaning
+      // I should close this and open the next one
+      // setIsOpen(false);
+      setModalCardIndex(index);
+    }
   }
-
 
   useEffect(() => {
     updateRelatedIDs(product.id);
     generateInitialOutfitList();
-  }, [product]);
+  }, []); // might need product here
 
   // This is where we will make use of RelatedList
   // Carousel = RelatedList
@@ -229,7 +247,7 @@ function Related({
     return <div>Empty</div>;
   }
   return (
-    <RelatedAndOutfitContainer>
+    <RelatedAndOutfitContainer ref={ref}>
       <Titles>Related Items:</Titles>
       <CarouselComponent
         RelatedListBool={true}
@@ -253,6 +271,13 @@ function Related({
         removeItemFromOutfit={removeItemFromOutfit}
         handleItemClick={handleItemClick}
       />
+      <div id="modal-root">
+        <Modal
+          modalCardIndex={modalCardIndex}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      </div>
     </RelatedAndOutfitContainer>
   );
 }
