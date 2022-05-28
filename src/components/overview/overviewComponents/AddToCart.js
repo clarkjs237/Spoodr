@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
+import { URL } from '../../App';
+import axios from 'axios';
 
 const StyledAddToCartForm = styled.form`
 
@@ -24,14 +26,38 @@ export default function AddToCart({ curStyleQuantAndSizes }){
     return {value: size, label: size}
   });
   const noStock = curStyleQuantAndSizes[0].size === 'Sold Out';
-  let refs;
+  let refs, cartPost;
+
+  if(selectedSize && !noStock){
+    let { quantity, sku } = curStyleQuantAndSizes.filter(({ size }) => size === selectedSize.value)[0];
+    quantOptions = [...Array(quantity)].map((k, i) => {
+      return {value: i + 1, label: i + 1}
+    });
+    cartPost = {sku_id: parseInt(sku)}
+  }
+
+  function postToCart() {
+    return axios.post(`${URL}/cart`, cartPost, {
+      headers: {
+        'Authorization': process.env.GITTOKEN,
+        'content-type': 'application/json'
+      }
+    })
+  }
 
   function onSubmitHandler(e) {
+    e.preventDefault();
     if(!selectedSize) {
       refs.focus();
       setMenuOpen(true);
+    } else {
+      setSelectedQuant('');
+      setSelectedSize('');
+      console.log(cartPost, selectedQuant.value);
+      Promise.all([...Array(selectedQuant.value)].map((element) => postToCart()))
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
     }
-    e.preventDefault();
   }
 
   function onQuantChangeHandler(options) {
@@ -47,14 +73,6 @@ export default function AddToCart({ curStyleQuantAndSizes }){
     if(action === 'menu-close') {
       setMenuOpen(false)
     }
-  }
-
-
-  if(selectedSize && !noStock){
-    const maxStyleQuantity = curStyleQuantAndSizes.filter(({ size }) => size === selectedSize.value)[0].quantity;
-    quantOptions = [...Array(maxStyleQuantity)].map((k, i) => {
-      return {value: i + 1, label: i + 1}
-    });
   }
 
   let submitButton = <StyledSubmitButton type="submit" value="Add To Bag"/>;

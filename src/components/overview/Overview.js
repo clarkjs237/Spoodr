@@ -50,6 +50,7 @@ export default function Overview({
           if(curSkus[key].quantity > 15){
             curSkus[key].quantity = 15;
           }
+          curSkus[key].sku = key;
           return curSkus[key];
         })
         .filter(({ quantity }) => quantity > 0);
