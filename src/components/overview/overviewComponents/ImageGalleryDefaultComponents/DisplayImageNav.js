@@ -33,8 +33,8 @@ export default function DisplayImageNav({
     }
   }
 
-  if(maxDisplayIndex === 0) {
-    return <div></div>
+  if (maxDisplayIndex === 0) {
+    return <div />;
   }
 
   if (curDisplayIndex === 0) {

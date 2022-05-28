@@ -28,7 +28,6 @@ export default function Overview({
   curStyleId,
   setCurStyleId,
 }) {
-
   const [expandedView, setExpandedView] = useState(false);
   const [curDisplayIndex, setCurDisplayIndex] = useState(0);
   let curDisplayPhotos;
@@ -40,46 +39,43 @@ export default function Overview({
   let socialUrl;
 
   if (product.category && productStyle.product_id) {
-    if(productStyle.results.length) {
+    if (productStyle.results.length) {
       productOrginalPrice = productStyle.results[curStyleId].original_price;
       productSalePrice = productStyle.results[curStyleId].sale_price;
       curStyleName = productStyle.results[curStyleId].name;
-      let curSkus = productStyle.results[curStyleId].skus;
+      const curSkus = productStyle.results[curStyleId].skus;
       curStyleQuantAndSizes = Object.keys(curSkus)
         .map((key) => {
-          if(curSkus[key].quantity > 15){
+          if (curSkus[key].quantity > 15) {
             curSkus[key].quantity = 15;
           }
           curSkus[key].sku = key;
           return curSkus[key];
         })
         .filter(({ quantity }) => quantity > 0);
-      if(!curStyleQuantAndSizes.length) {
-        curStyleQuantAndSizes = [{size: 'Sold Out', quantity: 0}];
+      if (!curStyleQuantAndSizes.length) {
+        curStyleQuantAndSizes = [{ size: 'Sold Out', quantity: 0 }];
       }
     } else {
       productOrginalPrice = product.default_price;
       productSalePrice = null;
       curStyleName = '';
-      curStyleQuantAndSizes = [{size: 'Sold Out', quantity: 0}];
+      curStyleQuantAndSizes = [{ size: 'Sold Out', quantity: 0 }];
     }
 
-    if(productStyle.results[curStyleId]) {
+    if (productStyle.results[curStyleId]) {
       socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
-      styleThumbnails = productStyle.results.map((style, i) => {
-        return { id: i, thumbnail: style.photos[0].thumbnail_url };
-      });
+      styleThumbnails = productStyle.results.map((style, i) => ({ id: i, thumbnail: style.photos[0].thumbnail_url }));
       curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo, i) => {
         photo.id = i;
         return photo;
       });
     } else {
-      const missingImg = "https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format";
+      const missingImg = 'https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format';
       socialUrl = missingImg;
-      styleThumbnails = [{id: 0, url: missingImg, thumbnail_url: missingImg}];
-      curDisplayPhotos = [{id: 0, url: missingImg, thumbnail_url: missingImg}];
+      styleThumbnails = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
+      curDisplayPhotos = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
     }
-
 
     if (expandedView) {
       return (
