@@ -1,14 +1,24 @@
 /*---- R&R styles ----*/
-.ratings-and-reviews, .rating-summary {
+.ratings-and-reviews{
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.ratings{
+  width: 400px
+}
+
+.reviews{
+  width: auto;
+}
+
+.rating-summary {
   display: flex;
 }
 
 .average-rating {
   font-size: 3rem;
-}
-
-.star-breakdown {
-  width: 100%
 }
 
 meter::-webkit-meter-bar {
@@ -21,6 +31,12 @@ meter::-webkit-meter-bar {
   width: 200px;
   display: flex;
   justify-content: space-between;
+}
+
+/* -------- Reviews --------- */
+
+.sort-form {
+  display: flex;
 }
 
 .review-photo {
