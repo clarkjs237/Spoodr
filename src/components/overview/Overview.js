@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ProductInfo from './overviewComponents/ProductInfo';
 import SocialMedia from './overviewComponents/SocialMedia';
@@ -44,9 +44,14 @@ export default function Overview({
       productOrginalPrice = productStyle.results[curStyleId].original_price;
       productSalePrice = productStyle.results[curStyleId].sale_price;
       curStyleName = productStyle.results[curStyleId].name;
-      const curSkus = productStyle.results[curStyleId].skus;
+      let curSkus = productStyle.results[curStyleId].skus;
       curStyleQuantAndSizes = Object.keys(curSkus)
-        .map((key) => curSkus[key])
+        .map((key) => {
+          if(curSkus[key].quantity > 15){
+            curSkus[key].quantity = 15;
+          }
+          return curSkus[key];
+        })
         .filter(({ quantity }) => quantity > 0);
       if(!curStyleQuantAndSizes.length) {
         curStyleQuantAndSizes = [{size: 'Sold Out', quantity: 0}];
