@@ -151,7 +151,9 @@ export default function CarouselComponent({
   relatedActiveIndex,
   setRelatedActiveIndex,
   outfitActiveIndex,
-  setOutfitActiveIndex
+  setOutfitActiveIndex,
+  // Function for both
+  handleItemClick
 }) {
   // NEED TO STORE ACTIVE INDEX IN PARENT COMPONENT
   // -----------------------------------------------------------------------
@@ -184,6 +186,9 @@ export default function CarouselComponent({
                 review={Object.values(relReviews)[index]}
                 outfit={false}
                 index={index}
+                // add individual card functionality here
+                // this is where the modal functionality will go
+                handleItemClick={handleItemClick}
               />
             ))}
           </Inner>
@@ -250,6 +255,7 @@ export default function CarouselComponent({
                 index={index}
                 // add individual card functionality here
                 removeItemFromOutfit={removeItemFromOutfit}
+                handleItemClick={handleItemClick}
               />
             ))}
           </Inner>

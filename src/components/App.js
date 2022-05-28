@@ -74,9 +74,8 @@ function App() {
   // Sully's event handler function
   function handleItemClick(id) {
     // This will change the state of product by using setProduct
-    console.log('Related Product ID : ' + id);
-    // e.preventDefault();
-    // console.log(e.target.id)
+    console.log('Page Reload For Product ID : ' + id);
+
     // setProduct({ id: id });
   }
   useEffect(() => {
@@ -97,7 +96,7 @@ function App() {
       />
       <Related
         product={product}
-        handleRelatedItemClick={handleItemClick}
+        handleItemClick={handleItemClick}
         productStyle={productStyle}
         curStyleId={curStyleId}
         averageStarRating={averageStarRating}

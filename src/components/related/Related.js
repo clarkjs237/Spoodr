@@ -228,6 +228,7 @@ function Related({
         relReviews={reviews}
         relatedActiveIndex={relatedActiveIndex}
         setRelatedActiveIndex={setRelatedActiveIndex}
+        handleItemClick={handleItemClick}
       />
       <Titles>My Outfit:</Titles>
       <CarouselComponent
@@ -238,6 +239,7 @@ function Related({
         setOutfitActiveIndex={setOutfitActiveIndex}
         handleAddToOutfit={handleAddToOutfit}
         removeItemFromOutfit={removeItemFromOutfit}
+        handleItemClick={handleItemClick}
       />
     </RelatedAndOutfitContainer>
   );

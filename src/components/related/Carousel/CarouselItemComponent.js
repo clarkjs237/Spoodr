@@ -63,7 +63,14 @@ export default function CarouselItemComponent({
   outfit,   // boolean, true if this belongs to the outfit list, false if it's related item
   index,      // specific index in the list, in string I believe
   removeItemFromOutfit, // this is for Outfit only. Will return specific index
+  handleItemClick, // this is when a card is clicked on. should reset state to this product_id/style
 }) {
+
+  function individualCardClicked(e) {
+    e.preventDefault();
+    handleItemClick(id);
+  }
+
 
   function actionButtonClick(e) {
     e.stopPropagation(); // need this in order to not activate things below
@@ -73,7 +80,7 @@ export default function CarouselItemComponent({
 
   if (defStyle && info && review && id && (review !== undefined)) {
     return (
-      <CarouselItem outfit={outfit}>
+      <CarouselItem outfit={outfit} onClick={individualCardClicked}>
         <InsideCarousel>
           <Photo src={defStyle.photos['0'].thumbnail_url}/>
           {info.product_category}<br/>
