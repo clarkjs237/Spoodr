@@ -125,15 +125,12 @@ function OutfitList({
   const nextCard = () => {
     // if the activeIndex is the last in the array, stay at end
     // else, increase by 1 (move right)
-    // console.log('right');
     setActiveIndex(activeIndex === length ? activeIndex : activeIndex + 1);
-    // console.log(activeIndex);
   };
 
   const prevCard = () => {
     // if the index is 0, stay at 0
     // else, decrease the index by 1
-    // console.log('left');
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
   };
 
