@@ -13,6 +13,11 @@ const ProductOverview = styled.div`
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 `;
 
+const InfoSelectorCartDiv = styled.div`
+  display: inline-block;
+  margin: 1.125rem;
+`;
+
 const ProductSlogan = styled.h4`
 `;
 
@@ -96,24 +101,26 @@ export default function Overview({
           setCurDisplayIndex={setCurDisplayIndex}
           setExpandedView={setExpandedView}
         />
-        <ProductInfo
-          totalReviews={totalReviews}
-          averageRating={averageRating}
-          averageStarRating={averageStarRating}
-          productCategory={product.category.toUpperCase()}
-          productTitle={product.name}
-          productOrginalPrice={productOrginalPrice}
-          productSalePrice={productSalePrice}
-        />
-        <StyleSelector
-          curStyleId={curStyleId}
-          setCurStyleId={setCurStyleId}
-          curStyleName={curStyleName}
-          styleThumbnails={styleThumbnails}
-        />
-        <AddToCart
-          curStyleQuantAndSizes={curStyleQuantAndSizes}
-        />
+        <InfoSelectorCartDiv>
+          <ProductInfo
+            totalReviews={totalReviews}
+            averageRating={averageRating}
+            averageStarRating={averageStarRating}
+            productCategory={product.category.toUpperCase()}
+            productTitle={product.name}
+            productOrginalPrice={productOrginalPrice}
+            productSalePrice={productSalePrice}
+          />
+          <StyleSelector
+            curStyleId={curStyleId}
+            setCurStyleId={setCurStyleId}
+            curStyleName={curStyleName}
+            styleThumbnails={styleThumbnails}
+          />
+          <AddToCart
+            curStyleQuantAndSizes={curStyleQuantAndSizes}
+          />
+        </InfoSelectorCartDiv>
         <SocialMedia url={socialUrl} slogan={product.slogan} />
         <ProductSlogan>{product.slogan}</ProductSlogan>
         <ProductDescription>{product.description}</ProductDescription>

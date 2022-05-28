@@ -8,10 +8,10 @@ const StyleImage = styled.img`
   border-width: .1rem;
   border-color: #0B2027;
   cursor: pointer;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0;
-  margin: .01rem;
+  margin: .25rem;
   &:hover {
     border-color: #90D7FF;
   }
@@ -19,14 +19,16 @@ const StyleImage = styled.img`
 
 const Check = styled.label`
   position: absolute;
-  border-radius: 40%;
+  border-radius: 50%;
   border: solid;
   border-width: .1rem;
   color: #32292F;
   background-color: #90D7FF;
   font-size: .5rem;
   font-weight: bold;
-  margin: 0 -.5rem;
+  margin: .2rem -1rem;
+  width: .5rem;
+  height: auto;
 `;
 
 export default function StyleSelectorImage({

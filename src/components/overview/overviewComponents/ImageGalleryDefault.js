@@ -25,6 +25,7 @@ const DisplayWrapper = styled.div`
   background-color: #D3AB9E;
   width: 37.5rem;
   position: relative;
+  display: inline-block;
 `;
 
 const ThumbnailImageWrapper = styled.div`

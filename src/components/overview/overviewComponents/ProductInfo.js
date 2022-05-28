@@ -23,7 +23,7 @@ export default function ProductInfo({
   averageStarRating,
 }) {
   return (
-    <div>
+    <>
       <StarRatingReview
         totalReviews={totalReviews}
         averageRating={averageRating}
@@ -35,7 +35,7 @@ export default function ProductInfo({
         productOrginalPrice={productOrginalPrice}
         productSalePrice={productSalePrice}
       />
-    </div>
+    </>
   );
 }
 
