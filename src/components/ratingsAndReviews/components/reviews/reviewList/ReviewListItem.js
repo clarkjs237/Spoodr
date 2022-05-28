@@ -88,8 +88,8 @@ function ReviewListItem(props) {
       <div className="review-item-footer">
         <div className="review-item-helpful">
           Helpful?
-          {!helpfulness.clicked ?
-            <button className="underline-button" type="submit" onClick={handleHelfulnessClick}>Yes</button>
+          { !helpfulness.clicked
+            ? <button className="underline-button" type="submit" onClick={handleHelfulnessClick}>Yes</button>
             : <button className="underline-button" type="submit">Yes</button>
           }
           (
