@@ -137,7 +137,9 @@ function Related({
       });
   }
 
-  // Functionality for MyOutfit
+  // --------------------------------------------------
+  // MY OUTFIT FUNCTIONS
+  // Generate the initial list by setting state value for outfitList equal to localStorage.outfit
   function generateInitialOutfitList() {
     // I want to set the initial state of outfit using localStorage
     if (localStorage.outfit) {
@@ -147,7 +149,6 @@ function Related({
       setOutfitList(arr);
     }
   }
-
   // Add currently viewed product/style to outfit
   function handleAddToOutfit() {
     // This will be when the user clicks add to outfit
@@ -195,7 +196,6 @@ function Related({
       }
     }
   }
-
   // Remove specific entry from outfit
   function removeItemFromOutfit(index) {
     // we are going to be returned the id in the array (hopefully),
@@ -206,6 +206,17 @@ function Related({
     let newOutfitList = JSON.stringify(temp);
     localStorage.setItem('outfit', newOutfitList);
   }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // RELATED LIST FUNCTIONS
+  function comparisonModal(index) {
+    // This will be triggered when the star action button is clicked for
+    // the individual related list item.
+    console.log('Im in comparisonModal ' + index);
+  }
+
+
   useEffect(() => {
     updateRelatedIDs(product.id);
     generateInitialOutfitList();
@@ -228,6 +239,7 @@ function Related({
         relReviews={reviews}
         relatedActiveIndex={relatedActiveIndex}
         setRelatedActiveIndex={setRelatedActiveIndex}
+        comparisonModal={comparisonModal}
         handleItemClick={handleItemClick}
       />
       <Titles>My Outfit:</Titles>

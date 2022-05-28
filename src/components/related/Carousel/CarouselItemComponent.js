@@ -48,7 +48,7 @@ const ActionButton = styled.div`
       `;
     }
     return css`
-      content: "\\2606";
+      content: "\\2605";
     `;
   }}
   }
@@ -63,18 +63,23 @@ export default function CarouselItemComponent({
   outfit,   // boolean, true if this belongs to the outfit list, false if it's related item
   index,      // specific index in the list, in string I believe
   removeItemFromOutfit, // this is for Outfit only. Will return specific index
+  comparisonModal, // this is for RelatedList only. Will return a specific index
   handleItemClick, // this is when a card is clicked on. should reset state to this product_id/style
 }) {
-
   function individualCardClicked(e) {
     e.preventDefault();
     handleItemClick(id);
   }
 
-
   function actionButtonClick(e) {
     e.stopPropagation(); // need this in order to not activate things below
-    removeItemFromOutfit(index);
+    // If this action is coming from the outfit, do removeItemFromOutfit
+    // Else, do comparisonModal for relatedList
+    if (outfit) {
+      removeItemFromOutfit(index);
+    } else {
+      comparisonModal(index);
+    }
   }
 
 

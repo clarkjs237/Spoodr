@@ -143,6 +143,7 @@ export default function CarouselComponent({
   relStyles,
   relInfos,
   relReviews,
+  comparisonModal, // this is the function that will handle displaying a modal popping up
   // Below is for OutfitList
   outfitList, // this will be just one array, so I don't think I need any of the things above
   handleAddToOutfit, // this is the function for adding to the OutfitList
@@ -188,6 +189,7 @@ export default function CarouselComponent({
                 index={index}
                 // add individual card functionality here
                 // this is where the modal functionality will go
+                comparisonModal={comparisonModal}
                 handleItemClick={handleItemClick}
               />
             ))}
