@@ -36,7 +36,7 @@ function Related({
   const [outfitActiveIndex, setOutfitActiveIndex] = useState(0);
 
   // For the popup modal view
-  const [modalCardIndex, setModalCardIndex] = useState(0); // to manage the index selected
+  const [modalCardIndex, setModalCardIndex] = useState(null); // to manage the index selected
   const [isOpen, setIsOpen] = useState(false); // this is to manage if it is open or not
   const ref = useRef();
 
@@ -226,6 +226,10 @@ function Related({
       // Set the value so it is now open
       // This works!
       setIsOpen(true);
+    } else if (isOpen && index === modalCardIndex) {
+      // In the event that the same star button was clicked, we want to close the window
+      setIsOpen(false);
+      setModalCardIndex(null);
     } else {
       console.log(`Compare Another Related Item at index: ${index} to Overview Product`);
       // There is already a modal open and another one has been clicked on, meaning
@@ -274,8 +278,17 @@ function Related({
       <div id="modal-root">
         <Modal
           modalCardIndex={modalCardIndex}
+          setModalCardIndex={setModalCardIndex}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
+          // From current overview product and style
+          overviewProduct={product} // general product info
+          overviewStyle={productStyle.results[curStyleId]} // specific style info
+          overviewRating={averageStarRating} // average star rating from overview product
+          // From the selected card in related items list
+          relatedProduct={Object.values(nameAndCat)[modalCardIndex]}
+          relatedStyle={Object.values(relatedIDs)[modalCardIndex]}
+          relatedRating={Object.values(reviews)[modalCardIndex]}
         />
       </div>
     </RelatedAndOutfitContainer>

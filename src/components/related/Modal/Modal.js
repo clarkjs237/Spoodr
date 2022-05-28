@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
+import ModalView from './ModalView';
 
 const ModalContainer = styled.div`
   position: relative;
-`;
-
-const ModalView = styled.div`
-  height: 16rem;
-  width: 16rem;
-  position: absolute;
-  background-color: red;
-  border: 2px black solid;
-  transition: transform 0.5s ease-out;
-  top: -62rem;
-  // left: ${(props) => (props.index * 8.5) + 8.5}rem;
-  left: 24rem;
 `;
 
 const CloseModalButton = styled.span`
@@ -49,9 +38,19 @@ function usePortal(id) {
 }
 
 export default function Modal({
+  // Functionality for keeping track of which card is selected
   modalCardIndex,
+  setModalCardIndex,
   isOpen,
   setIsOpen,
+  // overview product information
+  overviewProduct,
+  overviewStyle,
+  overviewRating,
+  // related product information
+  relatedProduct,
+  relatedStyle,
+  relatedRating,
 }) {
   // Uses the helper function to find the place in the DOM to put the window
   const target = usePortal('modal-root');
@@ -60,6 +59,7 @@ export default function Modal({
   function closeModal(e) {
     e.stopPropagation();
     setIsOpen(false);
+    setModalCardIndex(null);
   }
   // Actually places the modal into the DOM
   function placeModal() {
@@ -67,10 +67,17 @@ export default function Modal({
       return (
         <ModalContainer>
           <ModalView
-            index={modalCardIndex}
-          >
-            I'm a div!
-          </ModalView>
+            // Might use this for styled later, not essential now
+            modalCardIndex={modalCardIndex}
+            // Overview
+            overviewProduct={overviewProduct}
+            overviewStyle={overviewStyle}
+            overviewRating={overviewRating}
+            // Related Card
+            relatedProduct={relatedProduct}
+            relatedStyle={relatedStyle}
+            relatedRating={relatedRating}
+          />
           <CloseModalButton
             onClick={closeModal}
           />
