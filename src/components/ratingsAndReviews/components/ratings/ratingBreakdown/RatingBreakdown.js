@@ -2,7 +2,7 @@ import React from 'react';
 import RatingSummary from './components/RatingSummary';
 import Recommendations from './components/Recommendations';
 import StarBreakdown from './components/StarBreakdown';
-import Characteristics from './components/Characteristics';
+import Characteristics from './components/characteristics/Characteristics';
 
 function RatingBreakdown(props) {
   return (

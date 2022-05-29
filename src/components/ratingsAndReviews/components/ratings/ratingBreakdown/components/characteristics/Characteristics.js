@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CharacteristicsItem from './characteristics/CharacteristicsItem'
+import CharacteristicsItem from './CharacteristicsItem'
 
 function Characteristics(props) {
   const [characteristics, setCharacteristics] = useState({});
