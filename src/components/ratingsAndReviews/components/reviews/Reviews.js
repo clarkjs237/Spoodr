@@ -1,15 +1,27 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import ReviewsList from './reviewList/ReviewsList';
 import AddReviewForm from './addReview/AddReviewForm'
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
+
+const Modal = styled.div`
+  background-color: bisque;
+  position: fixed;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+`;
 
 function Reviews(props) {
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(2);
   const [sort, setSort] = useState('relevant');
+  const [toggleModal, setToggleModal] = useState(false);
 
   function getReviews() {
     fetch(
@@ -24,7 +36,8 @@ function Reviews(props) {
       .then((result) => setReviews(result.results));
   }
 
-  function handleMoreReviews() {
+  function handleMoreReviews(event) {
+    event.preventDefault();
     setCount(count + 2);
     getReviews();
   }
@@ -39,6 +52,10 @@ function Reviews(props) {
     if (option === 'relevant') {
       setSort('relevant');
     }
+  }
+
+  function handleToggleModalChange() {
+    setToggleModal(!toggleModal);
   }
 
   useEffect(() => {
@@ -57,10 +74,15 @@ function Reviews(props) {
           reviews={reviews}
         />
       </div>
-      { reviews.length === count && reviews.length > 0 &&
-        <button type="submit" onClick={handleMoreReviews}>More Reviews</button>
-      }
-      <AddReviewForm />
+      { reviews.length === count && reviews.length > 0
+      && <button type="submit" onClick={handleMoreReviews}>More Reviews</button> }
+      <button type="button" onClick={handleToggleModalChange}>Add a Review</button>
+      { toggleModal
+      && (
+      <Modal>
+        <AddReviewForm handleToggleModalChange={handleToggleModalChange}/>
+      </Modal>
+      )}
     </div>
   );
 }

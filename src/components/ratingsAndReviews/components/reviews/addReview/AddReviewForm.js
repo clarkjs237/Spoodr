@@ -50,6 +50,7 @@ function AddReviewForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <button type="button" onClick={props.handleToggleModalChange}>close</button>
       <div>
         Rate this product<br/>
         <label>
