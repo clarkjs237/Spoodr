@@ -17,6 +17,13 @@ const RelatedAndOutfitContainer = styled.div`
   position: relative;
 `;
 
+export const TextH3 = styled.h3`
+  font-size: 1rem;
+  font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+`;
+
+export const defFont = 'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"';
+
 function Related({
   product,
   handleItemClick,

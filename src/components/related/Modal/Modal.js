@@ -1,24 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
-import ModalView from './ModalView';
+import TableView from './TableView';
 
 const ModalContainer = styled.div`
   position: relative;
-`;
-
-const CloseModalButton = styled.span`
-  position: absolute;
-  top: -61.5rem;
-  left: 38rem;
-  font-size: 1.8rem;
-  &:before {
-    content: "\\2716";
-  }
-  cursor: pointer;
-  &:hover {
-    color: #90D7FF;
-  }
 `;
 
 // Helper function to find place to insert this into the DOM
@@ -66,7 +52,7 @@ export default function Modal({
     if (isOpen) {
       return (
         <ModalContainer>
-          <ModalView
+          <TableView
             // Might use this for styled later, not essential now
             modalCardIndex={modalCardIndex}
             // Overview
@@ -77,9 +63,8 @@ export default function Modal({
             relatedProduct={relatedProduct}
             relatedStyle={relatedStyle}
             relatedRating={relatedRating}
-          />
-          <CloseModalButton
-            onClick={closeModal}
+            // click handler for closing the modal
+            closeModal={closeModal}
           />
         </ModalContainer>
       );
