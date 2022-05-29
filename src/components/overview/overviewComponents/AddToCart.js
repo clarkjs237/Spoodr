@@ -22,6 +22,9 @@ const StyledSubmitButton = styled.input`
   }
 `;
 
+const StyledForm = styled.form`
+`;
+
 const selectStyles = {
   option: (styles, { isSelected, selectProps: { width } }) => ({
     ...styles,
@@ -34,7 +37,7 @@ const selectStyles = {
     ...styles, backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width, color: '#32292F', '&:hover': {borderColor: '#D3AB9E', color: '#D3AB9E' }
   }),
   dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#D3AB9E' }})),
-  indicatorSeparator: ((styles) => ({...styles, backgroundColor: '#32292F'})),
+  indicatorSeparator: ((styles) => ({...styles, backgroundColor: 'inherit'})),
   singleValue: (styles) => ({ ...styles, color: '#0B2027' }),
   container: (styles, { selectProps: { width } }) => ({
     ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0',
@@ -100,7 +103,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   let submitButton = (
     <StyledSubmitButton
       type="submit"
-      value="Add To Bag                              +"
+      value="ADD TO BAG                          +"
     />
   );
 
@@ -114,7 +117,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   }
 
   return (
-    <form onSubmit={onSubmitHandler}>
+    <StyledForm onSubmit={onSubmitHandler}>
       <Select
         name="Sizes"
         options={sizeOptions}
@@ -141,6 +144,6 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
       <div>
         {submitButton}
       </div>
-    </form>
+    </StyledForm>
   );
 }
