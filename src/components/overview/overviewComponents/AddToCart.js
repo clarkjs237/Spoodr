@@ -21,22 +21,24 @@ const StyledSubmitButton = styled.input`
 `;
 
 const selectStyles = {
-  option: (styles, {  isSelected, selectProps: { width } }) => {
-    return {
-      ...styles,
-      backgroundColor: '#D3AB9E',
-      color: isSelected ? '#90D7FF' : '#0B2027',
-      border: '.01rem dotted #32292F',
-      width: width,
-    }
-  },
-  control: (styles, { selectProps: { width }}) => ({...styles, color: '#90D7FF', backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width: width  }),
-  singleValue: (styles) => ({...styles, color: '#0B2027'}),
-  container: (styles, { selectProps: { width } }) => ({...styles,width: width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0'}),
-  dropdownIndicator: ((styles)=>({...styles, color: '#32292F'})),
-  indicatorSeparator: ((styles)=>({...styles, backgroundColor: '#32292F'})),
-  placeholder: ((styles, { selectProps: { placeholderColor } })=>({...styles, color: placeholderColor || '#D3AB9E'}))
-}
+  option: (styles, { isSelected, selectProps: { width } }) => ({
+    ...styles,
+    backgroundColor: '#D3AB9E',
+    color: isSelected ? '#90D7FF' : '#0B2027',
+    border: '.01rem dotted #32292F',
+    width,
+  }),
+  control: (styles, { selectProps: { width } }) => ({
+    ...styles, color: '#90D7FF', backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width,
+  }),
+  singleValue: (styles) => ({ ...styles, color: '#0B2027' }),
+  container: (styles, { selectProps: { width } }) => ({
+    ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0',
+  }),
+  dropdownIndicator: ((styles) => ({ ...styles, color: '#32292F' })),
+  indicatorSeparator: ((styles) => ({ ...styles, backgroundColor: '#32292F' })),
+  placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#D3AB9E' })),
+};
 
 export default function AddToCart({ curStyleQuantAndSizes }) {
   const [selectedSize, setSelectedSize] = useState();
@@ -93,10 +95,12 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
     }
   }
 
-  let submitButton = <StyledSubmitButton
-    type="submit"
-    value="Add To Bag                              +"
-  />;
+  let submitButton = (
+    <StyledSubmitButton
+      type="submit"
+      value="Add To Bag                              +"
+    />
+  );
 
   if (noStock) {
     submitButton = <></>;
@@ -129,7 +133,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         placeholder="-"
         value={selectedQuant}
         styles={selectStyles}
-        width={'5rem'}
+        width="5rem"
       />
       <div>
         {submitButton}
