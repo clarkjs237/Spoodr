@@ -9,19 +9,25 @@ import AddToCart from './overviewComponents/AddToCart';
 
 const ProductOverview = styled.div`
   color: #0B2027;
-  background-color: #EAC9C1;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  display: inline-block;
 `;
 
 const InfoSelectorCartDiv = styled.div`
   display: inline-block;
-  margin: 1.125rem;
+  margin-left: .5rem;
+  margin-top: .5rem;
+  font-size: 1.125rem;
+  vertical-align: top;
 `;
 
 const ProductSlogan = styled.h4`
+  margin: .5rem;
 `;
 
 const ProductDescription = styled.p`
+margin: .5rem;
+width: 40rem;
 `;
 
 export default function Overview({

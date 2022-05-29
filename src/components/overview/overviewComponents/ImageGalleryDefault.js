@@ -18,19 +18,21 @@ const DisplayImage = styled.img`
 `;
 
 const DisplayWrapper = styled.div`
-  height: 25rem;
   border: solid;
   border-width: .1rem;
   border-color: #32292F;
   background-color: #D3AB9E;
-  width: 37.5rem;
+  height: 30rem;
+  width: 40rem;
   position: relative;
+  margin: .5rem 0 .5rem .5rem;
+  align-items: center;
   display: inline-block;
 `;
 
 const ThumbnailImageWrapper = styled.div`
   position: absolute;
-  top: .25rem;
+  top: .5rem;
   left: .5rem;
 `;
 

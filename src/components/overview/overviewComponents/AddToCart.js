@@ -5,16 +5,38 @@ import axios from 'axios';
 import { URL } from '../../App';
 
 const StyledAddToCartForm = styled.form`
-
-`;
-
-const StyledSelectField = styled.select`
-
 `;
 
 const StyledSubmitButton = styled.input`
-
+  font-size: 1.125rem;
+  font-color: #0B2027;
+  width: 17rem;
+  background-color: #90D7FF;
+  padding: .5rem;
+  border: solid;
+  border-color: #32292F;
+  border-width: .1rem;
+  border-radius: .25rem;
+  text-align: left;
 `;
+
+const selectStyles = {
+  option: (styles, {  isSelected, selectProps: { width } }) => {
+    return {
+      ...styles,
+      backgroundColor: '#D3AB9E',
+      color: isSelected ? '#90D7FF' : '#0B2027',
+      border: '.01rem dotted #32292F',
+      width: width,
+    }
+  },
+  control: (styles, { selectProps: { width }}) => ({...styles, color: '#90D7FF', backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width: width  }),
+  singleValue: (styles) => ({...styles, color: '#0B2027'}),
+  container: (styles, { selectProps: { width } }) => ({...styles,width: width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0'}),
+  dropdownIndicator: ((styles)=>({...styles, color: '#32292F'})),
+  indicatorSeparator: ((styles)=>({...styles, backgroundColor: '#32292F'})),
+  placeholder: ((styles, { selectProps: { placeholderColor } })=>({...styles, color: placeholderColor || '#D3AB9E'}))
+}
 
 export default function AddToCart({ curStyleQuantAndSizes }) {
   const [selectedSize, setSelectedSize] = useState();
@@ -23,8 +45,8 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   let quantOptions = {};
   const sizeOptions = curStyleQuantAndSizes.map(({ size }) => ({ value: size, label: size }));
   const noStock = curStyleQuantAndSizes[0].size === 'Sold Out';
-  let refs; let
-    cartPost;
+  let refs;
+  let cartPost;
 
   if (selectedSize && !noStock) {
     const { quantity, sku } = curStyleQuantAndSizes.filter(({ size }) => size === selectedSize.value)[0];
@@ -71,7 +93,10 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
     }
   }
 
-  let submitButton = <StyledSubmitButton type="submit" value="Add To Bag" />;
+  let submitButton = <StyledSubmitButton
+    type="submit"
+    value="Add To Bag                              +"
+  />;
 
   if (noStock) {
     submitButton = <></>;
@@ -93,6 +118,9 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         value={selectedSize}
         openMenuOnFocus
         ref={(r) => refs = r}
+        styles={selectStyles}
+        width={menuOpen ? 'auto' : '11.5rem'}
+        placeholderColor={menuOpen ? '#0B2027' : '#D3AB9E'}
       />
       <Select
         name="Quant"
@@ -100,8 +128,12 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         onChange={onQuantChangeHandler}
         placeholder="-"
         value={selectedQuant}
+        styles={selectStyles}
+        width={'5rem'}
       />
-      {submitButton}
+      <div>
+        {submitButton}
+      </div>
     </StyledAddToCartForm>
   );
 }
