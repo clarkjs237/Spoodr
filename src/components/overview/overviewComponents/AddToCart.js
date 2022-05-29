@@ -4,12 +4,9 @@ import Select from 'react-select';
 import axios from 'axios';
 import { URL } from '../../App';
 
-const StyledAddToCartForm = styled.form`
-`;
-
 const StyledSubmitButton = styled.input`
   font-size: 1.125rem;
-  font-color: #0B2027;
+  color: #0B2027;
   width: 17rem;
   background-color: #90D7FF;
   padding: .5rem;
@@ -18,6 +15,11 @@ const StyledSubmitButton = styled.input`
   border-width: .1rem;
   border-radius: .25rem;
   text-align: left;
+  &:hover {
+    border-color: #D3AB9E;
+    color: #D3AB9E;
+    cursor: pointer;
+  }
 `;
 
 const selectStyles = {
@@ -29,14 +31,14 @@ const selectStyles = {
     width,
   }),
   control: (styles, { selectProps: { width } }) => ({
-    ...styles, color: '#90D7FF', backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width,
+    ...styles, backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width, color: '#32292F', '&:hover': {borderColor: '#D3AB9E', color: '#D3AB9E' }
   }),
+  dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#D3AB9E' }})),
+  indicatorSeparator: ((styles) => ({...styles, backgroundColor: '#32292F'})),
   singleValue: (styles) => ({ ...styles, color: '#0B2027' }),
   container: (styles, { selectProps: { width } }) => ({
     ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0',
   }),
-  dropdownIndicator: ((styles) => ({ ...styles, color: '#32292F' })),
-  indicatorSeparator: ((styles) => ({ ...styles, backgroundColor: '#32292F' })),
   placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#D3AB9E' })),
 };
 
@@ -112,7 +114,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   }
 
   return (
-    <StyledAddToCartForm onSubmit={onSubmitHandler}>
+    <form onSubmit={onSubmitHandler}>
       <Select
         name="Sizes"
         options={sizeOptions}
@@ -125,6 +127,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         styles={selectStyles}
         width={menuOpen ? 'auto' : '11.5rem'}
         placeholderColor={menuOpen ? '#0B2027' : '#D3AB9E'}
+        onMouseOver={console.log('hi')}
       />
       <Select
         name="Quant"
@@ -138,6 +141,6 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
       <div>
         {submitButton}
       </div>
-    </StyledAddToCartForm>
+    </form>
   );
 }
