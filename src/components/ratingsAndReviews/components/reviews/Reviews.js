@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import ReviewsList from './reviewList/ReviewsList';
+import AddReviewForm from './addReview/AddReviewForm'
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
 
@@ -59,7 +60,7 @@ function Reviews(props) {
       { reviews.length === count && reviews.length > 0 &&
         <button type="submit" onClick={handleMoreReviews}>More Reviews</button>
       }
-      {/* <AddReviewForm /> */}
+      <AddReviewForm />
     </div>
   );
 }
