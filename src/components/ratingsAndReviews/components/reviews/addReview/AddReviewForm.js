@@ -4,31 +4,33 @@ import { PRODUCT_ID, URL } from '../../../../App';
 function AddReviewForm(props) {
   const [data, setData] = useState({
     body: '',
+    photos: [],
     characteristics: {
-      Size: 3,
-      Width: 3,
-      Comfort: 3,
-      Quality: 3,
+      // Size: 3,
+      // Width: 3,
+      // Comfort: 3,
+      // Quality: 3,
     },
   });
 
-  function postReview(data) {
+  function postReview() {
     fetch(`${URL}/reviews`, {
       method: 'POST',
       headers: {
         Authorization: process.env.GITTOKEN,
+        'Content-Type': 'application/json',
       },
-      data: {
+      body: JSON.stringify({
         product_id: PRODUCT_ID,
-        rating: Number(data.rating),
+        rating: data.rating,
         summary: data.summary,
         body: data.body,
-        recommend: JSON.parse(data.recommend),
+        recommend: data.recommend,
         name: data.name,
         email: data.email,
-        // photos: data.photos,
-        // characteristics: data.characteristics,
-      },
+        photos: data.photos,
+        characteristics: data.characteristics,
+      }),
     })
       .then((response) => response.json())
       .then((result) => console.log(`created review:: ${result}`));
@@ -42,10 +44,22 @@ function AddReviewForm(props) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    setData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === 'rating') {
+      setData((prevState) => ({
+        ...prevState,
+        [name]: parseInt(value, 10),
+      }));
+    } else if (name === 'recommend') {
+      setData((prevState) => ({
+        ...prevState,
+        [name]: JSON.parse(value),
+      }));
+    } else {
+      setData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   }
 
   return (
@@ -140,7 +154,7 @@ function AddReviewForm(props) {
         Enter your email.<br />
         <input
           type="text"
-          name="name"
+          name="email"
           placeholder="Example: jackson11@email.com"
           maxLength="60"
           onChange={handleInputChange}

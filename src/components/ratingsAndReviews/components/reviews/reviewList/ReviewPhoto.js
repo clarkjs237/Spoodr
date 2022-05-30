@@ -1,42 +1,10 @@
-import React from 'react';
-import Modal from 'react-modal';
-
-// function ReviewPhoto(props) {
-//   return (
-//     <img
-//       className="review-photo"
-//       src={props.url}
-//       alt="thumbnail"
-//     />
-//   );
-// }
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
+import React, { useState } from 'react';
 
 function ReviewPhoto(props) {
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
 
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
+  function handleToggleModal() {
+    setToggleModal(!toggleModal);
   }
 
   return (
@@ -45,23 +13,19 @@ function ReviewPhoto(props) {
         className="review-list-item-thumbnail"
         src={props.url}
         alt="thumbnail"
-        onClick={openModal}
+        onClick={handleToggleModal}
       />
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        // style={customStyles}
-        className="review-list-item-modal"
-        contentLabel="Example Modal"
-      >
-        <button className="review-photo-modal-close-button" onClick={closeModal}>🆇</button>
+      {toggleModal
+      && (
+      <div className="Modal">
+        <button type="button" className="review-photo-modal-close-button" onClick={handleToggleModal}>🆇</button>
         <img
           className="review-list-item-modal-image"
           src={props.url}
-          alt="modal-image"
+          alt="modal"
         />
-      </Modal>
+      </div>
+      )}
     </div>
   );
 }

@@ -6,15 +6,15 @@ import AddReviewForm from './addReview/AddReviewForm'
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
 
-const Modal = styled.div`
-  background-color: bisque;
-  position: fixed;
-  float: left;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-`;
+// const Modal = styled.div`
+//   background-color: bisque;
+//   position: fixed;
+//   float: left;
+//   left: 50%;
+//   top: 50%;
+//   transform: translate(-50%, -50%);
+//   z-index: 100;
+// `;
 
 function Reviews(props) {
   const [reviews, setReviews] = useState([]);
@@ -74,15 +74,15 @@ function Reviews(props) {
           reviews={reviews}
         />
       </div>
-      { reviews.length === count && reviews.length > 0
-      && <button type="submit" onClick={handleMoreReviews}>More Reviews</button> }
       <button type="button" onClick={handleToggleModalChange}>Add a Review</button>
       { toggleModal
       && (
-      <Modal>
+      <div className="Modal">
         <AddReviewForm handleToggleModalChange={handleToggleModalChange}/>
-      </Modal>
+      </div>
       )}
+      { reviews.length === count && reviews.length > 0
+      && <button type="submit" onClick={handleMoreReviews}>More Reviews</button> }
     </div>
   );
 }
