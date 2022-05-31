@@ -137,7 +137,7 @@ export default function TableView({
     setFeaturesList(featuresObj);
   }
 
-  // Changet the state everytime a new related product is selected
+  // Change the state everytime a new related product is selected
   useEffect(() => {
     generateOverviewList();
     generateSizeList();
