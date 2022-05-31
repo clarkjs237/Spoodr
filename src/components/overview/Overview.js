@@ -43,6 +43,7 @@ export default function Overview({
   curStyleId,
   setCurStyleId,
 }) {
+
   const [expandedView, setExpandedView] = useState(false);
   const [curDisplayIndex, setCurDisplayIndex] = useState(0);
   let curDisplayPhotos;
@@ -54,6 +55,7 @@ export default function Overview({
   let socialUrl;
 
   if (product.category && productStyle.product_id) {
+
     if (productStyle.results.length) {
       productOrginalPrice = productStyle.results[curStyleId].original_price;
       productSalePrice = productStyle.results[curStyleId].sale_price;
@@ -110,6 +112,24 @@ export default function Overview({
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
           setExpandedView={setExpandedView}
+        />
+        <ProductInfo
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageStarRating={averageStarRating}
+          productCategory={product.category.toUpperCase()}
+          productTitle={product.name}
+          productOrginalPrice={productOrginalPrice}
+          productSalePrice={productSalePrice}
+        />
+        <StyleSelector
+          curStyleId={curStyleId}
+          setCurStyleId={setCurStyleId}
+          curStyleName={curStyleName}
+          styleThumbnails={styleThumbnails}
+        />
+        <AddToCart
+          curStyleQuantAndSizes={curStyleQuantAndSizes}
         />
         <InfoSelectorCartDiv>
           <ProductInfo

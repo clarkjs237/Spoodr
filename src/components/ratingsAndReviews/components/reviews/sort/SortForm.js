@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 
 function SortForm(props) {
@@ -7,13 +6,20 @@ function SortForm(props) {
   }
 
   return (
-    <form>
-      <input type="radio" name="helpful" value="helpful" onClick={handleClick} />
-      <label>helpful</label>
-      <input type="radio" name="newest" value="newest" onClick={handleClick}/>
-      <label>newest</label>
-      <input type="radio" name="relevant" value="relevant" onClick={handleClick}/>
-      <label>relevant</label>
+    // <form onChange={(handleClick)}>
+    //   <input type="radio" name="helpful" value="helpful" />
+    //   <label htmlFor='helpful'>helpful</label>
+    //   <input type="radio" name="newest" value="newest" />
+    //   <label htmlFor='newest'>newest</label>
+    //   <input type="radio" name="relevant" value="relevant" />
+    //   <label htmlFor='relevant'>relevant</label>
+    // </form>
+    <form onChange={(handleClick)}>
+      <select name="sort" class='underline-button'>
+        <option value="helpful">helpful</option>
+        <option value="newest">newest</option>
+        <option value="relevant">relevant</option>
+      </select>
     </form>
   );
 }

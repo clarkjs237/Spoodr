@@ -9,7 +9,7 @@ function RatingsAndReviews(props) {
     <div>
       <h3>Ratings & Reviews</h3>
       <div className='ratings-and-reviews'>
-        <div>
+        <div className='ratings'>
           <Ratings
             totalReviews={props.totalReviews}
             averageRating={props.averageRating}
@@ -17,7 +17,7 @@ function RatingsAndReviews(props) {
             reviewsMeta={props.reviewsMeta}
           />
         </div>
-        <div>
+        <div className='reviews'>
           <Reviews totalReviews={props.totalReviews}/>
         </div>
       </div>
