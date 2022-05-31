@@ -6,9 +6,9 @@ const Thumbnail = styled.img`
   object-fit: cover;
   border-width: .1rem;
   border-color: ${(props) => (props.selected ? '#90D7FF' : '#32292F')};
-  height: 2.5rem;
-  width: 2.5rem;
-  margin: .01rem;
+  height: 3.17rem;
+  width: 3.17rem;
+  margin: 0rem;
   cursor: pointer;
   &:hover {
     border-color: #90D7FF;
