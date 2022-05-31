@@ -27,7 +27,6 @@ const InfoSelectorCartDiv = styled.div`
 
 const ProductSlogan = styled.h4`
   margin: .5rem;
-
 `;
 
 const ProductDescription = styled.p`
