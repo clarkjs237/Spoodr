@@ -27,11 +27,15 @@ const InfoSelectorCartDiv = styled.div`
 
 const ProductSlogan = styled.h4`
   margin: .5rem;
+
 `;
 
 const ProductDescription = styled.p`
-margin: .5rem;
-width: 40rem;
+  margin: .5rem;
+  display: inline-block;
+  white-space: normal;
+  overflow-x: wrap;
+  width: 40rem;
 `;
 
 export default function Overview({
@@ -112,24 +116,6 @@ export default function Overview({
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
           setExpandedView={setExpandedView}
-        />
-        <ProductInfo
-          totalReviews={totalReviews}
-          averageRating={averageRating}
-          averageStarRating={averageStarRating}
-          productCategory={product.category.toUpperCase()}
-          productTitle={product.name}
-          productOrginalPrice={productOrginalPrice}
-          productSalePrice={productSalePrice}
-        />
-        <StyleSelector
-          curStyleId={curStyleId}
-          setCurStyleId={setCurStyleId}
-          curStyleName={curStyleName}
-          styleThumbnails={styleThumbnails}
-        />
-        <AddToCart
-          curStyleQuantAndSizes={curStyleQuantAndSizes}
         />
         <InfoSelectorCartDiv>
           <ProductInfo
