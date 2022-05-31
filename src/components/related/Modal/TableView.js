@@ -97,12 +97,12 @@ export default function TableView({
       }
     }
 
-    console.log(overviewArr)
-    console.log(relatedArr)
+    // console.log(overviewArr)
+    // console.log(relatedArr)
 
     const res = {
-      overview: overviewArr.join(', '),
-      related: relatedArr.join(', '),
+      overview: overviewArr.join(',  '),
+      related: relatedArr.join(',  '),
     };
 
     setSizes(res);
