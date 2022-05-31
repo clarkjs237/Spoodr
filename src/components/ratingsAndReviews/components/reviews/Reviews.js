@@ -1,10 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import ReviewsList from './reviewList/ReviewsList';
-<<<<<<< HEAD
 import AddReviewForm from './addReview/AddReviewForm';
-=======
->>>>>>> d752050fd2b7ce35392e411608ac99452eebc7fd
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
 
