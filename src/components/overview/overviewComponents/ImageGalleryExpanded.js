@@ -33,9 +33,9 @@ const ExpandedThumbnailImages = styled.div`
 
 const LeaveExpandedView = styled.div`
   position: absolute;
-  top: 0;
+  top: 4.5vh;
   left: 94.5vw;
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   color: #32292F;
   &:hover {
     cursor: pointer;
