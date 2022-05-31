@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import ReviewsList from './reviewList/ReviewsList';
+<<<<<<< HEAD
 import AddReviewForm from './addReview/AddReviewForm';
+=======
+>>>>>>> d752050fd2b7ce35392e411608ac99452eebc7fd
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
 
@@ -10,7 +13,6 @@ function Reviews(props) {
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(2);
   const [sort, setSort] = useState('relevant');
-  const [toggleModal, setToggleModal] = useState(false);
 
   function getReviews() {
     fetch(
@@ -25,8 +27,7 @@ function Reviews(props) {
       .then((result) => setReviews(result.results));
   }
 
-  function handleMoreReviews(event) {
-    event.preventDefault();
+  function handleMoreReviews() {
     setCount(count + 2);
     getReviews();
   }
@@ -41,10 +42,6 @@ function Reviews(props) {
     if (option === 'relevant') {
       setSort('relevant');
     }
-  }
-
-  function handleToggleModalChange() {
-    setToggleModal(!toggleModal);
   }
 
   useEffect(() => {
