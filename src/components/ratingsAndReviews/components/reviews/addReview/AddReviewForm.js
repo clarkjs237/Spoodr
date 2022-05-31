@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PRODUCT_ID, URL } from '../../../../App';
 
 function AddReviewForm(props) {
   const [data, setData] = useState({
+    product_id: PRODUCT_ID,
+    rating: 0,
+    summary: '',
     body: '',
+    recommend: undefined,
+    name: '',
+    email: '',
     photos: [],
-    characteristics: {
-      // Size: 3,
-      // Width: 3,
-      // Comfort: 3,
-      // Quality: 3,
-    },
+    characteristics: {},
   });
 
   function postReview() {
@@ -20,24 +21,13 @@ function AddReviewForm(props) {
         Authorization: process.env.GITTOKEN,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        product_id: PRODUCT_ID,
-        rating: data.rating,
-        summary: data.summary,
-        body: data.body,
-        recommend: data.recommend,
-        name: data.name,
-        email: data.email,
-        photos: data.photos,
-        characteristics: data.characteristics,
-      }),
+      body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((result) => console.log(`created review:: ${result}`));
+      .then((response) => response.json());
   }
 
   function handleSubmit() {
-    postReview(data);
+    postReview();
   }
 
   function handleInputChange(event) {
@@ -47,14 +37,33 @@ function AddReviewForm(props) {
     if (name === 'rating') {
       setData((prevState) => ({
         ...prevState,
-        [name]: parseInt(value, 10),
+        rating: parseInt(value, 10),
       }));
     } else if (name === 'recommend') {
       setData((prevState) => ({
         ...prevState,
-        [name]: JSON.parse(value),
+        recommend: JSON.parse(value),
       }));
-    } else {
+    }
+    else if (name === 'photos') {
+      if (event.target.files.length > 5) {
+        alert('Up to 5 photos only')
+        setData((prevState) => ({
+          ...prevState,
+          photos: [],
+        }));
+      } else {
+        let newPhotos = [];
+        for (let i = 0; i < event.target.files.length; i++) {
+          newPhotos.push("https://picsum.photos/200/300");
+        }
+        setData((prevState) => ({
+          ...prevState,
+          photos: newPhotos,
+        }));
+      }
+    }
+    else {
       setData((prevState) => ({
         ...prevState,
         [name]: value,
@@ -65,32 +74,34 @@ function AddReviewForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       <button type="button" onClick={props.handleToggleModalChange}>close</button>
-      <div>
-        Rate this product<br/>
-        <label>
+      <div className="new-review-form-rating">
+        Rate this product
+        <br />
+        <label htmlFor="rating">
           <input type="radio" name="rating" value="5" onChange={handleInputChange} required />
           5 stars
         </label>
-        <label>
+        <label htmlFor="rating">
           <input type="radio" name="rating" value="4" onChange={handleInputChange} />
           4 stars
         </label>
-        <label>
+        <label htmlFor="rating">
           <input type="radio" name="rating" value="3" onChange={handleInputChange} />
           3 stars
         </label>
-        <label>
+        <label htmlFor="rating">
           <input type="radio" name="rating" value="2" onChange={handleInputChange} />
           2 stars
         </label>
-        <label>
+        <label htmlFor="rating">
           <input type="radio" name="rating" value="1" onChange={handleInputChange} />
           1 stars
         </label>
       </div>
-      <div>
-        Would you recommend this product?<br />
-        <label>
+      <div className="new-review-form-recommend">
+        Would you recommend this product?
+        <br />
+        <label htmlFor="recommend">
           <input
             type="radio"
             name="recommend"
@@ -100,7 +111,7 @@ function AddReviewForm(props) {
           />
           Yes
         </label>
-        <label>
+        <label htmlFor="recommend">
           <input
             type="radio"
             name="recommend"
@@ -110,8 +121,9 @@ function AddReviewForm(props) {
           No
         </label>
       </div>
-      <div>
-        Summarize your review of this product.<br />
+      <div className="new-review-form-summary">
+        Summarize your review of this product.
+        <br />
         <input
           type="text"
           className="review-form-summary"
@@ -121,9 +133,10 @@ function AddReviewForm(props) {
           onChange={handleInputChange}
         />
       </div>
-      <div>
-        Tell us about this product.<br />
-        <input
+      <div className="new-review-form-body">
+        Tell us about this product.
+        <br />
+        <textarea
           type="text"
           className="review-form-body"
           name="body"
@@ -132,14 +145,31 @@ function AddReviewForm(props) {
           maxLength="1000"
           onChange={handleInputChange}
           required
-        /><br />
+        />
+        <br />
         {data.body.length < 50
-          ? <div>Character count: {data.body.length}</div>
-          : <div>Minimum reached</div>
-        }
+          ? (
+            <div>
+              Character count:
+              {data.body.length}
+            </div>
+          )
+          : <div>Minimum reached</div>}
       </div>
-      <div>
-        Enter your nickname.<br />
+      <div className="new-review-form-photos">
+        Add photos
+        <br />
+        <input
+          type="file"
+          name="photos"
+          accept="image/jpeg, image/png"
+          onChange={handleInputChange}
+          multiple
+        />
+      </div>
+      <div className="new-review-form-name">
+        Enter your nickname.
+        <br />
         <input
           type="text"
           name="name"
@@ -147,11 +177,13 @@ function AddReviewForm(props) {
           maxLength="60"
           onChange={handleInputChange}
           required
-        /> <br />
+        />
+        <br />
         For privacy reasons, do not use your full name or email address
       </div>
-      <div>
-        Enter your email.<br />
+      <div className="new-review-form-email">
+        Enter your email.
+        <br />
         <input
           type="text"
           name="email"
@@ -159,12 +191,13 @@ function AddReviewForm(props) {
           maxLength="60"
           onChange={handleInputChange}
           required
-        /> <br />
+        />
+        <br />
         For authentication reasons, you will not be emailed
       </div>
       <input type="submit" value="Submit" />
     </form>
-  )
+  );
 }
 
 export default AddReviewForm;

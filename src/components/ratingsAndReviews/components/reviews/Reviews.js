@@ -1,20 +1,9 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import ReviewsList from './reviewList/ReviewsList';
-import AddReviewForm from './addReview/AddReviewForm'
+import AddReviewForm from './addReview/AddReviewForm';
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
-
-// const Modal = styled.div`
-//   background-color: bisque;
-//   position: fixed;
-//   float: left;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
-//   z-index: 100;
-// `;
 
 function Reviews(props) {
   const [reviews, setReviews] = useState([]);
@@ -42,7 +31,7 @@ function Reviews(props) {
     getReviews();
   }
 
-  function handleSortChange(option) { //"newest", "helpful", or "relevant"
+  function handleSortChange(option) {
     if (option === 'helpful') {
       setSort('helpful');
     }
@@ -78,7 +67,7 @@ function Reviews(props) {
       { toggleModal
       && (
       <div className="Modal">
-        <AddReviewForm handleToggleModalChange={handleToggleModalChange}/>
+        <AddReviewForm handleToggleModalChange={handleToggleModalChange} />
       </div>
       )}
       { reviews.length === count && reviews.length > 0
