@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import StyleSelectorImage from './StyleSelectorComponents/StyleSelectorImage';
 
-const StyleName = styled.p`
+const StyleName = styled.div`
+margin-bottom: .25rem;
 `;
 
 const Style = styled.span`
@@ -26,7 +27,7 @@ export default function StyleSelector({
     <>
       <StyleName>
         <Style>{'STYLE > '}</Style>
-        {curStyleName}
+        {curStyleName.toUpperCase()}
       </StyleName>
       <ThumbnailDisplay>
         {styleThumbnailsByFour.map((fourStyleThumbnails) => (

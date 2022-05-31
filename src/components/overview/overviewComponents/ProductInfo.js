@@ -6,11 +6,11 @@ import StarRatingReview from './ProductInfoComponents/StarRatingReview';
 
 const ProductTitle = styled.h2`
   margin: 0;
-  font-size: 2em;
+  font-size: 2.25rem;
 `;
 const ProductCategory = styled.div`
-  margin-top: 1em;
-  font-size: 1em;
+  margin-top: 1rem;
+  font-size: 1rem;
 `;
 
 export default function ProductInfo({
@@ -23,7 +23,7 @@ export default function ProductInfo({
   averageStarRating,
 }) {
   return (
-    <div>
+    <>
       <StarRatingReview
         totalReviews={totalReviews}
         averageRating={averageRating}
@@ -35,7 +35,7 @@ export default function ProductInfo({
         productOrginalPrice={productOrginalPrice}
         productSalePrice={productSalePrice}
       />
-    </div>
+    </>
   );
 }
 

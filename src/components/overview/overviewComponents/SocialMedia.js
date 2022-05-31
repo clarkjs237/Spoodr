@@ -13,9 +13,15 @@ const SocialMediaSpan = styled.span`
   margin-left: .25rem;
 `;
 
+const SocialMediaWrap = styled.div`
+  position: absolute;
+  top: 29rem;
+  left: 34.7rem;
+`;
+
 export default function SocialMedia({ url, slogan }) {
   return (
-    <div>
+    <SocialMediaWrap>
       <SocialMediaSpan>
         <FacebookShareButton url={url} quote={slogan}>
           <FacebookIcon size="1.75rem" round />
@@ -31,6 +37,6 @@ export default function SocialMedia({ url, slogan }) {
           <TwitterIcon size="1.75rem" round />
         </TwitterShareButton>
       </SocialMediaSpan>
-    </div>
+    </SocialMediaWrap>
   );
 }

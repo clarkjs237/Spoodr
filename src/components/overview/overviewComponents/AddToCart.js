@@ -1,41 +1,144 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import Select from 'react-select';
+import axios from 'axios';
+import { URL } from '../../App';
+
 const StyledAddToCartForm = styled.form`
-
 `;
 
-const StyledSelectField = styled.select`
-
+const StyledSubmitButton = styled.input`
+  font-size: 1.125rem;
+  font-color: #0B2027;
+  width: 17rem;
+  background-color: #90D7FF;
+  padding: .5rem;
+  border: solid;
+  border-color: #32292F;
+  border-width: .1rem;
+  border-radius: .25rem;
+  text-align: left;
 `;
 
-const StyledInputButton = styled.input`
+const selectStyles = {
+  option: (styles, { isSelected, selectProps: { width } }) => ({
+    ...styles,
+    backgroundColor: '#D3AB9E',
+    color: isSelected ? '#90D7FF' : '#0B2027',
+    border: '.01rem dotted #32292F',
+    width,
+  }),
+  control: (styles, { selectProps: { width } }) => ({
+    ...styles, color: '#90D7FF', backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width,
+  }),
+  singleValue: (styles) => ({ ...styles, color: '#0B2027' }),
+  container: (styles, { selectProps: { width } }) => ({
+    ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0',
+  }),
+  dropdownIndicator: ((styles) => ({ ...styles, color: '#32292F' })),
+  indicatorSeparator: ((styles) => ({ ...styles, backgroundColor: '#32292F' })),
+  placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#D3AB9E' })),
+};
 
-`;
-
-export default function AddToCart({ curStyleQuantAndSizes }){
-
+export default function AddToCart({ curStyleQuantAndSizes }) {
   const [selectedSize, setSelectedSize] = useState();
   const [selectedQuant, setSelectedQuant] = useState();
+  const [menuOpen, setMenuOpen] = useState(false);
+  let quantOptions = {};
+  const sizeOptions = curStyleQuantAndSizes.map(({ size }) => ({ value: size, label: size }));
+  const noStock = curStyleQuantAndSizes[0].size === 'Sold Out';
+  let refs;
+  let cartPost;
 
-  function onSubmitHandler(e) {
-    console.log("post it bebe!");
+  if (selectedSize && !noStock) {
+    const { quantity, sku } = curStyleQuantAndSizes.filter(({ size }) => size === selectedSize.value)[0];
+    quantOptions = [...Array(quantity)].map((k, i) => ({ value: i + 1, label: i + 1 }));
+    cartPost = { sku_id: parseInt(sku) };
   }
 
-  function onChangeHandler(e) {
-    if(e.target.id === 'sizes') {
-      setSelectedSize(e.target.value)
+  function postToCart() {
+    return axios.post(`${URL}/cart`, cartPost, {
+      headers: {
+        Authorization: process.env.GITTOKEN,
+        'content-type': 'application/json',
+      },
+    });
+  }
+
+  function onSubmitHandler(e) {
+    e.preventDefault();
+    if (!selectedSize) {
+      refs.focus();
+      setMenuOpen(true);
+    } else {
+      setSelectedQuant('');
+      setSelectedSize('');
+      console.log(cartPost, selectedQuant.value);
+      Promise.all([...Array(selectedQuant.value)].map((element) => postToCart()))
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
     }
   }
 
-  return(
+  function onQuantChangeHandler(options) {
+    setSelectedQuant(options);
+  }
+
+  function onSizeChangeHandler(options) {
+    setSelectedSize(options);
+    setSelectedQuant({ value: 1, label: 1 });
+  }
+
+  function onSizeInputChangeHandler(options, { action }) {
+    if (action === 'menu-close') {
+      setMenuOpen(false);
+    }
+  }
+
+  let submitButton = (
+    <StyledSubmitButton
+      type="submit"
+      value="Add To Bag                              +"
+    />
+  );
+
+  if (noStock) {
+    submitButton = <></>;
+  }
+
+  let placeholder = 'Select Size'.toUpperCase();
+  if (menuOpen) {
+    placeholder = 'Please Select Size'.toUpperCase();
+  }
+
+  return (
     <StyledAddToCartForm onSubmit={onSubmitHandler}>
-      <StyledSelectField id="sizes" value={selectedSize} onChange={onChangeHandler}>
-        <option value={null}>Select Size</option>
-        {curStyleQuantAndSizes.map(({ size }) =>
-          <option id="size" value={size}>{size}</option>
-        )}
-      </StyledSelectField>
+      <Select
+        name="Sizes"
+        options={sizeOptions}
+        onChange={onSizeChangeHandler}
+        onInputChange={onSizeInputChangeHandler}
+        placeholder={placeholder}
+        value={selectedSize}
+        openMenuOnFocus
+        ref={(r) => refs = r}
+        styles={selectStyles}
+        width={menuOpen ? 'auto' : '11.5rem'}
+        placeholderColor={menuOpen ? '#0B2027' : '#D3AB9E'}
+      />
+      <Select
+        name="Quant"
+        options={quantOptions}
+        onChange={onQuantChangeHandler}
+        placeholder="-"
+        value={selectedQuant}
+        styles={selectStyles}
+        width="5rem"
+      />
+      <div>
+        {submitButton}
+      </div>
     </StyledAddToCartForm>
-  )
+  );
 }

@@ -128,10 +128,10 @@ export default function ImageGalleryExpanded({
       />
       <ExpandedThumbnailImages>
         <ExpandedThumbnailImageNav
-            curDisplayPhotos={curDisplayPhotos}
-            curDisplayIndex={curDisplayIndex}
-            setCurDisplayIndex={setCurDisplayIndex}
-          />
+          curDisplayPhotos={curDisplayPhotos}
+          curDisplayIndex={curDisplayIndex}
+          setCurDisplayIndex={setCurDisplayIndex}
+        />
       </ExpandedThumbnailImages>
       <LeaveExpandedView id="LeaveExpanded" onClick={onClickHandler}>
         &#9447;

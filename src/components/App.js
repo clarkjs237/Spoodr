@@ -7,7 +7,6 @@ import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 
 export const PRODUCT_ID = 40351;
 export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
-
 // In the file you need these variables in, do:
 // import { PRODUCT_ID, URL } from '../App';
 
