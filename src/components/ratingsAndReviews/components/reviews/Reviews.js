@@ -10,6 +10,7 @@ function Reviews(props) {
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(2);
   const [sort, setSort] = useState('relevant');
+  const [toggleModal, setToggleModal] = useState(false)
 
   function getReviews() {
     fetch(
@@ -39,6 +40,10 @@ function Reviews(props) {
     if (option === 'relevant') {
       setSort('relevant');
     }
+  }
+
+  function handleToggleModalChange() {
+    setToggleModal(!toggleModal);
   }
 
   useEffect(() => {
