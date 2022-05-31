@@ -33,15 +33,14 @@ const ExpandedThumbnailImages = styled.div`
 
 const LeaveExpandedView = styled.div`
   position: absolute;
-  top: 4.5vh;
-  left: 94.5vw;
+  top: 5%;
+  left: 95%;
   font-size: 2.25rem;
   color: #32292F;
   &:hover {
     cursor: pointer;
     color: #90D7FF;
   }
-
 `;
 
 export default function ImageGalleryExpanded({
@@ -58,9 +57,10 @@ export default function ImageGalleryExpanded({
     if (e.target.id === 'ExpandedImage') {
       if (zoomedView) {
         setZoomedView(false);
+        window.scrollTo(0,0);
       } else {
-        setMousePosition(e);
         setZoomedView(true);
+        window.scrollTo(mouseX * 2.5, mouseY * 2.5);
       }
     }
     if (e.target.id === 'LeaveExpanded') {

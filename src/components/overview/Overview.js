@@ -99,12 +99,14 @@ export default function Overview({
 
     if (expandedView) {
       return (
-        <ImageGalleryExpanded
-          curDisplayPhotos={curDisplayPhotos}
-          curDisplayIndex={curDisplayIndex}
-          setCurDisplayIndex={setCurDisplayIndex}
-          setExpandedView={setExpandedView}
-        />
+        <ExpandedWrap>
+          <ImageGalleryExpanded
+            curDisplayPhotos={curDisplayPhotos}
+            curDisplayIndex={curDisplayIndex}
+            setCurDisplayIndex={setCurDisplayIndex}
+            setExpandedView={setExpandedView}
+          />
+        </ExpandedWrap>
       );
     }
 
