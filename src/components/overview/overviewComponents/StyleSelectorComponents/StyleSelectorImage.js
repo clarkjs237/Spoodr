@@ -6,28 +6,38 @@ const StyleImage = styled.img`
   border-radius: 50%;
   border: solid;
   border-width: .1rem;
-  border-color: #0B2027;
+  border-color: #32292F;
   cursor: pointer;
   width: 3.5rem;
   height: 3.5rem;
   padding: 0;
-  margin: .01rem;
+  margin-right: .5rem;
+  margin-bottom: .5rem;
   &:hover {
     border-color: #90D7FF;
   }
+  position: relative;
+`;
+
+const StyleSpan = styled.span`
+  position: relative;
 `;
 
 const Check = styled.label`
   position: absolute;
-  border-radius: 40%;
+  border-radius: 50%;
   border: solid;
   border-width: .1rem;
   color: #32292F;
   background-color: #90D7FF;
+  top: -2.9rem;
+  left: 2.9rem;
   font-size: .5rem;
   font-weight: bold;
-  margin: 0 -.5rem;
-`;
+  width: .5rem;
+  height: auto;
+  `;
+  // margin: .2rem -1rem;
 
 export default function StyleSelectorImage({
   curStyleId,
@@ -41,10 +51,10 @@ export default function StyleSelectorImage({
 
   if (curStyleId === thumbnailId) {
     return (
-      <>
+      <StyleSpan>
         <StyleImage name={thumbnailId} src={thumbnail} />
         <Check>&#10003;</Check>
-      </>
+      </StyleSpan>
     );
   }
   return (

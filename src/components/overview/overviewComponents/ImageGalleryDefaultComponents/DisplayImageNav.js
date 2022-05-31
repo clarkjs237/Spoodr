@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const StyledDisplayImageNav = styled.div`
   position: absolute;
-  top: 12rem;
-  left: ${(props) => (props.next ? '35rem' : '3.5rem')};
-  font-size: 2.25rem;
+  top: 13.8rem;
+  left: ${(props) => (props.next ? '38rem' : '4.75rem')};
+  font-size: 3.5rem;
   color: #32292F;
   &:hover {
     color: #90D7FF;
@@ -33,8 +33,8 @@ export default function DisplayImageNav({
     }
   }
 
-  if(maxDisplayIndex === 0) {
-    return <div></div>
+  if (maxDisplayIndex === 0) {
+    return <div />;
   }
 
   if (curDisplayIndex === 0) {
