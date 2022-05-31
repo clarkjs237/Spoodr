@@ -36,13 +36,14 @@ const Table = styled.table`
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 
   left: 2.9rem;
-  border: 2px red solid;
+  // border: 2px red solid;
 `;
 
 const TableBody = styled.tbody`
 `;
 
 const TableRow = styled.tr`
+  border: 1px solid red;
 `;
 
 const TableHeader = styled.th`
@@ -50,6 +51,13 @@ const TableHeader = styled.th`
 `;
 
 const TableData = styled.td`
+  ${(props) => {
+    if (props.cat) {
+      return css`
+        font-weight: bold;
+      `;
+    }
+  }}
 `;
 
 export default function TableView({
@@ -68,6 +76,37 @@ export default function TableView({
   // For features, I want to see if there are any features that match
   // If none of the features match, it shouldn't match
   const [featuresList, setFeaturesList] = useState({});
+  const [sizes, setSizes] = useState({}); // this will be an object with overview and related properties, then the sizes in a comma separated list of each
+
+  function generateSizeList() {
+    let overviewArr = [];
+    for (let i = 0; i < Object.values(overviewStyle.skus).length; i++) {
+      // We want to look at the size here.
+      let temp = Object.values(overviewStyle.skus)[i];
+      if (temp.quantity) {
+        overviewArr.push(temp.size);
+      }
+    }
+
+    let relatedArr = [];
+    for (let i = 0; i < Object.values(relatedStyle.skus).length; i++) {
+      // Look for the sizes in the related object
+      let temp = Object.values(relatedStyle.skus)[i];
+      if (temp.quantity) {
+        relatedArr.push(temp.size);
+      }
+    }
+
+    console.log(overviewArr)
+    console.log(relatedArr)
+
+    const res = {
+      overview: overviewArr.join(', '),
+      related: relatedArr.join(', '),
+    };
+
+    setSizes(res);
+  }
 
   function generateOverviewList() {
     const featuresObj = {}; // this is the object we will be creating and setting the state equal to
@@ -98,8 +137,10 @@ export default function TableView({
     setFeaturesList(featuresObj);
   }
 
+  // Changet the state everytime a new related product is selected
   useEffect(() => {
     generateOverviewList();
+    generateSizeList();
   }, [relatedProduct]);
 
   return (
@@ -123,7 +164,7 @@ export default function TableView({
           {/* Product Categories */}
           <TableRow>
             <TableData>{overviewProduct.category}</TableData>
-            <TableData><i>Category</i></TableData>
+            <TableData cat={true}><i>Category</i></TableData>
             <TableData>{relatedProduct.category}</TableData>
           </TableRow>
           {/* Product Prices */}
@@ -134,7 +175,7 @@ export default function TableView({
                 productSalePrice={overviewStyle.sale_price}
               />
             </TableData>
-            <TableData><i>Price</i></TableData>
+            <TableData cat={true}><i>Price</i></TableData>
             <TableData>
               <ProductPrice
                 productOrginalPrice={relatedStyle.original_price}
@@ -147,10 +188,24 @@ export default function TableView({
             <TableData>
               <StarRating averageStarRating={overviewRating} />
             </TableData>
-            <TableData><i>Average Rating</i></TableData>
+            <TableData cat={true}><i>Average Rating</i></TableData>
             <TableData>
               <StarRating averageStarRating={relatedRating} />
             </TableData>
+          </TableRow>
+          {/* Map over the features */}
+          {Object.keys(featuresList).map((feature, index) => (
+            <TableRow>
+              <TableData>{Object.values(featuresList)[index].overview}</TableData>
+              <TableData cat={true}><i>{feature}</i></TableData>
+              <TableData>{Object.values(featuresList)[index].related}</TableData>
+            </TableRow>
+          ))}
+          {/* Now I want to get the quantity of these products available */}
+          <TableRow>
+            <TableData>{sizes.overview}</TableData>
+            <TableData cat={true}><i>Available Sizes</i></TableData>
+            <TableData>{sizes.related}</TableData>
           </TableRow>
         </TableBody>
 
