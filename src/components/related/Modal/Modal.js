@@ -40,6 +40,26 @@ export default function Modal({
 }) {
   // Uses the helper function to find the place in the DOM to put the window
   const target = usePortal('modal-root');
+  // This is the state for the features list of the overview product that will be passed
+  // down to the modal to let it compare to the related product
+  // Only setting the state once below
+  // const [featuresList, setFeaturesList] = useState({});
+
+  // function createOverviewFeaturesList() {
+  //   const newFeatures = {};
+  //   for (let i = 0; i < overviewProduct.features.length; i++) {
+  //     const tempFeature = overviewProduct.features[i];
+  //     newFeatures[tempFeature.feature] = {
+  //       overview: tempFeature.value,
+  //       related: null,
+  //     };
+  //   }
+  //   console.log('I AM HERE')
+  //   setFeaturesList((oldObject) => ({
+  //     ...oldObject,
+  //     ...newFeatures,
+  //   }));
+  // }
 
   // When the close modal button is clicked, close the modal
   function closeModal(e) {
@@ -47,6 +67,11 @@ export default function Modal({
     setIsOpen(false);
     setModalCardIndex(null);
   }
+
+  // useEffect(() => {
+  //   createOverviewFeaturesList();
+  // }, []);
+
   // Actually places the modal into the DOM
   function placeModal() {
     if (isOpen) {
@@ -65,6 +90,8 @@ export default function Modal({
             relatedRating={relatedRating}
             // click handler for closing the modal
             closeModal={closeModal}
+            // pass down the state object
+            // featuresList={featuresList}
           />
         </ModalContainer>
       );
