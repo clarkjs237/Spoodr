@@ -61,69 +61,46 @@ export default function TableView({
   relatedStyle,
   relatedRating,
   closeModal,
-  featuresList
 }) {
   // I want to look through overviewProduct and relatedProduct for:
   // name, category, features.
+  // Here I am going to create the list
   // For features, I want to see if there are any features that match
   // If none of the features match, it shouldn't match
-  // const [features, setFeatures] = useState({});
-  // const featuresCopy = { ...featuresList };
-  // const featuresCopy = Object.assign({}, featuresList);
-  // const [features, setFeatures] = useState({});
+  const [featuresList, setFeaturesList] = useState({});
 
-  // const t = JSON.stringify(featuresList);
-  // const j = JSON.parse(t);
-  // setFeatures(j);
+  function generateOverviewList() {
+    const featuresObj = {}; // this is the object we will be creating and setting the state equal to
+    for (let i = 0; i < overviewProduct.features.length; i++) {
+      const tempFeature = overviewProduct.features[i];
+      featuresObj[tempFeature.feature] = {
+        overview: tempFeature.value,
+        related: null,
+      };
+    }
+    // This successfully is created an object for the overview product
 
-  // function createFeatureList() {
-    // Gonna loop through overviewProduct.features and relatedProduct.features
-    // gonna use this to build on to it
-    // const featuresCopy = { ...list };
+    // Now we want to loop through the related product features and find add to this list
+    for (let i = 0; i < relatedProduct.features.length; i++) {
+      const tempFeature = relatedProduct.features[i];
+      // If this feature isn't in the list
+      if (!featuresObj[tempFeature.feature]) {
+        featuresObj[tempFeature.feature] = {
+          overview: null,
+          related: tempFeature.value,
+        };
+      } else {
+        // This is an existing feature so we just want to add to the related portion
+        featuresObj[tempFeature.feature].related = tempFeature.value;
+      }
+    }
+    // Set the featuresList state object to equal the actual list now
+    setFeaturesList(featuresObj);
+  }
 
-    // const newFeatures = {};
-    // for (let i = 0; i < overviewProduct.features.length; i++) {
-    //   const tempFeature = overviewProduct.features[i];
-    //   newFeatures[tempFeature.feature] = {
-    //     overview: tempFeature.value,
-    //     related: null,
-    //   };
-    // }
-    // console.log('I AM HERE')
-    // setFeaturesList((oldObject) => ({
-    //   ...oldObject,
-    //   ...newFeatures,
-    // }));
-
-
-
-    // for (let i = 0; i < relatedProduct.features.length; i++) {
-    //   const tempFeature = relatedProduct.features[i];
-    //   let tempObj = {};
-    //   console.log(tempFeature);
-    //   // If this feature isn't in the list
-    //   if (!featuresCopy[tempFeature.feature]) {
-    //     console.log('This is a new feature from the related product');
-    //     featuresCopy[tempFeature.feature] = {
-    //       overview: null,
-    //       related: tempFeature.value,
-    //     };
-    //   } else {
-    //     // This is an existing feature
-    //     console.log('This is an existing feature');
-    //     featuresCopy[tempFeature.feature].related = tempFeature.value;
-    //   }
-    // }
-
-    // console.log(featuresCopy);
-    // Update the state of features so it has the characteristic as the key
-    // and then the value for both the overview and related product
-    // setFeatures(featuresCopy);
-  // }
-
-  // useEffect(() => {
-  //   createFeatureList();
-  // }, []);
+  useEffect(() => {
+    generateOverviewList();
+  }, [relatedProduct]);
 
   return (
     <TableContainer>
