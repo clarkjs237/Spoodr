@@ -15,6 +15,8 @@ const CarouselItem = styled.div`
   margin: 0.5rem;
   cursor: pointer;
   border: 1.5px solid #32292F;
+  box-shadow: 0.1rem 0.1rem 0.5rem black;
+
 
   // position: absolute;
 
