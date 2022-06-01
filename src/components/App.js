@@ -77,9 +77,10 @@ function App() {
   function handleItemClick(id) {
     // This will change the state of product by using setProduct
     console.log('Page Reload For Product ID : ' + id);
-
     setProduct_id_number(Number(id));
   }
+
+  // THIS IS THE OLD USE EFFECT
   // useEffect(() => {
   //   updateProductByID(product.id);
   //   getReviewsMeta(product.id);

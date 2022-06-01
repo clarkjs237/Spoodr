@@ -87,7 +87,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const AddOutfitCard = styled.div`
+export const AddOutfitCard = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -114,7 +114,7 @@ const AddOutfitButton = styled.span`
   }
 `;
 
-const AddButtonText = styled.span`
+export const AddButtonText = styled.span`
   font-size: 1.3rem;
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   position: absolute;

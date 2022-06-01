@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CarouselComponent from './Carousel/CarouselComponent';
+import CarouselComponent, { AddOutfitCard, AddButtonText } from './Carousel/CarouselComponent';
 import Modal from './Modal/Modal';
 import { URL } from '../App';
 import styled from 'styled-components';
@@ -140,6 +140,12 @@ function Related({
     })
       .then((response) => response.json())
       .then((results) => {
+        // Make sure that the related ids don't contain the actual product id itself
+        results = results.filter((id) => {
+          if (id !== product.id) {
+            return id;
+          }
+        });
         setRelatedIDs(results);
         if (results.length > 0) {
           results.forEach((product_id) => {
@@ -271,21 +277,21 @@ function Related({
     generateInitialOutfitList();
   }, [product]); // might need product here
 
-  // This is where we will make use of RelatedList
-  // Carousel = RelatedList
-  // CarouselItems = RelatedListItem
-  // if (Object.keys(relStyles).length === 0 || Object.keys(relInfos).length === 0 || Object.keys(relReviews).length === 0) {
-  //   return <div>Empty</div>;
-  // }
-
   // Need to handle the case when relatedIDs is empty
   if (emptyRelatedBool) {
-    // this means there is no related list
-    console.log('Im in empty relatedBool')
+    // this means there is no related list but still an outfit List
     return (
       <RelatedAndOutfitContainer>
         <Titles>Related Items:</Titles>
-        <div>Related Items Empty</div>
+        <AddOutfitCard
+          style={{"transform": "translateX(-0.5rem)"}}
+        >
+          <AddButtonText
+            style={{"top": "7rem", "left": "1.52rem"}}
+          >
+            No Related Items for Current Product
+          </AddButtonText>
+        </AddOutfitCard>
         <Titles>My Outfit:</Titles>
         <CarouselComponent
           RelatedListBool={false}
@@ -316,12 +322,15 @@ function Related({
       </RelatedAndOutfitContainer>
     );
   }
+  // Conditional rendering while waiting for the other api calls to be made
   if (Object.keys(relStyles).length === 0 || Object.keys(relInfos).length === 0 || Object.keys(relReviews).length === 0) {
     return <div>Loading...</div>;
   }
+  // If everything is loaded, return the actual component
   return (
     <RelatedAndOutfitContainer>
       <Titles>Related Items:</Titles>
+      {/* This is Related List */}
       <CarouselComponent
         RelatedListBool={true}
         OutfitListBool={false}
@@ -334,6 +343,7 @@ function Related({
         handleItemClick={handleItemClick}
       />
       <Titles>My Outfit:</Titles>
+      {/* This is Outfit List */}
       <CarouselComponent
         RelatedListBool={false}
         OutfitListBool={true}
@@ -362,56 +372,5 @@ function Related({
       </div>
     </RelatedAndOutfitContainer>
   );
-
-
-  // THIS WORKS IN CASE EVERYTHING ELSE BREAKS
-  // if (Object.keys(relStyles).length === 0 || Object.keys(relInfos).length === 0 || Object.keys(relReviews).length === 0) {
-  //   return <div>Empty</div>;
-  // }
-  // return (
-  //   <RelatedAndOutfitContainer>
-  //     <Titles>Related Items:</Titles>
-  //     <CarouselComponent
-  //       RelatedListBool={true}
-  //       OutfitListBool={false}
-  //       relStyles={relStyles}
-  //       relInfos={relInfos}
-  //       relReviews={relReviews}
-  //       relatedActiveIndex={relatedActiveIndex}
-  //       setRelatedActiveIndex={setRelatedActiveIndex}
-  //       comparisonModal={comparisonModal}
-  //       handleItemClick={handleItemClick}
-  //     />
-  //     <Titles>My Outfit:</Titles>
-  //     <CarouselComponent
-  //       RelatedListBool={false}
-  //       OutfitListBool={true}
-  //       outfitList={outfitList}
-  //       outfitActiveIndex={outfitActiveIndex}
-  //       setOutfitActiveIndex={setOutfitActiveIndex}
-  //       handleAddToOutfit={handleAddToOutfit}
-  //       removeItemFromOutfit={removeItemFromOutfit}
-  //       handleItemClick={handleItemClick}
-  //     />
-  //     <div id="modal-root">
-  //       <Modal
-  //         modalCardIndex={modalCardIndex}
-  //         setModalCardIndex={setModalCardIndex}
-  //         isOpen={isOpen}
-  //         setIsOpen={setIsOpen}
-  //         // From current overview product and style
-  //         overviewProduct={product} // general product info
-  //         overviewStyle={productStyle.results[curStyleId]} // specific style info
-  //         overviewRating={averageStarRating} // average star rating from overview product
-  //         // From the selected card in related items list
-  //         relatedProduct={Object.values(relInfos)[modalCardIndex]}
-  //         relatedStyle={Object.values(relStyles)[modalCardIndex]}
-  //         relatedRating={Object.values(relReviews)[modalCardIndex]}
-  //       />
-  //     </div>
-  //   </RelatedAndOutfitContainer>
-  // );
-
-
 }
 export default Related;

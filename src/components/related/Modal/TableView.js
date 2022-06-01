@@ -76,7 +76,8 @@ export default function TableView({
   // For features, I want to see if there are any features that match
   // If none of the features match, it shouldn't match
   const [featuresList, setFeaturesList] = useState({});
-  const [sizes, setSizes] = useState({}); // this will be an object with overview and related properties, then the sizes in a comma separated list of each
+  const [sizes, setSizes] = useState({}); // this will be an object with
+  // overview and related properties, then the sizes in a comma separated list of each
 
   function generateSizeList() {
     let overviewArr = [];
@@ -96,9 +97,6 @@ export default function TableView({
         relatedArr.push(temp.size);
       }
     }
-
-    // console.log(overviewArr)
-    // console.log(relatedArr)
 
     const res = {
       overview: overviewArr.join(',  '),
