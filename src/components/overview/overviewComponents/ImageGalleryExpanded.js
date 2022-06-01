@@ -50,26 +50,31 @@ export default function ImageGalleryExpanded({
   setExpandedView,
 }) {
   const [zoomedView, setZoomedView] = useState(false);
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-  const [scrollX, setScrollX] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
+  // const [mouseX, setMouseX] = useState(0);
+  // const [mouseY, setMouseY] = useState(0);
+  // const [scrollX, setScrollX] = useState(0);
+  // const [scrollY, setScrollY] = useState(0);
+  const [scroll, setScroll] = useState({x: 0, y: 0});
+  //const [mouse, setMouse] = useState({x: 0, y: 0});
+
 
   function onClickHandler(e) {
     if (e.target.id === 'ExpandedImage') {
       if (zoomedView) {
-        setScrollX(0);
-        setScrollY(0);
+        setScroll({x: 0, y: 0});
         // setMouseX(0);
         // setMouseY(0);
         setZoomedView(false);
       } else {
         let { x, y } = mousePosition(e);
-        debugger;
-        setScrollX((2.5 * x - .5) * e.target.clientWidth);
-        setScrollY((2.5 * y - .5) * e.target.clientHeight);
-        // setMouseX(scrollX);
-        // setMouseY(scrollY);
+        // setMouse({
+        //   x: (2.5 * x),
+        //   y: (2.5 * y)
+        // });
+        setScroll({
+          x: 2.5 * x - .5 * e.target.clientWidth,
+          y: 2.5 * y - .5 * e.target.clientHeight
+        });
         setZoomedView(true);
       }
     }
@@ -93,33 +98,51 @@ export default function ImageGalleryExpanded({
   });
 
   useEffect(()=>{
-    window.scrollTo(scrollX, scrollY)
+    window.scrollTo(scroll.x, scroll.y);
   }, [zoomedView]);
 
   function mousePosition(e) {
-    const {
-      top: offsetTop,
-      left: offsetLeft,
-    } = e.target.getBoundingClientRect();
-    const x = (e.pageX - offsetLeft)/e.target.clientWidth;
-    const y = (e.pageY - offsetTop)/e.target.clientHeight;
+
+    const x = e.pageX;
+    const y = e.pageY;
 
     return { x, y };
   }
 
-  if(zoomedView){
-      // if(mouseX > (scrollX)){
-      //   setScrollX(scrollX + 1)
-      // } else if(mouseX < (scrollX)) {
-      //   setScrollX(scrollX - 1)
-      // }
-  }
+  // if(zoomedView){
+  //   window.scrollTo(scrollX, scrollY)
+  //   if(mouseX > (scrollX)){
+  //       setScrollX(scrollX + 10)
+  //     } else if(mouseX < (scrollX)) {
+  //       setScrollX(scrollX - 10)
+  //     }
+  // }
 
   function handleMouseMove(e) {
     if(zoomedView) {
+      window.scrollTo(scroll.x, scroll.y);
       let { x, y } = mousePosition(e);
-      setMouseX(x - e.target.clientWidth / 2);
-      setMouseY(y);
+      let newX = scroll.x + e.target.width/5;
+      let newY = scroll.y + e.target.height/5;
+      console.log(x, newX);
+      const xSpeed = 5;
+      const ySpeed = 5;
+      const xBuffer = 50;
+      const yBuffer = 50;
+      if(x > newX + xBuffer && y > newY + yBuffer) {
+        setScroll({x: scroll.x + xSpeed, y: scroll.y + ySpeed})
+      } else if (x > newX + xBuffer) {
+        setScroll({x: scroll.x + xSpeed, y: scroll.y})
+      } else if (y > newY + yBuffer) {
+        setScroll({x: scroll.x, y: scroll.y + ySpeed})
+      }
+      if(x < newX - xBuffer && y < newY - yBuffer) {
+        setScroll({x: scroll.x - xSpeed, y: scroll.y - ySpeed})
+      } else if (x < newX - xBuffer) {
+        setScroll({x: scroll.x - xSpeed, y: scroll.y})
+      } else if (y < newY - yBuffer) {
+        setScroll({x: scroll.x, y: scroll.y - ySpeed})
+      }
     }
   }
 
