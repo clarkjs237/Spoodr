@@ -78,12 +78,17 @@ function App() {
     // This will change the state of product by using setProduct
     console.log('Page Reload For Product ID : ' + id);
 
-    // setProduct_id_number(id);
+    setProduct_id_number(Number(id));
   }
+  // useEffect(() => {
+  //   updateProductByID(product.id);
+  //   getReviewsMeta(product.id);
+  // }, []);
+
   useEffect(() => {
-    updateProductByID(product.id);
-    getReviewsMeta(product.id);
-  }, []);
+    updateProductByID(product_id_number);
+    getReviewsMeta(product_id_number);
+  }, [product_id_number]);
 
   return (
     <>
