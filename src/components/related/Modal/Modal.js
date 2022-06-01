@@ -59,11 +59,11 @@ export default function Modal({
 
     if (isOpen) {
       document.addEventListener('keydown', closeModalByEsc);
+    } else {
+      return () => {
+        document.removeEventListener('keydown', closeModalByEsc);
+      };
     }
-
-    return () => {
-      document.removeEventListener('keydown', closeModalByEsc);
-    };
   });
 
   // Actually places the modal into the DOM

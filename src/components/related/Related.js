@@ -249,7 +249,7 @@ function Related({
   useEffect(() => {
     updateRelatedIDs(product.id);
     generateInitialOutfitList();
-  }, []); // might need product here
+  }, [product]); // might need product here
 
   // This is where we will make use of RelatedList
   // Carousel = RelatedList

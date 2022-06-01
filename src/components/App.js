@@ -24,6 +24,9 @@ function App() {
 
   const [curStyleId, setCurStyleId] = useState(0);
 
+  // New state variable for the Product_id_number that is clicked on
+  const [product_id_number, setProduct_id_number] = useState(PRODUCT_ID);
+
   function updateProductByID(id) {
     fetch(`${URL}/products/${id}`, {
       headers: {
@@ -75,7 +78,7 @@ function App() {
     // This will change the state of product by using setProduct
     console.log('Page Reload For Product ID : ' + id);
 
-    // setProduct({ id: id });
+    // setProduct_id_number(id);
   }
   useEffect(() => {
     updateProductByID(product.id);
