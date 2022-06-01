@@ -11,14 +11,18 @@ const ProductOverview = styled.div`
   color: #0B2027;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   display: inline-block;
+  white-space: nowrap;
+  overflow-x: hidden;
 `;
 
 const InfoSelectorCartDiv = styled.div`
   display: inline-block;
+  position: top;
   margin-left: .5rem;
   margin-top: .5rem;
   font-size: 1.125rem;
   vertical-align: top;
+  white-space: normal;
 `;
 
 const ProductSlogan = styled.h4`
@@ -26,8 +30,11 @@ const ProductSlogan = styled.h4`
 `;
 
 const ProductDescription = styled.p`
-margin: .5rem;
-width: 40rem;
+  margin: .5rem;
+  display: inline-block;
+  white-space: normal;
+  overflow-x: wrap;
+  width: 40rem;
 `;
 
 export default function Overview({
@@ -92,12 +99,12 @@ export default function Overview({
 
     if (expandedView) {
       return (
-        <ImageGalleryExpanded
-          curDisplayPhotos={curDisplayPhotos}
-          curDisplayIndex={curDisplayIndex}
-          setCurDisplayIndex={setCurDisplayIndex}
-          setExpandedView={setExpandedView}
-        />
+          <ImageGalleryExpanded
+            curDisplayPhotos={curDisplayPhotos}
+            curDisplayIndex={curDisplayIndex}
+            setCurDisplayIndex={setCurDisplayIndex}
+            setExpandedView={setExpandedView}
+          />
       );
     }
 
@@ -108,24 +115,6 @@ export default function Overview({
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
           setExpandedView={setExpandedView}
-        />
-        <ProductInfo
-          totalReviews={totalReviews}
-          averageRating={averageRating}
-          averageStarRating={averageStarRating}
-          productCategory={product.category.toUpperCase()}
-          productTitle={product.name}
-          productOrginalPrice={productOrginalPrice}
-          productSalePrice={productSalePrice}
-        />
-        <StyleSelector
-          curStyleId={curStyleId}
-          setCurStyleId={setCurStyleId}
-          curStyleName={curStyleName}
-          styleThumbnails={styleThumbnails}
-        />
-        <AddToCart
-          curStyleQuantAndSizes={curStyleQuantAndSizes}
         />
         <InfoSelectorCartDiv>
           <ProductInfo
