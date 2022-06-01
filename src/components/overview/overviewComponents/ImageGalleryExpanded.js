@@ -7,7 +7,6 @@ import ExpandedThumbnailImageNav from './ImageGalleryExpandedComponents/Expanded
 const ImageGalleryExpandedWrapper = styled.div`
   height: ${(props) => (props.zoom ? '100%' : '99vh')};
   width: 100%;
-  background-color: #EAC9C1;
   position: relative;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 `;
@@ -16,8 +15,6 @@ const ExpandedImage = styled.img`
   display: inline-block;
   width: ${(props) => (props.zoom ? '247.5vw' : '99vw')};
   height: ${(props) => (props.zoom ? '230vh' : '92vh')};
-  border: solid;
-  border-width: .1rem;
   margin-left: auto;
   margin-right: auto;
   object-fit: cover;

@@ -39,8 +39,8 @@
 meter::-webkit-meter-bar {
   /* background: #eee;
   border-radius: 0px; */
-  width: 200px;
-  height: 10px;
+  /* width: 200px;
+  height: 10px; */
   -webkit-appearance: none; /* Reset appearance */
   border: 1px solid #ccc;
   border-radius: 0px;

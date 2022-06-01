@@ -18,10 +18,6 @@ const DisplayImage = styled.img`
 `;
 
 const DisplayWrapper = styled.div`
-  border: solid;
-  border-width: .1rem;
-  border-color: #32292F;
-  background-color: #D3AB9E;
   height: 30rem;
   width: 40rem;
   position: relative;

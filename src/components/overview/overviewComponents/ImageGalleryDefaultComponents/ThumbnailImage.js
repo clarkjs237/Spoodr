@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Thumbnail = styled.img`
   border: solid;
   object-fit: cover;
-  border-width: .1rem;
+  border-width: ${(props) => (props.selected ? '.1rem' : '0')};
   border-color: ${(props) => (props.selected ? '#90D7FF' : '#32292F')};
   height: 3.17rem;
   width: 3.17rem;

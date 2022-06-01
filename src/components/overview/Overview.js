@@ -8,9 +8,6 @@ import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
 import AddToCart from './overviewComponents/AddToCart';
 
 const ProductOverview = styled.div`
-  color: #0B2027;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  display: inline-block;
   white-space: nowrap;
   overflow-x: hidden;
 `;
