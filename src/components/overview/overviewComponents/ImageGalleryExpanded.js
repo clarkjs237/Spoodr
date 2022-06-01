@@ -97,19 +97,15 @@ export default function ImageGalleryExpanded({
 
   function handleMouseMove(e) {
     if(zoomedView) {
-      window.scrollTo({
-        left: scroll.x,
-        top: scroll.y,
-        behaviour: smooth,
-      });
+      window.scrollTo(scroll.x, scroll.y);
       let { x, y } = mousePosition(e);
       let newX = scroll.x + e.target.width/5;
       let newY = scroll.y + e.target.height/5;
       console.log(x, newX);
-      const xSpeed = 5;
-      const ySpeed = 5;
-      const xBuffer = 70;
-      const yBuffer = 50;
+      const xSpeed = 2.75;
+      const ySpeed = 2;
+      const xBuffer = 200;
+      const yBuffer = 150;
       if(x > newX + xBuffer && y > newY + yBuffer) {
         setScroll({x: scroll.x + xSpeed, y: scroll.y + ySpeed})
       } else if (x > newX + xBuffer) {
