@@ -1,31 +1,44 @@
-import React, { useState } from 'react';
-import { PRODUCT_ID, URL } from '../../../../App';
+import React, { useState, useEffect } from "react";
+import { PRODUCT_ID, URL } from "../../../../App";
+import ReviewFormCharacteristics from "./ReviewFormCharacteristics";
 
 function AddReviewForm(props) {
   const [data, setData] = useState({
     product_id: PRODUCT_ID,
     rating: 0,
-    summary: '',
-    body: '',
+    summary: "",
+    body: "",
     recommend: undefined,
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     photos: [],
     characteristics: {},
   });
 
+  function getCharacteristics() {
+    if (props.reviewsMeta.characteristics) {
+      const characteristics = {};
+      Object.keys(props.reviewsMeta.characteristics).forEach((key) => {
+        characteristics[props.reviewsMeta.characteristics[key].id] = 0;
+      });
+      setData((prevState) => ({
+        ...prevState,
+        characteristics,
+      }));
+    }
+  }
+
   function postReview() {
     fetch(`${URL}/reviews`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         Authorization: process.env.GITTOKEN,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    }).catch((error) => {
+      console.error("Error:", error);
+    });
   }
 
   function handleSubmit(event) {
@@ -38,20 +51,37 @@ function AddReviewForm(props) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    if (name === 'rating') {
+    if (name === "rating") {
       setData((prevState) => ({
         ...prevState,
         rating: parseInt(value, 10),
       }));
-    } else if (name === 'recommend') {
+    } else if (name === "recommend") {
       setData((prevState) => ({
         ...prevState,
         recommend: JSON.parse(value),
       }));
-    }
-    else if (name === 'photos') {
+    } else if (
+      name === "Size" ||
+      name === "Width" ||
+      name === "Comfort" ||
+      name === "Quality" ||
+      name === "Length" ||
+      name === "Fit"
+    ) {
+      setData((prevState) => {
+        const characteristics = {
+          ...prevState.characteristics,
+        };
+        characteristics[props.reviewsMeta.characteristics[name].id] = parseInt(value, 10);
+        return {
+          ...prevState,
+          characteristics,
+        };
+      });
+    } else if (name === "photos") {
       if (event.target.files.length > 5) {
-        alert('Up to 5 photos only')
+        alert("Up to 5 photos only");
         setData((prevState) => ({
           ...prevState,
           photos: [],
@@ -66,8 +96,7 @@ function AddReviewForm(props) {
           photos: newPhotos,
         }));
       }
-    }
-    else {
+    } else {
       setData((prevState) => ({
         ...prevState,
         [name]: value,
@@ -75,30 +104,62 @@ function AddReviewForm(props) {
     }
   }
 
+  useEffect(() => {
+    getCharacteristics();
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
-      <button type="button" onClick={props.handleToggleModalChange}>close</button>
+      <button type="button" onClick={props.handleToggleModalChange}>
+        close
+      </button>
       <div className="new-review-form-rating">
         Rate this product
         <br />
         <label htmlFor="rating">
-          <input type="radio" name="rating" value="5" onChange={handleInputChange} required />
+          <input
+            type="radio"
+            name="rating"
+            value="5"
+            onChange={handleInputChange}
+            required
+          />
           5 stars
         </label>
         <label htmlFor="rating">
-          <input type="radio" name="rating" value="4" onChange={handleInputChange} />
+          <input
+            type="radio"
+            name="rating"
+            value="4"
+            onChange={handleInputChange}
+          />
           4 stars
         </label>
         <label htmlFor="rating">
-          <input type="radio" name="rating" value="3" onChange={handleInputChange} />
+          <input
+            type="radio"
+            name="rating"
+            value="3"
+            onChange={handleInputChange}
+          />
           3 stars
         </label>
         <label htmlFor="rating">
-          <input type="radio" name="rating" value="2" onChange={handleInputChange} />
+          <input
+            type="radio"
+            name="rating"
+            value="2"
+            onChange={handleInputChange}
+          />
           2 stars
         </label>
         <label htmlFor="rating">
-          <input type="radio" name="rating" value="1" onChange={handleInputChange} />
+          <input
+            type="radio"
+            name="rating"
+            value="1"
+            onChange={handleInputChange}
+          />
           1 stars
         </label>
       </div>
@@ -124,6 +185,20 @@ function AddReviewForm(props) {
           />
           No
         </label>
+      </div>
+      <div className="new-review-form-characteristics">
+        characteristics
+        {props.reviewsMeta && (
+          <div>
+            {Object.keys(props.reviewsMeta.characteristics).map((key, index) => (
+              <ReviewFormCharacteristics
+                key={index}
+                handleInputChange={handleInputChange}
+                name={key}
+              />
+            ))}
+          </div>
+        )}
       </div>
       <div className="new-review-form-summary">
         Summarize your review of this product.
@@ -151,14 +226,14 @@ function AddReviewForm(props) {
           required
         />
         <br />
-        {data.body.length < 50
-          ? (
-            <div>
-              Character count:
-              {data.body.length}
-            </div>
-          )
-          : <div>Minimum reached</div>}
+        {data.body.length < 50 ? (
+          <div>
+            Character count:
+            {data.body.length}
+          </div>
+        ) : (
+          <div>Minimum reached</div>
+        )}
       </div>
       <div className="new-review-form-photos">
         Add photos

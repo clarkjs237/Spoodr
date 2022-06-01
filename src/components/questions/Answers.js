@@ -1,44 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
-function Answers({ allAnswers }) {
-  const [answers, setAnswers] = useState(allAnswers.slice(0, 2));
-  const [isCollapsedAnswers, setIsCollapsedAnswers] = useState(true);
-  const [answerText, setAnswerText] = useState('See more answers');
+import Answer from './Answer';
 
-  const handleAnswerClick = () => {
-    if (isCollapsedAnswers) {
-      setAnswers(allAnswers);
-      setAnswerText('Collapse answers');
-    } else {
-      setAnswers(allAnswers.slice(0, 2));
-      setAnswerText('See more answers');
-    }
-    setIsCollapsedAnswers(!isCollapsedAnswers);
-  };
+function Answers({ answers, getAnswers }) {
+  useEffect(() => {
+    getAnswers();
+  }, []);
 
   return (
     <>
       {answers.map((answer) => (
-        <div key={answer.id}>
-          <p>
-            A:
-            {answer.body}
-          </p>
-          <footer>
-            <span>
-              by
-              {answer.answerer_name}
-            </span>
-            <span>
-              Helpful? Yes(
-              {answer.helpfulness}
-              )
-            </span>
-            <span>Report</span>
-          </footer>
-        </div>
+        <Answer
+          key={answer.answer_id}
+          id={answer.answer_id}
+          body={answer.body}
+          username={answer.answerer_name}
+          date={answer.date}
+          helpfulness={answer.helpfulness}
+          getAnswers={getAnswers}
+        />
       ))}
-      <p onClick={handleAnswerClick}>{answerText}</p>
     </>
   );
 }

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import StarRating from './StarRating';
 
 const ReviewLink = styled.span`
-font-size: .5rem;
-color: #32292F;
+  font-size: .5rem;
+  color: #32292F;
   text-decoration: underline;
   &:hover {
     background-color: #90D7FF;
