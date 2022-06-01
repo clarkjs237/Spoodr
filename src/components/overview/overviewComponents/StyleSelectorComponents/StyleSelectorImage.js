@@ -3,10 +3,8 @@ import styled from 'styled-components';
 
 const StyleImage = styled.img`
   object-fit: cover;
+  color: white;
   border-radius: 50%;
-  border: solid;
-  border-width: .1rem;
-  border-color: #32292F;
   cursor: pointer;
   width: 3.5rem;
   height: 3.5rem;
@@ -14,7 +12,7 @@ const StyleImage = styled.img`
   margin-right: .5rem;
   margin-bottom: .5rem;
   &:hover {
-    border-color: #90D7FF;
+    color: #90D7FF;
   }
   position: relative;
 `;

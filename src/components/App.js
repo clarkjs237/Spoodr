@@ -4,11 +4,27 @@ import Overview from './overview/Overview';
 import Questions from './questions/Questions';
 import Related from './related/Related';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
+import { createGlobalStyle } from 'styled-components';
 
 export const PRODUCT_ID = 40351;
 export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
-// In the file you need these variables in, do:
-// import { PRODUCT_ID, URL } from '../App';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: white;
+    border-color: #32292F;
+    color: #0B2027;
+    border-width: 1.5px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
+  button {
+    background-color: #90D7FF;
+    border-width: 0px;
+    padding: 1rem;
+    margin: 2px;
+  }
+`;
 
 function App() {
   const [product, setProduct] = useState({ id: PRODUCT_ID });
@@ -93,6 +109,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyle />
       <Overview
         product={product}
         productStyle={productStyle}
