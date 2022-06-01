@@ -9,6 +9,8 @@ const Inner = styled.div`
   ${(props) => css`
       transform: translateX(-${props.activeIndex * 14 + 0.5}rem);
   `};
+
+  position: absolute;
 `;
 
 const CarouselWindow = styled.div`
@@ -21,6 +23,9 @@ const CarouselWindow = styled.div`
 
   // Attempting to overlay button
   position: relative;
+
+  // Changes
+  border: 1px green solid;
 `;
 
 const Blur = styled.div`
@@ -85,6 +90,10 @@ const Container = styled.div`
   flex-direction: row;
   margin-bottom: 2rem;
   position: relative;
+
+  // Attempted changes
+  // position: absolute;
+  border: 1px solid blue;
 `;
 
 export const AddOutfitCard = styled.div`

@@ -16,8 +16,10 @@ const CarouselItem = styled.div`
   cursor: pointer;
   border: 1.5px solid #32292F;
 
+  // position: absolute;
+
   // For whatever reason, I need this line for the outfit list formatting
-  transform: ${(props) => (props.outfit ? 'translateY(-9.25rem)' : 'translateY(0rem)')}
+  transform: ${(props) => (props.outfit ? 'translateY(-9.4rem)' : 'translateY(0rem)')}
 `;
 
 const InsideCarousel = styled.div`
@@ -55,6 +57,10 @@ const ActionButton = styled.div`
   cursor: pointer;
 `;
 
+const BottomWrapper = styled.div`
+  border: 2px red solid;
+`;
+
 export default function CarouselItemComponent({
   defStyle, // style object handed to the carousel component
   id,       // product id (in string)
@@ -87,15 +93,18 @@ export default function CarouselItemComponent({
       <CarouselItem outfit={outfit} onClick={individualCardClicked}>
         <InsideCarousel>
           <Photo src={defStyle.photos['0'].thumbnail_url}/>
-          {info.category}<br />
-          {info.name}<br />
-          <div>
-            <StarRating averageStarRating={review} />
-          </div>
-          <ProductPrice
-            productOrginalPrice={defStyle.original_price}
-            productSalePrice={defStyle.sale_price}
-          />
+          <BottomWrapper>
+            {info.category}<br />
+            {info.name}<br />
+            <div>
+              <StarRating averageStarRating={review} />
+            </div>
+            <ProductPrice
+              productOrginalPrice={defStyle.original_price}
+              productSalePrice={defStyle.sale_price}
+            />
+          </BottomWrapper>
+
           <ActionButton outfit={outfit} onClick={actionButtonClick}/>
         </InsideCarousel>
       </CarouselItem>
