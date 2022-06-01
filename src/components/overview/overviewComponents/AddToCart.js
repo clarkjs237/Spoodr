@@ -78,7 +78,6 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
     } else {
       setSelectedQuant('');
       setSelectedSize('');
-      console.log(cartPost, selectedQuant.value);
       Promise.all([...Array(selectedQuant.value)].map((element) => postToCart()))
         .then((data) => console.log(data))
         .catch((err) => console.log(err));
@@ -130,7 +129,6 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         styles={selectStyles}
         width={menuOpen ? 'auto' : '11.5rem'}
         placeholderColor={menuOpen ? '#0B2027' : '#D3AB9E'}
-        onMouseOver={console.log('hi')}
       />
       <Select
         name="Quant"

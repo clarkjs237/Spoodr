@@ -13,9 +13,9 @@ const ImageGalleryExpandedWrapper = styled.div`
 `;
 
 const ExpandedImage = styled.img`
-  display: block;
+  display: inline-block;
   width: ${(props) => (props.zoom ? '250%' : '100%')};
-  height: ${(props) => (props.zoom ? 'auto' : '90vh')};
+  height: ${(props) => (props.zoom ? 'auto' : '92vh')};
   border: solid;
   border-width: .1rem;
   margin-left: auto;
@@ -52,15 +52,20 @@ export default function ImageGalleryExpanded({
   const [zoomedView, setZoomedView] = useState(false);
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
+  const [scrollX, setScrollX] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
 
   function onClickHandler(e) {
     if (e.target.id === 'ExpandedImage') {
       if (zoomedView) {
+        setScrollX(0);
+        setScrollY(0);
         setZoomedView(false);
-        window.scrollTo(0,0);
       } else {
+        let { x, y } = mousePosition(e);
+        setScrollX(1.5 * x);
+        setScrollY(2.5 * y);
         setZoomedView(true);
-        window.scrollTo(mouseX * 2.5, mouseY * 2.5);
       }
     }
     if (e.target.id === 'LeaveExpanded') {
@@ -70,6 +75,7 @@ export default function ImageGalleryExpanded({
 
   function handleEscKeyPress(e) {
     if (e.key === 'Escape') {
+      window.scrollTo(0, 0);
       setExpandedView(false);
     }
   }
@@ -81,21 +87,32 @@ export default function ImageGalleryExpanded({
     };
   });
 
-  function setMousePosition(e) {
+  useEffect(()=>{
+    window.scrollTo(scrollX, scrollY)
+  }, [zoomedView]);
+
+  function mousePosition(e) {
     const {
       top: offsetTop,
       left: offsetLeft,
     } = e.target.getBoundingClientRect();
 
-    const x = ((e.pageX - offsetLeft) / e.target.width) * 100;
-    const y = ((e.pageY - offsetTop) / e.target.height) * 100;
+    const x = e.pageX - offsetLeft;
+    const y = e.pageY - offsetTop;
 
-    setMouseX(x);
-    setMouseY(y);
+    return { x, y };
+  }
+
+  if(zoomedView){
+    //window.scrollTo(scrollX, scrollY);
   }
 
   function handleMouseMove(e) {
-    setMousePosition(e);
+    if(zoomedView) {
+      let { x, y } = mousePosition(e);
+      setMouseX(x);
+      setMouseY(y);
+    }
   }
 
   if (zoomedView) {
