@@ -22,7 +22,6 @@ const DisplayWrapper = styled.div`
   width: 40rem;
   position: relative;
   margin: .5rem 0 .5rem .5rem;
-  align-items: center;
   display: inline-block;
 `;
 
