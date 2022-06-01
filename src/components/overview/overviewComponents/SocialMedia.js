@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -10,32 +9,34 @@ import {
   TwitterIcon,
 } from 'react-share';
 
-const SocialMediaSpan = styled.span`
-  margin-left: .5rem;
+const SocialMediaWrap = styled.span`
+  margin-left: .25rem;
+  position: absolute;
+  top: 29rem;
+  left: 34.7rem;
+  width: 10rem;
+`;
+
+const StyledPinterestShareButton = styled(PinterestShareButton)`
+  margin-left: .25rem;
+`;
+
+const StyledTwitterShareButton = styled(TwitterShareButton)`
+  margin-left: .25rem;
 `;
 
 export default function SocialMedia({ url, slogan }) {
   return (
-    <div>
-      <SocialMediaSpan>
-        <FacebookShareButton url={url} quote={slogan}>
-          <FacebookIcon size={24} round />
-        </FacebookShareButton>
-      </SocialMediaSpan>
-      <SocialMediaSpan>
-        <PinterestShareButton media={url} url={url} description={slogan}>
-          <PinterestIcon size={24} round />
-        </PinterestShareButton>
-      </SocialMediaSpan>
-      <SocialMediaSpan>
-        <TwitterShareButton url={url} title={slogan}>
-          <TwitterIcon size={24} round />
-        </TwitterShareButton>
-      </SocialMediaSpan>
-    </div>
+    <SocialMediaWrap>
+      <FacebookShareButton url={url} quote={slogan}>
+        <FacebookIcon size="1.75rem" round />
+      </FacebookShareButton>
+      <StyledPinterestShareButton media={url} url={url} description={slogan}>
+        <PinterestIcon size="1.75rem" round />
+      </StyledPinterestShareButton>
+      <StyledTwitterShareButton url={url} title={slogan}>
+        <TwitterIcon size="1.75rem" round />
+      </StyledTwitterShareButton>
+    </SocialMediaWrap>
   );
 }
-
-SocialMedia.propTypes = {
-
-};

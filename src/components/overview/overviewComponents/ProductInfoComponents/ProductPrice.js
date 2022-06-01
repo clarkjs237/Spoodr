@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const PriceContainer = styled.p`
-  margin-top: 1em;
+  margin-top: 1rem;
+  font-size: 1.125;
 `;
 
 const Price = styled.span`
@@ -18,18 +18,15 @@ export default function ProductPrice({ productOrginalPrice, productSalePrice }) 
   if (productSalePrice) {
     return (
       <PriceContainer>
-        <Price sale>{`$${productSalePrice}`}</Price>
-        <Price orgsale>{`$${productOrginalPrice}`}</Price>
+        <Price sale>{`$${parseInt(productSalePrice)}`}</Price>
+        <Price orgsale>{`$${parseInt(productOrginalPrice)}`}</Price>
       </PriceContainer>
     );
   }
   return (
     <PriceContainer>
-      <Price>{`$${productOrginalPrice}`}</Price>
+      <Price>{`$${parseInt(productOrginalPrice)}`}</Price>
     </PriceContainer>
   );
 }
 
-ProductPrice.propTypes = {
-
-};

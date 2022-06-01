@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 const Thumbnail = styled.img`
   border: solid;
+  object-fit: cover;
   border-width: .1rem;
   border-color: ${(props) => (props.selected ? '#90D7FF' : '#32292F')};
-  height: 2.5rem;
-  width: 2rem;
-  margin: .01rem;
+  height: 3.17rem;
+  width: 3.17rem;
+  margin: 0rem;
   cursor: pointer;
   &:hover {
     border-color: #90D7FF;
@@ -25,9 +26,9 @@ export default function ThumbnailImage({
   }
 
   if (id === curDisplayIndex) {
-    return <div><Thumbnail selected src={thumbnail} name={id} onClick={onClickHandler} /></div>;
+    return <Thumbnail selected src={thumbnail} name={id} onClick={onClickHandler} />;
   }
   return (
-    <div><Thumbnail src={thumbnail} name={id} onClick={onClickHandler} /></div>
+    <Thumbnail src={thumbnail} name={id} onClick={onClickHandler} />
   );
 }

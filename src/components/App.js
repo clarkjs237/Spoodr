@@ -3,30 +3,26 @@ import styled from 'styled-components';
 import Overview from './overview/Overview';
 import Questions from './questions/Questions';
 import Related from './related/Related';
-import Reviews from './reviews/Reviews';
+import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 
-export const PRODUCT_ID = 65631;
-export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+export const PRODUCT_ID = 40351;
+export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
 // In the file you need these variables in, do:
 // import { PRODUCT_ID, URL } from '../App';
-
-// const Title = styled.h1`
-// font-size: 1.5em;
-// text-align: center;
-// color: palevioletred;
-// `;
-// const Wrapper = styled.section`
-// padding: 4em;
-// background: papayawhip;
-// `;
 
 function App() {
   const [product, setProduct] = useState({ id: PRODUCT_ID });
   const [productStyle, setProductStyle] = useState({});
-  const [reviewsMeta, setReviewsMeta] = useState({});
+  const [reviewsMeta, setReviewsMeta] = useState({
+    recommended: { true: '0', false: '0' },
+    ratings: { 5: '0', 4: '0', 3: '0', 2: '0', 1: '0'},
+    characteristics: {},
+  });
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const [averageStarRating, setAverageStarRating] = useState(0);
+
+  const [curStyleId, setCurStyleId] = useState(0);
 
   function updateProductByID(id) {
     fetch(`${URL}/products/${id}`, {
@@ -75,9 +71,10 @@ function App() {
   }
 
   // Sully's event handler function
-  function handleRelatedItemClick(id) {
+  function handleItemClick(id) {
     // This will change the state of product by using setProduct
-    console.log('Related Product ID : ' + id);
+    console.log('Page Reload For Product ID : ' + id);
+
     // setProduct({ id: id });
   }
   useEffect(() => {
@@ -93,13 +90,18 @@ function App() {
         totalReviews={totalReviews}
         averageRating={averageRating}
         averageStarRating={averageStarRating}
+        curStyleId={curStyleId}
+        setCurStyleId={setCurStyleId}
       />
-      <Questions product={product} />
       <Related
         product={product}
-        handleRelatedItemClick={handleRelatedItemClick}
+        handleItemClick={handleItemClick}
+        productStyle={productStyle}
+        curStyleId={curStyleId}
+        averageStarRating={averageStarRating}
       />
-      <Reviews
+      <Questions product={product} />
+      <RatingsAndReviews
         product={product}
         totalReviews={totalReviews}
         averageRating={averageRating}
