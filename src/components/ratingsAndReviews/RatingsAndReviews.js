@@ -18,7 +18,10 @@ function RatingsAndReviews(props) {
           />
         </div>
         <div>
-          <Reviews totalReviews={props.totalReviews}/>
+          <Reviews
+            totalReviews={props.totalReviews}
+            reviewsMeta={props.reviewsMeta}
+          />
         </div>
       </div>
     </div>

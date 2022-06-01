@@ -10,7 +10,7 @@ function Reviews(props) {
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(2);
   const [sort, setSort] = useState('relevant');
-  const [toggleModal, setToggleModal] = useState(false)
+  const [toggleModal, setToggleModal] = useState(false);
 
   function getReviews() {
     fetch(
@@ -66,7 +66,10 @@ function Reviews(props) {
       { toggleModal
       && (
       <div className="Modal">
-        <AddReviewForm handleToggleModalChange={handleToggleModalChange} />
+        <AddReviewForm
+          handleToggleModalChange={handleToggleModalChange}
+          reviewsMeta={props.reviewsMeta}
+        />
       </div>
       )}
       { reviews.length === count && reviews.length > 0
