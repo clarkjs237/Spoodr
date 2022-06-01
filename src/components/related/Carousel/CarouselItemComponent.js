@@ -82,7 +82,6 @@ export default function CarouselItemComponent({
     }
   }
 
-
   if (defStyle && info && review && id && (review !== undefined)) {
     return (
       <CarouselItem outfit={outfit} onClick={individualCardClicked}>

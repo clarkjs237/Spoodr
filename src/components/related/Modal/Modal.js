@@ -47,6 +47,25 @@ export default function Modal({
     setIsOpen(false);
     setModalCardIndex(null);
   }
+
+  // useEffect here is to make use of the Escape key to exit the modal window
+  useEffect(() => {
+    function closeModalByEsc(e) {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        setModalCardIndex(null);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', closeModalByEsc);
+    } else {
+      return () => {
+        document.removeEventListener('keydown', closeModalByEsc);
+      };
+    }
+  });
+
   // Actually places the modal into the DOM
   function placeModal() {
     if (isOpen) {
