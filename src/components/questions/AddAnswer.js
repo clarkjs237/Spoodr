@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 
-function AskQuestion({
-  product, getQuestions, isDialogOpen, setIsDialogOpen,
-}) {
+function AddAnswer({ isDialogOpen, setIsDialogOpen, questionId, getAnswers }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [askQuestion, setAskQuestion] = useState('');
+  const [answer, setAnswer] = useState('');
 
-  const handleQuestionSubmit = async () => {
+  const handleAnswerSubmit = async () => {
     event.preventDefault();
     const data = {
-      body: askQuestion,
+      body: answer,
       name: username,
       email,
-      product_id: product.id,
     };
     try {
-      await fetch(`${process.env.URL}/qa/questions`, {
+      await fetch(`${process.env.URL}/qa/questions/${questionId}/answers`, {
         method: 'POST',
         headers: {
           Authorization: process.env.GITTOKEN,
@@ -26,7 +23,7 @@ function AskQuestion({
         body: JSON.stringify(data),
       });
       setIsDialogOpen(false);
-      getQuestions();
+      getAnswers();
     } catch (error) {
       console.error(error);
     }
@@ -40,8 +37,8 @@ function AskQuestion({
     setEmail(event.target.value);
   };
 
-  const handleAskQuestionChange = (event) => {
-    setAskQuestion(event.target.value);
+  const handleAnswerChange = (event) => {
+    setAnswer(event.target.value);
   };
 
   return (
@@ -50,12 +47,11 @@ function AskQuestion({
       onClose={() => setIsDialogOpen(false)}
     >
       <Dialog.Panel>
-        <Dialog.Title>Ask Your Question</Dialog.Title>
+        <Dialog.Title>Add your answer</Dialog.Title>
         <Dialog.Description>
-          About the
-          {product.name}
+          Description
         </Dialog.Description>
-        <form onSubmit={handleQuestionSubmit}>
+        <form onSubmit={handleAnswerSubmit}>
           <label htmlFor="username">
             Username:
             <input
@@ -74,12 +70,12 @@ function AskQuestion({
               onChange={handleEmailChange}
             />
           </label>
-          <label htmlFor="question">
+          <label htmlFor="answer">
             Your question:
             <textarea
-              id="question"
-              value={askQuestion}
-              onChange={handleAskQuestionChange}
+              id="answer"
+              value={answer}
+              onChange={handleAnswerChange}
             />
           </label>
           <input type="submit" value="Submit" />
@@ -89,4 +85,4 @@ function AskQuestion({
   );
 }
 
-export default AskQuestion;
+export default AddAnswer;

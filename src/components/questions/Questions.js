@@ -64,6 +64,7 @@ function Questions({ product }) {
             body={question.question_body}
             helpfulness={question.question_helpfulness}
             getQuestions={getQuestions}
+            product={product}
           />
         ))}
         {hasMoreQuestions && (
