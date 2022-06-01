@@ -14,14 +14,25 @@ const CarouselItem = styled.div`
   background-color: #EAC9C1;
   margin: 0.5rem;
   cursor: pointer;
-  border: 1.5px solid #32292F;
-  box-shadow: 0.1rem 0.1rem 0.5rem black;
 
+  // border: 1.5px solid #32292F;
+
+  &:hover: {
+    border-color: #32292F;
+    box-shadow: 0.1rem 0.1rem 0.5rem black;
+  }
 
   // position: absolute;
 
   // For whatever reason, I need this line for the outfit list formatting
   transform: ${(props) => (props.outfit ? 'translateY(-9.4rem)' : 'translateY(0rem)')}
+
+  // This down here messes things up for some reason
+  // border: 1.5px solid;
+  // &:hover: {
+  //   border-color: #32292F;
+  //   box-shadow: 0.1rem 0.1rem 0.5rem black;
+  // }
 `;
 
 const InsideCarousel = styled.div`
@@ -57,6 +68,9 @@ const ActionButton = styled.div`
   }}
   }
   cursor: pointer;
+  // &:hover {
+  //   color: #90D7FF;
+  // }
 `;
 
 const BottomWrapper = styled.div`

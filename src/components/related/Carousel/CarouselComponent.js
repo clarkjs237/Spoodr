@@ -25,7 +25,7 @@ const CarouselWindow = styled.div`
   position: relative;
 
   // Changes
-  border: 1px green solid;
+  // border: 1px green solid;
 `;
 
 const Blur = styled.div`
@@ -93,7 +93,7 @@ const Container = styled.div`
 
   // Attempted changes
   // position: absolute;
-  border: 1px solid blue;
+  // border: 1px solid blue;
 `;
 
 export const AddOutfitCard = styled.div`
@@ -107,11 +107,12 @@ export const AddOutfitCard = styled.div`
   background-color: #EAC9C1;
   margin: 0.5rem;
   cursor: pointer;
-  border: 1.5px solid #32292F;
+  // border: 1.5px solid #32292F;
   transform: translateY(-0.3rem);
   position: relative;
+
   background-image: linear-gradient(to bottom, white, transparent);
-  box-shadow: 0.1rem 0.1rem 0.5rem black;
+  // box-shadow: 0.1rem 0.1rem 0.5rem black;
 `;
 
 const AddOutfitButton = styled.span`
