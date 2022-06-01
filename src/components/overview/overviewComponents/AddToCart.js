@@ -7,13 +7,13 @@ import { URL } from '../../App';
 const StyledSubmitButton = styled.input`
   font-size: 1.125rem;
   color: #0B2027;
-  width: 17rem;
+  width: 15.5rem;
   background-color: #90D7FF;
-  padding: .5rem;
-  border: solid;
+  padding: 1rem;
+
   border-color: #32292F;
-  border-width: .1rem;
-  border-radius: .25rem;
+
+  border-width: 0;
   text-align: left;
   &:hover {
     border-color: #D3AB9E;
@@ -28,13 +28,13 @@ const StyledForm = styled.form`
 const selectStyles = {
   option: (styles, { isSelected, selectProps: { width } }) => ({
     ...styles,
-    backgroundColor: '#D3AB9E',
+    backgroundColor: 'white',
     color: isSelected ? '#90D7FF' : '#0B2027',
-    border: '.01rem dotted #32292F',
     width,
+    height: 'auto',
   }),
   control: (styles, { selectProps: { width } }) => ({
-    ...styles, backgroundColor: '#90D7FF', border: '.1rem solid #32292F', width, color: '#32292F', '&:hover': {borderColor: '#D3AB9E', color: '#D3AB9E' }
+    ...styles, backgroundColor: '#90D7FF', borderRadius: '0', border: '0', width, color: '#32292F', '&:hover': { color: '#D3AB9E' }
   }),
   dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#D3AB9E' }})),
   indicatorSeparator: ((styles) => ({...styles, backgroundColor: 'inherit'})),
@@ -102,7 +102,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   let submitButton = (
     <StyledSubmitButton
       type="submit"
-      value="ADD TO BAG                          +"
+      value="ADD TO BAG                   +"
     />
   );
 
@@ -127,7 +127,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         openMenuOnFocus
         ref={(r) => refs = r}
         styles={selectStyles}
-        width={menuOpen ? 'auto' : '11.5rem'}
+        width={menuOpen ? 'auto' : '10.75rem'}
         placeholderColor={menuOpen ? '#0B2027' : '#D3AB9E'}
       />
       <Select
@@ -137,7 +137,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         placeholder="-"
         value={selectedQuant}
         styles={selectStyles}
-        width="5rem"
+        width="4.25rem"
       />
       <div>
         {submitButton}

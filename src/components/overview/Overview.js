@@ -9,7 +9,6 @@ import AddToCart from './overviewComponents/AddToCart';
 
 const ProductOverview = styled.div`
   white-space: nowrap;
-  overflow-x: hidden;
 `;
 
 const InfoSelectorCartDiv = styled.div`
@@ -19,7 +18,7 @@ const InfoSelectorCartDiv = styled.div`
   margin-top: .5rem;
   font-size: 1.125rem;
   vertical-align: top;
-  white-space: normal;
+
 `;
 
 const ProductSlogan = styled.h4`

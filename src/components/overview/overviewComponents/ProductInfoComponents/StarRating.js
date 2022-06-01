@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const starColor = '#32292F';
+const starBlank = '#90D7FF';
+
 const Star = styled.span`
   background: ${(props) => {
     if (props.full) {
-      return '#0B2027';
+      return starColor;
     } if (props.half) {
-      return '-webkit-linear-gradient(0deg, #0B2027 50%, #D3AB9E 50%)';
+      return `-webkit-linear-gradient(0deg, ${starColor} 50%, ${starBlank} 50%)`;
     } if (props.quarter) {
-      return '-webkit-linear-gradient(0deg, #0B2027 40%, #D3AB9E 40%)';
+      return `-webkit-linear-gradient(0deg, ${starColor} 40%, ${starBlank} 40%)`;
     } if (props.threequarter) {
-      return '-webkit-linear-gradient(0deg, #0B2027 60%, #D3AB9E 60%)';
+      return `-webkit-linear-gradient(0deg, ${starColor} 60%, ${starBlank} 60%)`;
     }
-    return '#D3AB9E';
+    return starBlank;
   }};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

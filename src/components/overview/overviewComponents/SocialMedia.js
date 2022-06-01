@@ -12,8 +12,8 @@ import {
 const SocialMediaWrap = styled.span`
   margin-left: .25rem;
   position: absolute;
-  top: 29rem;
-  left: 34.7rem;
+  top: 28.5rem;
+  left: 34rem;
   width: 10rem;
 `;
 
@@ -29,13 +29,13 @@ export default function SocialMedia({ url, slogan }) {
   return (
     <SocialMediaWrap>
       <FacebookShareButton url={url} quote={slogan}>
-        <FacebookIcon size="1.75rem" round />
+        <FacebookIcon size="1.75rem" />
       </FacebookShareButton>
       <StyledPinterestShareButton media={url} url={url} description={slogan}>
-        <PinterestIcon size="1.75rem" round />
+        <PinterestIcon size="1.75rem"  />
       </StyledPinterestShareButton>
       <StyledTwitterShareButton url={url} title={slogan}>
-        <TwitterIcon size="1.75rem" round />
+        <TwitterIcon size="1.75rem"  />
       </StyledTwitterShareButton>
     </SocialMediaWrap>
   );

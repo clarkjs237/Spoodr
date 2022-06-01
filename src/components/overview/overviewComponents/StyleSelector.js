@@ -14,6 +14,10 @@ const ThumbnailDisplay = styled.div`
   position: relative;
 `;
 
+const StyleWrap = styled.div`
+  margin-bottom: .4rem;
+`;
+
 export default function StyleSelector({
   curStyleId,
   setCurStyleId,
@@ -24,7 +28,7 @@ export default function StyleSelector({
   const styleThumbnailsByFour = [...Array(setsOfFour)].map((und, i) => styleThumbnails.slice(i * 4, (i + 1) * 4));
 
   return (
-    <>
+    <StyleWrap>
       <StyleName>
         <Style>{'STYLE > '}</Style>
         {curStyleName.toUpperCase()}
@@ -36,6 +40,6 @@ export default function StyleSelector({
           </ThumbnailDisplay>
         ))}
       </ThumbnailDisplay>
-    </>
+    </StyleWrap>
   );
 }
