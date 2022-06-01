@@ -5,14 +5,16 @@ function Search({
 }) {
   return (
     <section>
-      <label htmlFor={id}>Questions & answers</label>
-      <input
-        id={id}
-        type={type}
-        value={value}
-        placeholder="Have a question? Search for answers..."
-        onChange={onInputChange}
-      />
+      <label htmlFor={id}>
+        Questions & answers
+        <input
+          id={id}
+          type={type}
+          value={value}
+          placeholder="Have a question? Search for answers..."
+          onChange={onInputChange}
+        />
+      </label>
     </section>
   );
 }
