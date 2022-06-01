@@ -23,7 +23,7 @@ const CloseModalButton = styled.span`
   right: 1rem;
   font-size: 1.8rem;
   &:before {
-    content: "\\2716";
+    content: "\\2715";
   }
   cursor: pointer;
   &:hover {

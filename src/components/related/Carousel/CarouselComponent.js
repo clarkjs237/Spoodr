@@ -196,7 +196,7 @@ export default function CarouselComponent({
                 id={Object.keys(relStyles)[index]}
                 info={Object.values(relInfos)[index]}
                 review={Object.values(relReviews)[index]}
-                outfit={false}
+                list={'related'} // specify which list this is for
                 index={index}
                 // add individual card functionality here
                 // this is where the modal functionality will go
@@ -264,7 +264,7 @@ export default function CarouselComponent({
                 id={item.id}
                 info={item.info}
                 review={item.review}
-                outfit={true}
+                list={'outfit'} // specify which list this is for
                 index={index}
                 // add individual card functionality here
                 removeItemFromOutfit={removeItemFromOutfit}

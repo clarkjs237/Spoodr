@@ -17,7 +17,7 @@ const RelatedAndOutfitContainer = styled.div`
   position: relative;
 
   // Changes
-  // border: 1px red solid;
+  border: 1px red solid;
   width: fit-content;
 `;
 

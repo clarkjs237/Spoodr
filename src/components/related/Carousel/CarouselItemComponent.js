@@ -17,15 +17,16 @@ const CarouselItem = styled.div`
 
   // border: 1.5px solid #32292F;
 
-  &:hover: {
-    border-color: #32292F;
-    box-shadow: 0.1rem 0.1rem 0.5rem black;
-  }
+  // &:hover: {
+  //   border-color: #32292F;
+  //   box-shadow: 0.1rem 0.1rem 0.5rem black;
+  // }
 
+  position: relative;
   // position: absolute;
 
   // For whatever reason, I need this line for the outfit list formatting
-  transform: ${(props) => (props.outfit ? 'translateY(-9.4rem)' : 'translateY(0rem)')}
+  transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.4rem)' : 'translateY(0rem)')}
 
   // This down here messes things up for some reason
   // border: 1.5px solid;
@@ -47,30 +48,32 @@ const Photo = styled.img`
   // position: absolute;
 `;
 
-const ActionButton = styled.div`
+const ActionButton = styled.span`
   font-size: 1.6rem;
   left: 10.7rem;
-  top: 0.1rem;
+  top: 0rem;
   position: absolute;
+  cursor: pointer;
   &:hover {
     color: #90D7FF;
   }
+  // 2716, 2613
   &:before {
     ${(props) => {
-    if (props.outfit) {
+    if (props.list === 'outfit') {
       return css`
-        content: "\\2716";
+        content: "\\2715";
+        font-size: 1.4rem;
+        // top: 0rem;
       `;
     }
     return css`
       content: "\\2605";
+      // top: 0.1rem;
     `;
   }}
   }
-  cursor: pointer;
-  // &:hover {
-  //   color: #90D7FF;
-  // }
+
 `;
 
 const BottomWrapper = styled.div`
@@ -82,7 +85,7 @@ export default function CarouselItemComponent({
   id,       // product id (in string)
   info,     // general product info (object with at least category_name and product_name)
   review,   // an average rating (number) - exclude review from this bc it could be zero
-  outfit,   // boolean, true if this belongs to the outfit list, false if it's related item
+  list,   // boolean, true if this belongs to the outfit list, false if it's related item
   index,      // specific index in the list, in string I believe
   removeItemFromOutfit, // this is for Outfit only. Will return specific index
   comparisonModal, // this is for RelatedList only. Will return a specific index
@@ -97,16 +100,16 @@ export default function CarouselItemComponent({
     e.stopPropagation(); // need this in order to not activate things below
     // If this action is coming from the outfit, do removeItemFromOutfit
     // Else, do comparisonModal for relatedList
-    if (outfit) {
+    if (list === 'outfit') {
       removeItemFromOutfit(index);
     } else {
       comparisonModal(index);
     }
   }
 
-  if (defStyle && info && review && id && (review !== undefined)) {
+  if (defStyle && info && review && id && list && (review !== undefined)) {
     return (
-      <CarouselItem outfit={outfit} onClick={individualCardClicked}>
+      <CarouselItem list={list} onClick={individualCardClicked}>
         <InsideCarousel>
           <Photo src={defStyle.photos['0'].thumbnail_url}/>
           <BottomWrapper>
@@ -121,7 +124,7 @@ export default function CarouselItemComponent({
             />
           </BottomWrapper>
 
-          <ActionButton outfit={outfit} onClick={actionButtonClick}/>
+          <ActionButton list={list} onClick={actionButtonClick}/>
         </InsideCarousel>
       </CarouselItem>
     );
