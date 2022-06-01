@@ -14,8 +14,8 @@ const ImageGalleryExpandedWrapper = styled.div`
 
 const ExpandedImage = styled.img`
   display: inline-block;
-  width: ${(props) => (props.zoom ? '250%' : '100%')};
-  height: ${(props) => (props.zoom ? 'auto' : '92vh')};
+  width: ${(props) => (props.zoom ? '247.5vw' : '99vw')};
+  height: ${(props) => (props.zoom ? '230vh' : '92vh')};
   border: solid;
   border-width: .1rem;
   margin-left: auto;
@@ -60,11 +60,16 @@ export default function ImageGalleryExpanded({
       if (zoomedView) {
         setScrollX(0);
         setScrollY(0);
+        // setMouseX(0);
+        // setMouseY(0);
         setZoomedView(false);
       } else {
         let { x, y } = mousePosition(e);
-        setScrollX(1.5 * x);
-        setScrollY(2.5 * y);
+        debugger;
+        setScrollX((2.5 * x - .5) * e.target.clientWidth);
+        setScrollY((2.5 * y - .5) * e.target.clientHeight);
+        // setMouseX(scrollX);
+        // setMouseY(scrollY);
         setZoomedView(true);
       }
     }
@@ -96,21 +101,24 @@ export default function ImageGalleryExpanded({
       top: offsetTop,
       left: offsetLeft,
     } = e.target.getBoundingClientRect();
-
-    const x = e.pageX - offsetLeft;
-    const y = e.pageY - offsetTop;
+    const x = (e.pageX - offsetLeft)/e.target.clientWidth;
+    const y = (e.pageY - offsetTop)/e.target.clientHeight;
 
     return { x, y };
   }
 
   if(zoomedView){
-    //window.scrollTo(scrollX, scrollY);
+      // if(mouseX > (scrollX)){
+      //   setScrollX(scrollX + 1)
+      // } else if(mouseX < (scrollX)) {
+      //   setScrollX(scrollX - 1)
+      // }
   }
 
   function handleMouseMove(e) {
     if(zoomedView) {
       let { x, y } = mousePosition(e);
-      setMouseX(x);
+      setMouseX(x - e.target.clientWidth / 2);
       setMouseY(y);
     }
   }
