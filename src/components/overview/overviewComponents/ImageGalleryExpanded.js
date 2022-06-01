@@ -50,27 +50,15 @@ export default function ImageGalleryExpanded({
   setExpandedView,
 }) {
   const [zoomedView, setZoomedView] = useState(false);
-  // const [mouseX, setMouseX] = useState(0);
-  // const [mouseY, setMouseY] = useState(0);
-  // const [scrollX, setScrollX] = useState(0);
-  // const [scrollY, setScrollY] = useState(0);
   const [scroll, setScroll] = useState({x: 0, y: 0});
-  //const [mouse, setMouse] = useState({x: 0, y: 0});
-
 
   function onClickHandler(e) {
     if (e.target.id === 'ExpandedImage') {
       if (zoomedView) {
         setScroll({x: 0, y: 0});
-        // setMouseX(0);
-        // setMouseY(0);
         setZoomedView(false);
       } else {
         let { x, y } = mousePosition(e);
-        // setMouse({
-        //   x: (2.5 * x),
-        //   y: (2.5 * y)
-        // });
         setScroll({
           x: 2.5 * x - .5 * e.target.clientWidth,
           y: 2.5 * y - .5 * e.target.clientHeight
@@ -108,15 +96,6 @@ export default function ImageGalleryExpanded({
 
     return { x, y };
   }
-
-  // if(zoomedView){
-  //   window.scrollTo(scrollX, scrollY)
-  //   if(mouseX > (scrollX)){
-  //       setScrollX(scrollX + 10)
-  //     } else if(mouseX < (scrollX)) {
-  //       setScrollX(scrollX - 10)
-  //     }
-  // }
 
   function handleMouseMove(e) {
     if(zoomedView) {
