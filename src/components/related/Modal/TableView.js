@@ -26,6 +26,7 @@ const CloseModalButton = styled.span`
     content: "\\2715";
   }
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
   &:hover {
     color: #90D7FF;
   }
@@ -139,6 +140,11 @@ export default function TableView({
     generateOverviewList();
     generateSizeList();
   }, [relatedProduct]);
+
+  if (!overviewProduct || !overviewStyle || !overviewRating ||
+      !relatedProduct || !relatedStyle || !relatedRating) {
+    return <div>Empty</div>;
+  }
 
   return (
     <TableContainer>
