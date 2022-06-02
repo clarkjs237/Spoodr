@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 import axios from 'axios';
@@ -68,6 +68,11 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
     });
   }
 
+  useEffect(()=>{
+    setSelectedQuant('');
+      setSelectedSize('');
+  },[curStyleQuantAndSizes]);
+
   function onSubmitHandler(e) {
     e.preventDefault();
     if (!selectedSize) {
@@ -88,6 +93,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
 
   function onSizeChangeHandler(options) {
     setSelectedSize(options);
+    if(options.value !== 'Sold Out')
     setSelectedQuant({ value: 1, label: 1 });
   }
 

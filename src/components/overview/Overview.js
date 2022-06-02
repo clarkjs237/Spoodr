@@ -28,7 +28,7 @@ const ProductDescription = styled.div`
   display: inline-block;
   white-space: normal;
   overflow-x: wrap;
-  width: 40rem;
+  width: 52rem;
   margin-top: 1rem;
 `;
 
