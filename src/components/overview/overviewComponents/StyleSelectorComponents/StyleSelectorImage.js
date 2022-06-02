@@ -5,7 +5,7 @@ const StyleImage = styled.img`
   object-fit: cover;
   color: white;
   border: solid;
-  border-radius: 50%;
+  //border-radius: 50%;
   cursor: pointer;
   margin-right: 1rem;
   width: 3.5rem;
@@ -27,7 +27,7 @@ const Check = styled.label`
   color: #32292F;
   background-color: #90D7FF;
   top: -2.75rem;
-  left: 2.75rem;
+  left: 2.9rem;
   font-size: .5rem;
   font-weight: bold;
   width: .5rem;
