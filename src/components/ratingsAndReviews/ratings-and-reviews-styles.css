@@ -1,0 +1,165 @@
+/* -------- R&R styles -------- */
+
+/* --- Global --- */
+.ratings-and-reviews{
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.underline-button {
+  border-style: none;
+  background: none;
+  text-decoration: underline;
+}
+
+.Modal {
+  background-color: bisque;
+  position: fixed;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+/* --- Ratings --- */
+.ratings{
+  width: 400px;
+}
+
+.rating-summary {
+  display: flex;
+}
+
+.average-rating {
+  font-size: 3rem;
+}
+
+meter::-webkit-meter-bar {
+  /* background: #eee;
+  border-radius: 0px; */
+  /* width: 200px;
+  height: 10px; */
+  -webkit-appearance: none; /* Reset appearance */
+  border: 1px solid #ccc;
+  border-radius: 0px;
+}
+
+.characteristic-limits{
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* -------- Reviews --------- */
+
+.reviews{
+  width: auto;
+}
+
+/* --- Sort --- */
+.sort-form {
+  display: flex;
+}
+
+/* --- Review Item --- */
+.review-list {
+  overflow-y: scroll;
+  max-height: 500px;
+  padding-bottom: 20px;
+}
+
+.review-list-item {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.review-item-header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.review-item-summary {
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.review-item-body {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  max-width: 500px;
+
+}
+
+.review-item-body-text {
+
+}
+
+.review-item-body-text-scroll {
+  overflow-y: scroll;
+  max-height: 150px;
+}
+
+.review-item-photos {
+  padding-top: 5px;
+  padding-right: 5px;
+  max-height: 50px;
+  max-width: 100%;
+  display: flex;
+}
+
+.review-list-item-thumbnail {
+  padding-top: 5px;
+  padding-right: 5px;
+  max-height: 50px;
+  /* max-width: 100%; */
+}
+
+.review-list-item-modal {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 500px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 25px;
+}
+
+.review-list-item-modal-image {
+  padding-top: 5px;
+  padding-right: 5px;
+  margin: auto;
+  width: 500px;
+}
+
+.review-photo-modal-close-button {
+  border-style: none;
+  background: none;
+}
+
+.review-item-recommend {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.review-item-response {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.review-item-helpful {
+  padding-right: 5px;
+}
+
+.review-item-footer {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
