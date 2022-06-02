@@ -9,11 +9,11 @@ const NavArrow = styled.div`
   opacity: ${(props) => (props.clear ? '0' : '1')};
   height: auto;
   width: .1rem;
-  margin-left: ${(props) => (props.id === 'top' ? '1.8rem' : '1.45rem')};
+  margin-left: ${(props) => (props.id === 'top' ? '1.9rem' : '1.55rem')};
   border-width: 0;
   &:hover {
     color: #90D7FF;
-    cursor: pointer;
+    cursor: ${(props) => (props.clear ? 'zoom' : 'pointer')};
   }
 `;
 
