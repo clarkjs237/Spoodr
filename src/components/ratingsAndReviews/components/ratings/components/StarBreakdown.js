@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+const StyledStarsBreakdown = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+`;
+
 const StyledStarBreakdown = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 10px;
 `;
@@ -25,28 +33,28 @@ function StarBreakdown(props) {
   }, [props.reviewsMeta.ratings]);
 
   return (
-    <div>
+    <StyledStarsBreakdown>
       <StyledStarBreakdown>
-        <underline-button>5 stars</underline-button>
+        <underline-button>5&nbsp;stars</underline-button>
         <meter value={ratings['5']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
-        <underline-button>4 stars</underline-button>
+        <underline-button>4&nbsp;stars</underline-button>
         <meter value={ratings['4']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
-        <underline-button>3 stars</underline-button>
+        <underline-button>3&nbsp;stars</underline-button>
         <meter value={ratings['3']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
-        <underline-button>2 stars</underline-button>
+        <underline-button>2&nbsp;stars</underline-button>
         <meter value={ratings['2']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
-        <underline-button>1 stars</underline-button>
+        <underline-button>1&nbsp;stars</underline-button>
         <meter value={ratings['1']} min={0} max={100}/>
       </StyledStarBreakdown>
-    </div>
+    </StyledStarsBreakdown>
   );
 }
 

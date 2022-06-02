@@ -10,7 +10,9 @@ const StyledRatings = styled.div`
   align-items: flex-start;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
   min-width: 200px;
+  padding: 10px;
 `;
 
 function Ratings(props) {

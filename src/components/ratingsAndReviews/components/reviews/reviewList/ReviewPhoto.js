@@ -17,14 +17,17 @@ function ReviewPhoto(props) {
       />
       {toggleModal
       && (
-      <div className="Modal">
-        <button type="button" className="review-photo-modal-close-button" onClick={handleToggleModal}>🆇</button>
-        <img
-          className="review-list-item-modal-image"
-          src={props.url}
-          alt="modal"
-        />
-      </div>
+        <div>
+          <div className='Modal-bg'></div>
+          <div className="Modal">
+            <button type="button" className="review-photo-modal-close-button" onClick={handleToggleModal}>🆇</button>
+            <img
+              className="review-list-item-modal-image"
+              src={props.url}
+              alt="modal"
+            />
+          </div>
+        </div>
       )}
     </div>
   );

@@ -18,11 +18,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
-  button {
-    background-color: #90D7FF;
-    border-width: 0px;
+  button{
+    background-color: white;
+    border-width: 1px;
+    border-color: black;
     padding: 1rem;
-    margin: 2px;
   }
 
   underline-button {

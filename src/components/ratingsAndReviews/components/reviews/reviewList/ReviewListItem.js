@@ -1,9 +1,13 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import StarRating from '../../../../overview/overviewComponents/ProductInfoComponents/StarRating';
 import ReviewPhoto from './ReviewPhoto';
 import { URL } from "../../../../App";
 import { format } from 'date-fns';
+
+const StyledReviewListItem = styled.div`
+`
 
 function ReviewListItem(props) {
   const [helpfulness, setHelpfulness] = useState(
@@ -88,7 +92,7 @@ function ReviewListItem(props) {
           </div>
         )
       }
-      <div className="review-item-footer" style={{fontSize: "small"}}>
+      <div className="review-item-footer">
         <div className="review-item-helpful">
           Helpful?&nbsp;
           { !helpfulness.clicked

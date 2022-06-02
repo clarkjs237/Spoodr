@@ -4,7 +4,7 @@ import ReviewListItem from './ReviewListItem';
 
 function ReviewsList(props) {
   return (
-    <div>
+    <div className="review-list">
       {props.reviews.map((review, index) => (
         <ReviewListItem
           review={review}
