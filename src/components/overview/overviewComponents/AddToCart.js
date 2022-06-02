@@ -6,18 +6,16 @@ import { URL } from '../../App';
 
 const StyledSubmitButton = styled.input`
   font-size: 1.125rem;
+  border:solid;
   color: #0B2027;
   width: 15.5rem;
-  background-color: #90D7FF;
+  background-color: white;
   padding: 1rem;
-
   border-color: #32292F;
-
-  border-width: 0;
+  border-width: 1.5px;
   text-align: left;
   &:hover {
-    border-color: #D3AB9E;
-    color: #D3AB9E;
+    border-color: #90D7FF;
     cursor: pointer;
   }
 `;
@@ -34,9 +32,9 @@ const selectStyles = {
     height: 'auto',
   }),
   control: (styles, { selectProps: { width } }) => ({
-    ...styles, backgroundColor: '#90D7FF', borderRadius: '0', border: '0', width, color: '#32292F', '&:hover': { color: '#D3AB9E' }
+    ...styles, backgroundColor: 'white', borderRadius: '0', border: 'solid', 'border-width': '1.5px', width, color: '#32292F', '&:hover': { 'border-color': '#90D7FF' }
   }),
-  dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#D3AB9E' }})),
+  dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#0B2027' }})),
   indicatorSeparator: ((styles) => ({...styles, backgroundColor: 'inherit'})),
   singleValue: (styles) => ({ ...styles, color: '#0B2027' }),
   container: (styles, { selectProps: { width } }) => ({

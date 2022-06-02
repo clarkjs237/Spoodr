@@ -14,19 +14,14 @@ const ProductOverview = styled.div`
 const InfoSelectorCartDiv = styled.div`
   display: inline-block;
   position: top;
-  margin-left: .5rem;
-  margin-top: .5rem;
-  font-size: 1.125rem;
   vertical-align: top;
-
+  margin-left: 1rem;
 `;
 
 const ProductSlogan = styled.h4`
-  margin: .5rem;
 `;
 
 const ProductDescription = styled.p`
-  margin: .5rem;
   display: inline-block;
   white-space: normal;
   overflow-x: wrap;
