@@ -11,7 +11,7 @@ const CarouselItem = styled.div`
   min-width: 13rem;
   max-width: 13rem;
   max-height: 18rem;
-  background-color: #EAC9C1;
+  /* background-color: #EAC9C1; */
   margin: 0.5rem;
   cursor: pointer;
   position: relative;
@@ -66,7 +66,13 @@ const ActionButton = styled.span`
 `;
 
 const BottomWrapper = styled.div`
-  border: 2px red solid;
+  /* border: 2px red solid; */
+  position: absolute;
+  bottom: -0.1rem;
+  left: 0rem;
+  width:13rem;
+  height: 5.75rem;
+  background-color: #E8F2F4;
 `;
 
 export default function CarouselItemComponent({
