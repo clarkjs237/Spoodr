@@ -144,7 +144,6 @@ const BottomWrapper = styled.div`
   left: 0rem;
   width:13rem;
   height: 5.75rem;
-  /* background-color: ${(props) => (props.hover ? '#E8F2F4' : 'white')}; */
   transition: background-color 0.3s ease-in-out;
 
   ${(props) => {

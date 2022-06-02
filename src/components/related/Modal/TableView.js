@@ -9,7 +9,7 @@ const TableContainer = styled.div`
   width: 28rem;
   position: absolute;
   background-color: #EAC9C1;
-  background-image: linear-gradient(to bottom,white,transparent);
+  background-image: linear-gradient(to bottom,white 60%,transparent);
   border: 1.5px #32292F solid;
   transition: transform 0.5s ease-out;
   top: -73rem;

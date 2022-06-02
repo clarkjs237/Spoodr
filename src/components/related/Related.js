@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CarouselComponent, { AddOutfitCard, AddButtonText } from './Carousel/CarouselComponent';
 import Modal from './Modal/Modal';
 import { URL } from '../App';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Titles = styled.h1`
   font-size: 1em;
@@ -15,15 +15,26 @@ const RelatedAndOutfitContainer = styled.div`
 
   // Added this line, not sure if I'll need to keep it or not
   position: relative;
-
-  // Changes
-  /* border: 1px red solid; */
   width: fit-content;
 `;
 
 export const TextH3 = styled.h3`
   font-size: 1rem;
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+`;
+
+const ModalContainer = styled.div`
+  ${(props) => {
+    if (props.isOpen) {
+      return css`
+        opacity: 1;
+      `;
+    }
+    return css`
+      opacity: 0;
+    `;
+  }}
+  transition: opacity 0.2s ease-in-out;
 `;
 
 export const defFont = 'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"';
@@ -308,7 +319,7 @@ function Related({
           removeItemFromOutfit={removeItemFromOutfit}
           handleItemClick={handleItemClick}
         />
-        <div id="modal-root">
+        <ModalContainer id="modal-root" isOpen={isOpen}>
           <Modal
             modalCardIndex={modalCardIndex}
             setModalCardIndex={setModalCardIndex}
@@ -323,7 +334,7 @@ function Related({
             relatedStyle={Object.values(relStyles)[modalCardIndex]}
             relatedRating={Object.values(relReviews)[modalCardIndex]}
           />
-        </div>
+        </ModalContainer>
       </RelatedAndOutfitContainer>
     );
   }
@@ -359,7 +370,7 @@ function Related({
         removeItemFromOutfit={removeItemFromOutfit}
         handleItemClick={handleItemClick}
       />
-      <div id="modal-root">
+      <ModalContainer id="modal-root" isOpen={isOpen}>
         <Modal
           modalCardIndex={modalCardIndex}
           setModalCardIndex={setModalCardIndex}
@@ -374,7 +385,7 @@ function Related({
           relatedStyle={Object.values(relStyles)[modalCardIndex]}
           relatedRating={Object.values(relReviews)[modalCardIndex]}
         />
-      </div>
+      </ModalContainer>
     </RelatedAndOutfitContainer>
   );
 }
