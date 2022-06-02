@@ -31,20 +31,21 @@ const CarouselWindow = styled.div`
 const Blur = styled.div`
   position: absolute;
   width: 4.5rem;
-  height: 18.5rem;
-  top: 0.20rem;
+  height: 19.5rem;
 
   ${(props) => {
     if (props.left && props.activeIndex > 0) {
       return css`
         left: 0rem;
         background-image: linear-gradient(-90deg, transparent, white 80%);
+        top: -0.5rem;
       `;
     }
     if (!props.left) {
       return css`
         left: 44.5rem;
         background-image: linear-gradient(90deg, transparent, white 80%);
+        top: -0.15rem;
     `;
     }
     return css`

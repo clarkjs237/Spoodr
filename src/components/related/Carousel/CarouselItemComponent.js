@@ -14,26 +14,18 @@ const CarouselItem = styled.div`
   background-color: #EAC9C1;
   margin: 0.5rem;
   cursor: pointer;
-
-  // border: 1.5px solid #32292F;
-
-  // &:hover: {
-  //   border-color: #32292F;
-  //   box-shadow: 0.1rem 0.1rem 0.5rem black;
-  // }
-
   position: relative;
-  // position: absolute;
-
+  /* position: absolute; */
   // For whatever reason, I need this line for the outfit list formatting
-  transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.4rem)' : 'translateY(0rem)')}
+  transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.4rem)' : 'translateY(0rem)')};
 
-  // This down here messes things up for some reason
-  // border: 1.5px solid;
-  // &:hover: {
-  //   border-color: #32292F;
-  //   box-shadow: 0.1rem 0.1rem 0.5rem black;
-  // }
+  /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
+  &:hover {
+    margin-top: -0.1rem;
+    margin-right: 0.3rem;
+    border: 0.1rem solid #32292F;
+    box-shadow: 0.1rem 0.1rem 0.5rem black;
+  }
 `;
 
 const InsideCarousel = styled.div`
@@ -57,23 +49,19 @@ const ActionButton = styled.span`
   &:hover {
     color: #90D7FF;
   }
-  // 2716, 2613
   &:before {
     ${(props) => {
     if (props.list === 'outfit') {
       return css`
         content: "\\2715";
         font-size: 1.4rem;
-        // top: 0rem;
       `;
     }
     return css`
       content: "\\2605";
-      // top: 0.1rem;
     `;
   }}
   }
-
 `;
 
 const BottomWrapper = styled.div`
