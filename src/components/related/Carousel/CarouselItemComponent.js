@@ -72,6 +72,25 @@ const ProductName = styled.span`
   font-size: 1.13rem;
 `;
 
+const TextRatingPriceWrapper = styled.div`
+  position: absolute;
+  margin-left: 0.2rem;
+  width: 12rem;
+`;
+
+const ProductPriceComp = styled(ProductPrice)`
+    margin-top: 0rem;
+    font-size: 1.13rem;
+    transition: font-size 0.3s ease-in-out;
+    ${(props) => {
+    if (props.hover) {
+      return css`
+        font-size: 1.35rem;
+      `;
+    }
+  }}
+`;
+
 const ActionButton = styled.span`
   font-size: 1.6rem;
   left: 10.7rem;
@@ -131,10 +150,6 @@ const BottomWrapper = styled.div`
         background-color: white;
     `;
   }}
-
-
-
-  /* background-color: ${(props) => (props.hover ? '#90D7FF' : 'white')}; */
 `;
 
 export default function CarouselItemComponent({
@@ -179,16 +194,18 @@ export default function CarouselItemComponent({
             <Photo src={defStyle.photos['0'].thumbnail_url}/>
           </PhotoWrapper>
           <BottomWrapper hover={hover}>
-            <i>{info.category}</i><br />
-            <ProductName>{info.name}</ProductName>
-            <div>
-              <StarRating averageStarRating={review} />
-            </div>
-            <ProductPrice
-              style={{"fontSize": "1.5rem"}}
-              productOrginalPrice={defStyle.original_price}
-              productSalePrice={defStyle.sale_price}
-            />
+            <TextRatingPriceWrapper>
+              <i>{info.category}</i><br />
+              <ProductName>{info.name}</ProductName>
+              <div>
+                <StarRating averageStarRating={review} />
+              </div>
+              <ProductPriceComp
+                hover={hover}
+                productOrginalPrice={defStyle.original_price}
+                productSalePrice={defStyle.sale_price}
+              />
+            </TextRatingPriceWrapper>
           </BottomWrapper>
           <ActionButton hover={hover} list={list} onClick={actionButtonClick}/>
         </InsideCarousel>
