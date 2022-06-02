@@ -6,9 +6,16 @@ const Inner = styled.div`
   white-space: nowrap;
   transition: transform 0.3s ease-out;
 
-  ${(props) => css`
+  ${(props) => {
+    if (props.activeIndex === 0) {
+      return css`
+        transform: translateX(-0.25rem);
+      `;
+    }
+    return css`
       transform: translateX(-${props.activeIndex * 14 + 0.5}rem);
-  `};
+    `;
+  }};
 
   position: absolute;
 `;
@@ -19,13 +26,7 @@ const CarouselWindow = styled.div`
   min-width: 48.5rem;
   min-height: 19rem;
   max-height: 19rem;
-
-
-  // Attempting to overlay button
   position: relative;
-
-  // Changes
-  // border: 1px green solid;
 `;
 
 const Blur = styled.div`
@@ -91,10 +92,6 @@ const Container = styled.div`
   flex-direction: row;
   margin-bottom: 2rem;
   position: relative;
-
-  // Attempted changes
-  // position: absolute;
-  // border: 1px solid blue;
 `;
 
 export const AddOutfitCard = styled.div`
@@ -105,19 +102,13 @@ export const AddOutfitCard = styled.div`
   min-width: 13rem;
   max-width: 13rem;
   max-height: 18rem;
-  background-color: #EAC9C1;
   margin: 0.5rem;
   cursor: pointer;
-  // border: 1.5px solid #32292F;
   transform: translateY(-0.4rem);
   position: relative;
 
-  background-image: linear-gradient(to bottom, white, transparent);
   &:hover {
-    margin-top: 0.3rem;
-    margin-right: 0.3rem;
-    border: 0.1rem solid #32292F;
-    transform: translate(-0.1rem, -0.3rem);
+    outline: 0.1rem solid #32292F;
   }
 `;
 

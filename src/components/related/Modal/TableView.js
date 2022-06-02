@@ -36,7 +36,6 @@ const Table = styled.table`
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 
   left: 2.9rem;
-  // border: 2px red solid;
 `;
 
 const TableBody = styled.tbody`

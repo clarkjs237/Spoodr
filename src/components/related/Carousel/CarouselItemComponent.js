@@ -11,21 +11,18 @@ const CarouselItem = styled.div`
   min-width: 13rem;
   max-width: 13rem;
   max-height: 18rem;
-  /* background-color: #EAC9C1; */
   margin: 0.5rem;
   cursor: pointer;
   position: relative;
-  /* position: absolute; */
   // For whatever reason, I need this line for the outfit list formatting
   transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.3rem)' : 'translateY(0rem)')};
 
   /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
   &:hover {
-    margin-top: -0.1rem;
-    margin-right: 0.3rem;
-    border: 0.1rem solid #32292F;
-    transform: ${(props) => (props.list === 'outfit' ? 'translate(-0.1rem, -9.3rem)' : 'translate(-0.1rem, 0rem)')};
+    outline: 0.1rem solid #32292F;
   }
+
+  top: ${(props) => (props.list === 'outfit' ? '-0.6rem' : '0rem')};
 `;
 
 const InsideCarousel = styled.div`
@@ -34,10 +31,34 @@ const InsideCarousel = styled.div`
 `;
 
 const Photo = styled.img`
-  height: 8rem;
+  max-width: 95%;
+  max-height: 100%;
+  flex-shrink: 0;
 
-  // height: 100%;
-  // position: absolute;
+  ${(props) => {
+    if (!props.src) {
+      // this is null so return a null image or something
+      return css`
+        content: url("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg");
+      `;
+    }
+  }};
+`;
+
+const PhotoWrapper = styled.div`
+  position: absolute;
+  bottom: 5.95rem;
+  left: 0rem;
+  width: 13rem;
+  height: 10.05rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const ProductName = styled.span`
+  font-size: 1.13rem;
 `;
 
 const ActionButton = styled.span`
@@ -58,7 +79,7 @@ const ActionButton = styled.span`
       `;
     }
     return css`
-      content: "\\2605";
+      content: "\\2606";
     `;
   }}
   }
@@ -66,13 +87,13 @@ const ActionButton = styled.span`
 `;
 
 const BottomWrapper = styled.div`
-  /* border: 2px red solid; */
   position: absolute;
-  bottom: -0.1rem;
+  bottom: 0rem;
+  margin-bottom: -0.01rem;
   left: 0rem;
   width:13rem;
   height: 5.75rem;
-  background-color: #E8F2F4;
+  background-color: ${(props) => (props.hover ? '#E8F2F4' : 'white')};
 `;
 
 export default function CarouselItemComponent({
@@ -112,19 +133,22 @@ export default function CarouselItemComponent({
         onMouseLeave={() => setHover(false)}
       >
         <InsideCarousel>
-          <Photo src={defStyle.photos['0'].thumbnail_url}/>
-          <BottomWrapper>
-            {info.category}<br />
-            {info.name}<br />
+          <PhotoWrapper hover={hover}>
+            <Photo src={defStyle.photos['0'].thumbnail_url}/>
+          </PhotoWrapper>
+          <BottomWrapper hover={hover}>
+            <i>{info.category}</i><br />
+            {/* {info.name}<br /> */}
+            <ProductName>{info.name}</ProductName>
             <div>
               <StarRating averageStarRating={review} />
             </div>
             <ProductPrice
+              style={{"fontSize": "1.5rem"}}
               productOrginalPrice={defStyle.original_price}
               productSalePrice={defStyle.sale_price}
             />
           </BottomWrapper>
-
           <ActionButton hover={hover} list={list} onClick={actionButtonClick}/>
         </InsideCarousel>
       </CarouselItem>
