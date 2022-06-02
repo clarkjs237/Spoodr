@@ -18,14 +18,18 @@ const InfoSelectorCartDiv = styled.div`
   margin-left: 1rem;
 `;
 
-const ProductSlogan = styled.h4`
+const ProductSlogan = styled.div`
+  font-weight: bold;
+  margin-top: 1rem;
+
 `;
 
-const ProductDescription = styled.p`
+const ProductDescription = styled.div`
   display: inline-block;
   white-space: normal;
   overflow-x: wrap;
   width: 40rem;
+  margin-top: 1rem;
 `;
 
 export default function Overview({

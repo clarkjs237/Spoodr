@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PriceContainer = styled.p`
-  margin-top: 1rem;
+  margin-top: 1.75rem;
   font-size: 1.125;
 `;
 

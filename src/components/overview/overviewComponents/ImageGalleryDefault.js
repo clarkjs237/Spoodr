@@ -19,8 +19,8 @@ const DisplayImage = styled.img`
 `;
 
 const DisplayWrapper = styled.div`
-  height: 30rem;
-  width: 40rem;
+  height: 39rem;
+  width: 52rem;
   position: relative;
   display: inline-block;
 `;

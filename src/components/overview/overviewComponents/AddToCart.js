@@ -8,7 +8,7 @@ const StyledSubmitButton = styled.input`
   font-size: 1.125rem;
   border:solid;
   color: #0B2027;
-  width: 15.5rem;
+  width: 18rem;
   background-color: white;
   padding: 1rem;
   border-color: #32292F;
@@ -32,7 +32,7 @@ const selectStyles = {
     height: 'auto',
   }),
   control: (styles, { selectProps: { width } }) => ({
-    ...styles, backgroundColor: 'white', borderRadius: '0', border: 'solid', 'border-width': '1.5px', width, color: '#32292F', '&:hover': { 'border-color': '#90D7FF' }
+    ...styles, backgroundColor: 'white', borderRadius: '0', padding: '.5rem', border: 'solid', 'border-width': '1.5px', width, color: '#32292F', 'font-size': '1.125rem', '&:hover': { 'border-color': '#90D7FF', cursor: 'pointer', }
   }),
   dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#0B2027' }})),
   indicatorSeparator: ((styles) => ({...styles, backgroundColor: 'inherit'})),
@@ -40,7 +40,7 @@ const selectStyles = {
   container: (styles, { selectProps: { width } }) => ({
     ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0',
   }),
-  placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#D3AB9E' })),
+  placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#0B2027' })),
 };
 
 export default function AddToCart({ curStyleQuantAndSizes }) {
@@ -100,7 +100,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   let submitButton = (
     <StyledSubmitButton
       type="submit"
-      value="ADD TO BAG                   +"
+      value="ADD TO BAG                       +"
     />
   );
 
@@ -125,8 +125,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         openMenuOnFocus
         ref={(r) => refs = r}
         styles={selectStyles}
-        width={menuOpen ? 'auto' : '10.75rem'}
-        placeholderColor={menuOpen ? '#0B2027' : '#D3AB9E'}
+        width={menuOpen ? 'auto' : '12rem'}
       />
       <Select
         name="Quant"
@@ -135,7 +134,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         placeholder="-"
         value={selectedQuant}
         styles={selectStyles}
-        width="4.25rem"
+        width="5.5rem"
       />
       <div>
         {submitButton}

@@ -7,6 +7,7 @@ const StyleImage = styled.img`
   border: solid;
   border-radius: 50%;
   cursor: pointer;
+  margin-right: 1rem;
   width: 3.5rem;
   height: 3.5rem;
   &:hover {
