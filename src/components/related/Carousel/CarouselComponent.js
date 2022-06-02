@@ -60,24 +60,23 @@ const Chevron = styled.span`
   position: absolute;
   top: 7rem;
   left: ${(props) => (props.left ? '0.5rem' : '46.5rem')};
-  transition: visibility 0.2s ease-in-out;
   ${(props) => {
     if (props.left && props.activeIndex === 0) {
       return css`
-        visibility: hidden;
+        opacity: 0;
       `;
     }
     if (!props.left && props.activeIndex === props.length) {
       return css`
-        visibility: hidden;
+        opacity: 0;
       `;
     }
     return css`
-      visibility: visible;
+      opacity: 1;
     `;
-  }}
+  }};
 
-  transition: color 0.2s ease-in-out;
+  transition: opacity 0.3s ease-in, color 0.2s ease-in-out;
 
   &:hover {
     color: #90D7FF;
