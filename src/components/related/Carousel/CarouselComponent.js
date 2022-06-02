@@ -76,6 +76,9 @@ const Chevron = styled.span`
       visibility: visible;
     `;
   }}
+
+  transition: color 0.2s ease-in-out;
+
   &:hover {
     color: #90D7FF;
   }

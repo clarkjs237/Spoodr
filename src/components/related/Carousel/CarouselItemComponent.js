@@ -19,9 +19,6 @@ const CarouselItem = styled.div`
 
   /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
   transition: outline 0.3s ease-in-out;
-  /* &:hover {
-    outline: 0.1rem solid #32292F;
-  } */
   ${(props) => {
     if (props.hover) {
       return css`
