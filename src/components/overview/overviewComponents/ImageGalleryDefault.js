@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ThumbnailImageNav from './ImageGalleryDefaultComponents/ThumbnailImageNav';
 import DisplayImageNav from './ImageGalleryDefaultComponents/DisplayImageNav';
+import SocialMedia from './SocialMedia';
 
 const DisplayImage = styled.img`
   object-fit: cover;
@@ -35,6 +36,8 @@ export default function ImageGalleryDefault({
   curDisplayIndex,
   setCurDisplayIndex,
   setExpandedView,
+  url,
+  slogan,
 }) {
   if (!curDisplayPhotos[curDisplayIndex]) {
     setCurDisplayIndex(curDisplayPhotos.length - 1);
@@ -62,6 +65,7 @@ export default function ImageGalleryDefault({
         setCurDisplayIndex={setCurDisplayIndex}
         maxDisplayIndex={curDisplayPhotos.length - 1}
       />
+      <SocialMedia url={url} slogan={slogan} />
     </DisplayWrapper>
   );
 }

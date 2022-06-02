@@ -12,8 +12,8 @@ import {
 const SocialMediaWrap = styled.span`
   margin-left: .25rem;
   position: absolute;
-  top: 28rem;
-  left: 33.5rem;
+  top: 27.5rem;
+  left: 33rem;
   width: 10rem;
 `;
 

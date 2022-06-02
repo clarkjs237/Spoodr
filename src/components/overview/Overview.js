@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ProductInfo from './overviewComponents/ProductInfo';
-import SocialMedia from './overviewComponents/SocialMedia';
+//import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
 import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
 import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
@@ -106,6 +106,8 @@ export default function Overview({
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
           setExpandedView={setExpandedView}
+          url={socialUrl}
+          slogan={product.slogan}
         />
         <InfoSelectorCartDiv>
           <ProductInfo
@@ -127,7 +129,6 @@ export default function Overview({
             curStyleQuantAndSizes={curStyleQuantAndSizes}
           />
         </InfoSelectorCartDiv>
-        <SocialMedia url={socialUrl} slogan={product.slogan} />
         <ProductSlogan>{product.slogan}</ProductSlogan>
         <ProductDescription>{product.description}</ProductDescription>
       </ProductOverview>
