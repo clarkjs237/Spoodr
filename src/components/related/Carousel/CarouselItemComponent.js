@@ -17,14 +17,14 @@ const CarouselItem = styled.div`
   position: relative;
   /* position: absolute; */
   // For whatever reason, I need this line for the outfit list formatting
-  transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.4rem)' : 'translateY(0rem)')};
+  transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.3rem)' : 'translateY(0rem)')};
 
   /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
   &:hover {
     margin-top: -0.1rem;
     margin-right: 0.3rem;
     border: 0.1rem solid #32292F;
-    box-shadow: 0.1rem 0.1rem 0.5rem black;
+    transform: ${(props) => (props.list === 'outfit' ? 'translate(-0.1rem, -9.3rem)' : 'translate(-0.1rem, 0rem)')};
   }
 `;
 
@@ -62,6 +62,7 @@ const ActionButton = styled.span`
     `;
   }}
   }
+  visibility: ${(props) => (props.hover ? 'visible' : 'hidden')};
 `;
 
 const BottomWrapper = styled.div`
@@ -79,6 +80,7 @@ export default function CarouselItemComponent({
   comparisonModal, // this is for RelatedList only. Will return a specific index
   handleItemClick, // this is when a card is clicked on. should reset state to this product_id/style
 }) {
+  const [hover, setHover] = useState(false);
   function individualCardClicked(e) {
     e.preventDefault();
     handleItemClick(id);
@@ -97,7 +99,12 @@ export default function CarouselItemComponent({
 
   if (defStyle && info && review && id && list && (review !== undefined)) {
     return (
-      <CarouselItem list={list} onClick={individualCardClicked}>
+      <CarouselItem
+        list={list}
+        onClick={individualCardClicked}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
         <InsideCarousel>
           <Photo src={defStyle.photos['0'].thumbnail_url}/>
           <BottomWrapper>
@@ -112,7 +119,7 @@ export default function CarouselItemComponent({
             />
           </BottomWrapper>
 
-          <ActionButton list={list} onClick={actionButtonClick}/>
+          <ActionButton hover={hover} list={list} onClick={actionButtonClick}/>
         </InsideCarousel>
       </CarouselItem>
     );

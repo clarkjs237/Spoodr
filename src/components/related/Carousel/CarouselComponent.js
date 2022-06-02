@@ -109,11 +109,16 @@ export const AddOutfitCard = styled.div`
   margin: 0.5rem;
   cursor: pointer;
   // border: 1.5px solid #32292F;
-  transform: translateY(-0.3rem);
+  transform: translateY(-0.4rem);
   position: relative;
 
   background-image: linear-gradient(to bottom, white, transparent);
-  // box-shadow: 0.1rem 0.1rem 0.5rem black;
+  &:hover {
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+    border: 0.1rem solid #32292F;
+    transform: translate(-0.1rem, -0.3rem);
+  }
 `;
 
 const AddOutfitButton = styled.span`
@@ -124,6 +129,12 @@ const AddOutfitButton = styled.span`
   &:before {
     content: "\\002B";
   }
+`;
+
+const AddButtonContentWrapper = styled.div`
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
 `;
 
 export const AddButtonText = styled.span`
@@ -256,8 +267,10 @@ export default function CarouselComponent({
         <CarouselWindow>
           <Inner activeIndex={outfitActiveIndex}>
             <AddOutfitCard onClick={handleAddToOutfit}>
-              <AddOutfitButton />
-              <AddButtonText>Add to My Outfit</AddButtonText>
+              <AddButtonContentWrapper>
+                <AddOutfitButton />
+                <AddButtonText>Add to My Outfit</AddButtonText>
+              </AddButtonContentWrapper>
             </AddOutfitCard>
             {outfitList.map((item, index) => (
               <CarouselItemComponent
