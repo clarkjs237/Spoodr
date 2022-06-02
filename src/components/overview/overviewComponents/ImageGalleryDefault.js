@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ThumbnailImageNav from './ImageGalleryDefaultComponents/ThumbnailImageNav';
 import DisplayImageNav from './ImageGalleryDefaultComponents/DisplayImageNav';
+import SocialMedia from './SocialMedia';
 
 const DisplayImage = styled.img`
   object-fit: cover;
@@ -18,17 +19,15 @@ const DisplayImage = styled.img`
 `;
 
 const DisplayWrapper = styled.div`
-  height: 30rem;
-  width: 40rem;
+  height: 39rem;
+  width: 52rem;
   position: relative;
-  margin: .5rem 0 .5rem .5rem;
-  align-items: center;
   display: inline-block;
 `;
 
 const ThumbnailImageWrapper = styled.div`
   position: absolute;
-  top: .5rem;
+  top: 0;
   left: .5rem;
 `;
 
@@ -37,6 +36,8 @@ export default function ImageGalleryDefault({
   curDisplayIndex,
   setCurDisplayIndex,
   setExpandedView,
+  url,
+  slogan,
 }) {
   if (!curDisplayPhotos[curDisplayIndex]) {
     setCurDisplayIndex(curDisplayPhotos.length - 1);
@@ -64,6 +65,7 @@ export default function ImageGalleryDefault({
         setCurDisplayIndex={setCurDisplayIndex}
         maxDisplayIndex={curDisplayPhotos.length - 1}
       />
+      <SocialMedia url={url} slogan={slogan} />
     </DisplayWrapper>
   );
 }
