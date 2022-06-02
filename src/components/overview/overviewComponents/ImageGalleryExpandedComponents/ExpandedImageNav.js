@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const StyledDisplayImageNav = styled.div`
   position: absolute;
-  top: 43%;
   left: ${(props) => (props.next ? '95%' : '5%')};
+  top: 45%;
   font-size: 3.5rem;
   color: #32292F;
   &:hover {
