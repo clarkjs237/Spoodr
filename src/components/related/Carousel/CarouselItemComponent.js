@@ -39,9 +39,10 @@ const InsideCarousel = styled.div`
 `;
 
 const Photo = styled.img`
-  max-width: 95%;
-  max-height: 100%;
+  max-width: 85%;
+  max-height: 90%;
   flex-shrink: 0;
+  transition: max-width 0.3s ease-in-out, max-height 0.3s ease-in-out;
 
   ${(props) => {
     if (!props.src) {
@@ -50,7 +51,15 @@ const Photo = styled.img`
         content: url("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg");
       `;
     }
+
+    if (props.hover) {
+      return css`
+        max-width: 95%;
+        max-height: 100%;
+      `;
+    }
   }};
+
 `;
 
 const PhotoWrapper = styled.div`
@@ -72,6 +81,7 @@ const ProductName = styled.span`
 const TextRatingPriceWrapper = styled.div`
   position: absolute;
   margin-left: 0.2rem;
+  margin-top: 0.25rem;
   width: 12rem;
 `;
 
@@ -188,7 +198,7 @@ export default function CarouselItemComponent({
       >
         <InsideCarousel>
           <PhotoWrapper hover={hover}>
-            <Photo src={defStyle.photos['0'].thumbnail_url}/>
+            <Photo hover={hover} src={defStyle.photos['0'].thumbnail_url}/>
           </PhotoWrapper>
           <BottomWrapper hover={hover}>
             <TextRatingPriceWrapper>
