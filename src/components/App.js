@@ -24,6 +24,16 @@ const GlobalStyle = createGlobalStyle`
     padding: 1rem;
     margin: 2px;
   }
+
+  underline-button {
+    border-style: none;
+    background: none;
+    text-decoration: underline;
+  }
+
+  light-text {
+    font-size: small;
+  }
 `;
 
 function App() {

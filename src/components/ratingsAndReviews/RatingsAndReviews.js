@@ -8,7 +8,7 @@ function RatingsAndReviews(props) {
   return (
     <div>
       <h3>Ratings & Reviews</h3>
-      <div className='ratings-and-reviews'>
+      <div style={{display: "flex"}}>
         <div>
           <Ratings
             totalReviews={props.totalReviews}

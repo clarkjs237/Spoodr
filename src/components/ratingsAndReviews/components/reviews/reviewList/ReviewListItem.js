@@ -55,7 +55,7 @@ function ReviewListItem(props) {
         <div>
           <StarRating averageStarRating={props.review.rating}/>
         </div>
-        <div>
+        <div style={{fontSize: "small"}}>
           {props.review.reviewer_name} {format(new Date(props.review.date), "MMMM dd, yyyy")}
         </div>
       </div>
@@ -88,19 +88,19 @@ function ReviewListItem(props) {
           </div>
         )
       }
-      <div className="review-item-footer">
+      <div className="review-item-footer" style={{fontSize: "small"}}>
         <div className="review-item-helpful">
-          Helpful?
+          Helpful?&nbsp;
           { !helpfulness.clicked
-            ? <button className="underline-button" type="submit" onClick={handleHelfulnessClick}>Yes</button>
-            : <button className="underline-button" type="submit">Yes</button>
+            ? <underline-button type="submit" onClick={handleHelfulnessClick}>Yes</underline-button>
+            : <underline-button type="submit">Yes</underline-button>
           }
-          (
+          &nbsp;(
           {helpfulness.value}
           )
         </div>
-        |
-        <button className="underline-button" type="submit" onClick={handleReportClick}>Report</button>
+        |&nbsp;
+        <underline-button type="submit" onClick={handleReportClick}>Report</underline-button>
       </div>
     </div>
   );
