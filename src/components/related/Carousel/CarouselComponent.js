@@ -60,15 +60,22 @@ const Chevron = styled.span`
   position: absolute;
   top: 7rem;
   left: ${(props) => (props.left ? '0.5rem' : '46.5rem')};
-  visibility ${(props) => {
+  transition: visibility 0.2s ease-in-out;
+  ${(props) => {
     if (props.left && props.activeIndex === 0) {
-      return 'hidden';
+      return css`
+        visibility: hidden;
+      `;
     }
     if (!props.left && props.activeIndex === props.length) {
-      return 'hidden';
+      return css`
+        visibility: hidden;
+      `;
     }
-    return 'visible';
-  }};
+    return css`
+      visibility: visible;
+    `;
+  }}
   &:hover {
     color: #90D7FF;
   }
@@ -107,6 +114,8 @@ export const AddOutfitCard = styled.div`
   transform: translateY(-0.4rem);
   position: relative;
 
+  outline: 0.1rem solid white;
+  transition: outline 0.3s ease-in-out;
   &:hover {
     outline: 0.1rem solid #32292F;
   }

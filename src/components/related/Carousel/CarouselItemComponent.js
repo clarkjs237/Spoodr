@@ -18,9 +18,20 @@ const CarouselItem = styled.div`
   transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.3rem)' : 'translateY(0rem)')};
 
   /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
-  &:hover {
+  transition: outline 0.3s ease-in-out;
+  /* &:hover {
     outline: 0.1rem solid #32292F;
-  }
+  } */
+  ${(props) => {
+    if (props.hover) {
+      return css`
+        outline: 0.1rem solid #32292F;
+      `;
+    }
+    return css`
+      outline: 0.1rem solid white;
+    `;
+  }}
 
   top: ${(props) => (props.list === 'outfit' ? '-0.6rem' : '0rem')};
 `;
@@ -67,8 +78,22 @@ const ActionButton = styled.span`
   top: 0rem;
   position: absolute;
   cursor: pointer;
+  visibility: hidden;
+  color: white;
+  transition: color 0.3s ease-in-out;
+
+  ${(props) => {
+    if (props.hover) {
+      return css`
+        color: #32292F;
+      `;
+    }
+  }}
+
   &:hover {
+    transition: color 0.1.5s ease-in-out;
     color: #90D7FF;
+    visibility: visible;
   }
   &:before {
     ${(props) => {
@@ -93,7 +118,23 @@ const BottomWrapper = styled.div`
   left: 0rem;
   width:13rem;
   height: 5.75rem;
-  background-color: ${(props) => (props.hover ? '#E8F2F4' : 'white')};
+  /* background-color: ${(props) => (props.hover ? '#E8F2F4' : 'white')}; */
+  transition: background-color 0.3s ease-in-out;
+
+  ${(props) => {
+    if (props.hover) {
+      return css`
+        background-color: #90D7FF;
+      `;
+    }
+    return css`
+        background-color: white;
+    `;
+  }}
+
+
+
+  /* background-color: ${(props) => (props.hover ? '#90D7FF' : 'white')}; */
 `;
 
 export default function CarouselItemComponent({
@@ -131,6 +172,7 @@ export default function CarouselItemComponent({
         onClick={individualCardClicked}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        hover={hover}
       >
         <InsideCarousel>
           <PhotoWrapper hover={hover}>
@@ -138,7 +180,6 @@ export default function CarouselItemComponent({
           </PhotoWrapper>
           <BottomWrapper hover={hover}>
             <i>{info.category}</i><br />
-            {/* {info.name}<br /> */}
             <ProductName>{info.name}</ProductName>
             <div>
               <StarRating averageStarRating={review} />
