@@ -8,7 +8,7 @@ import './ratings-and-reviews-styles.css';
 const StyledRatingsAndReviews = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 75px;
   width: 100%;
 `;
 
