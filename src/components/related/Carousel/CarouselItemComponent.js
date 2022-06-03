@@ -11,13 +11,26 @@ const CarouselItem = styled.div`
   min-width: 13rem;
   max-width: 13rem;
   max-height: 18rem;
-  background-color: #EAC9C1;
   margin: 0.5rem;
   cursor: pointer;
-  border: 1.5px solid #32292F;
-
+  position: relative;
   // For whatever reason, I need this line for the outfit list formatting
-  transform: ${(props) => (props.outfit ? 'translateY(-9.25rem)' : 'translateY(0rem)')}
+  transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.3rem)' : 'translateY(0rem)')};
+
+  /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
+  transition: outline 0.3s ease-in-out;
+  ${(props) => {
+    if (props.hover) {
+      return css`
+        outline: 0.1rem solid #32292F;
+      `;
+    }
+    return css`
+      outline: 0.1rem solid white;
+    `;
+  }}
+
+  top: ${(props) => (props.list === 'outfit' ? '-0.6rem' : '0rem')};
 `;
 
 const InsideCarousel = styled.div`
@@ -26,33 +39,124 @@ const InsideCarousel = styled.div`
 `;
 
 const Photo = styled.img`
-  height: 8rem;
+  max-width: 85%;
+  max-height: 90%;
+  flex-shrink: 0;
+  transition: max-width 0.3s ease-in-out, max-height 0.3s ease-in-out;
 
-  // height: 100%;
-  // position: absolute;
+  ${(props) => {
+    if (!props.src) {
+      // this is null so return a null image or something
+      return css`
+        content: url("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg");
+      `;
+    }
+
+    if (props.hover) {
+      return css`
+        max-width: 95%;
+        max-height: 100%;
+      `;
+    }
+  }};
+
 `;
 
-const ActionButton = styled.div`
+const PhotoWrapper = styled.div`
+  position: absolute;
+  bottom: 5.95rem;
+  left: 0rem;
+  width: 13rem;
+  height: 10.05rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const ProductName = styled.span`
+  font-size: 1.13rem;
+`;
+
+const TextRatingPriceWrapper = styled.div`
+  position: absolute;
+  margin-left: 0.2rem;
+  margin-top: 0.25rem;
+  width: 12rem;
+`;
+
+const ProductPriceComp = styled(ProductPrice)`
+    margin-top: 0rem;
+    font-size: 1.13rem;
+    transition: font-size 0.3s ease-in-out;
+    ${(props) => {
+    if (props.hover) {
+      return css`
+        font-size: 1.35rem;
+      `;
+    }
+  }}
+`;
+
+const ActionButton = styled.span`
   font-size: 1.6rem;
   left: 10.7rem;
-  top: 0.1rem;
+  top: 0rem;
   position: absolute;
+  cursor: pointer;
+  visibility: hidden;
+  color: white;
+  transition: color 0.3s ease-in-out;
+
+  ${(props) => {
+    if (props.hover) {
+      return css`
+        color: #32292F;
+      `;
+    }
+  }}
+
   &:hover {
+    transition: color 0.1.5s ease-in-out;
     color: #90D7FF;
+    visibility: visible;
   }
   &:before {
     ${(props) => {
-    if (props.outfit) {
+    if (props.list === 'outfit') {
       return css`
-        content: "\\2716";
+        content: "\\2715";
+        font-size: 1.4rem;
       `;
     }
     return css`
-      content: "\\2605";
+      content: "\\2606";
     `;
   }}
   }
-  cursor: pointer;
+  visibility: ${(props) => (props.hover ? 'visible' : 'hidden')};
+`;
+
+const BottomWrapper = styled.div`
+  position: absolute;
+  bottom: 0rem;
+  margin-bottom: -0.01rem;
+  left: 0rem;
+  width:13rem;
+  height: 5.75rem;
+  transition: background-color 0.3s ease-in-out;
+
+  ${(props) => {
+    if (props.hover) {
+      return css`
+        background-color: #90D7FF;
+        /* background-color: lightgray; */
+      `;
+    }
+    return css`
+        background-color: white;
+    `;
+  }}
 `;
 
 export default function CarouselItemComponent({
@@ -60,12 +164,13 @@ export default function CarouselItemComponent({
   id,       // product id (in string)
   info,     // general product info (object with at least category_name and product_name)
   review,   // an average rating (number) - exclude review from this bc it could be zero
-  outfit,   // boolean, true if this belongs to the outfit list, false if it's related item
+  list,   // boolean, true if this belongs to the outfit list, false if it's related item
   index,      // specific index in the list, in string I believe
   removeItemFromOutfit, // this is for Outfit only. Will return specific index
   comparisonModal, // this is for RelatedList only. Will return a specific index
   handleItemClick, // this is when a card is clicked on. should reset state to this product_id/style
 }) {
+  const [hover, setHover] = useState(false);
   function individualCardClicked(e) {
     e.preventDefault();
     handleItemClick(id);
@@ -75,28 +180,42 @@ export default function CarouselItemComponent({
     e.stopPropagation(); // need this in order to not activate things below
     // If this action is coming from the outfit, do removeItemFromOutfit
     // Else, do comparisonModal for relatedList
-    if (outfit) {
+    if (list === 'outfit') {
       removeItemFromOutfit(index);
     } else {
       comparisonModal(index);
     }
   }
 
-  if (defStyle && info && review && id && (review !== undefined)) {
+  if (defStyle && info && review && id && list && (review !== undefined)) {
     return (
-      <CarouselItem outfit={outfit} onClick={individualCardClicked}>
+      <CarouselItem
+        list={list}
+        onClick={individualCardClicked}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        hover={hover}
+      >
         <InsideCarousel>
-          <Photo src={defStyle.photos['0'].thumbnail_url}/>
-          {info.category}<br />
-          {info.name}<br />
-          <div>
-            <StarRating averageStarRating={review} />
-          </div>
-          <ProductPrice
-            productOrginalPrice={defStyle.original_price}
-            productSalePrice={defStyle.sale_price}
-          />
-          <ActionButton outfit={outfit} onClick={actionButtonClick}/>
+          <PhotoWrapper hover={hover}>
+            <Photo hover={hover} src={defStyle.photos['0'].thumbnail_url}/>
+          </PhotoWrapper>
+          <BottomWrapper hover={hover}>
+            <TextRatingPriceWrapper>
+              <i>{info.category}</i><br />
+              <ProductName>{info.name}</ProductName>
+              <div>
+                {hover ? <StarRating averageStarRating={review} starColor={'#32292F'} starBlank={'white'}/>
+                  : <StarRating averageStarRating={review} />}
+              </div>
+              <ProductPriceComp
+                hover={hover}
+                productOrginalPrice={defStyle.original_price}
+                productSalePrice={defStyle.sale_price}
+              />
+            </TextRatingPriceWrapper>
+          </BottomWrapper>
+          <ActionButton hover={hover} list={list} onClick={actionButtonClick}/>
         </InsideCarousel>
       </CarouselItem>
     );
