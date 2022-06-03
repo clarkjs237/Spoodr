@@ -24,14 +24,6 @@ function Reviews(props) {
   const [toggleModal, setToggleModal] = useState(false);
 
   function getReviews() {
-    // fetch(
-    //   `${URL}/reviews?product_id=${PRODUCT_ID}&page=${page}&count=${count}&sort=${sort}`,
-    //   {
-    //     headers: {
-    //       Authorization: process.env.GITTOKEN,
-    //     },
-    //   },
-    // )
     fetch(`/review/${PRODUCT_ID}/${page}/${count}/${sort}/`)
       .then((response) => response.json())
       .then((result) => setReviews(result.results));

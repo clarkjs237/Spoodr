@@ -64,14 +64,14 @@ function AddReviewForm(props) {
   }
 
   function postReview() {
-    fetch(`${URL}/reviews`, {
-      method: "POST",
+    fetch(`/reviews`, {
+      method: 'POST',
       headers: {
-        Authorization: process.env.GITTOKEN,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.error("Error:", error);
     });
   }

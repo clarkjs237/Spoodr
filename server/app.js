@@ -86,6 +86,40 @@ app.get('/review/:id/:page/:count/:sort', (req, res) => {
     .then((results) => res.send(results));
 });
 
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  fetch(`${process.env.URL}/reviews/${req.params.review_id}/helpful`, {
+    method: 'PUT',
+    headers: {
+      Authorization: process.env.GITTOKEN,
+      'User-Agent': 'user',
+    },
+  })
+    .then((results) => res.send(results));
+});
+
+app.put('/reviews/:review_id/report', (req, res) => {
+  fetch(`${process.env.URL}/reviews/${req.params.review_id}/report`, {
+    method: 'PUT',
+    headers: {
+      Authorization: process.env.GITTOKEN,
+      'User-Agent': 'user',
+    },
+  })
+    .then((results) => res.send(results));
+});
+
+app.post('/reviews', (req, res) => {
+  fetch(`${process.env.URL}/reviews`, {
+    method: 'POST',
+    headers: {
+      Authorization: process.env.GITTOKEN,
+      'User-Agent': 'user',
+    },
+    body: JSON.stringify(req.body.data),
+  })
+    .then((results) => res.send(results));
+});
+
 // Questions
 app.get('/review/:id', (req, res) => {
   fetch(`${process.env.URL}/qa/questions?product_id=${req.params.id}&count=1000`, {
