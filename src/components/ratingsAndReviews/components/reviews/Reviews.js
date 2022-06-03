@@ -1,9 +1,21 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import ReviewsList from './reviewList/ReviewsList';
 import AddReviewForm from './addReview/AddReviewForm';
+import { StyledModal, StyledModalBG } from "../styled-components/Modal"
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
+
+const StyledReviews = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  min-width: 500px;
+  padding: 10px;
+`;
 
 function Reviews(props) {
   const [reviews, setReviews] = useState([]);
@@ -51,30 +63,35 @@ function Reviews(props) {
   }, [count, sort]);
 
   return (
-    <div>
+    <StyledReviews id="reviews">
       <Sort
         totalReviews={props.totalReviews}
         sort={sort}
         handleSortChange={handleSortChange}
       />
-      <div className="review-list">
+      <div>
         <ReviewsList
           reviews={reviews}
         />
       </div>
-      <button type="button" onClick={handleToggleModalChange}>Add a Review</button>
+      <div style={{display: 'flex', gap: '10px'}}>
+        <button type="button" onClick={handleToggleModalChange}>Add a Review</button>
+        { reviews.length === count && reviews.length > 0
+        && <button type="submit" onClick={handleMoreReviews}>More Reviews</button> }
+      </div>
       { toggleModal
       && (
-      <div className="Modal">
-        <AddReviewForm
-          handleToggleModalChange={handleToggleModalChange}
-          reviewsMeta={props.reviewsMeta}
-        />
-      </div>
+        <div>
+          <StyledModalBG/>
+          <StyledModal>
+            <AddReviewForm
+              handleToggleModalChange={handleToggleModalChange}
+              reviewsMeta={props.reviewsMeta}
+            />
+          </StyledModal>
+        </div>
       )}
-      { reviews.length === count && reviews.length > 0
-      && <button type="submit" onClick={handleMoreReviews}>More Reviews</button> }
-    </div>
+    </StyledReviews>
   );
 }
 

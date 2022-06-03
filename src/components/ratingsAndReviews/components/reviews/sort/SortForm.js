@@ -1,5 +1,12 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledDropdown = styled.select`
+  border-style: none;
+  background: none;
+  text-decoration: underline;
+`;
 
 function SortForm({handleSortChange}) {
   function handleClick(event) {
@@ -8,11 +15,11 @@ function SortForm({handleSortChange}) {
 
   return (
     <form onChange={(handleClick)}>
-      <select name="sort" className="underline-button">
+      <StyledDropdown name="sort">
         <option value="helpful">helpful</option>
         <option value="newest">newest</option>
         <option value="relevant">relevant</option>
-      </select>
+      </StyledDropdown>
     </form>
   );
 }
