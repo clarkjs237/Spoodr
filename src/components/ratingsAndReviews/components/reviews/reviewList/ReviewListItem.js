@@ -80,36 +80,14 @@ function ReviewListItem(props) {
       clicked: false,
     },
   );
-  let reviewsPhotos = false;
-  if( props.review.photos.length ) {
-    reviewsPhotos = true;
-  }
 
   function markReviewAsHelpful(reviewId) {
-    fetch(
-      `${URL}/reviews/${reviewId}/helpful`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: process.env.GITTOKEN,
-        },
-      }
-    )
-      // .then((response) => response.json())
+    fetch(`/reviews/${reviewId}/helpful`, {method: 'PUT'})
       .then(() => setHelpfulness({ value: helpfulness.value + 1, clicked: true }));
   }
 
   function reportReview(reviewId) {
-    fetch(
-      `${URL}/reviews/${reviewId}/report`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: process.env.GITTOKEN,
-        },
-      }
-    )
-      // .then((response) => response.json())
+    fetch(`/reviews/${reviewId}/report`, {method: 'PUT'})
       .then(() => console.log(`reported review:: ${reviewId}`));
   }
 
