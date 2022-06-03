@@ -1,5 +1,15 @@
 import React from 'react';
 import { format } from 'date-fns';
+import styled from 'styled-components';
+
+const BoldText = styled.span`
+  font-weight: 700;
+`;
+
+const StyledFooter = styled.footer`
+  color: gray;
+  font-size: 0.8125rem;
+`;
 
 function Answer({
   id,
@@ -7,7 +17,7 @@ function Answer({
   username,
   date,
   helpfulness,
-  getAnswers
+  getAnswers,
 }) {
   const handleHelpfulClick = async (answerId) => {
     await fetch(
@@ -35,24 +45,25 @@ function Answer({
     getAnswers();
   };
 
-  console.log(id, body);
-
   return (
     <div key={id}>
       <p>
-        A:
+        <BoldText>A:</BoldText>
+        {' '}
         {body}
       </p>
-      <footer>
+      <StyledFooter>
         <span>
           by
+          {' '}
           {username}
         </span>
         <span>
-          by
+          {' | '}
           {format(new Date(date), 'MMMM d, yyyy')}
         </span>
         <span>
+          {' | '}
           Helpful?
           {' '}
           <span onClick={() => handleHelpfulClick(id)}>Yes</span>
@@ -60,8 +71,11 @@ function Answer({
           {helpfulness}
           )
         </span>
-        <span onClick={() => handleReportClick(id)}>Report</span>
-      </footer>
+        <span onClick={() => handleReportClick(id)}>
+          {' | '}
+          Report
+        </span>
+      </StyledFooter>
     </div>
   );
 }
