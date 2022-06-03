@@ -98,9 +98,23 @@ app.get('/review/:id', (req, res) => {
     .then((results) => res.send(results));
 });
 
+//Overview
+app.post('/cart', (req, res) => {
+  fetch(`${process.env.URL}/cart`, {
+    method: 'POST',
+    headers: {
+      Authorization: process.env.GITTOKEN,
+      'User-Agent': 'user',
+    },
+    body: JSON.stringify(req.body.cartPost),
+  })
+    .then((response) => response.json())
+    .then((results) => res.send(results));
+});
 
-
-
+app.post('/tester', (req, res) => {
+  res.send(req.body)
+})
 
 app.listen(port, () => {
   console.log(`Spooder listening on port ${port}`);

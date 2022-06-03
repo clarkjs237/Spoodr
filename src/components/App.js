@@ -22,7 +22,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  button{
+  button,
+  input[type=submit] {
     background-color: white;
     border-width: 1px;
     border-color: black;
@@ -66,19 +67,21 @@ function App() {
   const [product_id_number, setProduct_id_number] = useState(PRODUCT_ID);
 
   function updateProductByID(id) {
-    fetch(`${URL}/products/${id}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    // fetch(`${URL}/products/${id}`, {
+    //   headers: {
+    //     Authorization: process.env.GITTOKEN,
+    //   },
+    // })
+    fetch(`/product/${id}`)
       .then((response) => response.json())
       .then((result) => setProduct(result));
 
-    fetch(`${URL}/products/${id}/styles`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    // fetch(`${URL}/products/${id}/styles`, {
+    //   headers: {
+    //     Authorization: process.env.GITTOKEN,
+    //   },
+    // })
+    fetch(`/style/${id}`)
       .then((response) => response.json())
       .then((result) => setProductStyle(result));
   }
@@ -99,11 +102,12 @@ function App() {
   }
 
   function getReviewsMeta(id) {
-    fetch(`${URL}/reviews/meta?product_id=${id}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    // fetch(`${URL}/reviews/meta?product_id=${id}`, {
+    //   headers: {
+    //     Authorization: process.env.GITTOKEN,
+    //   },
+    // })
+    fetch(`/review/${id}`)
       .then((response) => response.json())
       .then((result) => {
         setReviewsMeta(result);
