@@ -12,6 +12,13 @@ import "@fontsource/inter/700.css";
 export const PRODUCT_ID = 40351;
 export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
 
+const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: white;
@@ -136,7 +143,7 @@ function App() {
   }, [product_id_number]);
 
   return (
-    <>
+    <AppWrapper>
       <GlobalStyle />
       <Header />
       <StyledWidgets>
@@ -165,7 +172,7 @@ function App() {
           reviewsMeta={reviewsMeta}
         />
       </StyledWidgets>
-    </>
+    </AppWrapper>
   );
 }
 

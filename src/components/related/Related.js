@@ -10,8 +10,8 @@ const Titles = styled.h1`
 `;
 
 const RelatedAndOutfitContainer = styled.div`
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  /* margin-bottom: 2rem;
+  margin-top: 2rem; */
 
   // Added this line, not sure if I'll need to keep it or not
   position: relative;
