@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import axios from 'axios';
 import { URL } from '../../App';
 
 const StyledSubmitButton = styled.input`
@@ -76,13 +75,13 @@ export default function AddToCart({ curStyleQuantAndSizes, className }) {
   }
 
   function postToCart() {
-    return axios.post(`${URL}/cart`, cartPost, {
+    return fetch('/cart', {
+      method: 'post',
       headers: {
-        Authorization: process.env.GITTOKEN,
         'content-type': 'application/json',
       },
-    });
-    //return fetch('/cart', cartPost);
+      body: JSON.stringify(cartPost)
+    })
   }
 
   useEffect(() => {
