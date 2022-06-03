@@ -9,7 +9,7 @@ const TableContainer = styled.div`
   width: 28rem;
   position: absolute;
   background-color: #EAC9C1;
-  background-image: linear-gradient(to bottom,white,transparent);
+  background-image: linear-gradient(to bottom,white 60%,transparent);
   border: 1.5px #32292F solid;
   transition: transform 0.5s ease-out;
   top: -73rem;
@@ -23,9 +23,10 @@ const CloseModalButton = styled.span`
   right: 1rem;
   font-size: 1.8rem;
   &:before {
-    content: "\\2716";
+    content: "\\2715";
   }
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
   &:hover {
     color: #90D7FF;
   }
@@ -36,7 +37,6 @@ const Table = styled.table`
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 
   left: 2.9rem;
-  // border: 2px red solid;
 `;
 
 const TableBody = styled.tbody`
@@ -141,6 +141,11 @@ export default function TableView({
     generateSizeList();
   }, [relatedProduct]);
 
+  if (!overviewProduct || !overviewStyle || !overviewRating ||
+      !relatedProduct || !relatedStyle || !relatedRating) {
+    return <div>Empty</div>;
+  }
+
   return (
     <TableContainer>
       <TextH3
@@ -184,11 +189,11 @@ export default function TableView({
           {/* Average Rating */}
           <TableRow>
             <TableData>
-              <StarRating averageStarRating={overviewRating} />
+              <StarRating averageStarRating={overviewRating} starBlank={'#EAC9C1'}/>
             </TableData>
             <TableData cat={true}><i>Average Rating</i></TableData>
             <TableData>
-              <StarRating averageStarRating={relatedRating} />
+              <StarRating averageStarRating={relatedRating} starBlank={'#EAC9C1'}/>
             </TableData>
           </TableRow>
           {/* Map over the features */}

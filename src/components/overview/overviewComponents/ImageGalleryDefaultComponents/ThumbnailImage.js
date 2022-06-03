@@ -3,14 +3,16 @@ import styled from 'styled-components';
 
 const Thumbnail = styled.img`
   border: solid;
+  border-width: ${(props) => (props.selected ? '.15rem' : '0')};
   object-fit: cover;
-  border-width: ${(props) => (props.selected ? '.1rem' : '0')};
-  border-color: ${(props) => (props.selected ? '#90D7FF' : '#32292F')};
-  height: 3.17rem;
-  width: 3.17rem;
-  margin: 0rem;
+  color: ${(props) => (props.selected ? '#90D7FF' : '#32292F')};
+  height: 3.5rem;
+  width: 3.5rem;
   cursor: pointer;
+  margin: ${(props) => (props.selected ? '0' : '.15rem')};
   &:hover {
+    margin: 0;
+    border-width: .15rem;
     border-color: #90D7FF;
   }
 `;

@@ -6,9 +6,18 @@ const Inner = styled.div`
   white-space: nowrap;
   transition: transform 0.3s ease-out;
 
-  ${(props) => css`
+  ${(props) => {
+    if (props.activeIndex === 0) {
+      return css`
+        transform: translateX(-0.25rem);
+      `;
+    }
+    return css`
       transform: translateX(-${props.activeIndex * 14 + 0.5}rem);
-  `};
+    `;
+  }};
+
+  position: absolute;
 `;
 
 const CarouselWindow = styled.div`
@@ -17,29 +26,27 @@ const CarouselWindow = styled.div`
   min-width: 48.5rem;
   min-height: 19rem;
   max-height: 19rem;
-
-
-  // Attempting to overlay button
   position: relative;
 `;
 
 const Blur = styled.div`
   position: absolute;
   width: 4.5rem;
-  height: 18.5rem;
-  top: 0.20rem;
+  height: 19.5rem;
 
   ${(props) => {
     if (props.left && props.activeIndex > 0) {
       return css`
         left: 0rem;
         background-image: linear-gradient(-90deg, transparent, white 80%);
+        top: -0.5rem;
       `;
     }
     if (!props.left) {
       return css`
         left: 44.5rem;
         background-image: linear-gradient(90deg, transparent, white 80%);
+        top: -0.15rem;
     `;
     }
     return css`
@@ -53,15 +60,24 @@ const Chevron = styled.span`
   position: absolute;
   top: 7rem;
   left: ${(props) => (props.left ? '0.5rem' : '46.5rem')};
-  visibility ${(props) => {
+  ${(props) => {
     if (props.left && props.activeIndex === 0) {
-      return 'hidden';
+      return css`
+        opacity: 0;
+      `;
     }
     if (!props.left && props.activeIndex === props.length) {
-      return 'hidden';
+      return css`
+        opacity: 0;
+      `;
     }
-    return 'visible';
+    return css`
+      opacity: 1;
+    `;
   }};
+
+  transition: opacity 0.3s ease-in, color 0.2s ease-in-out;
+
   &:hover {
     color: #90D7FF;
   }
@@ -95,13 +111,16 @@ export const AddOutfitCard = styled.div`
   min-width: 13rem;
   max-width: 13rem;
   max-height: 18rem;
-  background-color: #EAC9C1;
   margin: 0.5rem;
   cursor: pointer;
-  border: 1.5px solid #32292F;
-  transform: translateY(-0.3rem);
+  transform: translateY(-0.4rem);
   position: relative;
-  background-image: linear-gradient(to bottom, white, transparent)
+
+  outline: 0.1rem solid white;
+  transition: outline 0.3s ease-in-out;
+  &:hover {
+    outline: 0.1rem solid #32292F;
+  }
 `;
 
 const AddOutfitButton = styled.span`
@@ -112,6 +131,12 @@ const AddOutfitButton = styled.span`
   &:before {
     content: "\\002B";
   }
+`;
+
+const AddButtonContentWrapper = styled.div`
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
 `;
 
 export const AddButtonText = styled.span`
@@ -185,7 +210,7 @@ export default function CarouselComponent({
                 id={Object.keys(relStyles)[index]}
                 info={Object.values(relInfos)[index]}
                 review={Object.values(relReviews)[index]}
-                outfit={false}
+                list={'related'} // specify which list this is for
                 index={index}
                 // add individual card functionality here
                 // this is where the modal functionality will go
@@ -244,8 +269,10 @@ export default function CarouselComponent({
         <CarouselWindow>
           <Inner activeIndex={outfitActiveIndex}>
             <AddOutfitCard onClick={handleAddToOutfit}>
-              <AddOutfitButton />
-              <AddButtonText>Add to My Outfit</AddButtonText>
+              <AddButtonContentWrapper>
+                <AddOutfitButton />
+                <AddButtonText>Add to My Outfit</AddButtonText>
+              </AddButtonContentWrapper>
             </AddOutfitCard>
             {outfitList.map((item, index) => (
               <CarouselItemComponent
@@ -253,7 +280,7 @@ export default function CarouselComponent({
                 id={item.id}
                 info={item.info}
                 review={item.review}
-                outfit={true}
+                list={'outfit'} // specify which list this is for
                 index={index}
                 // add individual card functionality here
                 removeItemFromOutfit={removeItemFromOutfit}

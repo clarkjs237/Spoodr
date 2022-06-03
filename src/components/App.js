@@ -115,6 +115,7 @@ function App() {
   useEffect(() => {
     updateProductByID(product_id_number);
     getReviewsMeta(product_id_number);
+    setCurStyleId(0);
   }, [product_id_number]);
 
   return (

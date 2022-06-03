@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ProductInfo from './overviewComponents/ProductInfo';
-import SocialMedia from './overviewComponents/SocialMedia';
+//import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
 import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
 import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
@@ -9,29 +9,27 @@ import AddToCart from './overviewComponents/AddToCart';
 
 const ProductOverview = styled.div`
   white-space: nowrap;
-  overflow-x: hidden;
 `;
 
 const InfoSelectorCartDiv = styled.div`
   display: inline-block;
   position: top;
-  margin-left: .5rem;
-  margin-top: .5rem;
-  font-size: 1.125rem;
   vertical-align: top;
-  white-space: normal;
+  margin-left: 1rem;
 `;
 
-const ProductSlogan = styled.h4`
-  margin: .5rem;
+const ProductSlogan = styled.div`
+  font-weight: bold;
+  margin-top: 1rem;
+
 `;
 
-const ProductDescription = styled.p`
-  margin: .5rem;
+const ProductDescription = styled.div`
   display: inline-block;
   white-space: normal;
   overflow-x: wrap;
-  width: 40rem;
+  width: 52rem;
+  margin-top: 1rem;
 `;
 
 export default function Overview({
@@ -112,6 +110,8 @@ export default function Overview({
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
           setExpandedView={setExpandedView}
+          url={socialUrl}
+          slogan={product.slogan}
         />
         <InfoSelectorCartDiv>
           <ProductInfo
@@ -133,7 +133,6 @@ export default function Overview({
             curStyleQuantAndSizes={curStyleQuantAndSizes}
           />
         </InfoSelectorCartDiv>
-        <SocialMedia url={socialUrl} slogan={product.slogan} />
         <ProductSlogan>{product.slogan}</ProductSlogan>
         <ProductDescription>{product.description}</ProductDescription>
       </ProductOverview>
