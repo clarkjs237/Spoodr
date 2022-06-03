@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Meter } from '../../../styled-components/Meter';
 
 const StyledCharacteristicsItem = styled.div`
   width: 100%;
@@ -21,7 +22,7 @@ function CharacteristicsItem(props) {
       <div>
         {props.characteristic}
       </div>
-      <meter value={props.value} min={0} max={5} style={{width: "100%"}}/>
+      <Meter value={props.value} min={0} max={5} style={{width: "100%"}}/>
       <CharacteristicsLimits>
         <div>-</div>
         <div>+</div>

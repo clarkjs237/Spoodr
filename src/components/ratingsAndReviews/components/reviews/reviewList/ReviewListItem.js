@@ -148,7 +148,7 @@ function ReviewListItem(props) {
           </StyledReviewThumbnails>
       </StyledReviewBody>
       { props.review.recommend === true &&
-        <StyledReviewRecommend> ✔ I recommend this product. </StyledReviewRecommend>
+        <StyledReviewRecommend> ✓ I recommend this product. </StyledReviewRecommend>
       }
       { props.review.response &&
         (
