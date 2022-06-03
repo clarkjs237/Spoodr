@@ -10,7 +10,6 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const express = require('express');
 require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -104,11 +103,10 @@ app.post('/cart', (req, res) => {
     method: 'POST',
     headers: {
       Authorization: process.env.GITTOKEN,
-      'User-Agent': 'user',
+      'content-type': 'application/json',
     },
-    body: JSON.stringify(req.body.cartPost),
+    body: JSON.stringify(req.body),
   })
-    .then((response) => response.json())
     .then((results) => res.send(results));
 });
 

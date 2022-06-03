@@ -45,7 +45,7 @@ export default function Overview({
 
   const [expandedView, setExpandedView] = useState(false);
   const [curDisplayIndex, setCurDisplayIndex] = useState(0);
-  const missingImg = 'https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format';
+  const missingImg = 'https://pic.onlinewebfonts.com/svg/img_523930.png';
   let curDisplayPhotos;
   let productOrginalPrice;
   let productSalePrice;

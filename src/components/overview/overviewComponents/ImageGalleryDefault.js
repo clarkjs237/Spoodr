@@ -5,7 +5,7 @@ import DisplayImageNav from './ImageGalleryDefaultComponents/DisplayImageNav';
 import SocialMedia from './SocialMedia';
 
 const DisplayImage = styled.img`
-  object-fit: cover;
+  object-fit: ${(props)=>props.err ? 'contain' : 'cover'};
   cursor: zoom-in;
   width: 60%;
   height: 100%;
@@ -40,15 +40,15 @@ export default function ImageGalleryDefault({
   slogan,
   missingImg,
 }) {
-
+  let displayImageErr=false;
   let curDisplaySrc;
-
   function onClickHandler(e) {
     setExpandedView(true);
   }
 
-  if(!curDisplayPhotos[curDisplayIndex]) {
+  if(!curDisplayPhotos[curDisplayIndex] || !curDisplayPhotos[curDisplayIndex].url) {
     curDisplaySrc = missingImg;
+    displayImageErr = true;
   } else {
     curDisplaySrc = curDisplayPhotos[curDisplayIndex].url;
   }
@@ -57,8 +57,9 @@ export default function ImageGalleryDefault({
     <DisplayWrapper>
       <DisplayImage
         src={curDisplaySrc || missingImg}
+        err={displayImageErr}
         onClick={onClickHandler}
-        onError={(e)=>e.target.src=missingImg}
+        onError={(e)=>{e.target.src=missingImg; e.target.err=true}}
       />
       <ThumbnailImageWrapper>
         <ThumbnailImageNav

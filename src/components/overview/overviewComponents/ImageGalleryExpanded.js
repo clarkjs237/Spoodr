@@ -17,7 +17,7 @@ const ExpandedImage = styled.img`
   height: ${(props) => (props.zoom ? '230vh' : '92vh')};
   margin-left: auto;
   margin-right: auto;
-  object-fit: cover;
+  object-fit: ${(props)=>props.err ? 'contain' : 'cover'};
   &:hover {
     cursor: ${(props) => (props.zoom ? 'zoom-out' : 'crosshair')};
   }
@@ -49,7 +49,8 @@ export default function ImageGalleryExpanded({
 }) {
   const [zoomedView, setZoomedView] = useState(false);
   const [scroll, setScroll] = useState({x: 0, y: 0});
-
+  let expImageErr=false;
+  let curExpSrc;
   function onClickHandler(e) {
     if (e.target.id === 'ExpandedImage') {
       if (zoomedView) {
@@ -121,15 +122,24 @@ export default function ImageGalleryExpanded({
     }
   }
 
+  if(!curDisplayPhotos[curDisplayIndex] || !curDisplayPhotos[curDisplayIndex].url) {
+    curExpSrc = missingImg;
+    expImageErr = true;
+  } else {
+    curExpSrc = curDisplayPhotos[curDisplayIndex].url;
+  }
+
   if (zoomedView) {
     return (
       <ImageGalleryExpandedWrapper zoom={zoomedView}>
         <ExpandedImage
           id="ExpandedImage"
           zoom={zoomedView}
-          src={curDisplayPhotos[curDisplayIndex].url || missingImg}
+          src={curExpSrc || missingImg}
+          err={expImageErr}
           onClick={onClickHandler}
           onMouseMove={handleMouseMove}
+          onError={(e)=>{e.target.src=missingImg; e.target.err=true}}
         />
       </ImageGalleryExpandedWrapper>
     );
@@ -143,6 +153,8 @@ export default function ImageGalleryExpanded({
         src={curDisplayPhotos[curDisplayIndex].url || missingImg}
         onClick={onClickHandler}
         onMouseMove={handleMouseMove}
+        err={expImageErr}
+        onError={(e)=>{e.target.src=missingImg; e.target.err=true}}
       />
       <ExpandedImageNav
         curDisplayIndex={curDisplayIndex}
