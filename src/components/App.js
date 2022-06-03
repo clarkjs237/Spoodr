@@ -5,6 +5,8 @@ import Questions from './questions/Questions';
 import Related from './related/Related';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 import { createGlobalStyle } from 'styled-components';
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/700.css";
 
 export const PRODUCT_ID = 40351;
 export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
