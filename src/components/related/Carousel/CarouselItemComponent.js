@@ -48,7 +48,11 @@ const Photo = styled.img`
     if (!props.src) {
       // this is null so return a null image or something
       return css`
-        content: url("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg");
+        /* content: url("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"); */
+        /* content: url("https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format"); */
+        content: url("https://pic.onlinewebfonts.com/svg/img_523930.png");
+        max-width: 30%;
+        max-height: 30%;
       `;
     }
 
