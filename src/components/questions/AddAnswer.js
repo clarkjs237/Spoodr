@@ -65,7 +65,7 @@ const Textarea = styled.textarea`
 `;
 
 function AddAnswer({
-  isDialogOpen, setIsDialogOpen, questionId, getAnswers,
+  isDialogOpen, setIsDialogOpen, questionId, getAnswers, product, question,
 }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -114,39 +114,39 @@ function AddAnswer({
       <Overlay aria-hidden="true" />
       <StyledContainer>
         <StyledPanel>
-            <StyledTitle>Add your answer</StyledTitle>
-            <StyledDescription>
-              Description
-            </StyledDescription>
-            <form onSubmit={handleAnswerSubmit}>
-              <Label htmlFor="username">
-                Username
-                <Input
-                  id="username"
-                  type="text"
-                  value={username}
-                  onChange={handleUsernameChange}
-                />
-              </Label>
-              <Label htmlFor="email">
-                Email
-                <Input
-                  id="email"
-                  type="text"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </Label>
-              <Label htmlFor="answer">
-                Your question
-                <Textarea
-                  id="answer"
-                  value={answer}
-                  onChange={handleAnswerChange}
-                />
-              </Label>
-              <input type="submit" value="Submit" />
-            </form>
+          <StyledTitle>Submit your answer</StyledTitle>
+          <StyledDescription>
+            {product}: {question}
+          </StyledDescription>
+          <form onSubmit={handleAnswerSubmit}>
+            <Label htmlFor="username">
+              Username
+              <Input
+                id="username"
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+            </Label>
+            <Label htmlFor="email">
+              Email
+              <Input
+                id="email"
+                type="text"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </Label>
+            <Label htmlFor="answer">
+              Your question
+              <Textarea
+                id="answer"
+                value={answer}
+                onChange={handleAnswerChange}
+              />
+            </Label>
+            <input type="submit" value="Submit" />
+          </form>
         </StyledPanel>
       </StyledContainer>
     </StyledDialog>

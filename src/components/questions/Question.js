@@ -81,6 +81,8 @@ function Question({
         setIsDialogOpen={setIsDialogOpen}
         questionId={id}
         getAnswers={getAnswers}
+        product={product.name}
+        question={body}
       />
       <Answers
         id={id}
