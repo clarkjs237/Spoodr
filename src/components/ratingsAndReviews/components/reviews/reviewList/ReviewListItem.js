@@ -7,7 +7,71 @@ import { URL } from "../../../../App";
 import { format } from 'date-fns';
 
 const StyledReviewListItem = styled.div`
-`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const StyledReviewHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledReviewBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  white-space: wrap;
+  overflow: hidden;
+`;
+
+const StyledReviewBodyText = styled.div`
+  overflow-wrap: break-word;
+`;
+
+const StyledReviewBodyTextScroll = styled.div`
+  overflow-y: scroll;
+  max-height: 100px;
+  padding-right: 10px;
+  &::-webkit-scrollbar{
+    width: 12px;
+  }
+  &::-webkit-scrollbar-track{
+    background: white;
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: #90D7FF;
+  }
+`;
+
+const StyledReviewThumbnails = styled.div`
+  padding-top: 5px;
+  padding-right: 5px;
+  max-height: 50px;
+  max-width: 100%;
+  display: flex;
+  gap: 5px;
+`;
+
+const StyledReviewRecommend = styled.div`
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
+
+const StyledReviewResponse = styled.div`
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+`;
+
+const StyledReviewFooter = styled.div`
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: small;
+`;
 
 function ReviewListItem(props) {
   const [helpfulness, setHelpfulness] = useState(
@@ -16,6 +80,10 @@ function ReviewListItem(props) {
       clicked: false,
     },
   );
+  let reviewsPhotos = false;
+  if( props.review.photos.length ) {
+    reviewsPhotos = true;
+  }
 
   function markReviewAsHelpful(reviewId) {
     fetch(
@@ -54,46 +122,45 @@ function ReviewListItem(props) {
   }
 
   return (
-    <div className="review-list-item">
-      <div className="review-item-header">
+    <StyledReviewListItem>
+      <StyledReviewHeader>
         <div>
           <StarRating averageStarRating={props.review.rating}/>
         </div>
         <div style={{fontSize: "small"}}>
           {props.review.reviewer_name} {format(new Date(props.review.date), "MMMM dd, yyyy")}
         </div>
-      </div>
-      <div className="review-item-summary">
+      </StyledReviewHeader>
+      <div style={{fontWeight: "bold"}}>
         {props.review.summary}
       </div>
-      <div className="review-item-body">
+      <StyledReviewBody>
         { props.review.body.length <= 250
-          ? <div className="review-item-body-text">{props.review.body}</div>
-          : <div className="review-item-body-text-scroll">{props.review.body}</div>
-        }
-        <div className="review-item-photos">
-          {props.review.photos.map((photo, index) => (
-            <ReviewPhoto
-              url={photo.url}
-              key={index}
-            />
-          ))}
-        </div>
-      </div>
+          ? <StyledReviewBodyText>{props.review.body}</StyledReviewBodyText>
+          : <StyledReviewBodyTextScroll>{props.review.body}</StyledReviewBodyTextScroll>}
+          <StyledReviewThumbnails>
+            {props.review.photos.map((photo, index) => (
+              <ReviewPhoto
+                url={photo.url}
+                key={index}
+              />
+            ))}
+          </StyledReviewThumbnails>
+      </StyledReviewBody>
       { props.review.recommend === true &&
-        <div className="review-item-recommend"> ✔ I recommend this product. </div>
+        <StyledReviewRecommend> ✔ I recommend this product. </StyledReviewRecommend>
       }
       { props.review.response &&
         (
-          <div className="review-item-response">
+          <StyledReviewResponse>
             Response from seller:
             <br />
             {props.review.response}
-          </div>
+          </StyledReviewResponse>
         )
       }
-      <div className="review-item-footer">
-        <div className="review-item-helpful">
+      <StyledReviewFooter>
+        <div>
           Helpful?&nbsp;
           { !helpfulness.clicked
             ? <underline-button type="submit" onClick={handleHelfulnessClick}>Yes</underline-button>
@@ -101,12 +168,12 @@ function ReviewListItem(props) {
           }
           &nbsp;(
           {helpfulness.value}
-          )
+          )&nbsp;
         </div>
         |&nbsp;
         <underline-button type="submit" onClick={handleReportClick}>Report</underline-button>
-      </div>
-    </div>
+      </StyledReviewFooter>
+    </StyledReviewListItem>
   );
 }
 

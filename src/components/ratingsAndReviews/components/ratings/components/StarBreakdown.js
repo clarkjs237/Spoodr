@@ -15,6 +15,22 @@ const StyledStarBreakdown = styled.div`
   gap: 10px;
 `;
 
+const Meter = styled.meter`
+  width: 100%;
+  &::-webkit-meter-bar {
+    background: rgb(255, 255, 255);
+    border-radius: 0px;
+    height: 10px;
+    width: 100%;
+    -webkit-appearance: none;
+    border: 1px solid lightgray;
+    border-radius: 0px;
+  }
+  &::-webkit-meter-optimum-value {
+    background:#454545;
+  }
+`
+
 function StarBreakdown(props) {
   const [ratings, setRatings] = useState({});
 
@@ -36,23 +52,23 @@ function StarBreakdown(props) {
     <StyledStarsBreakdown>
       <StyledStarBreakdown>
         <underline-button>5&nbsp;stars</underline-button>
-        <meter value={ratings['5']} min={0} max={100}/>
+        <Meter value={ratings['5']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
         <underline-button>4&nbsp;stars</underline-button>
-        <meter value={ratings['4']} min={0} max={100}/>
+        <Meter value={ratings['4']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
         <underline-button>3&nbsp;stars</underline-button>
-        <meter value={ratings['3']} min={0} max={100}/>
+        <Meter value={ratings['3']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
         <underline-button>2&nbsp;stars</underline-button>
-        <meter value={ratings['2']} min={0} max={100}/>
+        <Meter value={ratings['2']} min={0} max={100}/>
       </StyledStarBreakdown>
       <StyledStarBreakdown>
         <underline-button>1&nbsp;stars</underline-button>
-        <meter value={ratings['1']} min={0} max={100}/>
+        <Meter value={ratings['1']} min={0} max={100}/>
       </StyledStarBreakdown>
     </StyledStarsBreakdown>
   );

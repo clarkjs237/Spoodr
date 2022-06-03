@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PRODUCT_ID, URL } from "../../../../App";
 import ReviewFormCharacteristics from "./ReviewFormCharacteristics";
 import styled from 'styled-components';
+import { TextInput } from '../../styled-components/TextInput'
 
 const StyledForm = styled.form`
   display: flex;
@@ -26,10 +27,14 @@ const StyledForm = styled.form`
   }
 `;
 
-const StyledModal = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+const styledTextarea = styled.textarea`
+  resize: none;
+  border-radius: 0px;
+  width: 50%;
+  // height: 100px;
+  // &::-webkit-input-placeholder {
+  //   padding: 10px;
+  // }
 `;
 
 function AddReviewForm(props) {
@@ -139,7 +144,7 @@ function AddReviewForm(props) {
   }, []);
 
   return (
-    <StyledModal>
+    <div>
       <button type="button" onClick={props.handleToggleModalChange} style={{width:"100px"}}>
         close
       </button>
@@ -234,7 +239,7 @@ function AddReviewForm(props) {
         <div className="new-review-form-summary">
           Summarize your review of this product.
           <br />
-          <input
+          <TextInput
             type="text"
             className="review-form-summary"
             name="summary"
@@ -243,21 +248,17 @@ function AddReviewForm(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div className="new-review-form-body">
+        <div>
           Tell us about this product.
           <br />
-          <input
+          <textarea
             type="text"
-            className="review-form-body"
             name="body"
             placeholder="Why did you like the product or not?"
             minLength="50"
             maxLength="1000"
             onChange={handleInputChange}
-            style={{
-              width: "250px",
-              height: "150px"
-            }}
+            style={{width: "50%"}}
             required
           />
           <br />
@@ -284,7 +285,7 @@ function AddReviewForm(props) {
         <div className="new-review-form-name">
           Enter your nickname.
           <br />
-          <input
+          <TextInput
             type="text"
             name="name"
             placeholder="Example: jackson11!"
@@ -298,7 +299,7 @@ function AddReviewForm(props) {
         <div className="new-review-form-email">
           Enter your email.
           <br />
-          <input
+          <TextInput
             type="text"
             name="email"
             placeholder="Example: jackson11@email.com"
@@ -311,7 +312,7 @@ function AddReviewForm(props) {
         </div>
       </StyledForm>
       <button form="add-review-form" type="submit" value="Submit" style={{width:"100px"}}>submit</button>
-    </StyledModal>
+    </div>
   );
 }
 

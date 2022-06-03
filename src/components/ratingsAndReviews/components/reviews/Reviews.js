@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReviewsList from './reviewList/ReviewsList';
 import AddReviewForm from './addReview/AddReviewForm';
+import { StyledModal, StyledModalBG } from "../styled-components/Modal"
 import Sort from './sort/Sort';
 import { PRODUCT_ID, URL } from '../../../App';
 
@@ -81,14 +82,13 @@ function Reviews(props) {
       { toggleModal
       && (
         <div>
-          <div className="Modal-bg"></div>
-          <div className="Modal">
+          <StyledModalBG/>
+          <StyledModal>
             <AddReviewForm
               handleToggleModalChange={handleToggleModalChange}
               reviewsMeta={props.reviewsMeta}
             />
-          </div>
-
+          </StyledModal>
         </div>
       )}
     </StyledReviews>
