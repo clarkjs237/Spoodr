@@ -4,7 +4,7 @@ import ReviewsList from './reviewList/ReviewsList';
 import AddReviewForm from './addReview/AddReviewForm';
 import { StyledModal, StyledModalBG } from "../styled-components/Modal"
 import Sort from './sort/Sort';
-import { PRODUCT_ID, URL } from '../../../App';
+import { PRODUCT_ID } from '../../../App';
 
 const StyledReviews = styled.div`
   display: flex;
@@ -24,14 +24,15 @@ function Reviews(props) {
   const [toggleModal, setToggleModal] = useState(false);
 
   function getReviews() {
-    fetch(
-      `${URL}/reviews?product_id=${PRODUCT_ID}&page=${page}&count=${count}&sort=${sort}`,
-      {
-        headers: {
-          Authorization: process.env.GITTOKEN,
-        },
-      },
-    )
+    // fetch(
+    //   `${URL}/reviews?product_id=${PRODUCT_ID}&page=${page}&count=${count}&sort=${sort}`,
+    //   {
+    //     headers: {
+    //       Authorization: process.env.GITTOKEN,
+    //     },
+    //   },
+    // )
+    fetch(`/review/${PRODUCT_ID}/${page}/${count}/${sort}/`)
       .then((response) => response.json())
       .then((result) => setReviews(result.results));
   }

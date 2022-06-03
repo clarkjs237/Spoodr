@@ -82,12 +82,13 @@ export default function AddToCart({ curStyleQuantAndSizes, className }) {
         'content-type': 'application/json',
       },
     });
+    //return fetch('/cart', cartPost);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setSelectedQuant('');
-      setSelectedSize('');
-  },[curStyleQuantAndSizes]);
+    setSelectedSize('');
+  }, [curStyleQuantAndSizes]);
 
   function onSubmitHandler(e) {
     e.preventDefault();
@@ -109,8 +110,9 @@ export default function AddToCart({ curStyleQuantAndSizes, className }) {
 
   function onSizeChangeHandler(options) {
     setSelectedSize(options);
-    if(options.value !== 'Sold Out')
-    setSelectedQuant({ value: 1, label: 1 });
+    if (options.value !== 'Sold Out') {
+      setSelectedQuant({ value: 1, label: 1 })
+    }
   }
 
   function onSizeInputChangeHandler(options, { action }) {
