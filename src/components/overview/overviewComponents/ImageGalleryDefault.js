@@ -40,24 +40,25 @@ export default function ImageGalleryDefault({
   slogan,
   missingImg,
 }) {
-  if (!curDisplayPhotos[curDisplayIndex]) {
-    setCurDisplayIndex(curDisplayPhotos.length - 1);
-  }
+
+  let curDisplaySrc;
 
   function onClickHandler(e) {
     setExpandedView(true);
   }
 
-  function addDefaultSrc(e) {
-    e.target.src = missingImg;
-    console.log(missingImg);
+  if(!curDisplayPhotos[curDisplayIndex]) {
+    curDisplaySrc = missingImg;
+  } else {
+    curDisplaySrc = curDisplayPhotos[curDisplayIndex].url;
   }
 
   return (
     <DisplayWrapper>
       <DisplayImage
-        src={curDisplayPhotos[curDisplayIndex].url || missingImg}
+        src={curDisplaySrc || missingImg}
         onClick={onClickHandler}
+        onError={(e)=>e.target.src=missingImg}
       />
       <ThumbnailImageWrapper>
         <ThumbnailImageNav

@@ -32,7 +32,7 @@ const Check = styled.label`
   font-weight: bold;
   width: .5rem;
   height: auto;
-  `;
+`;
 
 export default function StyleSelectorImage({
   curStyleId,
@@ -48,12 +48,20 @@ export default function StyleSelectorImage({
   if (curStyleId === thumbnailId) {
     return (
       <StyleSpan>
-        <StyleImage name={thumbnailId} src={thumbnail || missingImg} />
+        <StyleImage
+        name={thumbnailId}
+        src={thumbnail || missingImg}
+        onError={(e)=>e.target.src=missingImg}/>
         <Check>&#10003;</Check>
       </StyleSpan>
     );
   }
   return (
-    <StyleImage name={thumbnailId} src={thumbnail || missingImg} onClick={onClickHandler} />
+    <StyleImage
+      name={thumbnailId}
+      src={thumbnail || missingImg}
+      onClick={onClickHandler}
+      onError={(e)=>e.target.src=missingImg}
+    />
   );
 }

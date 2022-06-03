@@ -9,7 +9,7 @@ const StyledSubmitButton = styled.input`
   border: solid;
   border-width: 1.5px;
   color: #0B2027;
-  width: 18rem;
+  width: 18.3rem;
   background-color: white;
   padding: 1rem;
   border-color: #32292F;
@@ -131,7 +131,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         openMenuOnFocus
         ref={(r) => refs = r}
         styles={selectStyles}
-        width={menuOpen ? 'auto' : '12rem'}
+        width={menuOpen ? 'auto' : '12.3rem'}
       />
       <Select
         name="Quant"

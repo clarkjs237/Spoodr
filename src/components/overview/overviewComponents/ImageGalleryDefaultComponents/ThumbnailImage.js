@@ -29,9 +29,19 @@ export default function ThumbnailImage({
   }
 
   if (id === curDisplayIndex) {
-    return <Thumbnail selected src={thumbnail || missingImg} name={id} onClick={onClickHandler} />;
+    return <Thumbnail
+      selected
+      src={thumbnail || missingImg}
+      name={id}
+      onClick={onClickHandler}
+      onError={(e)=>e.target.src=missingImg}
+    />;
   }
   return (
-    <Thumbnail src={thumbnail || missingImg} name={id} onClick={onClickHandler} />
+    <Thumbnail
+      src={thumbnail || missingImg}
+      name={id} onClick={onClickHandler}
+      onError={(e)=>e.target.src=missingImg}
+    />
   );
 }

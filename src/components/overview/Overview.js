@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ProductInfo from './overviewComponents/ProductInfo';
-//import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
 import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
 import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
@@ -16,6 +15,8 @@ const InfoSelectorCartDiv = styled.div`
   position: top;
   vertical-align: top;
   margin-left: 1rem;
+  height: 39rem;
+  overflow-y: 'visible';
 `;
 
 const ProductSlogan = styled.div`
@@ -53,7 +54,12 @@ export default function Overview({
   let curStyleQuantAndSizes;
   let socialUrl;
 
+  useEffect(()=>{
+    setCurDisplayIndex(0)
+  },[product.id]);
+
   if (product.category && productStyle.product_id) {
+
 
     if (productStyle.results.length) {
       productOrginalPrice = productStyle.results[curStyleId].original_price;
@@ -81,12 +87,18 @@ export default function Overview({
     }
 
     if (productStyle.results[curStyleId]) {
-      socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
-      styleThumbnails = productStyle.results.map((style, i) => ({ id: i, thumbnail: style.photos[0].thumbnail_url }));
-      curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo, i) => {
-        photo.id = i;
-        return photo;
-      });
+      if(!productStyle.results[curStyleId].photos[curDisplayIndex]) {
+        socialUrl = missingImg;
+        styleThumbnails = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
+        curDisplayPhotos = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
+      } else {
+        socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
+        styleThumbnails = productStyle.results.map((style, i) => ({ id: i, thumbnail: style.photos[0].thumbnail_url }));
+        curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo, i) => {
+          photo.id = i;
+          return photo;
+        });
+      }
     } else {
       socialUrl = missingImg;
       styleThumbnails = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
