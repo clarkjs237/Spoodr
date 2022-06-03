@@ -278,7 +278,7 @@ function Related({
     // this means there is no related list but still an outfit List
     return (
       <RelatedAndOutfitContainer>
-        <Titles>Related Items</Titles>
+        <Titles>Recommended For You</Titles>
         <AddOutfitCard
           style={{"transform": "translateX(-0.5rem)"}}
         >
