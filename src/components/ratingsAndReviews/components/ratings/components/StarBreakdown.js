@@ -27,7 +27,7 @@ const Meter = styled.meter`
     border-radius: 0px;
   }
   &::-webkit-meter-optimum-value {
-    background:#454545;
+    background: #90D7FF;
   }
 `
 

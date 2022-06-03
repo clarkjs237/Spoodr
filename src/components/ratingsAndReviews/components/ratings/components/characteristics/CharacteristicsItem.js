@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Meter } from '../../../styled-components/Meter';
+import { CharacteristicsMeter, CharacteristicsMeterPointer } from '../../../styled-components/CharacteristicsMeter';
 
 const StyledCharacteristicsItem = styled.div`
   width: 100%;
@@ -22,7 +23,10 @@ function CharacteristicsItem(props) {
       <div>
         {props.characteristic}
       </div>
-      <Meter value={props.value} min={0} max={5} style={{width: "100%"}}/>
+      <div>
+        <CharacteristicsMeter />
+        <CharacteristicsMeterPointer value={props.value}/>
+      </div>
       <CharacteristicsLimits>
         <div>-</div>
         <div>+</div>
