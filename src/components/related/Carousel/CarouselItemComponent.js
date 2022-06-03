@@ -80,7 +80,8 @@ const PhotoWrapper = styled.div`
 `;
 
 const ProductName = styled.span`
-  font-size: 1.13rem;
+  font-size: 1.05rem;
+  /* font-size: clamp(0.4rem, 2.8vw, 1.13rem); */
 `;
 
 const TextRatingPriceWrapper = styled.div`
@@ -207,7 +208,7 @@ export default function CarouselItemComponent({
           </PhotoWrapper>
           <BottomWrapper hover={hover}>
             <TextRatingPriceWrapper>
-              <i>{info.category}</i><br />
+              <i style={{"fontSize": "0.9rem"}}>{info.category}</i><br />
               <ProductName>{info.name}</ProductName>
               <div>
                 {hover ? <StarRating averageStarRating={review} starColor={'#32292F'} starBlank={'white'}/>
