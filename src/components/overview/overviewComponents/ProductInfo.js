@@ -7,6 +7,10 @@ const ProductTitle = styled.div`
   margin: 0;
   font-size: 3.5rem;
   font-weight: bold;
+  width: 18rem;
+  display: inline-block;
+  white-space: normal;
+  overflow-x: wrap;
 `;
 
 const ProductCategory = styled.div`

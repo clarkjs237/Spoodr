@@ -6,13 +6,13 @@ import { URL } from '../../App';
 
 const StyledSubmitButton = styled.input`
   font-size: 1.125rem;
-  border:solid;
+  border: solid;
+  border-width: 1.5px;
   color: #0B2027;
-  width: 18rem;
+  width: 18.3rem;
   background-color: white;
   padding: 1rem;
   border-color: #32292F;
-  border-width: 1.5px;
   text-align: left;
   &:hover {
     border-color: #90D7FF;
@@ -24,15 +24,31 @@ const StyledForm = styled.form`
 `;
 
 const selectStyles = {
-  option: (styles, { isSelected, selectProps: { width } }) => ({
+  option: (styles, { isSelected, isFocused, selectProps: { width } }) => ({
     ...styles,
-    backgroundColor: 'white',
-    color: isSelected ? '#90D7FF' : '#0B2027',
+    backgroundColor: isSelected ? '#90D7FF' : 'white',
+    outline: isFocused ? 'solid 1.5px #90D7FF' : '0',
+    fontSize: isFocused ? '1.125rem' : 'inherit',
+    color: '#0B2027',
     width,
     height: 'auto',
+    '&:hover': {
+      backgroundColor: '90D7FF',
+    }
   }),
   control: (styles, { selectProps: { width } }) => ({
-    ...styles, backgroundColor: 'white', borderRadius: '0', padding: '.5rem', border: 'solid', 'border-width': '1.5px', width, color: '#32292F', 'font-size': '1.125rem', '&:hover': { 'border-color': '#90D7FF', cursor: 'pointer', }
+    ...styles,
+    backgroundColor: 'white',
+    borderRadius: '0',
+    padding: '8.5px 8px',
+    border: '1.5px solid',
+    width,
+    color: '#32292F',
+    fontSize: '1.125rem',
+    '&:hover': {
+      borderColor: '#90D7FF',
+      cursor: 'pointer',
+    }
   }),
   dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#0B2027' }})),
   indicatorSeparator: ((styles) => ({...styles, backgroundColor: 'inherit'})),
@@ -40,10 +56,10 @@ const selectStyles = {
   container: (styles, { selectProps: { width } }) => ({
     ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0',
   }),
-  placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#0B2027' })),
+  placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, margin: '0', color: placeholderColor || '#0B2027' })),
 };
 
-export default function AddToCart({ curStyleQuantAndSizes }) {
+export default function AddToCart({ curStyleQuantAndSizes, className }) {
   const [selectedSize, setSelectedSize] = useState();
   const [selectedQuant, setSelectedQuant] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -106,7 +122,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   let submitButton = (
     <StyledSubmitButton
       type="submit"
-      value="ADD TO BAG                       +"
+      value="ADD TO BAG                         +"
     />
   );
 
@@ -122,6 +138,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   return (
     <StyledForm onSubmit={onSubmitHandler}>
       <Select
+        className={className}
         name="Sizes"
         options={sizeOptions}
         onChange={onSizeChangeHandler}
@@ -131,9 +148,10 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         openMenuOnFocus
         ref={(r) => refs = r}
         styles={selectStyles}
-        width={menuOpen ? 'auto' : '12rem'}
+        width={menuOpen ? 'auto' : '12.3rem'}
       />
       <Select
+        className={className}
         name="Quant"
         options={quantOptions}
         onChange={onQuantChangeHandler}

@@ -45,6 +45,7 @@ export default function ImageGalleryExpanded({
   curDisplayIndex,
   setCurDisplayIndex,
   setExpandedView,
+  missingImg
 }) {
   const [zoomedView, setZoomedView] = useState(false);
   const [scroll, setScroll] = useState({x: 0, y: 0});
@@ -126,7 +127,7 @@ export default function ImageGalleryExpanded({
         <ExpandedImage
           id="ExpandedImage"
           zoom={zoomedView}
-          src={curDisplayPhotos[curDisplayIndex].url}
+          src={curDisplayPhotos[curDisplayIndex].url || missingImg}
           onClick={onClickHandler}
           onMouseMove={handleMouseMove}
         />
@@ -139,7 +140,7 @@ export default function ImageGalleryExpanded({
       <ExpandedImage
         id="ExpandedImage"
         zoom={zoomedView}
-        src={curDisplayPhotos[curDisplayIndex].url}
+        src={curDisplayPhotos[curDisplayIndex].url || missingImg}
         onClick={onClickHandler}
         onMouseMove={handleMouseMove}
       />
@@ -153,6 +154,7 @@ export default function ImageGalleryExpanded({
           curDisplayPhotos={curDisplayPhotos}
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
+          missingImg={missingImg}
         />
       </ExpandedThumbnailImages>
       <LeaveExpandedView id="LeaveExpanded" onClick={onClickHandler}>
