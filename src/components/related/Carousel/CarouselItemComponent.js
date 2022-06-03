@@ -18,10 +18,11 @@ const CarouselItem = styled.div`
   transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.3rem)' : 'translateY(0rem)')};
 
   /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
-  transition: outline 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, outline 0.3s ease-in-out;
   ${(props) => {
     if (props.hover) {
       return css`
+        background-color: #f9f9f9;
         outline: 0.1rem solid #32292F;
       `;
     }
