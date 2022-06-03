@@ -189,11 +189,11 @@ export default function TableView({
           {/* Average Rating */}
           <TableRow>
             <TableData>
-              <StarRating averageStarRating={overviewRating} />
+              <StarRating averageStarRating={overviewRating} starBlank={'#EAC9C1'}/>
             </TableData>
             <TableData cat={true}><i>Average Rating</i></TableData>
             <TableData>
-              <StarRating averageStarRating={relatedRating} />
+              <StarRating averageStarRating={relatedRating} starBlank={'#EAC9C1'}/>
             </TableData>
           </TableRow>
           {/* Map over the features */}

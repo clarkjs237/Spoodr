@@ -98,19 +98,6 @@ const ProductPriceComp = styled(ProductPrice)`
   }}
 `;
 
-const StarRatingComp = styled(StarRating)`
-  // I want to give it a white background when hover is true
-  /* background-color: white; */
-  /* ${(props) => {
-    if (props.hover) {
-      // props.starBlank = '#ff9094';
-      return css`
-        background-color: white;
-      `;
-    }
-  }} */
-`;
-
 const ActionButton = styled.span`
   font-size: 1.6rem;
   left: 10.7rem;
@@ -218,8 +205,8 @@ export default function CarouselItemComponent({
               <i>{info.category}</i><br />
               <ProductName>{info.name}</ProductName>
               <div>
-                {hover ? <StarRatingComp averageStarRating={review} starColor={'#32292F'} starBlank={'white'}/>
-                  : <StarRatingComp averageStarRating={review} />}
+                {hover ? <StarRating averageStarRating={review} starColor={'#32292F'} starBlank={'white'}/>
+                  : <StarRating averageStarRating={review} />}
               </div>
               <ProductPriceComp
                 hover={hover}

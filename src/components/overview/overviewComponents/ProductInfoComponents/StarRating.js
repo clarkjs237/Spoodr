@@ -35,7 +35,7 @@ export default function StarRating({ averageStarRating, className, starColor, st
     const partialReturnRating = returnRating;
     returnRating = 0;
     if (partialReturnRating === 0.25) {
-      return <Star className={className} quarte starColor={starColor} starBlank={starBlank}r>&#9733;</Star>;
+      return <Star className={className} quarter starColor={starColor} starBlank={starBlank}r>&#9733;</Star>;
     } if (partialReturnRating === 0.5) {
       return <Star className={className} half starColor={starColor} starBlank={starBlank}>&#9733;</Star>;
     }
