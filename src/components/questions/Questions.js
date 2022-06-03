@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import Search from './Search';
 import Question from './Question';
 import AskQuestion from './AskQuestion';
+
+const Heading = styled.h2`
+  font-size: 1.125rem;
+  font-weight: 300;
+  text-transform: uppercase;
+`;
+
+const StyledContainer = styled.div`
+  max-width: 75em;
+  margin: 2rem 0;
+`;
 
 function Questions({ product }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,7 +66,8 @@ function Questions({ product }) {
   }, []);
 
   return (
-    <>
+    <StyledContainer>
+      <h3>Questions & answers</h3>
       <Search id="search" value={searchTerm} onInputChange={handleSearch} />
       <section>
         {questions.map((question) => (
@@ -82,7 +95,7 @@ function Questions({ product }) {
           setIsDialogOpen={setIsDialogOpen}
         />
       </section>
-    </>
+    </StyledContainer>
   );
 }
 
