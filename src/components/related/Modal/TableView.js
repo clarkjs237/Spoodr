@@ -8,7 +8,7 @@ const TableContainer = styled.div`
   height: 28rem;
   width: 28rem;
   position: absolute;
-  background-color: #EAC9C1;
+  background-color: #90D7FF;
   background-image: linear-gradient(to bottom,white 60%,transparent);
   border: 1.5px #32292F solid;
   transition: transform 0.5s ease-out;
@@ -189,11 +189,11 @@ export default function TableView({
           {/* Average Rating */}
           <TableRow>
             <TableData>
-              <StarRating averageStarRating={overviewRating} starBlank={'#EAC9C1'}/>
+              <StarRating averageStarRating={overviewRating} starBlank={'#90D7FF'}/>
             </TableData>
             <TableData cat={true}><i>Average Rating</i></TableData>
             <TableData>
-              <StarRating averageStarRating={relatedRating} starBlank={'#EAC9C1'}/>
+              <StarRating averageStarRating={relatedRating} starBlank={'#90D7FF'}/>
             </TableData>
           </TableRow>
           {/* Map over the features */}
