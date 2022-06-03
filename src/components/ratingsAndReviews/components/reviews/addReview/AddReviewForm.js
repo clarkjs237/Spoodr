@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import { PRODUCT_ID, URL } from "../../../../App";
 import ReviewFormCharacteristics from "./ReviewFormCharacteristics";
 import styled from 'styled-components';
-import { TextInput } from '../../styled-components/TextInput'
+import { TextInput } from '../../styled-components/TextInput';
 
 const StyledForm = styled.form`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
   min-width: 300px;
   max-height: 500px;
   overflow-y: scroll;
   padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   &::-webkit-scrollbar {
     width: 12px;
   };
@@ -27,7 +29,7 @@ const StyledForm = styled.form`
   }
 `;
 
-const styledTextarea = styled.textarea`
+const StyledTextarea = styled.textarea`
   resize: none;
   border-radius: 0px;
   width: 50%;
@@ -35,6 +37,20 @@ const styledTextarea = styled.textarea`
   // &::-webkit-input-placeholder {
   //   padding: 10px;
   // }
+`;
+
+const StyledSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+const StyledLabel = styled.label`
+  padding-bottom: 5px;
+`;
+
+const StyledSectionHeader = styled.div`
+  padding-bottom: 5px;
 `;
 
 function AddReviewForm(props) {
@@ -145,14 +161,14 @@ function AddReviewForm(props) {
 
   return (
     <div>
-      <button type="button" onClick={props.handleToggleModalChange} style={{width:"100px"}}>
+      <button type="button" onClick={props.handleToggleModalChange}>
         close
       </button>
       <StyledForm onSubmit={handleSubmit} id="add-review-form">
-        <div className="new-review-form-rating">
+        <StyledSection>
           Rate this product
           <br />
-          <label htmlFor="rating">
+          <StyledLabel>
             <input
               type="radio"
               name="rating"
@@ -161,8 +177,8 @@ function AddReviewForm(props) {
               required
             />
             5 stars
-          </label>
-          <label htmlFor="rating">
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
             <input
               type="radio"
               name="rating"
@@ -170,8 +186,8 @@ function AddReviewForm(props) {
               onChange={handleInputChange}
             />
             4 stars
-          </label>
-          <label htmlFor="rating">
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
             <input
               type="radio"
               name="rating"
@@ -179,8 +195,8 @@ function AddReviewForm(props) {
               onChange={handleInputChange}
             />
             3 stars
-          </label>
-          <label htmlFor="rating">
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
             <input
               type="radio"
               name="rating"
@@ -188,8 +204,8 @@ function AddReviewForm(props) {
               onChange={handleInputChange}
             />
             2 stars
-          </label>
-          <label htmlFor="rating">
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
             <input
               type="radio"
               name="rating"
@@ -197,12 +213,11 @@ function AddReviewForm(props) {
               onChange={handleInputChange}
             />
             1 stars
-          </label>
-        </div>
-        <div className="new-review-form-recommend">
-          Would you recommend this product?
-          <br />
-          <label htmlFor="recommend">
+          </StyledLabel>
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>Would you recommend this product?</StyledSectionHeader>
+          <StyledLabel>
             <input
               type="radio"
               name="recommend"
@@ -211,8 +226,8 @@ function AddReviewForm(props) {
               required
             />
             Yes
-          </label>
-          <label htmlFor="recommend">
+          </StyledLabel>
+          <StyledLabel>
             <input
               type="radio"
               name="recommend"
@@ -220,10 +235,12 @@ function AddReviewForm(props) {
               onChange={handleInputChange}
             />
             No
-          </label>
-        </div>
-        <div className="new-review-form-characteristics">
-          Did this product meet expectations?
+          </StyledLabel>
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Did this product meet expectations?
+          </StyledSectionHeader>
           {props.reviewsMeta && (
             <div>
               {Object.keys(props.reviewsMeta.characteristics).map((key, index) => (
@@ -235,10 +252,11 @@ function AddReviewForm(props) {
               ))}
             </div>
           )}
-        </div>
-        <div className="new-review-form-summary">
-          Summarize your review of this product.
-          <br />
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Summarize your review of this product.
+          </StyledSectionHeader>
           <TextInput
             type="text"
             className="review-form-summary"
@@ -247,10 +265,11 @@ function AddReviewForm(props) {
             maxLength="60"
             onChange={handleInputChange}
           />
-        </div>
-        <div>
-          Tell us about this product.
-          <br />
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Tell us about this product.
+          </StyledSectionHeader>
           <textarea
             type="text"
             name="body"
@@ -261,19 +280,19 @@ function AddReviewForm(props) {
             style={{width: "50%"}}
             required
           />
-          <br />
           {data.body.length < 50 ? (
-            <div>
-              Character count:
+            <div style={{fontSize: "small"}}>
+              Character count:&nbsp;
               {data.body.length}
             </div>
           ) : (
-            <div>Minimum reached</div>
+            <div style={{fontSize: "small"}}>Minimum reached</div>
           )}
-        </div>
-        <div className="new-review-form-photos">
-          Add photos
-          <br />
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Add photos
+          </StyledSectionHeader>
           <input
             type="file"
             name="photos"
@@ -281,10 +300,11 @@ function AddReviewForm(props) {
             onChange={handleInputChange}
             multiple
           />
-        </div>
-        <div className="new-review-form-name">
-          Enter your nickname.
-          <br />
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Enter your nickname.
+          </StyledSectionHeader>
           <TextInput
             type="text"
             name="name"
@@ -293,12 +313,14 @@ function AddReviewForm(props) {
             onChange={handleInputChange}
             required
           />
-          <br />
-          For privacy reasons, do not use your full name or email address
-        </div>
-        <div className="new-review-form-email">
-          Enter your email.
-          <br />
+          <div style={{fontSize: "small"}}>
+            For privacy reasons, do not use your full name or email address
+          </div>
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Enter your email.
+          </StyledSectionHeader>
           <TextInput
             type="text"
             name="email"
@@ -307,11 +329,12 @@ function AddReviewForm(props) {
             onChange={handleInputChange}
             required
           />
-          <br />
-          For authentication reasons, you will not be emailed
-        </div>
+          <div style={{fontSize: "small"}}>
+            For authentication reasons, you will not be emailed
+          </div>
+        </StyledSection>
       </StyledForm>
-      <button form="add-review-form" type="submit" value="Submit" style={{width:"100px"}}>submit</button>
+      <button form="add-review-form" type="submit" value="Submit">submit</button>
     </div>
   );
 }

@@ -12,7 +12,6 @@ const StyledRatings = styled.div`
   gap: 10px;
   width: 100%;
   min-width: 200px;
-  padding: 10px;
 `;
 
 function Ratings(props) {
