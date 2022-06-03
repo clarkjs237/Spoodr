@@ -1533,6 +1533,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:^4.5.10":
+  version: 4.5.10
+  resolution: "@fontsource/inter@npm:4.5.10"
+  checksum: c947c5184f9ce7959fcccd716d0dde8156b5ed9c14b4ba27ee181fb2b05a136a49d99ed00c382551b64ecae010320ef7c062b1944b70260280ca0fcde93bd4f2
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -4462,6 +4469,7 @@ __metadata:
     "@babel/core": ^7.18.0
     "@babel/preset-env": ^7.18.0
     "@babel/preset-react": ^7.17.12
+    "@fontsource/inter": ^4.5.10
     "@headlessui/react": ^1.6.3
     "@testing-library/react": ^13.2.0
     axios: ^0.27.2
@@ -4490,7 +4498,6 @@ __metadata:
     react-test-renderer: ^18.1.0
     style-loader: ^3.3.1
     styled-components: ^5.3.5
-    typeface-inter: ^3.18.1
     webpack: ^5.72.1
     webpack-cli: ^4.9.2
     webpack-dev-server: ^4.9.0
@@ -8271,13 +8278,6 @@ __metadata:
     media-typer: 0.3.0
     mime-types: ~2.1.24
   checksum: 2c8e47675d55f8b4e404bcf529abdf5036c537a04c2b20177bcf78c9e3c1da69da3942b1346e6edb09e823228c0ee656ef0e033765ec39a70d496ef601a0c657
-  languageName: node
-  linkType: hard
-
-"typeface-inter@npm:^3.18.1":
-  version: 3.18.1
-  resolution: "typeface-inter@npm:3.18.1"
-  checksum: 7a31415cdb420f84b63e4ce2e1974e004f2d7c7b5cf2f693356c49e67fe9e947e2ee5f7b57844073873b9cbafd4c68ed36462a95e2b22cff696541327ae0db11
   languageName: node
   linkType: hard
 
