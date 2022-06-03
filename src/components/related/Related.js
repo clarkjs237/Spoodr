@@ -4,7 +4,7 @@ import Modal from './Modal/Modal';
 import { URL } from '../App';
 import styled, { css } from 'styled-components';
 
-const Titles = styled.h1`
+const Titles = styled.h3`
   font-size: 1.17em;
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 `;
@@ -278,7 +278,7 @@ function Related({
     // this means there is no related list but still an outfit List
     return (
       <RelatedAndOutfitContainer>
-        <Titles>Related Items:</Titles>
+        <Titles>Related Items</Titles>
         <AddOutfitCard
           style={{"transform": "translateX(-0.5rem)"}}
         >
@@ -288,7 +288,7 @@ function Related({
             No Related Items for Current Product
           </AddButtonText>
         </AddOutfitCard>
-        <Titles>My Outfit:</Titles>
+        <Titles>My Outfit</Titles>
         <CarouselComponent
           RelatedListBool={false}
           OutfitListBool={true}
@@ -325,7 +325,7 @@ function Related({
   // If everything is loaded, return the actual component
   return (
     <RelatedAndOutfitContainer>
-      <Titles>Related Items:</Titles>
+      <Titles>Recommended For You</Titles>
       {/* This is Related List */}
       <CarouselComponent
         RelatedListBool={true}
@@ -338,7 +338,7 @@ function Related({
         comparisonModal={comparisonModal}
         handleItemClick={handleItemClick}
       />
-      <Titles>My Outfit:</Titles>
+      <Titles>My Outfit</Titles>
       {/* This is Outfit List */}
       <CarouselComponent
         RelatedListBool={false}
