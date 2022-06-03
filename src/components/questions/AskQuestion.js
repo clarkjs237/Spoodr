@@ -114,41 +114,41 @@ function AskQuestion({
       <Overlay aria-hidden="true" />
       <StyledContainer>
         <StyledPanel>
-            <StyledTitle>Ask your question</StyledTitle>
-            <StyledDescription>
-              About the
-              {' '}
-              {product.name}
-            </StyledDescription>
-            <form onSubmit={handleQuestionSubmit}>
-              <Label htmlFor="username">
-                Username
-                <Input
-                  id="username"
-                  type="text"
-                  value={username}
-                  onChange={handleUsernameChange}
-                />
-              </Label>
-              <Label htmlFor="email">
-                Email
-                <Input
-                  id="email"
-                  type="text"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </Label>
-              <Label htmlFor="question">
-                Your question
-                <Textarea
-                  id="question"
-                  value={askQuestion}
-                  onChange={handleAskQuestionChange}
-                />
-              </Label>
-              <input type="submit" value="Submit" />
-            </form>
+          <StyledTitle>Ask your question</StyledTitle>
+          <StyledDescription>
+            About the
+            {' '}
+            {product.name}
+          </StyledDescription>
+          <form onSubmit={handleQuestionSubmit}>
+            <Label htmlFor="username">
+              Username
+              <Input
+                id="username"
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+            </Label>
+            <Label htmlFor="email">
+              Email
+              <Input
+                id="email"
+                type="text"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </Label>
+            <Label htmlFor="question">
+              Your question
+              <Textarea
+                id="question"
+                value={askQuestion}
+                onChange={handleAskQuestionChange}
+              />
+            </Label>
+            <input type="submit" value="Submit" />
+          </form>
         </StyledPanel>
       </StyledContainer>
     </StyledDialog>
