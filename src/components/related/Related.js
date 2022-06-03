@@ -5,13 +5,13 @@ import { URL } from '../App';
 import styled, { css } from 'styled-components';
 
 const Titles = styled.h1`
-  font-size: 1em;
+  font-size: 1.17em;
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 `;
 
 const RelatedAndOutfitContainer = styled.div`
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  /* margin-bottom: 2rem;
+  margin-top: 2rem; */
 
   // Added this line, not sure if I'll need to keep it or not
   position: relative;

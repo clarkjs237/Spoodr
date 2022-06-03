@@ -100,6 +100,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 2rem;
+  margin-top: 1rem;
   position: relative;
 `;
 
