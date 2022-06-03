@@ -89,20 +89,21 @@ export default function Overview({
     if (productStyle.results[curStyleId]) {
       if(!productStyle.results[curStyleId].photos[curDisplayIndex]) {
         socialUrl = missingImg;
-        styleThumbnails = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
-        curDisplayPhotos = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
+        styleThumbnails = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
+        curDisplayPhotos = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
       } else {
         socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
-        styleThumbnails = productStyle.results.map((style, i) => ({ id: i, thumbnail: style.photos[0].thumbnail_url }));
+        styleThumbnails = productStyle.results.map((style, i) => ({ key: i, id: i, thumbnail: style.photos[0].thumbnail_url }));
         curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo, i) => {
           photo.id = i;
+          photo.key = i;
           return photo;
         });
       }
     } else {
       socialUrl = missingImg;
-      styleThumbnails = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
-      curDisplayPhotos = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
+      styleThumbnails = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
+      curDisplayPhotos = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
     }
 
     if (expandedView) {

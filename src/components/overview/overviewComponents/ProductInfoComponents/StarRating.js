@@ -23,20 +23,20 @@ const Star = styled.span`
 
 export default function StarRating({ averageStarRating, className }) {
   let returnRating = averageStarRating;
-  return [...Array(5)].map(() => {
+  return [...Array(5)].map((_, i) => {
     if (returnRating >= 1) {
       returnRating--;
-      return <Star full className={className}>&#9733;</Star>;// 1
+      return <Star key={i} full className={className}>&#9733;</Star>;// 1
     } if (returnRating === 0) {
-      return <Star className={className} empty>&#9733;</Star>;// 0
+      return <Star key={i} className={className} empty>&#9733;</Star>;// 0
     }
     const partialReturnRating = returnRating;
     returnRating = 0;
     if (partialReturnRating === 0.25) {
-      return <Star className={className} quarter>&#9733;</Star>;
+      return <Star key={i} className={className} quarter>&#9733;</Star>;
     } if (partialReturnRating === 0.5) {
-      return <Star className={className} half>&#9733;</Star>;
+      return <Star key={i} className={className} half>&#9733;</Star>;
     }
-    return <Star className={className} threequarter>&#9733;</Star>;
+    return <Star key={i} className={className} threequarter>&#9733;</Star>;
   });
 }

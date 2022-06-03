@@ -32,7 +32,7 @@ const selectStyles = {
     height: 'auto',
   }),
   control: (styles, { selectProps: { width } }) => ({
-    ...styles, backgroundColor: 'white', borderRadius: '0', padding: '.5rem',  border: 'solid', width, 'border-width': '1.5px', color: '#32292F', fontSize: '1.15rem', '&:hover': { borderColor: '#90D7FF', cursor: 'pointer', }
+    ...styles, backgroundColor: 'white', borderRadius: '0', padding: '.5rem',  border: '1.5px solid', width, color: '#32292F', fontSize: '1.15rem', '&:hover': { borderColor: '#90D7FF', cursor: 'pointer', }
   }),
   dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#0B2027' }})),
   indicatorSeparator: ((styles) => ({...styles, backgroundColor: 'inherit'})),
@@ -43,7 +43,7 @@ const selectStyles = {
   placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#0B2027' })),
 };
 
-export default function AddToCart({ curStyleQuantAndSizes }) {
+export default function AddToCart({ curStyleQuantAndSizes, className }) {
   const [selectedSize, setSelectedSize] = useState();
   const [selectedQuant, setSelectedQuant] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -122,6 +122,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   return (
     <StyledForm onSubmit={onSubmitHandler}>
       <Select
+        className={className}
         name="Sizes"
         options={sizeOptions}
         onChange={onSizeChangeHandler}
@@ -134,6 +135,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
         width={menuOpen ? 'auto' : '12.3rem'}
       />
       <Select
+        className={className}
         name="Quant"
         options={quantOptions}
         onChange={onQuantChangeHandler}

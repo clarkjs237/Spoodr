@@ -41,9 +41,17 @@ export default function StyleSelector({
         {curStyleName.toUpperCase()}
       </StyleName>
       <ThumbnailFourBlock>
-        {styleThumbnailsByFour.map((fourStyleThumbnails) => (
-          <ThumbnailDisplay>
-            {fourStyleThumbnails.map(({ id, thumbnail }) => <StyleSelectorImage curStyleId={curStyleId} setCurStyleId={setCurStyleId} thumbnailId={id} thumbnail={thumbnail} missingImg={missingImg} />)}
+        {styleThumbnailsByFour.map((fourStyleThumbnails, i) => (
+          <ThumbnailDisplay key={i}>
+            {fourStyleThumbnails.map(({ id, thumbnail }, i) =>
+              <StyleSelectorImage
+                key={i}
+                curStyleId={curStyleId}
+                setCurStyleId={setCurStyleId}
+                thumbnailId={id}
+                thumbnail={thumbnail}
+                missingImg={missingImg}
+              />)}
           </ThumbnailDisplay>
         ))}
       </ThumbnailFourBlock>

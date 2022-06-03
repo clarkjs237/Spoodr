@@ -63,8 +63,9 @@ export default function ExpandedThumbnailImageNav({
   return (
     <>
       {navArrowLeft}
-      {curDisplayPhotosSeven.map(({ id, thumbnail_url }) => (
+      {curDisplayPhotosSeven.map(({ id, thumbnail_url }, i) => (
         <ThumbnailImage
+          key={i}
           id={id}
           thumbnail={thumbnail_url}
           curDisplayIndex={curDisplayIndex}

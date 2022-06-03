@@ -71,7 +71,7 @@ export default function ThumbnailImageNav({
     <div>
       {navArrowTop}
       {curDisplayPhotosSeven.map(({ id, thumbnail_url }) => (
-        <div>
+        <div key={id}>
           <ThumbnailImage
             id={id}
             thumbnail={thumbnail_url}
