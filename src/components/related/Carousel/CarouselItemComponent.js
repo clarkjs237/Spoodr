@@ -163,6 +163,8 @@ const BottomWrapper = styled.div`
         background-color: white;
     `;
   }}
+
+  transform: ${(props) => (props.list === 'outfit' ? 'translateY(0px)' : 'translateY(-1px)')};
 `;
 
 export default function CarouselItemComponent({
@@ -206,7 +208,7 @@ export default function CarouselItemComponent({
           <PhotoWrapper hover={hover}>
             <Photo hover={hover} src={defStyle.photos['0'].thumbnail_url}/>
           </PhotoWrapper>
-          <BottomWrapper hover={hover}>
+          <BottomWrapper hover={hover} list={list}>
             <TextRatingPriceWrapper>
               <i style={{"fontSize": "0.9rem"}}>{info.category}</i><br />
               <ProductName>{info.name}</ProductName>
