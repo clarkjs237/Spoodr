@@ -5,13 +5,13 @@ const StyleImage = styled.img`
   object-fit: cover;
   color: white;
   border: solid;
-  //border-radius: 50%;
+  border-width: 2px;
   cursor: pointer;
   margin-right: 1rem;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.6rem;
+  height: 3.6rem;
   &:hover {
-    color: #90D7FF;
+    border-color: #90D7FF;
   }
 `;
 
@@ -23,10 +23,10 @@ const Check = styled.label`
   position: absolute;
   border-radius: 50%;
   border: solid;
-  border-width: .1rem;
+  border-width: 1.5px;
   color: #32292F;
   background-color: #90D7FF;
-  top: -2.75rem;
+  top: -2.7rem;
   left: 2.9rem;
   font-size: .5rem;
   font-weight: bold;

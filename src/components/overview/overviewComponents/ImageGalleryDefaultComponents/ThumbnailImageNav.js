@@ -63,8 +63,8 @@ export default function ThumbnailImageNav({
       navArrowTop = <NavArrow id="top" onClick={onClickHandler}>&#8249;</NavArrow>;
     }
   } else {
-    navArrowTop = <NavArrow id="top" clear>&#8249;</NavArrow>;
-    navArrowBottom = <NavArrow id="bottom" clear>&#8249;</NavArrow>;
+    navArrowTop = <NavArrow id="top" clear={true}>&#8249;</NavArrow>;
+    navArrowBottom = <NavArrow id="bottom" clear={true}>&#8249;</NavArrow>;
   }
 
   return (

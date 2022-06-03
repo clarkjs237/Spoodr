@@ -5,14 +5,14 @@ import axios from 'axios';
 import { URL } from '../../App';
 
 const StyledSubmitButton = styled.input`
-  font-size: 1.125rem;
-  border:solid;
+  font-size: 1.12rem;
+  border: solid;
+  border-width: 1.5px;
   color: #0B2027;
   width: 18rem;
   background-color: white;
   padding: 1rem;
   border-color: #32292F;
-  border-width: 1.5px;
   text-align: left;
   &:hover {
     border-color: #90D7FF;
@@ -32,13 +32,13 @@ const selectStyles = {
     height: 'auto',
   }),
   control: (styles, { selectProps: { width } }) => ({
-    ...styles, backgroundColor: 'white', borderRadius: '0', padding: '.5rem', border: 'solid', 'border-width': '1.5px', width, color: '#32292F', 'font-size': '1.125rem', '&:hover': { 'border-color': '#90D7FF', cursor: 'pointer', }
+    ...styles, backgroundColor: 'white', borderRadius: '0', padding: '.5rem',  border: 'solid', width, 'border-width': '1.5px', color: '#32292F', fontSize: '1.15rem', '&:hover': { borderColor: '#90D7FF', cursor: 'pointer', }
   }),
   dropdownIndicator: ((styles) => ({ ...styles, color: 'inherit','&:hover': { color: '#0B2027' }})),
   indicatorSeparator: ((styles) => ({...styles, backgroundColor: 'inherit'})),
   singleValue: (styles) => ({ ...styles, color: '#0B2027' }),
   container: (styles, { selectProps: { width } }) => ({
-    ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0',
+    ...styles, width, height: 'auto', display: 'inline-block', margin: '0 .5rem .5rem 0'
   }),
   placeholder: ((styles, { selectProps: { placeholderColor } }) => ({ ...styles, color: placeholderColor || '#0B2027' })),
 };
@@ -106,7 +106,7 @@ export default function AddToCart({ curStyleQuantAndSizes }) {
   let submitButton = (
     <StyledSubmitButton
       type="submit"
-      value="ADD TO BAG                       +"
+      value="ADD TO BAG                         +"
     />
   );
 
