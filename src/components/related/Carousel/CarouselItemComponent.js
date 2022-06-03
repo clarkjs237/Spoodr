@@ -18,10 +18,11 @@ const CarouselItem = styled.div`
   transform: ${(props) => (props.list === 'outfit' ? 'translateY(-9.3rem)' : 'translateY(0rem)')};
 
   /* Hovers correctly and offsets the margin so the rest of the list isn't shifted */
-  transition: outline 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, outline 0.3s ease-in-out;
   ${(props) => {
     if (props.hover) {
       return css`
+        background-color: #f9f9f9;
         outline: 0.1rem solid #32292F;
       `;
     }
@@ -48,7 +49,11 @@ const Photo = styled.img`
     if (!props.src) {
       // this is null so return a null image or something
       return css`
-        content: url("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg");
+        /* content: url("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"); */
+        /* content: url("https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format"); */
+        content: url("https://pic.onlinewebfonts.com/svg/img_523930.png");
+        max-width: 30%;
+        max-height: 30%;
       `;
     }
 

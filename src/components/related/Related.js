@@ -66,12 +66,7 @@ function Related({
 
   // Will be used to find the default style based on a given productID
   function updateDefaultStyle(productID) {
-    fetch(`${URL}/products/${productID}/styles`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-        'User-Agent': 'user',
-      },
-    })
+    fetch(`/style/${productID}`)
       .then((response) => response.json())
       .then((result) => {
         // Result is an individual request from this styles api
@@ -99,12 +94,7 @@ function Related({
   }
 
   function updateProductInfo(productID) {
-    fetch(`${URL}/products/${productID}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-        'User-Agent': 'user',
-      },
-    })
+    fetch(`/product/${productID}`)
       .then((response) => response.json())
       .then((result) => {
         // Getting the product name and the category
@@ -124,12 +114,7 @@ function Related({
     // this will fetch the metadata from each related id,
     // look at the ratings and calculate the average (rounded down to the nearest quarter),
     // and save it as an integer value to each product id
-    fetch(`${URL}/reviews/meta?product_id=${productID}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-        'User-Agent': 'user',
-      },
-    })
+    fetch(`/review/${productID}`)
       .then((response) => response.json())
       .then((result) => {
         // result.ratings is the object i want to look at
@@ -147,13 +132,8 @@ function Related({
   }
 
   // This houses all of the API calls necessary for each Related Product ID
-  function updaterelStyles(id) {
-    fetch(`${URL}/products/${id}/related`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-        'User-Agent': 'user',
-      },
-    })
+  function updateRelStyles(id) {
+    fetch(`/related/${id}`)
       .then((response) => response.json())
       .then((results) => {
         // Make sure that the related ids don't contain the actual product id itself
@@ -286,10 +266,10 @@ function Related({
   }
 
   useEffect(() => {
-    console.log('Updating related products')
+    console.log('Updating related products');
     // Maybe do a promise.all here to make sure that all the states are reset?
     resetStateValues();
-    updaterelStyles(product.id);
+    updateRelStyles(product.id);
     generateInitialOutfitList();
   }, [product]); // might need product here
 
