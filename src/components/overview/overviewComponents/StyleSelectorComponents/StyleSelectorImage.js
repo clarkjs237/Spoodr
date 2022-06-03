@@ -26,7 +26,7 @@ const Check = styled.label`
   border-width: 1.5px;
   color: #32292F;
   background-color: #90D7FF;
-  top: -2.7rem;
+  top: -2.65rem;
   left: 2.9rem;
   font-size: .5rem;
   font-weight: bold;
