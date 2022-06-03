@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReviewsList from './reviewList/ReviewsList';

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Header from './header/Header';
 import Overview from './overview/Overview';
 import Questions from './questions/Questions';
 import Related from './related/Related';
@@ -18,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     color: #0B2027;
     border-width: 1.5px;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin: 0;
   }
 
   button{
@@ -36,6 +38,14 @@ const GlobalStyle = createGlobalStyle`
   light-text {
     font-size: small;
   }
+`;
+
+const StyledWidgets = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px;
+  padding-top: 125px;
 `;
 
 function App() {
@@ -124,30 +134,33 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Overview
-        product={product}
-        productStyle={productStyle}
-        totalReviews={totalReviews}
-        averageRating={averageRating}
-        averageStarRating={averageStarRating}
-        curStyleId={curStyleId}
-        setCurStyleId={setCurStyleId}
-      />
-      <Related
-        product={product}
-        handleItemClick={handleItemClick}
-        productStyle={productStyle}
-        curStyleId={curStyleId}
-        averageStarRating={averageStarRating}
-      />
-      <Questions product={product} />
-      <RatingsAndReviews
-        product={product}
-        totalReviews={totalReviews}
-        averageRating={averageRating}
-        averageStarRating={averageStarRating}
-        reviewsMeta={reviewsMeta}
-      />
+      <Header />
+      <StyledWidgets>
+        <Overview
+          product={product}
+          productStyle={productStyle}
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageStarRating={averageStarRating}
+          curStyleId={curStyleId}
+          setCurStyleId={setCurStyleId}
+        />
+        <Related
+          product={product}
+          handleItemClick={handleItemClick}
+          productStyle={productStyle}
+          curStyleId={curStyleId}
+          averageStarRating={averageStarRating}
+        />
+        <Questions product={product} />
+        <RatingsAndReviews
+          product={product}
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageStarRating={averageStarRating}
+          reviewsMeta={reviewsMeta}
+        />
+      </StyledWidgets>
     </>
   );
 }
