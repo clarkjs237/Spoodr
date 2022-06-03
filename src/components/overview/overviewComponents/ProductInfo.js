@@ -3,13 +3,23 @@ import styled from 'styled-components';
 import ProductPrice from './ProductInfoComponents/ProductPrice';
 import StarRatingReview from './ProductInfoComponents/StarRatingReview';
 
-const ProductTitle = styled.h2`
+const ProductTitle = styled.div`
   margin: 0;
-  font-size: 2.25rem;
+  font-size: 3.5rem;
+  font-weight: bold;
+  width: 18rem;
+  display: inline-block;
+  white-space: normal;
+  overflow-x: wrap;
 `;
+
 const ProductCategory = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.75rem;
   font-size: 1rem;
+`;
+
+const ProductInfoWrap = styled.div`
+  margin-bottom: 1.75rem;
 `;
 
 export default function ProductInfo({
@@ -22,7 +32,7 @@ export default function ProductInfo({
   averageStarRating,
 }) {
   return (
-    <>
+    <ProductInfoWrap>
       <StarRatingReview
         totalReviews={totalReviews}
         averageRating={averageRating}
@@ -34,6 +44,6 @@ export default function ProductInfo({
         productOrginalPrice={productOrginalPrice}
         productSalePrice={productSalePrice}
       />
-    </>
+    </ProductInfoWrap>
   );
 }

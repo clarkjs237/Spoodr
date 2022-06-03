@@ -1,16 +1,67 @@
 import React, { useState, useEffect } from "react";
 import { PRODUCT_ID, URL } from "../../../../App";
 import ReviewFormCharacteristics from "./ReviewFormCharacteristics";
+import styled from 'styled-components';
+import { TextInput } from '../../styled-components/TextInput';
+
+const StyledForm = styled.form`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 25px;
+  min-width: 300px;
+  max-height: 500px;
+  overflow-y: scroll;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  &::-webkit-scrollbar {
+    width: 12px;
+  };
+  &::-webkit-scrollbar-track {
+    background: white;
+  };
+  &::-webkit-scrollbar-thumb{
+    background-color: #90D7FF;
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: #90D7FF
+  }
+`;
+
+const StyledTextarea = styled.textarea`
+  resize: none;
+  border-radius: 0px;
+  width: 50%;
+  // height: 100px;
+  // &::-webkit-input-placeholder {
+  //   padding: 10px;
+  // }
+`;
+
+const StyledSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+const StyledLabel = styled.label`
+  padding-bottom: 5px;
+`;
+
+const StyledSectionHeader = styled.div`
+  padding-bottom: 5px;
+`;
 
 function AddReviewForm(props) {
   const [data, setData] = useState({
     product_id: PRODUCT_ID,
     rating: 0,
-    summary: "",
-    body: "",
+    summary: '',
+    body: '',
     recommend: undefined,
-    name: "",
-    email: "",
+    name: '',
+    email: '',
     photos: [],
     characteristics: {},
   });
@@ -29,14 +80,14 @@ function AddReviewForm(props) {
   }
 
   function postReview() {
-    fetch(`${URL}/reviews`, {
-      method: "POST",
+    fetch(`/reviews`, {
+      method: 'POST',
       headers: {
-        Authorization: process.env.GITTOKEN,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.error("Error:", error);
     });
   }
@@ -109,173 +160,182 @@ function AddReviewForm(props) {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <button type="button" onClick={props.handleToggleModalChange}>
         close
       </button>
-      <div className="new-review-form-rating">
-        Rate this product
-        <br />
-        <label htmlFor="rating">
+      <StyledForm onSubmit={handleSubmit} id="add-review-form">
+        <StyledSection>
+          Rate this product
+          <br />
+          <StyledLabel>
+            <input
+              type="radio"
+              name="rating"
+              value="5"
+              onChange={handleInputChange}
+              required
+            />
+            5 stars
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
+            <input
+              type="radio"
+              name="rating"
+              value="4"
+              onChange={handleInputChange}
+            />
+            4 stars
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
+            <input
+              type="radio"
+              name="rating"
+              value="3"
+              onChange={handleInputChange}
+            />
+            3 stars
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
+            <input
+              type="radio"
+              name="rating"
+              value="2"
+              onChange={handleInputChange}
+            />
+            2 stars
+          </StyledLabel>
+          <StyledLabel htmlFor="rating">
+            <input
+              type="radio"
+              name="rating"
+              value="1"
+              onChange={handleInputChange}
+            />
+            1 stars
+          </StyledLabel>
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>Would you recommend this product?</StyledSectionHeader>
+          <StyledLabel>
+            <input
+              type="radio"
+              name="recommend"
+              value="true"
+              onChange={handleInputChange}
+              required
+            />
+            Yes
+          </StyledLabel>
+          <StyledLabel>
+            <input
+              type="radio"
+              name="recommend"
+              value="false"
+              onChange={handleInputChange}
+            />
+            No
+          </StyledLabel>
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Did this product meet expectations?
+          </StyledSectionHeader>
+          {props.reviewsMeta && (
+            <div>
+              {Object.keys(props.reviewsMeta.characteristics).map((key, index) => (
+                <ReviewFormCharacteristics
+                  key={index}
+                  handleInputChange={handleInputChange}
+                  name={key}
+                />
+              ))}
+            </div>
+          )}
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Summarize your review of this product.
+          </StyledSectionHeader>
+          <TextInput
+            type="text"
+            className="review-form-summary"
+            name="summary"
+            placeholder="Example: Best purchase ever!"
+            maxLength="60"
+            onChange={handleInputChange}
+          />
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Tell us about this product.
+          </StyledSectionHeader>
+          <textarea
+            type="text"
+            name="body"
+            placeholder="Why did you like the product or not?"
+            minLength="50"
+            maxLength="1000"
+            onChange={handleInputChange}
+            style={{width: "50%"}}
+            required
+          />
+          {data.body.length < 50 ? (
+            <div style={{fontSize: "small"}}>
+              Character count:&nbsp;
+              {data.body.length}
+            </div>
+          ) : (
+            <div style={{fontSize: "small"}}>Minimum reached</div>
+          )}
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Add photos
+          </StyledSectionHeader>
           <input
-            type="radio"
-            name="rating"
-            value="5"
+            type="file"
+            name="photos"
+            accept="image/jpeg, image/png"
+            onChange={handleInputChange}
+            multiple
+          />
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Enter your nickname.
+          </StyledSectionHeader>
+          <TextInput
+            type="text"
+            name="name"
+            placeholder="Example: jackson11!"
+            maxLength="60"
             onChange={handleInputChange}
             required
           />
-          5 stars
-        </label>
-        <label htmlFor="rating">
-          <input
-            type="radio"
-            name="rating"
-            value="4"
-            onChange={handleInputChange}
-          />
-          4 stars
-        </label>
-        <label htmlFor="rating">
-          <input
-            type="radio"
-            name="rating"
-            value="3"
-            onChange={handleInputChange}
-          />
-          3 stars
-        </label>
-        <label htmlFor="rating">
-          <input
-            type="radio"
-            name="rating"
-            value="2"
-            onChange={handleInputChange}
-          />
-          2 stars
-        </label>
-        <label htmlFor="rating">
-          <input
-            type="radio"
-            name="rating"
-            value="1"
-            onChange={handleInputChange}
-          />
-          1 stars
-        </label>
-      </div>
-      <div className="new-review-form-recommend">
-        Would you recommend this product?
-        <br />
-        <label htmlFor="recommend">
-          <input
-            type="radio"
-            name="recommend"
-            value="true"
+          <div style={{fontSize: "small"}}>
+            For privacy reasons, do not use your full name or email address
+          </div>
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionHeader>
+            Enter your email.
+          </StyledSectionHeader>
+          <TextInput
+            type="text"
+            name="email"
+            placeholder="Example: jackson11@email.com"
+            maxLength="60"
             onChange={handleInputChange}
             required
           />
-          Yes
-        </label>
-        <label htmlFor="recommend">
-          <input
-            type="radio"
-            name="recommend"
-            value="false"
-            onChange={handleInputChange}
-          />
-          No
-        </label>
-      </div>
-      <div className="new-review-form-characteristics">
-        characteristics
-        {props.reviewsMeta && (
-          <div>
-            {Object.keys(props.reviewsMeta.characteristics).map((key, index) => (
-              <ReviewFormCharacteristics
-                key={index}
-                handleInputChange={handleInputChange}
-                name={key}
-              />
-            ))}
+          <div style={{fontSize: "small"}}>
+            For authentication reasons, you will not be emailed
           </div>
-        )}
-      </div>
-      <div className="new-review-form-summary">
-        Summarize your review of this product.
-        <br />
-        <input
-          type="text"
-          className="review-form-summary"
-          name="summary"
-          placeholder="Example: Best purchase ever!"
-          maxLength="60"
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="new-review-form-body">
-        Tell us about this product.
-        <br />
-        <textarea
-          type="text"
-          className="review-form-body"
-          name="body"
-          placeholder="Why did you like the product or not?"
-          minLength="50"
-          maxLength="1000"
-          onChange={handleInputChange}
-          required
-        />
-        <br />
-        {data.body.length < 50 ? (
-          <div>
-            Character count:
-            {data.body.length}
-          </div>
-        ) : (
-          <div>Minimum reached</div>
-        )}
-      </div>
-      <div className="new-review-form-photos">
-        Add photos
-        <br />
-        <input
-          type="file"
-          name="photos"
-          accept="image/jpeg, image/png"
-          onChange={handleInputChange}
-          multiple
-        />
-      </div>
-      <div className="new-review-form-name">
-        Enter your nickname.
-        <br />
-        <input
-          type="text"
-          name="name"
-          placeholder="Example: jackson11!"
-          maxLength="60"
-          onChange={handleInputChange}
-          required
-        />
-        <br />
-        For privacy reasons, do not use your full name or email address
-      </div>
-      <div className="new-review-form-email">
-        Enter your email.
-        <br />
-        <input
-          type="text"
-          name="email"
-          placeholder="Example: jackson11@email.com"
-          maxLength="60"
-          onChange={handleInputChange}
-          required
-        />
-        <br />
-        For authentication reasons, you will not be emailed
-      </div>
-      <input type="submit" value="Submit" />
-    </form>
+        </StyledSection>
+      </StyledForm>
+      <button form="add-review-form" type="submit" value="Submit">submit</button>
+    </div>
   );
 }
 

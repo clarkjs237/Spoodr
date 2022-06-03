@@ -3,9 +3,9 @@ import SortForm from './SortForm';
 
 function Sort(props) {
   return (
-    <div className="sort-form">
+    <div className="sort-form" style={{display: "flex", fontSize: "small"}}>
       {props.totalReviews}
-      reviews, sorted by:
+      &nbsp;reviews, sorted by:
       <SortForm
         handleSortChange={props.handleSortChange}
         sort={props.sort}

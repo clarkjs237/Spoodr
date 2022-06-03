@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Header from './header/Header';
 import Overview from './overview/Overview';
 import Questions from './questions/Questions';
 import Related from './related/Related';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 import { createGlobalStyle } from 'styled-components';
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/700.css";
 
 export const PRODUCT_ID = 40351;
 export const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
+
+const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,14 +26,34 @@ const GlobalStyle = createGlobalStyle`
     color: #0B2027;
     border-width: 1.5px;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin: 0;
   }
 
-  button {
-    background-color: #90D7FF;
-    border-width: 0px;
+  button,
+  input[type=submit] {
+    background-color: white;
+    border-width: 1px;
+    border-color: black;
     padding: 1rem;
-    margin: 2px;
   }
+
+  underline-button {
+    border-style: none;
+    background: none;
+    text-decoration: underline;
+  }
+
+  light-text {
+    font-size: small;
+  }
+`;
+
+const StyledWidgets = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px;
+  padding-top: 125px;
 `;
 
 function App() {
@@ -44,19 +74,21 @@ function App() {
   const [product_id_number, setProduct_id_number] = useState(PRODUCT_ID);
 
   function updateProductByID(id) {
-    fetch(`${URL}/products/${id}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    // fetch(`${URL}/products/${id}`, {
+    //   headers: {
+    //     Authorization: process.env.GITTOKEN,
+    //   },
+    // })
+    fetch(`/product/${id}`)
       .then((response) => response.json())
       .then((result) => setProduct(result));
 
-    fetch(`${URL}/products/${id}/styles`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    // fetch(`${URL}/products/${id}/styles`, {
+    //   headers: {
+    //     Authorization: process.env.GITTOKEN,
+    //   },
+    // })
+    fetch(`/style/${id}`)
       .then((response) => response.json())
       .then((result) => setProductStyle(result));
   }
@@ -77,11 +109,12 @@ function App() {
   }
 
   function getReviewsMeta(id) {
-    fetch(`${URL}/reviews/meta?product_id=${id}`, {
-      headers: {
-        Authorization: process.env.GITTOKEN,
-      },
-    })
+    // fetch(`${URL}/reviews/meta?product_id=${id}`, {
+    //   headers: {
+    //     Authorization: process.env.GITTOKEN,
+    //   },
+    // })
+    fetch(`/review/${id}`)
       .then((response) => response.json())
       .then((result) => {
         setReviewsMeta(result);
@@ -105,36 +138,41 @@ function App() {
   useEffect(() => {
     updateProductByID(product_id_number);
     getReviewsMeta(product_id_number);
+    setCurStyleId(0);
+    window.scroll(0,0);
   }, [product_id_number]);
 
   return (
-    <>
+    <AppWrapper>
       <GlobalStyle />
-      <Overview
-        product={product}
-        productStyle={productStyle}
-        totalReviews={totalReviews}
-        averageRating={averageRating}
-        averageStarRating={averageStarRating}
-        curStyleId={curStyleId}
-        setCurStyleId={setCurStyleId}
-      />
-      <Related
-        product={product}
-        handleItemClick={handleItemClick}
-        productStyle={productStyle}
-        curStyleId={curStyleId}
-        averageStarRating={averageStarRating}
-      />
-      <Questions product={product} />
-      <RatingsAndReviews
-        product={product}
-        totalReviews={totalReviews}
-        averageRating={averageRating}
-        averageStarRating={averageStarRating}
-        reviewsMeta={reviewsMeta}
-      />
-    </>
+      <Header />
+      <StyledWidgets>
+        <Overview
+          product={product}
+          productStyle={productStyle}
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageStarRating={averageStarRating}
+          curStyleId={curStyleId}
+          setCurStyleId={setCurStyleId}
+        />
+        <Related
+          product={product}
+          handleItemClick={handleItemClick}
+          productStyle={productStyle}
+          curStyleId={curStyleId}
+          averageStarRating={averageStarRating}
+        />
+        <Questions product={product} />
+        <RatingsAndReviews
+          product={product}
+          totalReviews={totalReviews}
+          averageRating={averageRating}
+          averageStarRating={averageStarRating}
+          reviewsMeta={reviewsMeta}
+        />
+      </StyledWidgets>
+    </AppWrapper>
   );
 }
 

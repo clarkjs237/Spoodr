@@ -1,7 +1,25 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import Answers from './Answers';
 import AddAnswer from './AddAnswer';
+
+const StyledContainer = styled.div`
+  margin 1rem 0;
+`;
+
+const StyledQuestion = styled.div`
+  display: flex;
+`;
+
+const StyledQuestionBody = styled.span`
+  font-weight: 700;
+`;
+
+const QuestionMeta = styled.div`
+  margin-left: auto;
+  font-size: 0.8125rem;
+`;
 
 function Question({
   id, body, helpfulness, product, getQuestions,
@@ -38,31 +56,40 @@ function Question({
   };
 
   return (
-    <div>
-      <span>
-        Q:
-        {body}
-      </span>
-      <span>
-        Helpful?
-        <span onClick={() => handleHelpfulClick(id)}>Yes</span>
-        (
-        {helpfulness}
-        )
-      </span>
-      <span onClick={() => setIsDialogOpen(true)}>Add Answer</span>
+    <StyledContainer>
+      <StyledQuestion>
+        <StyledQuestionBody>
+          Q:
+          {' '}
+          {body}
+        </StyledQuestionBody>
+        <QuestionMeta>
+          <span>
+            Helpful?
+            {' '}
+            <span onClick={() => handleHelpfulClick(id)}>Yes</span>
+            (
+            {helpfulness}
+            )
+            {' | '}
+          </span>
+          <span onClick={() => setIsDialogOpen(true)}>Add Answer</span>
+        </QuestionMeta>
+      </StyledQuestion>
       <AddAnswer
         isDialogOpen={isDialogOpen}
         setIsDialogOpen={setIsDialogOpen}
         questionId={id}
         getAnswers={getAnswers}
+        product={product.name}
+        question={body}
       />
       <Answers
         id={id}
         answers={answers}
         getAnswers={getAnswers}
       />
-    </div>
+    </StyledContainer>
   );
 }
 

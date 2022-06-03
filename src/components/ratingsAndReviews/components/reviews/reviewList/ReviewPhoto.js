@@ -1,4 +1,17 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import Modal, { StyledModal, StyledModalBG } from '../../styled-components/Modal';
+
+const StyledThumbnail = styled.img`
+  max-height: 50px;
+`;
+
+const StyledModalImage = styled.img`
+  padding-top: 5px;
+  padding-right: 5px;
+  margin: auto;
+  width: 500px;
+`;
 
 function ReviewPhoto(props) {
   const [toggleModal, setToggleModal] = useState(false);
@@ -9,22 +22,23 @@ function ReviewPhoto(props) {
 
   return (
     <div>
-      <img
-        className="review-list-item-thumbnail"
+      <StyledThumbnail
         src={props.url}
         alt="thumbnail"
         onClick={handleToggleModal}
       />
       {toggleModal
       && (
-      <div className="Modal">
-        <button type="button" className="review-photo-modal-close-button" onClick={handleToggleModal}>🆇</button>
-        <img
-          className="review-list-item-modal-image"
-          src={props.url}
-          alt="modal"
-        />
-      </div>
+        <div>
+          <StyledModalBG/>
+          <StyledModal>
+            <button type="button" onClick={handleToggleModal}>close</button>
+            <StyledModalImage
+              src={props.url}
+              alt="modal"
+            />
+          </StyledModal>
+        </div>
       )}
     </div>
   );

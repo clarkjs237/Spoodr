@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StyleSelectorImage from './StyleSelectorComponents/StyleSelectorImage';
 
 const StyleName = styled.div`
-margin-bottom: .25rem;
+margin-bottom: 1rem;
 `;
 
 const Style = styled.span`
@@ -12,6 +12,16 @@ const Style = styled.span`
 
 const ThumbnailDisplay = styled.div`
   position: relative;
+  margin-right: 1rem;
+  margin-top: 1rem;
+`;
+
+const ThumbnailFourBlock = styled.div`
+  position: relative;
+`;
+
+const StyleWrap = styled.div`
+  margin-bottom: 2.25rem;
 `;
 
 export default function StyleSelector({
@@ -19,23 +29,32 @@ export default function StyleSelector({
   setCurStyleId,
   curStyleName,
   styleThumbnails,
+  missingImg
 }) {
   const setsOfFour = Math.ceil(styleThumbnails.length / 4);
   const styleThumbnailsByFour = [...Array(setsOfFour)].map((und, i) => styleThumbnails.slice(i * 4, (i + 1) * 4));
 
   return (
-    <>
+    <StyleWrap>
       <StyleName>
-        <Style>{'STYLE > '}</Style>
+        <Style>{'STYLE  >  '}</Style>
         {curStyleName.toUpperCase()}
       </StyleName>
-      <ThumbnailDisplay>
-        {styleThumbnailsByFour.map((fourStyleThumbnails) => (
-          <ThumbnailDisplay>
-            {fourStyleThumbnails.map(({ id, thumbnail }) => <StyleSelectorImage curStyleId={curStyleId} setCurStyleId={setCurStyleId} thumbnailId={id} thumbnail={thumbnail} />)}
+      <ThumbnailFourBlock>
+        {styleThumbnailsByFour.map((fourStyleThumbnails, i) => (
+          <ThumbnailDisplay key={i}>
+            {fourStyleThumbnails.map(({ id, thumbnail }, i) =>
+              <StyleSelectorImage
+                key={i}
+                curStyleId={curStyleId}
+                setCurStyleId={setCurStyleId}
+                thumbnailId={id}
+                thumbnail={thumbnail}
+                missingImg={missingImg}
+              />)}
           </ThumbnailDisplay>
         ))}
-      </ThumbnailDisplay>
-    </>
+      </ThumbnailFourBlock>
+    </StyleWrap>
   );
 }

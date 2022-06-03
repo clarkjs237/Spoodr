@@ -1,5 +1,67 @@
 import React, { useState } from 'react';
 import { Dialog } from '@headlessui/react';
+import styled from 'styled-components';
+
+const StyledDialog = styled(Dialog)`
+  position: relative;
+  z-index: 50;
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgb(0 0 0 / 0.5);
+`;
+
+const StyledContainer = styled.div`
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledPanel = styled(Dialog.Panel)`
+  width: 100%;
+  max-width: 24rem;
+  background-color: white;
+  padding: 1rem 3rem 1rem 1rem;
+`;
+
+const StyledTitle = styled(Dialog.Title)`
+  margin: 0 0 1rem;
+`;
+
+const StyledDescription = styled(Dialog.Description)`
+  font-weight: 700;
+  margin: 1rem 0;
+`;
+
+const Label = styled.label`
+  margin: 1rem 0 0;
+  font-size: 0.8125rem;
+  display: block;
+`;
+
+const Input = styled.input`
+  margin: 0.5rem 0 0;
+  width: 100%;
+  border: 1px solid #0B2027;
+  padding: 1rem;
+`;
+
+const Textarea = styled.textarea`
+  margin: 0.5rem 0 1rem;
+  width: 100%;
+  height: 10em;
+  border: 1px solid #0B2027;
+  padding: 1rem;`;
 
 function AskQuestion({
   product, getQuestions, isDialogOpen, setIsDialogOpen,
@@ -45,47 +107,51 @@ function AskQuestion({
   };
 
   return (
-    <Dialog
+    <StyledDialog
       open={isDialogOpen}
       onClose={() => setIsDialogOpen(false)}
     >
-      <Dialog.Panel>
-        <Dialog.Title>Ask Your Question</Dialog.Title>
-        <Dialog.Description>
-          About the
-          {product.name}
-        </Dialog.Description>
-        <form onSubmit={handleQuestionSubmit}>
-          <label htmlFor="username">
-            Username:
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={handleUsernameChange}
-            />
-          </label>
-          <label htmlFor="email">
-            Email:
-            <input
-              id="email"
-              type="text"
-              value={email}
-              onChange={handleEmailChange}
-            />
-          </label>
-          <label htmlFor="question">
-            Your question:
-            <textarea
-              id="question"
-              value={askQuestion}
-              onChange={handleAskQuestionChange}
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      </Dialog.Panel>
-    </Dialog>
+      <Overlay aria-hidden="true" />
+      <StyledContainer>
+        <StyledPanel>
+          <StyledTitle>Ask your question</StyledTitle>
+          <StyledDescription>
+            About the
+            {' '}
+            {product.name}
+          </StyledDescription>
+          <form onSubmit={handleQuestionSubmit}>
+            <Label htmlFor="username">
+              Username
+              <Input
+                id="username"
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+            </Label>
+            <Label htmlFor="email">
+              Email
+              <Input
+                id="email"
+                type="text"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </Label>
+            <Label htmlFor="question">
+              Your question
+              <Textarea
+                id="question"
+                value={askQuestion}
+                onChange={handleAskQuestionChange}
+              />
+            </Label>
+            <input type="submit" value="Submit" />
+          </form>
+        </StyledPanel>
+      </StyledContainer>
+    </StyledDialog>
   );
 }
 

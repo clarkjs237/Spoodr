@@ -4,12 +4,11 @@ import ThumbnailImage from '../ImageGalleryDefaultComponents/ThumbnailImage';
 
 const NavArrow = styled.span`
   color: #32292F;
-  opacity: ${(props) => (props.clear ? '0' : '1')};
-  font-size: 2.25rem;
-  margin-top: .15rem;
+  visibility: ${(props) => (props.clear ? 'hidden' : 'visible')};
+  font-size: 2.75rem;
   &:hover {
     color: #90D7FF;
-    cursor: ${(props) => (props.clear ? 'inherit' : 'pointer')};
+    cursor: 'pointer';
   }
 `;
 
@@ -17,6 +16,7 @@ export default function ExpandedThumbnailImageNav({
   curDisplayPhotos,
   curDisplayIndex,
   setCurDisplayIndex,
+  missingImg
 }) {
   const maxThumbnailIndex = 6;
   const curDisplayMaxIndex = curDisplayPhotos.length - 1;
@@ -62,12 +62,14 @@ export default function ExpandedThumbnailImageNav({
   return (
     <>
       {navArrowLeft}
-      {curDisplayPhotosSeven.map(({ id, thumbnail_url }) => (
+      {curDisplayPhotosSeven.map(({ id, thumbnail_url }, i) => (
         <ThumbnailImage
+          key={i}
           id={id}
           thumbnail={thumbnail_url}
           curDisplayIndex={curDisplayIndex}
           setCurDisplayIndex={setCurDisplayIndex}
+          missingImg={missingImg}
         />
       ))}
       {navArrowRight}
