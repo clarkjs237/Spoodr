@@ -55,7 +55,8 @@ export default function Overview({
   let socialUrl;
 
   useEffect(()=>{
-    setCurDisplayIndex(0)
+    setCurDisplayIndex(0);
+    setExpandedView(false);
   },[product.id]);
 
   if (product.category && productStyle.product_id) {

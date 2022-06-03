@@ -106,6 +106,7 @@ function App() {
     updateProductByID(product_id_number);
     getReviewsMeta(product_id_number);
     setCurStyleId(0);
+    window.scroll(0,0);
   }, [product_id_number]);
 
   return (

@@ -4,12 +4,11 @@ import ThumbnailImage from '../ImageGalleryDefaultComponents/ThumbnailImage';
 
 const NavArrow = styled.span`
   color: #32292F;
-  opacity: ${(props) => (props.clear ? '0' : '1')};
-  font-size: 2.25rem;
-  margin-top: .5rem;
+  visibility: ${(props) => (props.clear ? 'hidden' : 'visible')};
+  font-size: 2.75rem;
   &:hover {
     color: #90D7FF;
-    cursor: ${(props) => (props.clear ? 'inherit' : 'pointer')};
+    cursor: 'pointer';
   }
 `;
 
