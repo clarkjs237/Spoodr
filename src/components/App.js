@@ -22,7 +22,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  button{
+  button,
+  input[type=submit] {
     background-color: white;
     border-width: 1px;
     border-color: black;
