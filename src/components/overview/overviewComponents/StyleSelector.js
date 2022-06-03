@@ -29,6 +29,7 @@ export default function StyleSelector({
   setCurStyleId,
   curStyleName,
   styleThumbnails,
+  missingImg
 }) {
   const setsOfFour = Math.ceil(styleThumbnails.length / 4);
   const styleThumbnailsByFour = [...Array(setsOfFour)].map((und, i) => styleThumbnails.slice(i * 4, (i + 1) * 4));
@@ -42,7 +43,7 @@ export default function StyleSelector({
       <ThumbnailFourBlock>
         {styleThumbnailsByFour.map((fourStyleThumbnails) => (
           <ThumbnailDisplay>
-            {fourStyleThumbnails.map(({ id, thumbnail }) => <StyleSelectorImage curStyleId={curStyleId} setCurStyleId={setCurStyleId} thumbnailId={id} thumbnail={thumbnail} />)}
+            {fourStyleThumbnails.map(({ id, thumbnail }) => <StyleSelectorImage curStyleId={curStyleId} setCurStyleId={setCurStyleId} thumbnailId={id} thumbnail={thumbnail} missingImg={missingImg} />)}
           </ThumbnailDisplay>
         ))}
       </ThumbnailFourBlock>

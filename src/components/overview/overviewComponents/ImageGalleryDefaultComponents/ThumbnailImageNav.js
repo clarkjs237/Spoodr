@@ -21,6 +21,7 @@ export default function ThumbnailImageNav({
   curDisplayPhotos,
   curDisplayIndex,
   setCurDisplayIndex,
+  missingImg
 }) {
   const maxThumbnailIndex = 6;
   const curDisplayMaxIndex = curDisplayPhotos.length - 1;
@@ -76,6 +77,7 @@ export default function ThumbnailImageNav({
             thumbnail={thumbnail_url}
             curDisplayIndex={curDisplayIndex}
             setCurDisplayIndex={setCurDisplayIndex}
+            missingImg={missingImg}
           />
         </div>
       ))}

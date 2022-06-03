@@ -44,6 +44,7 @@ export default function Overview({
 
   const [expandedView, setExpandedView] = useState(false);
   const [curDisplayIndex, setCurDisplayIndex] = useState(0);
+  const missingImg = 'https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format';
   let curDisplayPhotos;
   let productOrginalPrice;
   let productSalePrice;
@@ -59,6 +60,7 @@ export default function Overview({
       productSalePrice = productStyle.results[curStyleId].sale_price;
       curStyleName = productStyle.results[curStyleId].name;
       const curSkus = productStyle.results[curStyleId].skus;
+
       curStyleQuantAndSizes = Object.keys(curSkus)
         .map((key) => {
           if (curSkus[key].quantity > 15) {
@@ -86,7 +88,6 @@ export default function Overview({
         return photo;
       });
     } else {
-      const missingImg = 'https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format';
       socialUrl = missingImg;
       styleThumbnails = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
       curDisplayPhotos = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
@@ -99,6 +100,7 @@ export default function Overview({
             curDisplayIndex={curDisplayIndex}
             setCurDisplayIndex={setCurDisplayIndex}
             setExpandedView={setExpandedView}
+            missingImg={missingImg}
           />
       );
     }
@@ -112,6 +114,7 @@ export default function Overview({
           setExpandedView={setExpandedView}
           url={socialUrl}
           slogan={product.slogan}
+          missingImg={missingImg}
         />
         <InfoSelectorCartDiv>
           <ProductInfo
@@ -128,6 +131,7 @@ export default function Overview({
             setCurStyleId={setCurStyleId}
             curStyleName={curStyleName}
             styleThumbnails={styleThumbnails}
+            missingImg={missingImg}
           />
           <AddToCart
             curStyleQuantAndSizes={curStyleQuantAndSizes}

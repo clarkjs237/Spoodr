@@ -22,15 +22,16 @@ export default function ThumbnailImage({
   thumbnail,
   curDisplayIndex,
   setCurDisplayIndex,
+  missingImg,
 }) {
   function onClickHandler(e) {
     setCurDisplayIndex(parseInt(e.target.name));
   }
 
   if (id === curDisplayIndex) {
-    return <Thumbnail selected src={thumbnail} name={id} onClick={onClickHandler} />;
+    return <Thumbnail selected src={thumbnail || missingImg} name={id} onClick={onClickHandler} />;
   }
   return (
-    <Thumbnail src={thumbnail} name={id} onClick={onClickHandler} />
+    <Thumbnail src={thumbnail || missingImg} name={id} onClick={onClickHandler} />
   );
 }

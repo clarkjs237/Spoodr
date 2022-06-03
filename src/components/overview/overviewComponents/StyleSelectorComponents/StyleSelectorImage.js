@@ -39,6 +39,7 @@ export default function StyleSelectorImage({
   setCurStyleId,
   thumbnail,
   thumbnailId,
+  missingImg
 }) {
   function onClickHandler(e) {
     setCurStyleId(parseInt(e.target.name));
@@ -47,12 +48,12 @@ export default function StyleSelectorImage({
   if (curStyleId === thumbnailId) {
     return (
       <StyleSpan>
-        <StyleImage name={thumbnailId} src={thumbnail} />
+        <StyleImage name={thumbnailId} src={thumbnail || missingImg} />
         <Check>&#10003;</Check>
       </StyleSpan>
     );
   }
   return (
-    <StyleImage name={thumbnailId} src={thumbnail} onClick={onClickHandler} />
+    <StyleImage name={thumbnailId} src={thumbnail || missingImg} onClick={onClickHandler} />
   );
 }
