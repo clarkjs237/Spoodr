@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ProductInfo from './overviewComponents/ProductInfo';
-//import SocialMedia from './overviewComponents/SocialMedia';
 import StyleSelector from './overviewComponents/StyleSelector';
 import ImageGalleryDefault from './overviewComponents/ImageGalleryDefault';
 import ImageGalleryExpanded from './overviewComponents/ImageGalleryExpanded';
@@ -16,6 +15,8 @@ const InfoSelectorCartDiv = styled.div`
   position: top;
   vertical-align: top;
   margin-left: 1rem;
+  height: 39rem;
+  overflow-y: 'visible';
 `;
 
 const ProductSlogan = styled.div`
@@ -44,6 +45,7 @@ export default function Overview({
 
   const [expandedView, setExpandedView] = useState(false);
   const [curDisplayIndex, setCurDisplayIndex] = useState(0);
+  const missingImg = 'https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format';
   let curDisplayPhotos;
   let productOrginalPrice;
   let productSalePrice;
@@ -52,13 +54,20 @@ export default function Overview({
   let curStyleQuantAndSizes;
   let socialUrl;
 
+  useEffect(()=>{
+    setCurDisplayIndex(0);
+    setExpandedView(false);
+  },[product.id]);
+
   if (product.category && productStyle.product_id) {
+
 
     if (productStyle.results.length) {
       productOrginalPrice = productStyle.results[curStyleId].original_price;
       productSalePrice = productStyle.results[curStyleId].sale_price;
       curStyleName = productStyle.results[curStyleId].name;
       const curSkus = productStyle.results[curStyleId].skus;
+
       curStyleQuantAndSizes = Object.keys(curSkus)
         .map((key) => {
           if (curSkus[key].quantity > 15) {
@@ -79,17 +88,23 @@ export default function Overview({
     }
 
     if (productStyle.results[curStyleId]) {
-      socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
-      styleThumbnails = productStyle.results.map((style, i) => ({ id: i, thumbnail: style.photos[0].thumbnail_url }));
-      curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo, i) => {
-        photo.id = i;
-        return photo;
-      });
+      if(!productStyle.results[curStyleId].photos[curDisplayIndex]) {
+        socialUrl = missingImg;
+        styleThumbnails = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
+        curDisplayPhotos = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
+      } else {
+        socialUrl = productStyle.results[curStyleId].photos[curDisplayIndex].url;
+        styleThumbnails = productStyle.results.map((style, i) => ({ key: i, id: i, thumbnail: style.photos[0].thumbnail_url }));
+        curDisplayPhotos = productStyle.results[curStyleId].photos.map((photo, i) => {
+          photo.id = i;
+          photo.key = i;
+          return photo;
+        });
+      }
     } else {
-      const missingImg = 'https://ma-hub.imgix.net/wp-images/2019/11/17203220/final-cut-pro-missing-file.jpg?w=1600&h=850&auto=format';
       socialUrl = missingImg;
-      styleThumbnails = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
-      curDisplayPhotos = [{ id: 0, url: missingImg, thumbnail_url: missingImg }];
+      styleThumbnails = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
+      curDisplayPhotos = [{ key: 0, id: 0, url: missingImg, thumbnail_url: missingImg }];
     }
 
     if (expandedView) {
@@ -99,6 +114,7 @@ export default function Overview({
             curDisplayIndex={curDisplayIndex}
             setCurDisplayIndex={setCurDisplayIndex}
             setExpandedView={setExpandedView}
+            missingImg={missingImg}
           />
       );
     }
@@ -112,6 +128,7 @@ export default function Overview({
           setExpandedView={setExpandedView}
           url={socialUrl}
           slogan={product.slogan}
+          missingImg={missingImg}
         />
         <InfoSelectorCartDiv>
           <ProductInfo
@@ -128,6 +145,7 @@ export default function Overview({
             setCurStyleId={setCurStyleId}
             curStyleName={curStyleName}
             styleThumbnails={styleThumbnails}
+            missingImg={missingImg}
           />
           <AddToCart
             curStyleQuantAndSizes={curStyleQuantAndSizes}
