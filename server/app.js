@@ -113,8 +113,9 @@ app.post('/reviews', (req, res) => {
     headers: {
       Authorization: process.env.GITTOKEN,
       'User-Agent': 'user',
+      'content-type': 'application/json',
     },
-    body: JSON.stringify(req.body.data),
+    body: JSON.stringify(req.body),
   })
     .then((results) => res.send(results));
 });
