@@ -66,9 +66,9 @@ function Reviews(props) {
           reviews={reviews}
         />
       </div>
-      <div style={{display: 'flex', gap: '10px'}}>
+      <div style={{ display: 'flex', gap: '10px' }}>
         <button type="button" onClick={handleToggleModalChange}>Add a Review</button>
-        { reviews.length === count && reviews.length > 0
+        { reviews.length === count
         && <button type="submit" onClick={handleMoreReviews}>More Reviews</button> }
       </div>
       { toggleModal
