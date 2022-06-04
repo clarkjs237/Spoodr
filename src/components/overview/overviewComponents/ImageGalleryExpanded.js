@@ -58,9 +58,10 @@ export default function ImageGalleryExpanded({
         setZoomedView(false);
       } else {
         let { x, y } = mousePosition(e);
+        console.log(e);
         setScroll({
-          x: 2.5 * x - .5 * e.target.clientWidth,
-          y: 2.5 * y - .5 * e.target.clientHeight
+          x: 2.5 * x -  2.5 * (e.target.width / 2),
+          y: 2.5 * y - 2.5 * (e.target.height / 2)
         });
         setZoomedView(true);
       }
@@ -100,7 +101,6 @@ export default function ImageGalleryExpanded({
       let { x, y } = mousePosition(e);
       let newX = scroll.x + e.target.width/5;
       let newY = scroll.y + e.target.height/5;
-      console.log(x, newX);
       const xSpeed = 2.75;
       const ySpeed = 2;
       const xBuffer = 200;

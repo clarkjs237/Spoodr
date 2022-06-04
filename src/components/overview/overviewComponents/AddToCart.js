@@ -149,7 +149,7 @@ export default function AddToCart({ curStyleQuantAndSizes, className }) {
         openMenuOnFocus
         ref={(r) => refs = r}
         styles={selectStyles}
-        width={menuOpen ? 'auto' : '12.3rem'}
+        width={menuOpen ? 'auto' : '11.3rem'}
       />
       <Select
         className={className}
@@ -159,7 +159,7 @@ export default function AddToCart({ curStyleQuantAndSizes, className }) {
         placeholder="-"
         value={selectedQuant}
         styles={selectStyles}
-        width="5.5rem"
+        width="6.5rem"
       />
       <div>
         {submitButton}
