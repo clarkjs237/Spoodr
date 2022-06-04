@@ -87,9 +87,9 @@ function AddReviewForm(props) {
       },
       body: JSON.stringify(data),
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    // .catch((error) => {
+    //   console.error("Error:", error);
+    // });
   }
 
   function handleSubmit(event) {
