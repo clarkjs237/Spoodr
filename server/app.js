@@ -27,6 +27,8 @@ app.use(express.static('public'));
 
 // Related Products
 app.get('/related/:id', (req, res) => {
+  console.log('Im in app js')
+  console.log(process.env.PORT)
   fetch(`${process.env.URL}/products/${req.params.id}/related`, {
     headers: {
       Authorization: process.env.GITTOKEN,
