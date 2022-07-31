@@ -164,8 +164,10 @@ const BottomWrapper = styled.div`
     `;
   }}
 
-  transform: ${(props) => (props.list === 'outfit' ? 'translateY(0px)' : 'translateY(-1px)')};
+
 `;
+// This belongs above
+// transform: ${(props) => (props.list === 'outfit' ? 'translateY(0px)' : 'translateY(-1px)')};
 
 export default function CarouselItemComponent({
   defStyle, // style object handed to the carousel component
